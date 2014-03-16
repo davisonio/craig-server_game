@@ -86,7 +86,6 @@ Calinou (CC BY-SA):
   default_bronze_ingot.png
   default_copper_ingot.png
   default_copper_lump.png
-  default_mineral_copper.png
 
 MirceaKitsune (WTFPL):
   character.x
@@ -103,7 +102,6 @@ PilzAdam (WTFPL):
   default_mossycobble.png
   default_gold_ingot.png
   default_gold_lump.png
-  default_mineral_gold.png
   default_diamond.png
   default_tool_diamondpick.png
   default_tool_diamondsword.png
@@ -120,9 +118,6 @@ PilzAdam (WTFPL):
 
 jojoa1997 (WTFPL):
   default_obsidian.png
-
-InfinityProject (WTFPL):
-  default_mineral_diamond.png
 
 Splizard (CC BY-SA 3.0):
   default_snow.png
