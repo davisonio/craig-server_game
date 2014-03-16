@@ -42,22 +42,23 @@ darkage.register_stairs("darkage","ors_cobble",
 	"Old Red Sandtone"
 )
 
---darkage.register_stairs("darkage","desert_stone_cobble",
---	{cracky=3},
---	{"darkage_desert_stone_cobble.png"},
---	"Desert Stone Cobble"
---)
-
 darkage.register_stairs("darkage","slate_cobble",
 	{cracky=3},
 	{"darkage_slate_cobble.png"},
 	"Slate Cobble"
 )
---darkage.register_stairs("darkage","sandstone_cobble",
---	{cracky=3},
---	{"darkage_sandstone_cobble.png"},
---	"Sandstone Cobble"
---) 
+
+darkage.register_stairs("darkage","marble",
+	{cracky=3},
+	{"darkage_marble.png"},
+	"Marble"
+)
+
+darkage.register_stairs("darkage","marble_tile",
+	{cracky=3},
+	{"darkage_marble_tile.png"},
+	"Marble Tile"
+)
 
 darkage.register_stairs("darkage","gneiss_cobble",
 	{cracky=3},
