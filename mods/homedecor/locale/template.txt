@@ -1,0 +1,184 @@
+
+##########################
+# Template language file #
+##########################
+
+### Special strings ###
+
+### kitchen_cabinet.lua ###
+Kitchen Cabinet =
+## 1: Player name, 2: position
+%s moves stuff in kitchen cabinet at %s =
+%s moves stuff to kitchen cabinet at %s =
+%s takes stuff from kitchen cabinet at %s =
+Half-height Kitchen Cabinet (on ceiling) =
+Under-sink cabinet =
+Kitchen Cabinet with sink =
+
+### door_models.lua ###
+Mahogany Closet Door =
+Oak Closet Door =
+Fancy Wood/Glass Door =
+Glass Office Door =
+Glass and Wood, Mahogany-colored =
+Glass and Wood, Oak-colored =
+Glass and Wood, White =
+Plain Wooden Door =
+left =
+right =
+## 1: Side the doors opens to
+(Top Half, %s-opening) =
+(%s-opening) =
+
+
+### door_nodes.lua ###
+Not enough vertical space to place a door! =
+
+### crafts.lua ###
+Brass Ingot =
+Bucket of white paint =
+Legs for Small Utility table =
+Plastic sheet =
+Silicon lump =
+Simple Integrated Circuit =
+Small Wooden Drawer =
+Terracotta Roof Tile =
+Titanium Dioxide =
+Uncooked Terracotta Base =
+Unprocessed Plastic base =
+
+### door_models.lua ###
+
+### door_nodes.lua ###
+
+### fences.lua ###
+Barbed Wire Fence =
+Barbed Wire Fence Gate =
+Brass Fence/railing =
+Brass Fence/railing with sign =
+Chainlink Fence =
+Chainlink Fence Gate =
+Chainlink Fence Gate (open) =
+Unpainted Picket Fence =
+Unpainted Picket Fence Gate =
+White Picket Fence =
+White Picket Fence Gate =
+Wooden Privacy Fence =
+Wrought Iron Fence/railing =
+Wrought Iron Fence/railing with sign =
+want to simply place the wielded item like usual. =
+
+### init.lua ###
+Loaded! =
+Asphalt Shingles =
+Black Plastic Flower Pot =
+Brass Pole =
+Brass Table Legs =
+red =
+green =
+blue =
+white =
+pink =
+violet =
+## 1: Color name
+Curtains (%s) =
+Drop-Ceiling Tile =
+Glass Skylight =
+Glass Table (Small, Round) =
+Glass Table (Small, Square) =
+Green Plastic Flower Pot =
+Large Area Rug =
+Large Glass Table Piece =
+Large Stereo Speaker =
+Legs for Utility Table =
+Projection Screen Material =
+Small Surround Speaker =
+Small Throw Rug =
+Stereo Receiver =
+Terracotta Flower Pot =
+Terracotta Roofing =
+Textured Ceiling Paint =
+Utility Table =
+Utility table mk2 =
+Wooden Shutter (Black) =
+Wooden Shutter (Dark Grey) =
+Wooden Shutter (Forest Green) =
+Wooden Shutter (Grey) =
+Wooden Shutter (Light Blue) =
+Wooden Shutter (Purple) =
+Wooden Shutter (Red) =
+Wooden Shutter (Unpainted Mahogany) =
+Wooden Shutter (Unpainted Oak) =
+Wooden Shutter (White) =
+Wooden Shutter (Yellow) =
+Wooden Tabletop piece =
+Wooden Tabletop (Small, Round) =
+Wooden Tabletop (Small, Square) =
+Wood Shingles =
+Wrought Iron Pole =
+someone =
+## 1: Player name
+Sorry, %s owns that spot. =
+
+### lighting.lua ###
+White Glowlight (small cube) =
+White Glowlight (small cube, on ceiling) =
+White Glowlight (thick) =
+White Glowlight (thick, on wall) =
+White Glowlight (thin) =
+White Glowlight (thin, on wall) =
+Yellow Glowlight (small cube) =
+Yellow Glowlight (small cube, on ceiling) =
+Yellow Glowlight (thick) =
+Yellow Glowlight (thick, on wall) =
+Yellow Glowlight (thin) =
+Yellow Glowlight (thin, on wall) =
+
+### locked.lua ###
+## 1: Item description, 2: Owner name
+%s (owned by %s) =
+## 1: Player name, 2: Item description, 3: Owner name, 4: Position
+%s tried to access a %s belonging to %s at %s =
+## 1: Item description
+%s (Locked) =
+Locked Cabinet =
+Locked Nightstand =
+
+### nightstands.lua ###
+Mahogany Nightstand with One Drawer =
+Mahogany Nightstand with Two Drawers =
+Oak Nightstand with One Drawer =
+Oak Nightstand with Two Drawers =
+## 1: Player name, 2: position
+%s moves stuff in nightstand at %s =
+%s moves stuff to nightstand at %s =
+%s takes stuff from nightstand at %s =
+One-drawer Nightstand =
+Two-drawer Nightstand =
+
+### oven.lua ###
+Oven =
+## 1: Item name
+Could not insert '%s' =
+## 1: Percentage
+Oven active: %d%% =
+Oven out of fuel =
+Oven is empty =
+
+### refrigerator.lua ###
+Refrigerator =
+## 1: Player name, 2: position
+%s moves stuff in refrigerator at %s =
+%s moves stuff to refrigerator at %s =
+%s takes stuff from refrigerator at %s =
+Not enough vertical space to place a refrigerator! =
+
+### television.lua ###
+Small CRT Television =
+
+### signs_lib.lua ###
+E: character map file not found =
+## 1: Full String, 2: pos in string, 3: current char at pos
+W: unknown symbol in '%s' at %d (probably %s) =
+%s wrote "%s" to sign at %s =
+signs loaded =

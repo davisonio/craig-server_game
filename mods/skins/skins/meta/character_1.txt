@@ -1,0 +1,3 @@
+name = "Smooth Sam",
+author = "Jordach",
+description = "The default skin but smoother.",

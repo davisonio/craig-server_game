@@ -1,0 +1,3 @@
+name = "Dirt Man",
+author = "planetminecraft.com",
+description = "A dirt skin.",
