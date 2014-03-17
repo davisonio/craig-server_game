@@ -1,1 +1,0 @@
-Death messages minetest mod.
