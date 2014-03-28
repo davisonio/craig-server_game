@@ -105,7 +105,7 @@ minetest.register_chatcommand("money", {
 					if is_frozen(name) then is_f = "yes" end
 					minetest.chat_send_player(name, "  is frozen: " .. is_f .. ".")
 				else
-					minetest.chat_send_player(name, "\"" .. param1 .. "\" account don't exist.")
+					minetest.chat_send_player(name, "\"" .. param1 .. "\" account does not exist.")
 				end
 			else
 				minetest.chat_send_player(name, "You don't have permission to run this command (missing privileges: money_admin)")
@@ -124,7 +124,7 @@ minetest.register_chatcommand("money", {
 							minetest.chat_send_player(name, "\"" .. param2 .. "\" account isn't frozen.")
 						end
 					else
-						minetest.chat_send_player(name, "\"" .. param2 .. "\" account don't exist.")
+						minetest.chat_send_player(name, "\"" .. param2 .. "\" account does not exist.")
 					end
 					return true
 				else
@@ -168,7 +168,7 @@ minetest.register_chatcommand("money", {
 										minetest.chat_send_player(param2, name .. " took your " .. CURRENCY_PREFIX .. param3 .. CURRENCY_POSTFIX .. ".")
 										minetest.chat_send_player(name, "You took " .. param2 .. "'s " .. CURRENCY_PREFIX .. param3 .. CURRENCY_POSTFIX .. ".")
 									else
-										minetest.chat_send_player(name, "Player named \""..param2.."\" do not have enough " .. CURRENCY_PREFIX .. param3 - get_money(player) .. CURRENCY_POSTFIX .. ".")
+										minetest.chat_send_player(name, "Player named \""..param2.."\" does not have enough " .. CURRENCY_PREFIX .. param3 - get_money(player) .. CURRENCY_POSTFIX .. ".")
 									end
 								elseif param1 == "set" then
 									set_money(param2, param3)
@@ -181,7 +181,7 @@ minetest.register_chatcommand("money", {
 										set_money(param2, get_money(param2) - param3)
 										minetest.chat_send_player(name, param2 .. " " .. CURRENCY_PREFIX .. get_money(param2) .. CURRENCY_POSTFIX)
 									else
-										minetest.chat_send_player(name, "Player named \""..param2.."\" do not have enough " .. CURRENCY_PREFIX .. param3 - get_money(player) .. CURRENCY_POSTFIX .. ".")
+										minetest.chat_send_player(name, "Player named \""..param2.."\" does not have enough " .. CURRENCY_PREFIX .. param3 - get_money(player) .. CURRENCY_POSTFIX .. ".")
 									end
 								end
 							else
@@ -194,7 +194,7 @@ minetest.register_chatcommand("money", {
 						minetest.chat_send_player(name, "Amount must be a number.")
 					end
 				else
-					minetest.chat_send_player(name, "\"" .. param2 .. "\" account don't exist.")
+					minetest.chat_send_player(name, "\"" .. param2 .. "\" account does not exist.")
 				end
 				return true
 			end
@@ -351,10 +351,10 @@ minetest.register_node("money:shop", {
 			local inv = meta:get_inventory()
 			local sender_inv = sender:get_inventory()
 			if not inv:contains_item("main", meta:get_string("nodename") .. " " .. meta:get_string("amount")) then
-				minetest.chat_send_player(sender_name, "In the shop is not enough goods.")
+				minetest.chat_send_player(sender_name, "There is not enough goods in the shop.")
 				return true
 			elseif not sender_inv:room_for_item("main", meta:get_string("nodename") .. " " .. meta:get_string("amount")) then
-				minetest.chat_send_player(sender_name, "In your inventory is not enough space.")
+				minetest.chat_send_player(sender_name, "There is not enough space in your inventory.")
 				return true
 			elseif get_money(sender_name) - tonumber(meta:get_string("costbuy")) < 0 then
 				minetest.chat_send_player(sender_name, "You do not have enough money.")
@@ -373,10 +373,10 @@ minetest.register_node("money:shop", {
 				minetest.chat_send_player(sender_name, "You do not have enough product.")
 				return true
 			elseif not inv:room_for_item("main", meta:get_string("nodename") .. " " .. meta:get_string("amount")) then
-				minetest.chat_send_player(sender_name, "In the shop is not enough space.")
+				minetest.chat_send_player(sender_name, "There is not enough space in the shop.")
 				return true
 			elseif get_money(meta:get_string("owner")) - meta:get_string("costsell") < 0 then
-				minetest.chat_send_player(sender_name, "The buyer is not enough money.") 
+				minetest.chat_send_player(sender_name, "The owner of this shop does not have enough money to buy your item.") 
 				return true
 			end
 			set_money(sender_name, get_money(sender_name) + meta:get_string("costsell"))
@@ -401,7 +401,7 @@ minetest.register_alias("shop", "money:shop")
 
 --Barter shop.
 minetest.register_node("money:barter_shop", {
-	description = "Barter Shop",
+	description = "Exchange Shop",
 	tiles = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
 		"default_chest_side.png", "default_chest_side.png", "money_barter_shop_front.png"},
 	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -410,18 +410,18 @@ minetest.register_node("money:barter_shop", {
 	after_place_node = function(pos, placer)
 		local meta = minetest.env:get_meta(pos)
 		meta:set_string("owner", placer:get_player_name())
-		meta:set_string("infotext", "Untuned Barter Shop (owned by " .. placer:get_player_name() .. ")")
+		meta:set_string("infotext", "Untuned Exchange Shop (owned by " .. placer:get_player_name() .. ")")
 	end,
 	on_construct = function(pos)
 		local meta = minetest.env:get_meta(pos)
 		meta:set_string("formspec", "size[8,5.6]"..
-			"field[0.256,0.5;8,1;bartershopname;Name of your barter shop:;]"..
+			"field[0.256,0.5;8,1;bartershopname;Name of your exchange shop:;]"..
 			"field[0.256,1.5;8,1;nodename1;What kind of a node do you want to exchange:;]"..
 			"field[0.256,2.5;8,1;nodename2;for:;]"..
 			"field[0.256,3.5;8,1;amount1;Amount of first kind of node:;]"..
 			"field[0.256,4.5;8,1;amount2;Amount of second kind of node:;]"..
 			"button_exit[3.1,5;2,1;button;Proceed]")
-		meta:set_string("infotext", "Untuned Barter Shop")
+		meta:set_string("infotext", "Untuned Exchange Shop")
 		meta:set_string("owner", "")
 		meta:set_string("form", "yes")
 	end,
@@ -434,7 +434,7 @@ minetest.register_node("money:barter_shop", {
 		local meta = minetest.env:get_meta(pos)
 		if not has_shop_privilege(meta, player) then
 			minetest.log("action", player:get_player_name()..
-					" tried to access a barter shop belonging to "..
+					" tried to access a exchange shop belonging to "..
 					meta:get_string("owner").." at "..
 					minetest.pos_to_string(pos))
 			return 0
@@ -445,7 +445,7 @@ minetest.register_node("money:barter_shop", {
 		local meta = minetest.env:get_meta(pos)
 		if not has_shop_privilege(meta, player) then
 			minetest.log("action", player:get_player_name()..
-					" tried to access a barter shop belonging to "..
+					" tried to access a exchange shop belonging to "..
 					meta:get_string("owner").." at "..
 					minetest.pos_to_string(pos))
 			return 0
@@ -456,7 +456,7 @@ minetest.register_node("money:barter_shop", {
 		local meta = minetest.env:get_meta(pos)
 		if not has_shop_privilege(meta, player) then
 			minetest.log("action", player:get_player_name()..
-					" tried to access a barter shop belonging to "..
+					" tried to access a exchange shop belonging to "..
 					meta:get_string("owner").." at "..
 					minetest.pos_to_string(pos))
 			return 0
@@ -465,15 +465,15 @@ minetest.register_node("money:barter_shop", {
 	end,
     on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 		minetest.log("action", player:get_player_name()..
-				" moves stuff in barter shop at "..minetest.pos_to_string(pos))
+				" moves stuff in exchange shop at "..minetest.pos_to_string(pos))
 	end,
     on_metadata_inventory_put = function(pos, listname, index, stack, player)
 		minetest.log("action", player:get_player_name()..
-				" moves stuff to barter shop at "..minetest.pos_to_string(pos))
+				" moves stuff to exchange shop at "..minetest.pos_to_string(pos))
 	end,
     on_metadata_inventory_take = function(pos, listname, index, count, player)
 		minetest.log("action", player:get_player_name()..
-				" takes stuff from barter shop at "..minetest.pos_to_string(pos))
+				" takes stuff from exchange shop at "..minetest.pos_to_string(pos))
 	end,
 	on_receive_fields = function(pos, formname, fields, sender)
 		local meta = minetest.env:get_meta(pos)
@@ -489,7 +489,7 @@ minetest.register_node("money:barter_shop", {
 				meta:set_string("nodename2", fields.nodename2)
 				meta:set_string("amount1", fields.amount1)
 				meta:set_string("amount2", fields.amount2)
-				meta:set_string("infotext", "Barter Shop \"" .. fields.bartershopname .. "\" (owned by " .. meta:get_string("owner") .. ")")
+				meta:set_string("infotext", "Exchange Shop \"" .. fields.bartershopname .. "\" (owned by " .. meta:get_string("owner") .. ")")
 				local inv = meta:get_inventory()
 				inv:set_size("main", 8*4)
 				meta:set_string("form", "no")
@@ -499,16 +499,16 @@ minetest.register_node("money:barter_shop", {
 			local inv = meta:get_inventory()
 			local sender_inv = sender:get_inventory()
 			if not inv:contains_item("main", meta:get_string("nodename1") .. " " .. meta:get_string("amount1")) then
-				minetest.chat_send_player(sender_name, "In the barter shop is not enough goods.")
+				minetest.chat_send_player(sender_name, "There is not enough goods in the exchange shop.")
 				return
 			elseif not sender_inv:contains_item("main", meta:get_string("nodename2") .. " " .. meta:get_string("amount2")) then
-				minetest.chat_send_player(sender_name, "In your inventory is not enough goods.")
+				minetest.chat_send_player(sender_name, "There is not enough goods in your inventory.")
 				return
 			elseif not inv:room_for_item("main", meta:get_string("nodename2") .. " " .. meta:get_string("amount2")) then
-				minetest.chat_send_player(sender_name, "In the barter shop is not enough space.")
+				minetest.chat_send_player(sender_name, "There is not enough space in the exchange shop.")
 				return
 			elseif not sender_inv:room_for_item("main", meta:get_string("nodename1") .. " " .. meta:get_string("amount1")) then
-				minetest.chat_send_player(sender_name, "In your inventory is not enough space.")
+				minetest.chat_send_player(sender_name, "There is not enough space in your inventory.")
 				return
 			end
 			inv:remove_item("main", meta:get_string("nodename1") .. " " .. meta:get_string("amount1"))
@@ -615,7 +615,7 @@ minetest.register_node("money:admin_shop", {
 			local sender_name = sender:get_player_name()
 			local sender_inv = sender:get_inventory()
 			if not sender_inv:room_for_item("main", meta:get_string("nodename") .. " " .. meta:get_string("amount")) then
-				minetest.chat_send_player(sender_name, "In your inventory is not enough space.")
+				minetest.chat_send_player(sender_name, "There is not enough space in your inventory.")
 				return true
 			elseif get_money(sender_name) - tonumber(meta:get_string("costbuy")) < 0 then
 				minetest.chat_send_player(sender_name, "You do not have enough money.")
@@ -643,7 +643,7 @@ minetest.register_alias("admin_shop", "money:admin_shop")
 
 --Admin barter shop.
 minetest.register_node("money:admin_barter_shop", {
-	description = "Admin Barter Shop",
+	description = "Admin Exchange Shop",
 	tiles = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
 		"default_chest_side.png", "default_chest_side.png", "money_admin_barter_shop_front.png"},
 	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -657,7 +657,7 @@ minetest.register_node("money:admin_barter_shop", {
 			"field[0.256,2.5;8,1;amount1;Amount of first kind of node:;]"..
 			"field[0.256,3.5;8,1;amount2;Amount of second kind of node:;]"..
 			"button_exit[3.1,4;2,1;button;Proceed]")
-		meta:set_string("infotext", "Untuned Admin Barter Shop")
+		meta:set_string("infotext", "Untuned Admin Exchange Shop")
 		meta:set_string("form", "yes")
 	end,
 	can_dig = function(pos,player)
@@ -675,17 +675,17 @@ minetest.register_node("money:admin_barter_shop", {
 				meta:set_string("nodename2", fields.nodename2)
 				meta:set_string("amount1", fields.amount1)
 				meta:set_string("amount2", fields.amount2)
-				meta:set_string("infotext", "Admin Barter Shop")
+				meta:set_string("infotext", "Admin Exchange Shop")
 				meta:set_string("form", "no")
 			end
 		elseif fields["button"] then
 			local sender_name = sender:get_player_name()
 			local sender_inv = sender:get_inventory()
 			if not sender_inv:contains_item("main", meta:get_string("nodename2") .. " " .. meta:get_string("amount2")) then
-				minetest.chat_send_player(sender_name, "In your inventory is not enough goods.")
+				minetest.chat_send_player(sender_name, "There is not enough goods in your inventory.")
 				return
 			elseif not sender_inv:room_for_item("main", meta:get_string("nodename1") .. " " .. meta:get_string("amount1")) then
-				minetest.chat_send_player(sender_name, "In your inventory is not enough space.")
+				minetest.chat_send_player(sender_name, "There is not enough space in your inventory.")
 				return
 			end
 			sender_inv:remove_item("main", meta:get_string("nodename2") .. " " .. meta:get_string("amount2"))
