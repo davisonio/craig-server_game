@@ -54,3 +54,6 @@ transactor_transactions['default:chest'] = {
     end
 }
 
+transactor_transactions['default:chest_locked'] = transactor_transactions['default:chest']
+transactor_transactions['chests_0gb_us:shared'] = transactor_transactions['default:chest']
+transactor_transactions['chests_0gb_us:dropbox'] = transactor_transactions['default:chest']
