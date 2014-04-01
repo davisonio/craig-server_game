@@ -39,7 +39,7 @@ darkage.register_stairs("darkage","stone_brick",
 darkage.register_stairs("darkage","ors_cobble",
 	{cracky=3},
 	{"darkage_ors_cobble.png"},
-	"Old Red Sandtone"
+	"Old Red Sandstone"
 )
 
 darkage.register_stairs("darkage","slate_cobble",
@@ -64,4 +64,10 @@ darkage.register_stairs("darkage","gneiss_cobble",
 	{cracky=3},
 	{"darkage_gneiss_cobble.png"},
 	"Gneiss Cobble"
+)
+
+darkage.register_stairs("darkage","serpentine",
+	{cracky=3},
+	{"darkage_serpentine.png"},
+	"Serpentine"
 )

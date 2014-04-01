@@ -145,5 +145,11 @@ darkage.register_stairs("darkage","marble_tile",
 darkage.register_stairs("darkage","ors_cobble",
 	{cracky=3},
 	{"darkage_ors_cobble.png"},
-	"Old Red Sandtone"
+	"Old Red Sandstone"
+)
+
+darkage.register_stairs("darkage","serpentine",
+	{cracky=3},
+	{"darkage_serpentine.png"},
+	"Serpentine"
 )
