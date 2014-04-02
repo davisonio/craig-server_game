@@ -18,7 +18,6 @@ function whoison.createFile(loopit)
 		file:write( datastring )
 	end
 	file:close()
-	minetest.log("action","Updated online player file")
 	if ( loopit == true ) then
 		minetest.after(60,whoison.createFile,true)
 	end
