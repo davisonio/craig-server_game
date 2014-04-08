@@ -288,7 +288,7 @@ register_stair_slab_panel_micro("moreblocks", "stonebrick", "default:stonebrick"
 	{cracky=3},
 	{"default_stone_brick.png"},
 	"Stone Bricks",
-	"stone_bricks",
+	"stonebrick",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "desert_stonebrick", "default:desert_stonebrick",
