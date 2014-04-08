@@ -307,16 +307,4 @@ for orename,def in pairs(oredefs) do
 	add_ore(modname, def.desc, orename, def)
 end
 
--- Bronze has some special cases, because it is made from copper and tin
-
-minetest.register_craft( {
-	type = "shapeless",
-	output = "default:bronze_ingot 3",
-	recipe = {
-		"moreores:tin_ingot",
-		"default:copper_ingot",
-		"default:copper_ingot",
-	}
-})
-
 print(S("[moreores] loaded."))
