@@ -5,11 +5,16 @@ end
 
 -- Save the areas table to a file
 function areas:save()
+	local datastr = minetest.serialize(self.areas)
+	if not datastr then
+		minetest.log("error", "[areas] Failed to serialize area data!")
+		return
+	end
 	local file, err = io.open(self.filename, "w")
 	if err then
 		return err
 	end
-	file:write(minetest.serialize(self.areas))
+	file:write(datastr)
 	file:close()
 end
 
@@ -124,34 +129,32 @@ function areas:canPlayerAddArea(pos1, pos2, name)
 	end
 
 	-- Check number of areas the user has and make sure it not above the max
-	if self.self_protection then
-		local count = 0
-		for _, area in pairs(self.areas) do
-			if area.owner == name then
-				count = count + 1
-			end
+	local count = 0
+	for _, area in pairs(self.areas) do
+		if area.owner == name then
+			count = count + 1
 		end
-		if count > self.self_protection_max_areas then
-			return false, "You have reached the maximum amount"
-					.." of areas that you are allowed to"
-					.." protect."
-		end
+	end
+	if count >= self.self_protection_max_areas then
+		return false, "You have reached the maximum amount of"
+				.." areas that you are allowed to  protect."
 	end
 
 	-- Check intersecting areas
-	for _, area in pairs(self.areas) do
+	for id, area in pairs(self.areas) do
 		if (area.pos1.x <= pos2.x and area.pos2.x >= pos1.x) and
 		   (area.pos1.y <= pos2.y and area.pos2.y >= pos1.y) and
 		   (area.pos1.z <= pos2.z and area.pos2.z >= pos1.z) then
-			--Found an area intersecting with the suplied area
-			if area.owner ~= name then
-				return false, "The area intersects with an"
-						.." area that you do not own."
+			-- Found an area intersecting with the suplied area
+			if not areas:isAreaOwner(id, name) then
+				return false, ("The area intersects with"
+					.." %s [%u] owned by %s.")
+					:format(area.name, id, area.owner)
 			end
 		end
 	end
 
-	return true, ""
+	return true
 end
 
 -- Given a id returns a string in the format:
