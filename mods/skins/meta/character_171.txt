@@ -1,0 +1,3 @@
+name = "DJ DUDE",
+author = "hansuke123",
+comment = "CC BY-NC-SA 3.0",

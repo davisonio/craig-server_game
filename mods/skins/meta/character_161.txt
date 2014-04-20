@@ -1,0 +1,3 @@
+name = "Finnzzin",
+author = "Jo&atilde;o Neto",
+comment = "CC BY-SA 3.0",
