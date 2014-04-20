@@ -1,3 +1,0 @@
-name = "Rhys' Skin",
-author = "Rhys",
-description = "A skin made by Rhys.",

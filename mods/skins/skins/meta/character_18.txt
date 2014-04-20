@@ -1,2 +1,0 @@
-name = "The Unknown Person",
-author = "Hybrid Dog",

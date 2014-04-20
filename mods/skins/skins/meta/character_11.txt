@@ -1,2 +1,0 @@
-name = "Harry Potter",
-author = "jmf",
