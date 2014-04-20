@@ -747,4 +747,3 @@ dofile(minetest.get_modpath("travelnet").."/elevator.lua");
 
 -- upon server start, read the savefile
 travelnet.restore_data();
-

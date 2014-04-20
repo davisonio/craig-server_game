@@ -186,4 +186,3 @@ minetest.register_alias("moreblocks:emptybookshelf", "moreblocks:empty_bookshelf
 minetest.register_alias("moreblocks:junglestick", "moreblocks:jungle_stick")
 minetest.register_alias("moreblocks:splitstonesquare","moreblocks:split_stone_tile")
 minetest.register_alias("moreblocks:allfacestree","moreblocks:all_faces_tree")
-

@@ -8,27 +8,11 @@ else
 	stairsplus_expect_infinite_stacks = true
 end
 
--- these vales are in order: facedir in degrees = 90, 0, 270, 180, 90
+-- These vales are in order: facedir in degrees = 90, 0, 270, 180, 90
 
 local dirs1 = { 21, 20, 23, 22, 21 }
 local dirs2 = { 15, 8, 17, 6, 15 }
 local dirs3 = { 14, 11, 16, 5, 14 }
-
-stairsplus_players_onwall = {}
-
-minetest.register_chatcommand("st", {
-	params = "",
-	description = "Toggle stairsplus between placing wall/vertical stairs/panels and normal.",
-	func = function(name, param)
-		stairsplus_players_onwall[name] = not stairsplus_players_onwall[name]
-
-		if stairsplus_players_onwall[name] then
-			 minetest.chat_send_player(name, "Stairsplus:  Placing wall stairs/vertical panels.")
-		else
-			 minetest.chat_send_player(name, "Stairsplus:  Placing floor/ceiling stairs/panels.")
-		end
-	end
-})
 
 stairsplus_can_it_stack = function(itemstack, placer, pointed_thing)
 	return false
@@ -100,54 +84,23 @@ local function get_nodedef_field(nodename, fieldname)
 	return minetest.registered_nodes[nodename][fieldname]
 end
 
-function stairsplus_rotate_and_place(itemstack, placer, pointed_thing, onwall)
+--[[
 
-	local node = minetest.env:get_node(pointed_thing.under)
-
-	if not minetest.registered_nodes[node.name] or not minetest.registered_nodes[node.name].on_rightclick then
-
-		local above = pointed_thing.above
-		local under = pointed_thing.under
-		local top = {x=under.x, y=under.y+1, z=under.z}
-
-		local pitch = placer:get_look_pitch()
-		local node = minetest.env:get_node(above)
-		local fdir = minetest.dir_to_facedir(placer:get_look_dir())
-		local wield_name = itemstack:get_name()
-
-		local slab = string.find(wield_name, "slab")
-		local panel = string.find(wield_name, "panel")
-		local micro = string.find(wield_name, "micro")
-		local iswall = (above.x ~= under.x) or (above.z ~= under.z)
-		local isceiling = (above.x == under.x) and (above.z == under.z) and (pitch > 0)
-
-		if get_nodedef_field(minetest.env:get_node(under).name, "buildable_to") then
-			if slab then fdir = 0 end
-			minetest.env:add_node(under, {name = wield_name, param2 = fdir }) -- place right side up
-		elseif not get_nodedef_field(minetest.env:get_node(above).name, "buildable_to") then
-			return
-		elseif onwall or (iswall and (slab or panel)) then 
-			if slab then
-				minetest.env:add_node(above, {name = wield_name, param2 = dirs2[fdir+2] }) -- place with wall slab rotation
-			else
-				minetest.env:add_node(above, {name = wield_name, param2 = dirs3[fdir+2] }) -- place with wall panel/micro rotation
-			end
-		elseif isceiling then
-			local nfdir = dirs1[fdir+2]
-			if slab then nfdir = 22 end
-			minetest.env:add_node(above, {name = wield_name, param2 = nfdir }) -- place upside down variant
-		else
-			if slab then fdir = 0 end
-			minetest.env:add_node(above, {name = wield_name, param2 = fdir }) -- place right side up
-		end
-
-		if not stairsplus_expect_infinite_stacks then
-			itemstack:take_item()
+function(itemstack, placer, pointed_thing)
+			local keys=placer:get_player_control()
+			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
 			return itemstack
 		end
-	else
-		minetest.registered_nodes[node.name].on_rightclick(pointed_thing.under, node, placer)
+
+]]--
+
+function stairsplus_rotate_and_place(itemstack, placer, pointed_thing)
+	if not moreblocks.node_is_owned(pointed_thing.under, placer) then
+		local keys=placer:get_player_control()
+		minetest.rotate_and_place(itemstack, placer, pointed_thing,
+		  stairsplus_expect_infinite_stacks, {force_wall = keys.sneak})
 	end
+	return itemstack
 end
 
 function register_stair_slab_panel_micro(modname, subname, recipeitem, groups, images, description, drop, light)
@@ -163,10 +116,10 @@ function register_stair_slab_panel_micro(modname, subname, recipeitem, groups, i
         register_6dfacedir_conversion(modname, subname)
 end
 
--- Default stairs/slabs/panels/microblocks
+-- Default stairs/slabs/panels/microblocks.
 
 register_stair_slab_panel_micro("moreblocks", "wood", "default:wood",
-	{snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+	{snappy=1, choppy=2, oddly_breakable_by_hand=2, flammable=3},
 	{"default_wood.png"},
 	"Wooden",
 	"wood",
@@ -201,14 +154,14 @@ register_stair_slab_panel_micro("moreblocks", "brick", "default:brick",
 	0)
 
 register_stair_slab_panel_micro("moreblocks", "sandstone", "default:sandstone",
-	{crumbly=2,cracky=2},
+	{crumbly=2, cracky=2},
 	{"default_sandstone.png"},
 	"Sandstone",
 	"sandstone",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "steelblock", "default:steelblock",
-	{cracky=1,level=2},
+	{cracky=1, level=2},
 	{"default_steel_block.png"},
 	"Steel Block",
 	"steelblock",
@@ -222,21 +175,21 @@ register_stair_slab_panel_micro("moreblocks", "goldblock", "default:goldblock",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "copperblock", "default:copperblock",
-	{cracky=1,level=2},
+	{cracky=1, level=2},
 	{"default_copper_block.png"},
 	"Copper Block",
 	"copperblock",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "bronzeblock", "default:bronzeblock",
-	{cracky=1,level=2},
+	{cracky=1, level=2},
 	{"default_bronze_block.png"},
 	"Bronze Block",
 	"bronzeblock",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "diamondblock", "default:diamondblock",
-	{cracky=1,level=3},
+	{cracky=1, level=3},
 	{"default_diamond_block.png"},
 	"Diamond Block",
 	"diamondblock",
@@ -250,35 +203,35 @@ register_stair_slab_panel_micro("moreblocks", "desert_stone", "default:desert_st
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "glass", "default:glass",
-	{snappy=2,cracky=3,oddly_breakable_by_hand=3},
+	{snappy=2, cracky=3, oddly_breakable_by_hand=3},
 	{"moreblocks_glass_stairsplus.png"},
 	"Glass",
 	"glass",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "tree", "default:tree",
-	{tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+	{tree=1, snappy=1, choppy=2, oddly_breakable_by_hand=1, flammable=2},
 	{"default_tree_top.png", "default_tree_top.png", "default_tree.png"},
 	"Tree",
 	"tree",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "jungletree", "default:jungletree",
-	{tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+	{tree=1, snappy=1, choppy=2, oddly_breakable_by_hand=1, flammable=2},
 	{"default_jungletree_top.png", "default_jungletree_top.png", "default_jungletree.png"},
 	"Jungle Tree",
 	"jungletree",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "obsidian", "default:obsidian",
-	{cracky=1,level=2},
+	{cracky=1, level=2},
 	{"default_obsidian.png"},
 	"Obsidian",
 	"obsidian",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "obsidian_glass", "default:obsidian_glass",
-	{cracky=3,oddly_breakable_by_hand=3},
+	{cracky=3, oddly_breakable_by_hand=3},
 	{"moreblocks_obsidian_glass_stairsplus.png"},
 	"Obsidian Glass",
 	"obsidian_glass",
@@ -306,12 +259,26 @@ register_stair_slab_panel_micro("moreblocks", "sandstonebrick", "default:sandsto
 	0)
 
 -- More Blocks stairs/slabs/panels/microblocks
+
+register_stair_slab_panel_micro("moreblocks", "invisible", "air",
+	{unbreakable=1, not_in_creative_inventory=1},
+	{"invisible.png"},
+	"Invisible",
+	"invisible",
+	0)
 	
 register_stair_slab_panel_micro("moreblocks", "circle_stone_bricks", "moreblocks:circle_stone_bricks",
 	{cracky=3},
 	{"moreblocks_circle_stone_bricks.png"},
 	"Circle Stone Bricks",
 	"circle_stone_bricks",
+	0)
+	
+register_stair_slab_panel_micro("moreblocks", "coal_stone_bricks", "moreblocks:coal_stone_bricks",
+	{cracky=3},
+	{"moreblocks_coal_stone_bricks.png"},
+	"Coal Stone Bricks",
+	"Coal_stone_bricks",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "iron_stone_bricks", "moreblocks:iron_stone_bricks",
@@ -417,14 +384,14 @@ register_stair_slab_panel_micro("moreblocks", "coal_glass", "moreblocks:coal_gla
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "iron_glass", "moreblocks:iron_glass",
-	{snappy=2,cracky=3,oddly_breakable_by_hand=3},
+	{snappy=2, cracky=3, oddly_breakable_by_hand=3},
 	{"moreblocks_iron_glass_stairsplus.png"},
 	"Iron Glass",
 	"iron_glass",
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "wood_tile", "moreblocks:wood_tile",
-	{snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+	{snappy=1, choppy=2, oddly_breakable_by_hand=2, flammable=3},
 	{"moreblocks_wood_tile.png", "moreblocks_wood_tile.png", "moreblocks_wood_tile.png",
 	"moreblocks_wood_tile.png", "moreblocks_wood_tile.png^[transformR90", "moreblocks_wood_tile.png^[transformR90"},
 	"Wooden Tile",
@@ -432,7 +399,7 @@ register_stair_slab_panel_micro("moreblocks", "wood_tile", "moreblocks:wood_tile
 	0)
 	
 register_stair_slab_panel_micro("moreblocks", "wood_tile_center", "moreblocks:wood_tile_center",
-	{snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+	{snappy=1, choppy=2, oddly_breakable_by_hand=2, flammable=3},
 	{"moreblocks_wood_tile_center.png", "moreblocks_wood_tile_center.png", "moreblocks_wood_tile_center.png",
 	"moreblocks_wood_tile_center.png", "moreblocks_wood_tile_center.png^[transformR90", "moreblocks_wood_tile_center.png^[transformR90"},
 	"Centered Wooden Tile",
@@ -440,7 +407,7 @@ register_stair_slab_panel_micro("moreblocks", "wood_tile_center", "moreblocks:wo
 	0)
 
 register_stair_slab_panel_micro("moreblocks", "wood_tile_full", "moreblocks:wood_tile_full",
-	{snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+	{snappy=1, choppy=2, oddly_breakable_by_hand=2, flammable=3},
 	{"moreblocks_wood_tile_full.png", "moreblocks_wood_tile_full.png", "moreblocks_wood_tile_full.png",
 	"moreblocks_wood_tile_full.png", "moreblocks_wood_tile_full.png^[transformR90", "moreblocks_wood_tile_full.png^[transformR90"},
 	"Full Wooden Tile",

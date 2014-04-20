@@ -1,3 +1,13 @@
+--[[
+****
+More Blocks
+by Calinou
+Licensed under the zlib/libpng license for code and CC BY-SA for textures, see LICENSE.txt for info.
+****
+--]]
+
+moreblocks = {}
+
 -- Load translation library if intllib is installed
 
 local S
@@ -7,9 +17,11 @@ if (minetest.get_modpath("intllib")) then
 	else
 	S = function ( s ) return s end
 end
+moreblocks.gettext = S
 
 dofile(minetest.get_modpath("moreblocks").."/_config.txt")
 
+dofile(minetest.get_modpath("moreblocks").."/ownership.lua")
 dofile(minetest.get_modpath("moreblocks").."/redefinitions.lua")
 dofile(minetest.get_modpath("moreblocks").."/crafting.lua")
 dofile(minetest.get_modpath("moreblocks").."/aliases.lua")
@@ -21,14 +33,6 @@ dofile(minetest.get_modpath("moreblocks").."/stairsplus/microblocks.lua")
 dofile(minetest.get_modpath("moreblocks").."/stairsplus/aliases.lua")
 dofile(minetest.get_modpath("moreblocks").."/stairsplus.lua")
 dofile(minetest.get_modpath("moreblocks").."/circular_saw.lua")
-
---[[
-****
-More Blocks
-by Calinou
-Licensed under the zlib/libpng license for code and CC BY-SA for textures, see LICENSE.txt for info.
-****
---]]
 
 -- Blocks
 
@@ -104,6 +108,13 @@ minetest.register_node("moreblocks:wood_tile_right", {
 minetest.register_node("moreblocks:circle_stone_bricks", {
 	description = S("Circle Stone Bricks"),
 	tiles = {"moreblocks_circle_stone_bricks.png"},
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("moreblocks:coal_stone_bricks", {
+	description = S("Coal Stone Bricks"),
+	tiles = {"moreblocks_coal_stone_bricks.png"},
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -363,8 +374,6 @@ minetest.register_node("moreblocks:rope", {
 	sounds = default.node_sound_leaves_defaults(),
 })
 
-
-
 -- Items
 
 minetest.register_craftitem("moreblocks:sweeper", {
@@ -375,10 +384,10 @@ minetest.register_craftitem("moreblocks:sweeper", {
 minetest.register_craftitem("moreblocks:jungle_stick", {
 	description = S("Jungle Stick"),
 	inventory_image = "moreblocks_junglestick.png",
+	groups = {stick=1},
 })
 
 minetest.register_craftitem("moreblocks:nothing", {
-	inventory_image = "invisible.png",
 	on_use = minetest.item_eat(0),
 })
 

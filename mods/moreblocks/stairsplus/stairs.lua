@@ -28,19 +28,8 @@ function register_stair(modname, subname, recipeitem, groups, images, descriptio
 				{-0.5, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-				{-0.5, 0, 0, 0.5, 0.5, 0.5},
-			},
-		},
 		sounds = default.node_sound_stone_defaults(),
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 
 	minetest.register_node(":stairs:stair_" .. subname, {
@@ -58,19 +47,8 @@ function register_stair(modname, subname, recipeitem, groups, images, descriptio
 				{-0.5, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-				{-0.5, 0, 0, 0.5, 0.5, 0.5},
-			},
-		},
 		sounds = default.node_sound_stone_defaults(),
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 
 	minetest.register_node(":" .. modname .. ":stair_" .. subname .. "_half", {
@@ -89,19 +67,8 @@ function register_stair(modname, subname, recipeitem, groups, images, descriptio
 				{-0.5, 0, 0, 0, 0.5, 0.5},
 			},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5, -0.5, -0.5, 0, 0, 0.5},
-				{-0.5, 0, 0, 0, 0.5, 0.5},
-			},
-		},
 		sounds = default.node_sound_stone_defaults(),
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 
 	minetest.register_node(":"..modname .. ":stair_" .. subname .. "_right_half", {
@@ -120,19 +87,8 @@ function register_stair(modname, subname, recipeitem, groups, images, descriptio
 				{0, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {
-				{0, -0.5, -0.5, 0.5, 0, 0.5},
-				{0, 0, 0, 0.5, 0.5, 0.5},
-			},
-		},
 		sounds = default.node_sound_stone_defaults(),
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 
 	minetest.register_node(":"..modname .. ":stair_" .. subname .. "_inner", {
@@ -153,20 +109,8 @@ function register_stair(modname, subname, recipeitem, groups, images, descriptio
 				{-0.5, 0, -0.5, 0, 0.5, 0},
 			},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-				{-0.5, 0, 0, 0.5, 0.5, 0.5},
-				{-0.5, 0, -0.5, 0, 0.5, 0},
-			},
-		},
 		sounds = default.node_sound_stone_defaults(),
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 
 	minetest.register_node(":"..modname .. ":stair_" .. subname .. "_outer", {
@@ -186,19 +130,8 @@ function register_stair(modname, subname, recipeitem, groups, images, descriptio
 				{-0.5, 0, 0, 0, 0.5, 0.5},
 			},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-				{-0.5, 0, 0, 0, 0.5, 0.5},
-			},
-		},
 		sounds = default.node_sound_stone_defaults(),
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 
 	minetest.register_node(":" .. modname .. ":stair_" .. subname .. "_alt", {
@@ -218,11 +151,67 @@ function register_stair(modname, subname, recipeitem, groups, images, descriptio
 			},
 		},
 		sounds = default.node_sound_stone_defaults(),
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
+	})
+	
+	minetest.register_node(":" .. modname .. ":stair_" .. subname .. "_alt_1", {
+		description = S("%s Stairs"):format(S(description)),
+		drawtype = "nodebox",
+		tiles = images,
+		light_source = light,
+		paramtype = "light",
+		paramtype2 = "facedir",
+		sunlight_propagates = true,
+		groups = groups,
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.0625, -0.5, 0.5, 0, 0},
+				{-0.5, 0.4375, 0, 0.5, 0.5, 0.5},
+			},
+		},
+		sounds = default.node_sound_stone_defaults(),
+		on_place = stairsplus_rotate_and_place
+	})
+	
+	minetest.register_node(":" .. modname .. ":stair_" .. subname .. "_alt_2", {
+		description = S("%s Stairs"):format(S(description)),
+		drawtype = "nodebox",
+		tiles = images,
+		light_source = light,
+		paramtype = "light",
+		paramtype2 = "facedir",
+		sunlight_propagates = true,
+		groups = groups,
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.125, -0.5, 0.5, 0, 0},
+				{-0.5, 0.375, 0, 0.5, 0.5, 0.5},
+			},
+		},
+		sounds = default.node_sound_stone_defaults(),
+		on_place = stairsplus_rotate_and_place
+	})
+	
+	minetest.register_node(":" .. modname .. ":stair_" .. subname .. "_alt_4", {
+		description = S("%s Stairs"):format(S(description)),
+		drawtype = "nodebox",
+		tiles = images,
+		light_source = light,
+		paramtype = "light",
+		paramtype2 = "facedir",
+		sunlight_propagates = true,
+		groups = groups,
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.25, -0.5, 0.5, 0, 0},
+				{-0.5, 0.25, 0, 0.5, 0.5, 0.5},
+			},
+		},
+		sounds = default.node_sound_stone_defaults(),
+		on_place = stairsplus_rotate_and_place
 	})
 
 	-- Unregister default recipes, optional, see _config.txt

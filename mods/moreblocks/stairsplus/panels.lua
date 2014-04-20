@@ -26,15 +26,7 @@ function register_panel(modname, subname, recipeitem, groups, images, descriptio
 			type = "fixed",
 			fixed = {-0.5, -0.5, 0, 0.5, 0, 0.5},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {-0.5, -0.5, 0, 0.5, 0, 0.5},
-		},
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 	
 	minetest.register_node(":" .. modname .. ":panel_" .. subname .. "_1", {
@@ -51,15 +43,7 @@ function register_panel(modname, subname, recipeitem, groups, images, descriptio
 			type = "fixed",
 			fixed = {-0.5, -0.5, 0, 0.5, -0.4375, 0.5},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {-0.5, -0.5, 0, 0.5, -0.4375, 0.5},
-		},
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 	
 	minetest.register_node(":" .. modname .. ":panel_" .. subname .. "_2", {
@@ -76,15 +60,7 @@ function register_panel(modname, subname, recipeitem, groups, images, descriptio
 			type = "fixed",
 			fixed = {-0.5, -0.5, 0, 0.5, -0.375, 0.5},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {-0.5, -0.5, 0, 0.5, -0.375, 0.5},
-		},
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 	
 	minetest.register_node(":" .. modname .. ":panel_" .. subname .. "_4", {
@@ -101,15 +77,7 @@ function register_panel(modname, subname, recipeitem, groups, images, descriptio
 			type = "fixed",
 			fixed = {-0.5, -0.5, 0, 0.5, -0.25, 0.5},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {-0.5, -0.5, 0, 0.5, -0.25, 0.5},
-		},
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 	
 	minetest.register_node(":" .. modname .. ":panel_" .. subname .. "_12", {
@@ -126,15 +94,7 @@ function register_panel(modname, subname, recipeitem, groups, images, descriptio
 			type = "fixed",
 			fixed = {-0.5, -0.5, 0, 0.5, 0.25, 0.5},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {-0.5, -0.5, 0, 0.5, 0.25, 0.5},
-		},
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 	
 	minetest.register_node(":" .. modname .. ":panel_" .. subname .. "_14", {
@@ -151,15 +111,7 @@ function register_panel(modname, subname, recipeitem, groups, images, descriptio
 			type = "fixed",
 			fixed = {-0.5, -0.5, 0, 0.5, 0.375, 0.5},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {-0.5, -0.5, 0, 0.5, 0.375, 0.5},
-		},
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 	
 	minetest.register_node(":" .. modname .. ":panel_" .. subname .. "_15", {
@@ -176,15 +128,7 @@ function register_panel(modname, subname, recipeitem, groups, images, descriptio
 			type = "fixed",
 			fixed = {-0.5, -0.5, 0, 0.5, 0.4375, 0.5},
 		},
-		selection_box = {
-			type = "fixed",
-			fixed = {-0.5, -0.5, 0, 0.5, 0.4375, 0.5},
-		},
-		on_place = function(itemstack, placer, pointed_thing)
-			local keys=placer:get_player_control()
-			stairsplus_rotate_and_place(itemstack, placer, pointed_thing, keys["sneak"])
-			return itemstack
-		end
+		on_place = stairsplus_rotate_and_place
 	})
 
 	minetest.register_alias(modname..":panel_"..subname.."_bottom", modname..":panel_"..subname)
