@@ -1,13 +1,6 @@
 -- This file supplies Kitchen cabinets and kitchen sink
 
--- Boilerplate to support localized strings if intllib mod is installed.
-local S
-if (minetest.get_modpath("intllib")) then
-    dofile(minetest.get_modpath("intllib").."/intllib.lua")
-    S = intllib.Getter(minetest.get_current_modname())
-else
-    S = function ( s ) return s end
-end
+local S = homedecor.gettext
 
 minetest.register_node('homedecor:kitchen_cabinet', {
 	description = S("Kitchen Cabinet"),
@@ -60,7 +53,7 @@ minetest.register_node('homedecor:kitchen_cabinet', {
 
 minetest.register_node('homedecor:kitchen_cabinet_half', {	
 	drawtype="nodebox",
-	description = 'Half-height Kitchen Cabinet (on ceiling)',
+	description = S('Half-height Kitchen Cabinet (on ceiling)'),
 	tiles = { 'homedecor_kitchen_cabinet_sides.png',
 			'homedecor_kitchen_cabinet_bottom.png',
 			'homedecor_kitchen_cabinet_sides.png',

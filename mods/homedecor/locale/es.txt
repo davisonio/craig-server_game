@@ -62,6 +62,19 @@ Wrought Iron Fence/railing = Cerca/Barandilla de Hierro Forjado
 Wrought Iron Fence/railing with sign = Cerca/Barandilla de Hierro Forjado con Letrero
 want to simply place the wielded item like usual. = solo se desea colocar el objeto empuñado normalmente.
 
+### furniture_medieval.lua ###
+Bars = Barras
+Binding Bars = Barras de Unión
+Chains = Cadenas
+Wall Torch = Antorcha de Pared
+
+### furniture_bathroom.lua ###
+Toilet = Inodoro
+Sink = Lavabo
+Taps = Grifo
+Shower Tray = Piso de Ducha
+Shower Head = Ducha
+
 ### init.lua ###
 Loaded! = ¡Cargado!
 Asphalt Shingles = Tejas de Asfalto
@@ -173,8 +186,9 @@ Not enough vertical space to place a refrigerator! = ¡No hay suficiente espacio
 Small CRT Television = Pequeña Televisión CRT
 
 ### signs_lib.lua ###
-E: character map file not found = E: archivo de mapa de caracteres no encontrado
-## 1: Full String, 2: pos in string, 3: current char at pos
-W: unknown symbol in '%s' at %d (probably %s) = A: símbolo desconocido en '%s' posición %d (probablemente %s)
 %s wrote "%s" to sign at %s = %s ha escrito "%s" en el letrero en %s
+Reading cached character database. = Leyendo base de datos de catacteres.
+Font seems to have changed. Rebuilding cache. = La fuente parece haber cambiado. Reconstruyendo información guardada.
+Could not find font line height in cached DB. Trying brute force. = No se pudo encontrar la altura de línea en la base de datos. Intentando con fuerza bruta.
+Registered %s and %s = Registrados %s y %s
 signs loaded = letreros cargados

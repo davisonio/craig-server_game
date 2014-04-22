@@ -1,7 +1,8 @@
+local S = homedecor.gettext
 
 -- Test
 minetest.register_node("homedecor:table", {
-    description = "Table",
+    description = S("Table"),
     tiles = {
         "forniture_wood.png",
         "forniture_wood.png",
@@ -31,7 +32,7 @@ minetest.register_node("homedecor:table", {
 })  
 
 minetest.register_node("homedecor:chair", {
-    description = "Chair",
+    description = S("Chair"),
     tiles = {
         "forniture_wood.png",
         "forniture_wood.png",
@@ -71,10 +72,10 @@ local chaircolors = {
 }
 
 for i in ipairs(chaircolors) do
-	color = chaircolors[i][1]
-	name = chaircolors[i][2]
+	local color = chaircolors[i][1]
+	local name = S(chaircolors[i][2])
 	minetest.register_node("homedecor:armchair_"..color, {
-	    description = "Armchair ("..name..")",
+	    description = S("Armchair (%s)"):format(name),
 	    tiles = {
 		"forniture_armchair_top_"..color..".png",
 		"forniture_armchair_top_"..color..".png",
@@ -115,7 +116,7 @@ for i in ipairs(chaircolors) do
 	    output = "homedecor:armchair_"..color.." 2",
 	    recipe = {
 		{ "wool:"..color,""},
-		{ "default:wood","default:wood" },
+		{ "group:wood","group:wood" },
 		{ "wool:"..color,"wool:"..color },
 	    },
 	})
@@ -126,7 +127,7 @@ local repl = { off="low", low="med", med="hi", hi="max", max="off", }
 
 local function reg_lamp(suffix, nxt, desc, tilesuffix, light)
 	minetest.register_node("homedecor:table_lamp_"..suffix, {
-	description = desc,
+	description = S(desc),
 	drawtype = "nodebox",
 	tiles = {
 		"forniture_table_lamp_s"..tilesuffix..".png",
