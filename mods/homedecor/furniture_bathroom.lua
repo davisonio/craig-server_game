@@ -1,7 +1,6 @@
-local S = homedecor.gettext
 
 minetest.register_node("homedecor:toilet", {
-    description = S("Toilet"),
+    description = "Toilet",
     tiles = { 
         "forniture_marble.png", "forniture_marble.png", 
         "forniture_marble_s1.png", "forniture_marble_s1.png", 
@@ -64,13 +63,13 @@ minetest.register_node("homedecor:toilet_open", {
     on_punch = function (pos, node, puncher)
         node.name = "homedecor:toilet"
         minetest.set_node(pos, node)
-        minetest.sound_play("homedecor_toilet_flush",{pos=pos, max_hear_distance=5,})
+        minetest.sound_play({name="homedecor_toilet_flush", pos=pos,})
     end,
 })
 
 --Sink
 minetest.register_node("homedecor:sink", {
-    description = S("Sink"),
+    description = "Sink",
     tiles = {
         "forniture_marble_top_sink.png", "forniture_marble.png",
         "forniture_marble_sb1.png", "forniture_marble_sb1.png",
@@ -104,7 +103,7 @@ minetest.register_node("homedecor:sink", {
 
 --Taps
 minetest.register_node("homedecor:taps", {
-    description = S("Taps"),
+    description = "Taps",
     tiles = {
         "forniture_metal.png", "forniture_metal.png",
         "forniture_metal_s1.png", "forniture_metal_s1.png",
@@ -139,7 +138,7 @@ minetest.register_node("homedecor:taps", {
 
 --Shower Tray
 minetest.register_node("homedecor:shower_tray", {
-    description = S("Shower Tray"),
+    description = "Shower Tray",
     tiles = {
         "forniture_marble_base_ducha_top.png",
         "forniture_marble_base_ducha_top.png",
@@ -173,7 +172,7 @@ minetest.register_node("homedecor:shower_tray", {
 
 --Shower Head
 minetest.register_node("homedecor:shower_head", {
-    description = S("Shower Head"),
+    description = "Shower Head",
     tiles = {
         "forniture_metal.png",
         "forniture_metal.png",

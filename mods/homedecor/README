@@ -1,0 +1,46 @@
+This is what I consider to be a fairly feature-filled home decor mod.  
+It supplies a bunch of stuff found in most homes, like flower pots, home 
+electronics, brass and wrought-iron tables, and lots more!
+
+All items can be accessed either by crafting various other items 
+together, or with the usual /give commands.  To get a list of the actual 
+node names, just go into the homedecor/ folder and run the listnodes.sh 
+Bash script.  Note that a few of the listed nodes are kinda useless by 
+themselves (like the various parts of the folding doors).
+
+All of the images used for the recipes in the forum post tracking this 
+mod are included in the crafting-guide/ folder.
+
+Most stuff can be made from materials found through a game world.  Some 
+stuff can only be crafted by using materials from another mod (look for 
+the orange highlights).  Currently, this mod can use materials from 
+moreores, mesecons, wool, and unifieddyes if present. You can still use 
+the usual /give commands to get the items that depend on these mods if 
+you don't use them installed.
+
+This mod is still a work-in-progress, but should be complete enough not 
+to irritate anyone. :-) Namely, dressers still need to be fleshed out, 
+many items can be used as fuel but the burn times need tuning, and I 
+need to tune the cook time and fuel usage on the four smelted items.
+
+This mod was put together using a recent git pull, and requires a 
+build/pull dated June 17, 2012 or later.  Most stuff should work fine on 
+older builds as well, but a few nodes in this mod require Nodebox 
+support, a feature added to Minetest on that date.  It will NOT work 
+with Minetest v0.3 (that version doesn't support mods).
+
+Much of the code (especially for the doors) plus the bucket were taken 
+from the files which come with Minetest and altered to suit.  Many 
+thanks to Jeija for coming up with an elegant cylinder using nodeboxes; 
+see his 'irregular' mods).  His code is used herein (you can guess where 
+:-) ).
+
+Dependencies: none (just the game's default stuff)
+
+Recommends: buckets, flowers, unifieddyes, junglegrass, moreores, 
+mesecons, wool
+
+The distribution archive also supplies a copy of Ironzorg's Flowers mod 
+and of my Unified Dyes mod, since this mod provides more stuff when 
+those two are present.  You can remove these if you want - they're only 
+needed if you want to craft the various dyed/colored items.

@@ -1,8 +1,6 @@
 
-local S = homedecor.gettext
-
 minetest.register_node("homedecor:bars", {
-    description = S("Bars"),
+    description = "Bars",
     tiles = {
         "forniture_black_metal.png",
         "forniture_black_metal.png",
@@ -34,7 +32,7 @@ minetest.register_node("homedecor:bars", {
 
 --L Binding Bars
 minetest.register_node("homedecor:L_binding_bars", {
-    description = S("Binding Bars"),
+    description = "Binding Bars",
     tiles = {
         "forniture_black_metal.png",
         "forniture_black_metal.png",
@@ -63,7 +61,7 @@ minetest.register_node("homedecor:L_binding_bars", {
 })
 
 minetest.register_node("homedecor:chains", {
-    description = S("Chains"),
+    description = "Chains",
     tiles = {
         "forniture_black_metal.png",
         "forniture_black_metal.png",
@@ -138,7 +136,7 @@ minetest.register_node("homedecor:chains", {
 })  
 
 minetest.register_node("homedecor:torch_wall", {
-    description = S("Wall Torch"),
+    description = "Torch Wall",
     drawtype = "nodebox",
     tiles = {
         "forniture_torch_wall_s.png",

@@ -1,6 +1,13 @@
 -- Various misc. nodes
 
-local S = homedecor.gettext
+-- Boilerplate to support localized strings if intllib mod is installed.
+local S
+if (minetest.get_modpath("intllib")) then
+    dofile(minetest.get_modpath("intllib").."/intllib.lua")
+    S = intllib.Getter(minetest.get_current_modname())
+else
+    S = function ( s ) return s end
+end
 
 minetest.register_node('homedecor:ceiling_paint', {
 	description = S("Textured Ceiling Paint"),
@@ -196,30 +203,27 @@ local curtaincolors = {
 }
 
 for c in ipairs(curtaincolors) do
-	local color = curtaincolors[c]
-	local color_d = S(curtaincolors[c])
+	local color = S(curtaincolors[c])
 
-	minetest.register_node("homedecor:curtain_"..color, {
-		description = S("Curtains (%s)"):format(color_d),
-		tiles = { "homedecor_curtain_"..color..".png" },
-		inventory_image = "homedecor_curtain_"..color..".png",
-		wield_image = "homedecor_curtain_"..color..".png",
-		drawtype = 'signlike',
-		sunlight_propagates = true,
-		paramtype = "light",
-		paramtype2 = "facedir",
-		walkable = false,
-		groups = { snappy = 3 },
-		sounds = default.node_sound_leaves_defaults(),
-		paramtype2 = 'wallmounted',
-		selection_box = {
-			type = "wallmounted",
-			--wall_side = = <default>
-		},
-	})
-	if color_d ~= color then
-		minetest.register_alias("homedecor:curtain_"..color_d, "homedecor:curtain_"..color)
-	end
+minetest.register_node("homedecor:curtain_"..color, {
+	description = S("Curtains (%s)"):format(color),
+	tiles = { "homedecor_curtain_"..color..".png" },
+	inventory_image = "homedecor_curtain_"..color..".png",
+	wield_image = "homedecor_curtain_"..color..".png",
+	drawtype = 'signlike',
+	sunlight_propagates = true,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	walkable = false,
+	groups = { snappy = 3 },
+	sounds = default.node_sound_leaves_defaults(),
+	paramtype2 = 'wallmounted',
+	selection_box = {
+		type = "wallmounted",
+		--wall_side = = <default>
+	},
+})
+
 end
 
 minetest.register_node('homedecor:air_conditioner', {

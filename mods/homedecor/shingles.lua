@@ -1,6 +1,13 @@
 -- Various kidns of shingles
 
-local S = homedecor.gettext
+-- Boilerplate to support localized strings if intllib mod is installed.
+local S
+if (minetest.get_modpath("intllib")) then
+    dofile(minetest.get_modpath("intllib").."/intllib.lua")
+    S = intllib.Getter(minetest.get_current_modname())
+else
+    S = function ( s ) return s end
+end
 
 minetest.register_node("homedecor:skylight", {
 	description = S("Glass Skylight"),
@@ -20,7 +27,7 @@ minetest.register_node("homedecor:skylight", {
 })
 
 minetest.register_node("homedecor:skylight_frosted", {
-	description = S("Glass Skylight Frosted"),
+	description = S("Glass Skylight"),
 	drawtype = "raillike",
 	tiles = { "homedecor_skylight_frosted.png" },
 	wield_image = "homedecor_skylight_frosted.png",
@@ -72,7 +79,7 @@ minetest.register_node("homedecor:shingles_asphalt", {
 })
 
 minetest.register_node("homedecor:shingles_terracotta", {
-	description = S("Terracotta Shingles"),
+	description = S("Terracotta Roofing"),
 	drawtype = "raillike",
 	tiles = { "homedecor_shingles_terracotta.png" },
 	wield_image = "homedecor_shingles_terracotta.png",

@@ -1,6 +1,13 @@
 -- This file adds fences of various types
 
-local S = homedecor.gettext
+-- Boilerplate to support localized strings if intllib mod is installed.
+local S
+if (minetest.get_modpath("intllib")) then
+    dofile(minetest.get_modpath("intllib").."/intllib.lua")
+    S = intllib.Getter(minetest.get_current_modname())
+else
+    S = function ( s ) return s end
+end
 
 minetest.register_node("homedecor:fence_brass", {
 	description = S("Brass Fence/railing"),
@@ -272,7 +279,7 @@ minetest.register_node("homedecor:fence_privacy", {
 
 minetest.register_node("homedecor:fence_privacy_corner", {
 	drawtype = "nodebox",
-        description = S("Wooden Privacy Fence Corner"),
+        description = S("Wooden Privacy Fence"),
         tiles = {
 		"homedecor_fence_privacy_corner_top.png",
 		"homedecor_fence_privacy_corner_bottom.png",
@@ -336,7 +343,7 @@ minetest.register_node("homedecor:fence_barbed_wire", {
 
 minetest.register_node("homedecor:fence_barbed_wire_corner", {
 	drawtype = "nodebox",
-        description = S("Barbed Wire Fence Corner"),
+        description = S("Barbed Wire Fence"),
         tiles = {
 		"homedecor_fence_barbed_wire.png"
 	},
@@ -401,7 +408,7 @@ minetest.register_node("homedecor:fence_chainlink", {
 
 minetest.register_node("homedecor:fence_chainlink_corner", {
 	drawtype = "nodebox",
-	description = S("Chainlink Fence Corner"),
+	description = "Chainlink Fence",
 	tiles = {
 		"homedecor_fence_chainlink_corner_top.png",
 		"homedecor_fence_chainlink_corner_bottom.png",
@@ -439,5 +446,8 @@ minetest.register_node("homedecor:fence_chainlink_corner", {
 	},
 })
 
-signs_lib.register_fence_with_sign("homedecor:fence_brass", "homedecor:fence_brass_with_sign")
-signs_lib.register_fence_with_sign("homedecor:fence_wrought_iron", "homedecor:fence_wrought_iron_with_sign")
+minetest.register_alias("homedecor:fence_wood_with_sign", "signs:sign_post")
+
+homedecor_register_fence_with_sign("default:fence_wood", "signs:sign_post")
+homedecor_register_fence_with_sign("homedecor:fence_brass", "homedecor:fence_brass_with_sign")
+homedecor_register_fence_with_sign("homedecor:fence_wrought_iron", "homedecor:fence_wrought_iron_with_sign")

@@ -1,8 +1,15 @@
 -- Various kinds of tables
 
-local S = homedecor.gettext
+-- Boilerplate to support localized strings if intllib mod is installed.
+local S
+if (minetest.get_modpath("intllib")) then
+    dofile(minetest.get_modpath("intllib").."/intllib.lua")
+    S = intllib.Getter(minetest.get_current_modname())
+else
+    S = function ( s ) return s end
+end
 
-local materials = {
+materials = {
 	{"glass","Glass"},
 	{"wood","Wood"}
 }
@@ -72,7 +79,7 @@ for i in ipairs(materials) do
 				else
 					minetest.add_node(above, {name = 'homedecor:'..m..'_table_small_square_b'})
 				end
-				if not homedecor.expect_infinite_stacks then
+				if not homedecor_expect_infinite_stacks then
 					itemstack:take_item()
 					return itemstack
 				end
@@ -83,7 +90,7 @@ for i in ipairs(materials) do
 	})
 
 	minetest.register_node('homedecor:'..m..'_table_small_square_t', {
-		description = S(d.." Table (Small, Square)"),
+		description = S(d.."Glass Table (Small, Square)"),
 		drawtype = 'nodebox',
 		tiles = {
 			'homedecor_'..m..'_table_small_square_tb.png',
@@ -200,7 +207,7 @@ for i in ipairs(materials) do
 				else
 					minetest.add_node(above, {name = 'homedecor:'..m..'_table_small_round_b'})
 				end
-				if not homedecor.expect_infinite_stacks then
+				if not homedecor_expect_infinite_stacks then
 					itemstack:take_item()
 					return itemstack
 				end
@@ -281,7 +288,7 @@ for i in ipairs(materials) do
 -- Large square table pieces
 
 	minetest.register_node('homedecor:'..m..'_table_large_b', {
-		description = S(d.." Table Piece (large)"),
+		description = S(d.."Table Piece (large)"),
 		drawtype = 'nodebox',
 		tiles = { 
 			'homedecor_'..m..'_table_large_tb.png',
@@ -327,7 +334,7 @@ for i in ipairs(materials) do
 				else
 					minetest.add_node(above, {name = 'homedecor:'..m..'_table_large_b'})
 				end
-				if not homedecor.expect_infinite_stacks then
+				if not homedecor_expect_infinite_stacks then
 					itemstack:take_item()
 					return itemstack
 				end
@@ -338,7 +345,7 @@ for i in ipairs(materials) do
 	})
 
 	minetest.register_node('homedecor:'..m..'_table_large_t', {
-		description = S(d.." Table Piece (large)"),
+		description = S(d.."Table Piece (large)"),
 		drawtype = 'nodebox',
 		tiles = { 
 			'homedecor_'..m..'_table_large_tb.png',
@@ -368,7 +375,7 @@ for i in ipairs(materials) do
 	})
 
 	minetest.register_node('homedecor:'..m..'_table_large_s', {
-		description = S(d.." Table Piece (large)"),
+		description = S(d.."Table Piece (large)"),
 		drawtype = 'nodebox',
 		tiles = { 
 			'homedecor_'..m..'_table_large_edges.png',
@@ -456,7 +463,7 @@ minetest.register_node("homedecor:table_legs_brass", {
 })
 
 minetest.register_node("homedecor:table_legs_wrought_iron", {
-        description = S("Wrought Iron Table Legs"),
+        description = S("Brass Table Legs"),
         drawtype = "plantlike",
         tiles = {"homedecor_table_legs_wrought_iron.png"},
         inventory_image = "homedecor_table_legs_wrought_iron.png",
