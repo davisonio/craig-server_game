@@ -2,7 +2,7 @@
 
 minetest.register_tool( "markers:land_title_register",
 {
-    description = "Land title register. Left-click with it to get information about who owns the land you clicked on.",
+    description = "Area Edit Book (Used for editing protected areas)",
     groups = {}, 
     inventory_image = "default_book.png", -- TODO
     wield_image = "",

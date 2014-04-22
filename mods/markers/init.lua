@@ -566,7 +566,7 @@ minetest.register_on_player_receive_fields( markers.form_input_handler)
 
 
 minetest.register_node("markers:mark", {
-	description = "Marker",
+	description = "Area Marker (Used for protecting areas)",
 	tiles = {"markers_mark.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
