@@ -1,4 +1,3 @@
- 
 local rules = {}
 
 rules.path = minetest.get_worldpath()
