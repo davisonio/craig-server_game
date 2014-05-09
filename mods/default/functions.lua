@@ -1,5 +1,8 @@
 -- mods/default/functions.lua
 
+minetest.register_privilege("diglocks",  { description = "allows to open/use and dig up all locked objects", give_to_singleplayer = false});
+end
+ 
 --
 -- Sounds
 --
