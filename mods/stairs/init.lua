@@ -60,7 +60,7 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 	})
 
 	minetest.register_craft({
-		output = 'stairs:stair_' .. subname .. ' 4',
+		output = 'stairs:stair_' .. subname .. ' 6',
 		recipe = {
 			{recipeitem, "", ""},
 			{recipeitem, recipeitem, ""},
@@ -70,7 +70,7 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 
 	-- Flipped recipe for the silly minecrafters
 	minetest.register_craft({
-		output = 'stairs:stair_' .. subname .. ' 4',
+		output = 'stairs:stair_' .. subname .. ' 6',
 		recipe = {
 			{"", "", recipeitem},
 			{"", recipeitem, recipeitem},
@@ -229,8 +229,29 @@ stairs.register_stair_and_slab("stone", "default:stone",
 stairs.register_stair_and_slab("cobble", "default:cobble",
 		{cracky=3},
 		{"default_cobble.png"},
-		"Cobble Stair",
-		"Cobble Slab",
+		"Cobblestone Stair",
+		"Cobblestone Slab",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("desert_stone", "default:desert_stone",
+		{cracky=3},
+		{"default_desert_stone.png"},
+		"Desertstone Stair",
+		"Desertstone Slab",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("desert_cobble", "default:desert_cobble",
+		{cracky=3},
+		{"default_desert_cobble.png"},
+		"Desert Cobblestone Stair",
+		"Desert Cobblestone Slab",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("desert_stonebrick", "default:desert_stonebrick",
+		{cracky=3},
+		{"default_desert_stone_brick.png"},
+		"Desert Stone Brick Stair",
+		"Desert Stone Brick Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("brick", "default:brick",
@@ -245,6 +266,13 @@ stairs.register_stair_and_slab("sandstone", "default:sandstone",
 		{"default_sandstone.png"},
 		"Sandstone Stair",
 		"Sandstone Slab",
+		default.node_sound_stone_defaults())
+		
+stairs.register_stair_and_slab("sandstonebrick", "default:sandstonebrick",
+		{crumbly=2,cracky=2},
+		{"default_sandstone_brick.png"},
+		"Sandstone Brick Stair",
+		"Sandstone Brick Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("junglewood", "default:junglewood",
