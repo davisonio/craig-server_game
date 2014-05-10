@@ -228,7 +228,7 @@ minetest.register_node("default:brick", {
 minetest.register_node("default:tree", {
 	description = "Tree",
 	tiles = {"default_tree_top.png", "default_tree_top.png", "default_tree.png"},
---	paramtype2 = "facedir",
+	paramtype2 = "facedir",
 	is_ground_content = false,
 	groups = {tree=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
 	sounds = default.node_sound_wood_defaults(),
@@ -238,7 +238,7 @@ minetest.register_node("default:tree", {
 minetest.register_node("default:jungletree", {
 	description = "Jungle Tree",
 	tiles = {"default_jungletree_top.png", "default_jungletree_top.png", "default_jungletree.png"},
---	paramtype2 = "facedir",
+	paramtype2 = "facedir",
 	is_ground_content = false,
 	groups = {tree=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
 	sounds = default.node_sound_wood_defaults(),
@@ -718,10 +718,10 @@ minetest.register_node("default:sign_wall", {
 	end,
 	on_receive_fields = function(pos, formname, fields, sender)
 		--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
-		if minetest.is_protected(pos, sender:get_player_name()) then
-			minetest.record_protection_violation(pos, sender:get_player_name())
-			return
-		end
+--		if minetest.is_protected(pos, sender:get_player_name()) then
+--			minetest.record_protection_violation(pos, sender:get_player_name())
+--			return
+--		end
 		local meta = minetest.get_meta(pos)
 		fields.text = fields.text or ""
 		minetest.log("action", (sender:get_player_name() or "").." wrote \""..fields.text..
