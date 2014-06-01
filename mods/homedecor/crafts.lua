@@ -785,25 +785,6 @@ minetest.register_craft( {
 	},
 })
 
--- cotton version
-
-minetest.register_craft( {
-        output = "homedecor:speaker",
-      		recipe = {
-		{ "group:wood", "cotton:black", "group:wood" },
-		{ "group:wood", "default:copper_ingot", "group:wood" },
-		{ "group:wood", "cotton:black", "group:wood" },
-	},
-})
-
-minetest.register_craft( {
-        output = "homedecor:speaker_small",
-      		recipe = {
-		{ "group:wood", "cotton:black", "group:wood" },
-		{ "group:wood", "default:copper_ingot", "group:wood" },
-	},
-})
-
 -- Curtains
 
 local curtaincolors = {
