@@ -1,5 +1,13 @@
 -- mods/default/crafting.lua
 
+-- Craft obsidian!
+minetest.register_craft({
+    output = "default:obsidian 5",
+    recipe = {
+		{"bucket:bucket_lava"},
+	}
+})
+
 minetest.register_craft({
 	output = 'default:wood 4',
 	recipe = {

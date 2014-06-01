@@ -58,10 +58,6 @@ function bucket.register_liquid(source, flowing, itemname, inventory_image, name
 					return
 				end
 
-                if itemstack:get_name() == "bucket:bucket_lava" then
-                    return 
-                end
-				
 				local node = minetest.get_node_or_nil(pointed_thing.under)
 				local ndef
 				if node then
