@@ -1,3 +1,7 @@
+
+
+-- Remove trees from old mod.
+
 local old_nodes = {"trees:leaves_yellow", "trees:leaves_red", "trees:leaves_green", "trees:leaves_palm", "trees:leaves_mangrove", "trees:leaves_conifer", "trees:tree_palm", "trees:tree_mangrove", "trees:tree_conifer", "trees:wood_conifer", "trees:wood_palm", "trees:wood_mangrove"}
 local old_entities = {}
 
