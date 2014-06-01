@@ -1,13 +1,6 @@
 -- This file supplies refrigerators
 
--- Boilerplate to support localized strings if intllib mod is installed.
-local S
-if (minetest.get_modpath("intllib")) then
-    dofile(minetest.get_modpath("intllib").."/intllib.lua")
-    S = intllib.Getter(minetest.get_current_modname())
-else
-    S = function ( s ) return s end
-end
+local S = homedecor.gettext
 
 minetest.register_node('homedecor:refrigerator', {
     drawtype = "nodebox",

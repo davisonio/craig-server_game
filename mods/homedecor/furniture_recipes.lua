@@ -2,7 +2,7 @@
 minetest.register_craft({
     output = "homedecor:table", "homedecor:chair 2",
     recipe = {
-        { "default:wood","default:wood", "default:wood" },
+        { "group:wood","group:wood", "group:wood" },
         { "default:stick", "", "default:stick" },
     },
 })
@@ -17,7 +17,7 @@ minetest.register_craft({
     output = "homedecor:chair 2",
     recipe = {
         { "default:stick",""},
-        { "default:wood","default:wood" },
+        { "group:wood","group:wood" },
         { "default:stick","default:stick" },
     },
 })

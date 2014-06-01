@@ -1,13 +1,6 @@
 -- This file adds fences of various types
 
--- Boilerplate to support localized strings if intllib mod is installed.
-local S
-if (minetest.get_modpath("intllib")) then
-    dofile(minetest.get_modpath("intllib").."/intllib.lua")
-    S = intllib.Getter(minetest.get_current_modname())
-else
-    S = function ( s ) return s end
-end
+local S = homedecor.gettext
 
 minetest.register_node("homedecor:fence_brass", {
 	description = S("Brass Fence/railing"),
@@ -445,9 +438,3 @@ minetest.register_node("homedecor:fence_chainlink_corner", {
 		}
 	},
 })
-
-minetest.register_alias("homedecor:fence_wood_with_sign", "signs:sign_post")
-
-homedecor_register_fence_with_sign("default:fence_wood", "signs:sign_post")
-homedecor_register_fence_with_sign("homedecor:fence_brass", "homedecor:fence_brass_with_sign")
-homedecor_register_fence_with_sign("homedecor:fence_wrought_iron", "homedecor:fence_wrought_iron_with_sign")

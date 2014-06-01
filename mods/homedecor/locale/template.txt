@@ -68,6 +68,19 @@ Wrought Iron Fence/railing =
 Wrought Iron Fence/railing with sign =
 want to simply place the wielded item like usual. =
 
+### furniture_medieval.lua ###
+Bars =
+Binding Bars =
+Chains =
+Wall Torch =
+
+### furniture_bathroom.lua ###
+Toilet =
+Sink =
+Taps =
+Shower Tray =
+Shower Head =
+
 ### init.lua ###
 Loaded! =
 Asphalt Shingles =
@@ -177,8 +190,9 @@ Not enough vertical space to place a refrigerator! =
 Small CRT Television =
 
 ### signs_lib.lua ###
-E: character map file not found =
-## 1: Full String, 2: pos in string, 3: current char at pos
-W: unknown symbol in '%s' at %d (probably %s) =
 %s wrote "%s" to sign at %s =
+Reading cached character database. =
+Font seems to have changed. Rebuilding cache. =
+Could not find font line height in cached DB. Trying brute force. =
+Registered %s and %s =
 signs loaded =

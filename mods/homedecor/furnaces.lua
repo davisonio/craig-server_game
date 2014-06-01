@@ -1,13 +1,6 @@
 -- This code supplies an oven/stove. Basically it's just a copy of the default furnace with different textures.
 
--- Boilerplate to support localized strings if intllib mod is installed.
-local S
-if (minetest.get_modpath("intllib")) then
-    dofile(minetest.get_modpath("intllib").."/intllib.lua")
-    S = intllib.Getter(minetest.get_current_modname())
-else
-    S = function ( s ) return s end
-end
+local S = homedecor.gettext
 
 local function hacky_swap_node(pos,name)
 	local node = minetest.get_node(pos)
@@ -82,7 +75,7 @@ local function make_tiles(tiles, fmt, active)
 	return tiles
 end
 
-function homedecor_register_furnace(name, furnacedef)
+function homedecor.register_furnace(name, furnacedef)
 
 	local furnacedef = furnacedef
 
@@ -249,7 +242,7 @@ function homedecor_register_furnace(name, furnacedef)
 	minetest.register_node(name_active, def_active)
 
 	minetest.register_abm({
-		nodenames = {name, name_active},
+		nodenames = {name, name_active, name.."_locked", name_active.."_locked"},
 		interval = 1.0,
 		chance = 1,
 		action = function(pos, node, active_object_count, active_object_count_wider)
@@ -333,8 +326,6 @@ function homedecor_register_furnace(name, furnacedef)
 				return
 			end
 
-			print(name..": cooked.item: "..dump(cooked.item:to_table()))
-
 			if not inv:room_for_item("dst", cooked.item) then
 				meta:set_string("infotext", desc..": output bins are full")
 				hacky_swap_node(pos, name)
@@ -351,7 +342,7 @@ function homedecor_register_furnace(name, furnacedef)
 
 end
 
-homedecor_register_furnace("homedecor:oven", {
+homedecor.register_furnace("homedecor:oven", {
 	description = "Oven",
 	tile_format = "homedecor_oven_%s%s.png",
 	output_slots = 4,
@@ -359,7 +350,7 @@ homedecor_register_furnace("homedecor:oven", {
 	cook_speed = 1.25,
 })
 
-homedecor_register_furnace("homedecor:microwave_oven", {
+homedecor.register_furnace("homedecor:microwave_oven", {
 	description = "Microwave Oven",
 	tiles = {
 		"homedecor_microwave_top.png", "homedecor_microwave_bottom.png",
