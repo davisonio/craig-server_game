@@ -44,15 +44,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-    output = "homedecor:table_lamp_off",
-    recipe = {
-        {"default:paper","default:torch" ,"default:paper"},
-        {"","default:stick",""},
-        {"","stairsplus:slab_wood",""},
-    },
-})
-
-minetest.register_craft({
     type = "fuel",
     recipe = "homedecor:table_lamp_off",
     burntime = 10,
