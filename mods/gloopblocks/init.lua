@@ -8,11 +8,19 @@ Maintained by VanessaE.
 2013-12-15
 
 --]]
+-- Boilerplate to support localized strings if intllib mod is installed.
+local S
+if (minetest.get_modpath("intllib")) then
+  dofile(minetest.get_modpath("intllib").."/intllib.lua")
+  S = intllib.Getter(minetest.get_current_modname())
+else
+  S = function ( s ) return s end
+end
 
 -- Nodes
 
 minetest.register_node("gloopblocks:shrubbery_large", {
-	description = "Shrubbery",
+	description = S("Shrubbery"),
 	drawtype = "allfaces_optional",
 	tiles = {"gloopblocks_shrubbery_top.png"},
 	paramtype = "light",
@@ -22,7 +30,7 @@ minetest.register_node("gloopblocks:shrubbery_large", {
 })
 
 minetest.register_node("gloopblocks:shrubbery", {
-	description = "Shrubbery",
+	description = S("Shrubbery"),
 	drawtype = "nodebox",
 	tiles = {
 		"gloopblocks_shrubbery_top.png",
@@ -54,7 +62,7 @@ minetest.register_node("gloopblocks:shrubbery", {
 })
 
 minetest.register_node("gloopblocks:rainbow_block", {
-	description = "Rainbow Block",
+	description = S("Rainbow Block"),
 	tiles = {"gloopblocks_rainbow_block.png"},
 	is_ground_content = true,
 	groups = {cracky=3},
@@ -62,7 +70,7 @@ minetest.register_node("gloopblocks:rainbow_block", {
 })
 
 minetest.register_node("gloopblocks:cement", {
-	description = "Cement",
+	description = S("Cement"),
 	tiles = {"gloopblocks_cement.png"},
 	is_ground_content = true,
 	groups = {cracky=2},
@@ -70,7 +78,7 @@ minetest.register_node("gloopblocks:cement", {
 })
 
 minetest.register_node("gloopblocks:evil_block", {
-	description = "Evil Block",
+	description = S("Evil Block"),
 	tiles = {"gloopblocks_evil_block.png"},
 	light_source = 5,
 	is_ground_content = true,
@@ -79,14 +87,16 @@ minetest.register_node("gloopblocks:evil_block", {
 })
 
 minetest.register_node("gloopblocks:pavement", {
-	description = "Pavement",
+	description = S("Pavement"),
 	tiles = {"gloopblocks_pavement.png"},
 	groups = {cracky=3, oddly_breakable_by_hand=3},
 	sounds = default.node_sound_stone_defaults(),
 })
 
 minetest.register_node("gloopblocks:oerkki_block", {
-	description = "Oerkki Block",
+	drawtype = "nodebox",
+	description = S("Oerkki Block"),
+	paramtype = "light",
 	paramtype2 = "facedir",
 	tiles = {
 		"gloopblocks_oerkkiblock_tb.png",
@@ -98,17 +108,32 @@ minetest.register_node("gloopblocks:oerkki_block", {
 	},
 	groups = {cracky=3, oddly_breakable_by_hand=3},
 	sounds = default.node_sound_stone_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
+	},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.1875, 0.5, 0.5, 0.1875}, -- NodeBox1
+			{-0.5, -0.5, -0.5, -0.4375, 0.5, 0.5}, -- NodeBox2
+			{0.4375, -0.5, -0.5, 0.5, 0.5, 0.5}, -- NodeBox3
+			{-0.5, 0.4375, -0.5, 0.5, 0.5, 0.5}, -- NodeBox4
+			{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5}, -- NodeBox5
+			{-0.5, -0.0625, -0.5, 0.5, 0.0625, 0.5}, -- NodeBox6
+		}
+	}
 })
 
 minetest.register_node("gloopblocks:stone_brick_mossy", {
-        description = "Mossy Stone Brick",
+        description = S("Mossy Stone Brick"),
         tiles = {"gloopblocks_stone_brick_mossy.png"},
         groups = {cracky=3, stone=1},
         sounds = default.node_sound_stone_defaults(),
 })
 
 minetest.register_node("gloopblocks:stone_mossy", {
-        description = "Mossy Stone",
+        description = S("Mossy Stone"),
         tiles = {"gloopblocks_stone_mossy.png"},
         groups = {cracky=3, stone=1},
         sounds = default.node_sound_stone_defaults(),
@@ -116,21 +141,21 @@ minetest.register_node("gloopblocks:stone_mossy", {
 })
 
 minetest.register_node("gloopblocks:cobble_road", {
-        description = "Cobblestone Road Bed",
+        description = S("Cobblestone Road Bed"),
         tiles = {"gloopblocks_cobble_road.png"},
         groups = {cracky=3, stone=1},
         sounds = default.node_sound_stone_defaults(),
 })
 
 minetest.register_node("gloopblocks:cobble_road_mossy", {
-        description = "Mossy Cobblestone Road Bed",
+        description = S("Mossy Cobblestone Road Bed"),
         tiles = {"gloopblocks_cobble_road_mossy.png"},
         groups = {cracky=3, stone=1},
         sounds = default.node_sound_stone_defaults(),
 })
 
 minetest.register_node("gloopblocks:scaffolding", {
-	description = "Wooden Scaffold",
+	description = S("Wooden Scaffold"),
 	drawtype = "allfaces",
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -168,6 +193,7 @@ minetest.register_node("gloopblocks:scaffolding", {
 
 
 minetest.register_alias("moreblocks:oerkkiblock", "gloopblocks:oerkki_block")
+minetest.register_alias("gloopblocks:obsidian", "default:obsidian")
 
 -- Stairs/slabs defs, conversion of normal -> mossy items
 
@@ -203,7 +229,7 @@ if minetest.get_modpath("moreblocks") then
 		if blocks[i][1] == "Evil Block" then
 			light = 5
 		end
-		register_stair_slab_panel_micro("gloopblocks", blocks[i][3], "gloopblocks:"..blocks[i][3], {cracky=2, not_in_creative_inventory=1}, {"gloopblocks_"..blocks[i][3]..".png"}, blocks[i][1], blocks[i][3], light)	
+		register_stair_slab_panel_micro("gloopblocks", blocks[i][3], "gloopblocks:"..blocks[i][3], {cracky=2, not_in_creative_inventory=1}, {"gloopblocks_"..blocks[i][3]..".png"}, S(blocks[i][1]), blocks[i][3], light)	
 		table.insert(circular_saw.known_stairs, "gloopblocks:"..blocks[i][3])
 	end
 
@@ -218,7 +244,7 @@ if minetest.get_modpath("moreblocks") then
 		 "gloopblocks_oerkkiblock_sides.png", 
 		 "gloopblocks_oerkkiblock_sides.png",
 		 "gloopblocks_oerkkiblock_front.png"},
-		"Oerkki Block",
+		S("Oerkki Block"),
 		"oerkki_block",
 		0
 	)
@@ -230,7 +256,7 @@ if minetest.get_modpath("moreblocks") then
 		"gloopblocks:stone_brick_mossy",
 		{cracky=1, not_in_creative_inventory=1},
 		{"gloopblocks_stone_brick_mossy.png"},
-		"Mossy Stone Brick",
+		S("Mossy Stone Brick"),
 		"stone_brick_mossy",
 		0
 	)
@@ -242,7 +268,7 @@ if minetest.get_modpath("moreblocks") then
 		"gloopblocks:stone_mossy",
 		{cracky=1, not_in_creative_inventory=1},
 		{"gloopblocks_stone_mossy.png"},
-		"Mossy Stone",
+		S("Mossy Stone"),
 		"stone_mossy",
 		0
 	)
@@ -254,7 +280,7 @@ if minetest.get_modpath("moreblocks") then
 		"gloopblocks:cobble_road",
 		{cracky=3, stone=1, not_in_creative_inventory=1},
 		{"gloopblocks_cobble_road.png"},
-		"Cobblestone Roadbed",
+		S("Cobblestone Roadbed"),
 		"cobble_road",
 		0
 	)
@@ -266,7 +292,7 @@ if minetest.get_modpath("moreblocks") then
 		"gloopblocks:cobble_road_mossy",
 		{cracky=3, stone=1, not_in_creative_inventory=1},
 		{"gloopblocks_cobble_road_mossy.png"},
-		"Mossy Cobblestone Roadbed",
+		S("Mossy Cobblestone Roadbed"),
 		"cobble_road_mossy",
 		0
 	)
@@ -297,7 +323,7 @@ if minetest.get_modpath("moreblocks") then
 		register_stair_slab_panel_micro( "wool", color, "wool:"..color,
 			{ snappy=2, choppy=2, oddly_breakable_by_hand=3, flammable=3, wool=1, not_in_creative_inventory=1 },
 			{ "wool_"..color..".png" },
-			colordesc.." Wool",
+			S(colordesc.." Wool"),
 			color,
 			0
 		)
@@ -373,40 +399,56 @@ elseif minetest.get_modpath("stairs") then
 	stairs.register_stair_and_slab("stone_mossy", "gloopblocks:stone_mossy",
 			{cracky=3},
 			{"gloopblocks_stone_mossy.png"},
-			"Mossy Stone Stair",
-			"Mossy Stone Slab",
+			S("Mossy Stone Stair"),
+			S("Mossy Stone Slab"),
 			default.node_sound_stone_defaults())
 
 	-- stairs:xxxx_mossycobble
 	stairs.register_stair_and_slab("mossycobble", "default:mossycobble",
 			{cracky=3},
 			{"default_mossycobble.png"},
-			"Mossy Cobble Stair",
-			"Mossy Cobble Slab",
+			S("Mossy Cobble Stair"),
+			S("Mossy Cobble Slab"),
 			default.node_sound_stone_defaults())
 
 	-- stairs:xxxx_stone_brick_mossy
 	stairs.register_stair_and_slab("stone_brick_mossy", "gloopblocks:stone_brick_mossy",
 			{cracky=3},
 			{"gloopblocks_stone_brick_mossy.png"},
-			"Mossy Stone Brick Stair",
-			"Mossy Stone Brick Slab",
+			S("Mossy Stone Brick Stair"),
+			S("Mossy Stone Brick Slab"),
 			default.node_sound_stone_defaults())
 
 	-- stairs:xxxx_cobble_road
 	stairs.register_stair_and_slab("cobble_road", "gloopblocks:cobble_road",
 			{cracky=3},
 			{"gloopblocks_cobble_road.png"},
-			"Cobble Roadbed Stair",
-			"Cobble Roadbed Slab",
+			S("Cobble Roadbed Stair"),
+			S("Cobble Roadbed Slab"),
 			default.node_sound_stone_defaults())
 
 	-- stairs:xxxx_cobble_road_mossy
 	stairs.register_stair_and_slab("cobble_road_mossy", "gloopblocks:cobble_road_mossy",
 			{cracky=3},
 			{"gloopblocks_cobble_road_mossy.png"},
-			"Mossy Cobble Roadbed Stair",
-			"Mossy Cobble Roadbed Slab",
+			S("Mossy Cobble Roadbed Stair"),
+			S("Mossy Cobble Roadbed Slab"),
+			default.node_sound_stone_defaults())
+
+	-- stairs:xxxx_cement
+	stairs.register_stair_and_slab("cement", "gloopblocks:cement",
+			{cracky=2},
+			{"gloopblocks_cement.png"},
+			S("Cement Stair"),
+			S("Cement Slab"),
+			default.node_sound_stone_defaults())
+
+	-- stairs:xxxx_pavement
+	stairs.register_stair_and_slab("pavement", "gloopblocks:pavement",
+			{cracky=3, oddly_breakable_by_hand=3},
+			{"gloopblocks_pavement.png"},
+			S("Pavement Stair"),
+			S("Pavement Slab"),
 			default.node_sound_stone_defaults())
 
 	gloopblocks_register_mossy_conversion({
@@ -434,13 +476,17 @@ elseif minetest.get_modpath("stairs") then
 	minetest.register_alias("gloopblocks:slab_stone_brick_mossy", "stairs:slab_stone_brick_mossy")
 	minetest.register_alias("gloopblocks:stair_stone_mossy", "stairs:stair_stone_mossy")
 	minetest.register_alias("gloopblocks:slab_stone_mossy", "stairs:slab_stone_mossy")
+	minetest.register_alias("gloopblocks:stair_cement", "stairs:stair_cement")
+	minetest.register_alias("gloopblocks:slab_cement", "stairs:slab_cement")
+	minetest.register_alias("gloopblocks:stair_pavement", "stairs:stair_pavement")
+	minetest.register_alias("gloopblocks:slab_pavement", "stairs:slab_pavement")
 
 end
 
 -- Tools
 
 minetest.register_tool("gloopblocks:pick_cement", {
-	description = "Cement Pickaxe",
+	description = S("Cement Pickaxe"),
 	inventory_image = "gloopblocks_cement_pick.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -453,7 +499,7 @@ minetest.register_tool("gloopblocks:pick_cement", {
 })
 
 minetest.register_tool("gloopblocks:shovel_cement", {
-	description = "Cement Shovel",
+	description = S("Cement Shovel"),
 	inventory_image = "gloopblocks_cement_shovel.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -466,7 +512,7 @@ minetest.register_tool("gloopblocks:shovel_cement", {
 })
 
 minetest.register_tool("gloopblocks:axe_cement", {
-	description = "Cement Axe",
+	description = S("Cement Axe"),
 	inventory_image = "gloopblocks_cement_axe.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -480,7 +526,7 @@ minetest.register_tool("gloopblocks:axe_cement", {
 })
 
 minetest.register_tool("gloopblocks:sword_cement", {
-	description = "Cement Sword",
+	description = S("Cement Sword"),
 	inventory_image = "gloopblocks_cement_sword.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -495,7 +541,7 @@ minetest.register_tool("gloopblocks:sword_cement", {
 })
 
 minetest.register_tool("gloopblocks:pick_evil", {
-	description = "Evil Pickaxe",
+	description = S("Evil Pickaxe"),
 	inventory_image = "gloopblocks_evil_pick.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -508,7 +554,7 @@ minetest.register_tool("gloopblocks:pick_evil", {
 })
 
 minetest.register_tool("gloopblocks:shovel_evil", {
-	description = "Evil Shovel",
+	description = S("Evil Shovel"),
 	inventory_image = "gloopblocks_evil_shovel.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -521,7 +567,7 @@ minetest.register_tool("gloopblocks:shovel_evil", {
 })
 
 minetest.register_tool("gloopblocks:axe_evil", {
-	description = "Evil Axe",
+	description = S("Evil Axe"),
 	inventory_image = "gloopblocks_evil_axe.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -535,7 +581,7 @@ minetest.register_tool("gloopblocks:axe_evil", {
 })
 
 minetest.register_tool("gloopblocks:sword_evil", {
-	description = "Evil Sword",
+	description = S("Evil Sword"),
 	inventory_image = "gloopblocks_evil_sword.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -552,15 +598,41 @@ minetest.register_tool("gloopblocks:sword_evil", {
 -- Other items
 
 minetest.register_craftitem("gloopblocks:wet_cement", {
-	description = "Wet Cement",
+	description = S("Wet Cement"),
 	inventory_image = "gloopblocks_wet_cement.png",
 })
 
 minetest.register_craftitem("gloopblocks:evil_stick", {
-	description = "Evil Stick",
+	description = S("Evil Stick"),
 	inventory_image = "gloopblocks_evil_stick.png",
 })
 
+-- Hook into the default lavacooling function to generate basalt and pumice
+local gloopblocks_search_nearby_nodes = function(pos, node)
+	if minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name == node then return true end
+	if minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name == node then return true end
+	if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == node then return true end
+	if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == node then return true end
+	if minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name == node then return true end
+	if minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name == node then return true end
+	return false
+end
+
+default.cool_lava_source = function(pos)
+	if gloopblocks_search_nearby_nodes(pos,"default:water_source")
+	or gloopblocks_search_nearby_nodes(pos,"default:water_flowing") then
+		minetest.set_node(pos, {name="gloopblocks:obsidian_cooled"})
+	end
+end
+
+default.cool_lava_flowing = function(pos)
+	if gloopblocks_search_nearby_nodes(pos,"default:water_source") then
+		minetest.set_node(pos, {name="gloopblocks:basalt_cooled"})
+	elseif gloopblocks_search_nearby_nodes(pos,"default:water_flowing") then
+		minetest.set_node(pos, {name="gloopblocks:pumice_cooled"})
+	end
+end
+
 dofile(minetest.get_modpath("gloopblocks").."/crafts.lua")
 
-print("Gloopblocks Loaded!")
+print(S("Gloopblocks Loaded!"))
