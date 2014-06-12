@@ -216,87 +216,85 @@ end
 
 if minetest.get_modpath("moreblocks") then
 
-	local blocks = {
-		{"Cement", "cement", "cement"},
-		{"Evil Block", "evil", "evil_block"},
-		{"Basalt", "basalt","basalt"},
-		{"Pumice", "pumice","pumice"},
-		{"Pavement", "pavement", "pavement"},
-	}
+    stairsplus:register_all("gloopblocks", "wood", "gloopblocks:oerkki_block", {
+        description = "Oerkki",
+        tiles = {
+            "gloopblocks_oerkkiblock_tb.png",
+            "gloopblocks_oerkkiblock_tb.png", 
+            "gloopblocks_oerkkiblock_sides.png", 
+            "gloopblocks_oerkkiblock_sides.png", 
+            "gloopblocks_oerkkiblock_sides.png",
+            "gloopblocks_oerkkiblock_front.png"
+        },
+        groups = {cracky=2, not_in_creative_inventory=1},
+        sounds = default.node_sound_stone_defaults(),
+        sunlight_propagates = true,
+    })
+    
+    stairsplus:register_all("gloopblocks", "mossy_stone_brick", "gloopblocks:stone_brick_mossy", {
+        description = "Mossy Stone Brick",
+        tiles = {"gloopblocks_stone_brick_mossy.png"},
+        groups = {cracky=1, not_in_creative_inventory=1},
+        sounds = default.node_sound_stone_defaults(),
+        sunlight_propagates = true,
+    })
+    
+    stairsplus:register_all("gloopblocks", "stone_mossy", "gloopblocks:stone_mossy", {
+        description = "Mossy Stone",
+        tiles = {"gloopblocks_stone_mossy.png"},
+        groups = {cracky=1, not_in_creative_inventory=1},
+        sounds = default.node_sound_stone_defaults(),
+        sunlight_propagates = true,
+    })
 
-	for i in ipairs(blocks) do
-		local light = 0
-		if blocks[i][1] == "Evil Block" then
-			light = 5
-		end
-		register_stair_slab_panel_micro("gloopblocks", blocks[i][3], "gloopblocks:"..blocks[i][3], {cracky=2, not_in_creative_inventory=1}, {"gloopblocks_"..blocks[i][3]..".png"}, S(blocks[i][1]), blocks[i][3], light)	
-		table.insert(circular_saw.known_stairs, "gloopblocks:"..blocks[i][3])
-	end
-
-	register_stair_slab_panel_micro(
-		"gloopblocks",
-		"oerkki_block",
-		"gloopblocks:oerkki_block",
-		{cracky=2, not_in_creative_inventory=1},
-		{"gloopblocks_oerkkiblock_tb.png",
-		 "gloopblocks_oerkkiblock_tb.png", 
-		 "gloopblocks_oerkkiblock_sides.png", 
-		 "gloopblocks_oerkkiblock_sides.png", 
-		 "gloopblocks_oerkkiblock_sides.png",
-		 "gloopblocks_oerkkiblock_front.png"},
-		S("Oerkki Block"),
-		"oerkki_block",
-		0
-	)
-	table.insert(circular_saw.known_stairs, "gloopblocks:oerkki_block")
-
-	register_stair_slab_panel_micro(
-		"gloopblocks",
-		"stone_brick_mossy",
-		"gloopblocks:stone_brick_mossy",
-		{cracky=1, not_in_creative_inventory=1},
-		{"gloopblocks_stone_brick_mossy.png"},
-		S("Mossy Stone Brick"),
-		"stone_brick_mossy",
-		0
-	)
-	table.insert(circular_saw.known_stairs, "gloopblocks:stone_brick_mossy")
-
-	register_stair_slab_panel_micro(
-		"gloopblocks",
-		"stone_mossy",
-		"gloopblocks:stone_mossy",
-		{cracky=1, not_in_creative_inventory=1},
-		{"gloopblocks_stone_mossy.png"},
-		S("Mossy Stone"),
-		"stone_mossy",
-		0
-	)
-	table.insert(circular_saw.known_stairs, "gloopblocks:stone_mossy")
-
-	register_stair_slab_panel_micro(
-		"gloopblocks",
-		"cobble_road",
-		"gloopblocks:cobble_road",
-		{cracky=3, stone=1, not_in_creative_inventory=1},
-		{"gloopblocks_cobble_road.png"},
-		S("Cobblestone Roadbed"),
-		"cobble_road",
-		0
-	)
-	table.insert(circular_saw.known_stairs, "gloopblocks:cobble_road")
-
-	register_stair_slab_panel_micro(
-		"gloopblocks",
-		"cobble_road_mossy",
-		"gloopblocks:cobble_road_mossy",
-		{cracky=3, stone=1, not_in_creative_inventory=1},
-		{"gloopblocks_cobble_road_mossy.png"},
-		S("Mossy Cobblestone Roadbed"),
-		"cobble_road_mossy",
-		0
-	)
-	table.insert(circular_saw.known_stairs, "gloopblocks:cobble_road_mossy")
+    stairsplus:register_all("gloopblocks", "cobble_road", "gloopblocks:cobble_road", {
+        description = "Cobblestone Roadbed",
+        tiles = {"gloopblocks_cobble_road.png"},
+        groups = {cracky=3, stone=1, not_in_creative_inventory=1},
+        sounds = default.node_sound_stone_defaults(),
+        sunlight_propagates = true,
+    })
+    
+    stairsplus:register_all("gloopblocks", "cobble_road_mossy", "gloopblocks:cobble_road_mossy", {
+        description = "Mossy Cobblestone Roadbed",
+        tiles = {"gloopblocks_cobble_road_mossy.png"},
+        groups = {cracky=3, stone=1, not_in_creative_inventory=1},
+        sounds = default.node_sound_stone_defaults(),
+        sunlight_propagates = true,
+    })
+    
+    stairsplus:register_all("gloopblocks", "cement", "gloopblocks:cement", {
+        description = "Cement",
+        tiles = {"gloopblocks_cement.png"},
+        groups = {cracky=2, not_in_creative_inventory=1},
+        sounds = default.node_sound_stone_defaults(),
+        sunlight_propagates = true,
+    })
+    
+    stairsplus:register_all("gloopblocks", "pavement", "gloopblocks:pavement", {
+        description = "Pavement",
+        tiles = {"gloopblocks_pavement.png"},
+        groups = {cracky=2, not_in_creative_inventory=1},
+        sounds = default.node_sound_stone_defaults(),
+        sunlight_propagates = true,
+    })
+    
+    stairsplus:register_all("gloopblocks", "rainbow_block", "gloopblocks:rainbow_block", {
+        description = "Rainbow Block",
+        tiles = {"gloopblocks_rainbow_block.png"},
+        groups = {cracky=3, not_in_creative_inventory=1},
+        sounds = default.node_sound_defaults(),
+        sunlight_propagates = true,
+    })
+    
+    stairsplus:register_all("gloopblocks", "evil_block", "gloopblocks:evil_block", {
+        description = "Evil Block",
+        tiles = {"gloopblocks_evil_block.png"},
+        groups = {cracky=3, not_in_creative_inventory=1},
+        sounds = default.node_sound_defaults(),
+        light_source = 5,
+        sunlight_propagates = true,
+    })
 
 	local colorlist = {
 		{"white",      "White"},
@@ -390,97 +388,6 @@ if minetest.get_modpath("moreblocks") then
 		{ "moreblocks:micro_stone", 				"gloopblocks:micro_stone_mossy" },
 		{ "moreblocks:stair_stone_alt", 			"gloopblocks:stair_stone_mossy_alt" },
 	})
-
-elseif minetest.get_modpath("stairs") then
-
-	--stairs.register_stair(subname, recipeitem, groups, images, description, sounds)
-
-	-- stairs:xxxx_stone_mossy ; xxxx = stair or slab
-	stairs.register_stair_and_slab("stone_mossy", "gloopblocks:stone_mossy",
-			{cracky=3},
-			{"gloopblocks_stone_mossy.png"},
-			S("Mossy Stone Stair"),
-			S("Mossy Stone Slab"),
-			default.node_sound_stone_defaults())
-
-	-- stairs:xxxx_mossycobble
-	stairs.register_stair_and_slab("mossycobble", "default:mossycobble",
-			{cracky=3},
-			{"default_mossycobble.png"},
-			S("Mossy Cobble Stair"),
-			S("Mossy Cobble Slab"),
-			default.node_sound_stone_defaults())
-
-	-- stairs:xxxx_stone_brick_mossy
-	stairs.register_stair_and_slab("stone_brick_mossy", "gloopblocks:stone_brick_mossy",
-			{cracky=3},
-			{"gloopblocks_stone_brick_mossy.png"},
-			S("Mossy Stone Brick Stair"),
-			S("Mossy Stone Brick Slab"),
-			default.node_sound_stone_defaults())
-
-	-- stairs:xxxx_cobble_road
-	stairs.register_stair_and_slab("cobble_road", "gloopblocks:cobble_road",
-			{cracky=3},
-			{"gloopblocks_cobble_road.png"},
-			S("Cobble Roadbed Stair"),
-			S("Cobble Roadbed Slab"),
-			default.node_sound_stone_defaults())
-
-	-- stairs:xxxx_cobble_road_mossy
-	stairs.register_stair_and_slab("cobble_road_mossy", "gloopblocks:cobble_road_mossy",
-			{cracky=3},
-			{"gloopblocks_cobble_road_mossy.png"},
-			S("Mossy Cobble Roadbed Stair"),
-			S("Mossy Cobble Roadbed Slab"),
-			default.node_sound_stone_defaults())
-
-	-- stairs:xxxx_cement
-	stairs.register_stair_and_slab("cement", "gloopblocks:cement",
-			{cracky=2},
-			{"gloopblocks_cement.png"},
-			S("Cement Stair"),
-			S("Cement Slab"),
-			default.node_sound_stone_defaults())
-
-	-- stairs:xxxx_pavement
-	stairs.register_stair_and_slab("pavement", "gloopblocks:pavement",
-			{cracky=3, oddly_breakable_by_hand=3},
-			{"gloopblocks_pavement.png"},
-			S("Pavement Stair"),
-			S("Pavement Slab"),
-			default.node_sound_stone_defaults())
-
-	gloopblocks_register_mossy_conversion({
-		{ "default:cobble", 					"default:mossycobble" },
-		{ "stairs:stair_cobble", 				"stairs:stair_mossycobble" },
-		{ "stairs:slab_cobble", 				"stairs:slab_mossycobble" },
-		{ "gloopblocks:cobble_road", 			"gloopblocks:cobble_road_mossy" },
-		{ "stairs:stair_cobble_road", 			"stairs:stair_cobble_road_mossy" },
-		{ "stairs:slab_cobble_road", 			"stairs:slab_cobble_road_mossy" },
-		{ "default:stonebrick", 				"gloopblocks:stone_brick_mossy" },
-		{ "stairs:stair_stonebrick", 			"stairs:stair_stone_brick_mossy" },
-		{ "stairs:slab_stonebrick", 			"stairs:slab_stone_brick_mossy" },
-		{ "default:stone", 						"gloopblocks:stone_mossy" },
-		{ "stairs:stair_stone", 				"stairs:stair_stone_mossy" },
-		{ "stairs:slab_stone", 					"stairs:slab_stone_mossy" },
-	})
-
-	minetest.register_alias("default:stair_mossycobble", "stairs:stair_mossycobble")
-	minetest.register_alias("default:slab_mossycobble", "stairs:slab_mossycobble")
-	minetest.register_alias("gloopblocks:stair_cobble_road", "stairs:stair_cobble_road")
-	minetest.register_alias("gloopblocks:slab_cobble_road", "stairs:slab_cobble_road")
-	minetest.register_alias("gloopblocks:stair_cobble_road_mossy", "stairs:stair_cobble_road_mossy")
-	minetest.register_alias("gloopblocks:slab_cobble_road_mossy", "stairs:slab_cobble_road_mossy")
-	minetest.register_alias("gloopblocks:stair_stone_brick_mossy", "stairs:stair_stone_brick_mossy")
-	minetest.register_alias("gloopblocks:slab_stone_brick_mossy", "stairs:slab_stone_brick_mossy")
-	minetest.register_alias("gloopblocks:stair_stone_mossy", "stairs:stair_stone_mossy")
-	minetest.register_alias("gloopblocks:slab_stone_mossy", "stairs:slab_stone_mossy")
-	minetest.register_alias("gloopblocks:stair_cement", "stairs:stair_cement")
-	minetest.register_alias("gloopblocks:slab_cement", "stairs:slab_cement")
-	minetest.register_alias("gloopblocks:stair_pavement", "stairs:stair_pavement")
-	minetest.register_alias("gloopblocks:slab_pavement", "stairs:slab_pavement")
-
 end
 
 -- Tools
