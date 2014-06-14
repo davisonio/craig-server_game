@@ -12,10 +12,10 @@ local open =  "size[8,10]"..
 local closed = "size[2,1]"..
 	"button[0,0;2,1;open;open]"
 
-minetest.register_node("chests_0gb_us:secret", {
+minetest.register_node("more_chests:secret", {
 	description = "Secret Chest",
 	tiles = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
-		"default_chest_side.png", "default_chest_side.png", "chests.0gb.us_secret_front.png"},
+		"default_chest_side.png", "default_chest_side.png", "secret_front.png"},
 	paramtype2 = "facedir",
 	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
 	legacy_facedir_simple = true,
@@ -97,7 +97,7 @@ minetest.register_node("chests_0gb_us:secret", {
 })
 
 minetest.register_craft({
-	output = 'chests_0gb_us:secret',
+	output = 'more_chests:secret',
 	recipe = {
 		{'default:wood','default:cobble','default:wood'},
 		{'default:wood','default:steel_ingot','default:wood'},

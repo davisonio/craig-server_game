@@ -11,7 +11,7 @@ local function has_locked_chest_privilege(meta, player)
 	end
 end
 
-local function formspec(string)
+local function get_formspec(string)
 	return "size[8,10]"..
 		"list[current_name;main;0,0;8,4;]"..
 		"list[current_player;main;0,5;8,4;]"..
@@ -19,10 +19,10 @@ local function formspec(string)
 		"button[6,9;2,1;submit;submit]"
 end
 
-minetest.register_node("chests_0gb_us:shared", {
+minetest.register_node("more_chests:shared", {
 	description = "Shared Chest",
 	tiles = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
-		"default_chest_side.png", "default_chest_side.png", "chests.0gb.us_shared_front.png"},
+		"default_chest_side.png", "default_chest_side.png", "shared_front.png"},
 	paramtype2 = "facedir",
 	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
 	legacy_facedir_simple = true,
@@ -35,7 +35,7 @@ minetest.register_node("chests_0gb_us:shared", {
 	end,
 	on_construct = function(pos)
 		local meta = minetest.env:get_meta(pos)
-		meta:set_string("formspec", formspec(""))
+		meta:set_string("formspec", get_formspec(""))
 		meta:set_string("infotext", "Shared Chest")
 		meta:set_string("owner", "")
 		local inv = meta:get_inventory()
@@ -91,17 +91,19 @@ minetest.register_node("chests_0gb_us:shared", {
 		minetest.log("action", player:get_player_name()..
 				" takes stuff from shared chest at "..minetest.pos_to_string(pos))
 	end,
-	on_receive_fields = function(pos, formname, fields, sender)
+	on_receive_fields = function(pos, formspec, fields, sender)
 		local meta = minetest.env:get_meta(pos);
-		if meta:get_string("owner") == sender:get_player_name() then
-			meta:set_string("shared", fields.shared);
-			meta:set_string("formspec", formspec(fields.shared))
+		if fields.shared then 
+			if meta:get_string("owner") == sender:get_player_name() then
+				meta:set_string("shared", fields.shared);
+				meta:set_string("formspec", get_formspec(fields.shared))
+			end
 		end
 	end,
 })
 
 minetest.register_craft({
-	output = 'chests_0gb_us:shared',
+	output = 'more_chests:shared',
 	recipe = {
 		{'default:wood','default:leaves','default:wood'},
 		{'default:wood','default:steel_ingot','default:wood'},
