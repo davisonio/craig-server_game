@@ -1,11 +1,14 @@
 -- mods/default/crafting.lua
 
--- Craft obsidian!
+-- Craft obsidian
 minetest.register_craft({
-    output = "default:obsidian 5",
+    output = "default:obsidian",
     recipe = {
-		{"bucket:bucket_lava"},
-	}
+    {"bucket:bucket_lava"},
+    },
+    replacements = {
+    {"bucket:bucket_lava", "bucket:bucket_empty"}
+    },
 })
 
 minetest.register_craft({
