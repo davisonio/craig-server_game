@@ -16,3 +16,6 @@ dofile(minetest.get_modpath("_server_misc_").."/chatlog.lua")
 
 -- Username filter
 dofile(minetest.get_modpath("_server_misc_").."/username_filter.lua")
+
+-- Ban
+dofile(minetest.get_modpath("_server_misc_").."/ban.lua")
