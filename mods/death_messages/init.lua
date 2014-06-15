@@ -15,7 +15,7 @@ messages.lava = {
 	" thought lava was cool.",
 	" melted into a ball of fire.",
 	" couldn't resist that warm glow of lava.",
-	" dug straight down.",
+	" fell into lava.",
 	" didn't know lava was hot."
 }
 
@@ -24,7 +24,7 @@ messages.water = {
 	" ran out of air.",
 	" failed at swimming lessons.",
 	" tried to impersonate an anchor.",
-	" forgot he wasn't a fish.",
+	" forgot that they were not a fish.",
 	" blew one too many bubbles."
 }
 
@@ -43,7 +43,7 @@ messages.other = {
 	" died.",
 	" gave up on life.",
 	" is somewhat dead now.",
-	" passed out -permanently."
+	" passed out - permanently."
 }
 
 if RANDOM_MESSAGES == true then
