@@ -19,3 +19,6 @@ dofile(minetest.get_modpath("_server_misc_").."/username_filter.lua")
 
 -- Ban
 dofile(minetest.get_modpath("_server_misc_").."/ban.lua")
+
+-- Chat Offline
+dofile(minetest.get_modpath("_server_misc_").."/chat_offline.lua")
