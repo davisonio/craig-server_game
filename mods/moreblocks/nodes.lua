@@ -282,7 +282,7 @@ for name, def in pairs(nodes) do
 	minetest.register_node("moreblocks:"..name, def)
 	minetest.register_alias(name, "moreblocks:"..name)
 	if not def.no_stairs then
-		local groups = {}
+		local groups = {not_in_creative_inventory=1, not_in_craft_guide=1}
 		for k, v in pairs(def.groups) do groups[k] = v end
 		stairsplus:register_all("moreblocks", name, "moreblocks:"..name, {
 			description = def.description,
