@@ -1,0 +1,2 @@
+default
+rubber_industry
