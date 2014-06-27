@@ -1,47 +1,102 @@
 --[[
-	StreetsMod 1.1 by webdesigner97:
-		License : CC-BY-NC (see license.txt)
+	StreetsMod 1.5 by webdesigner97:
+		License : CC-BY-SA 3.0 Unported (see license.txt)
 		Readme	: see readme.txt
 		Forum	: http://bit.ly/12cPMeo
 		Depends	: default
 ]]
--- Create variables and tables
-	print("Streets: Creating variables and tables...")
-	streets	= {}
-	streets.version	= 1.3
-	streets.modpath = minetest.get_modpath("streets")
+streets	= {}
+
+-- Kaeza intllib
+	-- Boilerplate to support localized strings if intllib mod is installed.
+	if minetest.get_modpath("intllib") then
+		streets.S = intllib.Getter()
+	else
+		streets.S = function(s) return s end
+	end
+	
+-- Create variable and tables
+	print("Streets: " .. streets.S("Creating variables and tables..."))
+	streets.version	= "1.5"
+	streets.modpath = minetest.get_modpath("streetsmod")
 	streets.extendedBy	= {}
+	streets.load = {
+		start = os.clock(),
+		fin = 0
+	}
+	streets.forms = {}
+
+
+	
+-- Support for mimnetest_next's fancy inventories
+	if gui_bg and gui_bg_img and gui_slots and type(default.get_hotbar_bg) == "function" then
+		-- Everything fine :)
+		-- minetest_next rules! :P
+	else
+		gui_bg = ""
+		gui_bg_img = ""
+		gui_slots = ""
+		default.get_hotbar_bg = function() return "" end
+	end
+	
+-- rubenwardy: smartfs
+	if not minetest.get_modpath("smartfs") then
+		dofile(streets.modpath .. "/libs/smartfs/smartfs.lua")
+	end
+	
+-- Load forms
+	dofile(streets.modpath .. "/forms.lua")
 	
 -- Check for mods which change this mod's beahaviour
-	print("Streets: Checking installed mods...")
+	print("Streets: " .. streets.S("Checking installed mods..."))
 	if minetest.get_modpath("wool")	 then
-		print("'Wool' is installed \n\t => You can craft labels for your asphalt blocks")
 		streets.extendedBy.wool = true
 	else
-		print("'Wool' not installed \n\t => You can't craft any labels")
 		streets.extendedBy.wool = false
 	end
 	if minetest.get_modpath("technic")	then
-		print("'Technic' is installed \n\t => You can use its concrete also in this mod")
 		streets.extendedBy.technic = true
 	else
-		print("'Technic' not installed \n\t => StreetsMod will register its own concrete block")
 		streets.extendedBy.technic = false
 	end
-	if minetest.get_modpath("stairs") then
-		print("'Stairs' is installed \n\t => There will be stairs and slabs'")
-		streets.extendedBy.stairs = true
+	if minetest.get_modpath("moreblocks") then
+		streets.extendedBy.moreblocks = true
 	else
-		print("'Stairs' not installed \n\t => There won't be stairs and slabs'")
-		streets.extendedBy.stairs = false
+		streets.extendedBy.moreblocks = false
 	end
-	if minetest.get_modpath("bucket") then
-		print("'Bucket' is installed \n\t => All signs are available")
-		streets.extendedBy.bucket = true
+	if minetest.get_modpath("mesecons") then
+		streets.extendedBy.mesecons = true
 	else
-		print("'Bucket' not installed \n\t => No signs available")
-		streets.extendedBy.bucket = false
+		streets.extendedBy.mesecons = false
+	end
+	if minetest.get_modpath("digilines") then
+		streets.extendedBy.digilines = true
+	else
+		streets.extendedBy.digilines = false
+	end
+	if minetest.get_modpath("prefab") then
+		streets.extendedBy.prefab = true
+	else
+		streets.extendedBy.prefab = false
+	end
+	if minetest.get_modpath("awards") then
+		streets.extendedBy.awards = true
+	else
+		streets.extendedBy.awards = false
 	end
 	
+-- Streets chatcommand
+	local function round(num, idp)
+		local mult = 10^(idp or 0)
+		return math.floor(num * mult + 0.5) / mult
+	end
+	minetest.register_chatcommand("streets",{
+		description = streets.S("Check version of your installed StreetsMod and find information"),
+		func = function(name,param)
+			streets.forms.chatcmd:show(name);
+		end
+	})
+	
 -- Done	
-	print("Streets: Setup completed, have fun with StreetsMod ".. streets.version .."!")
+	print("Streets: " .. streets.S("Setup completed, have fun with StreetsMod") .. " " .. streets.version .. "!")
+	streets.load.fin = os.clock()

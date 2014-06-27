@@ -2,7 +2,7 @@
 	StreetsMod: Delineator
 ]]
 minetest.register_node(":streets:delineator", {
-	description = "Delineator",
+	description = streets.S("Delineator"),
 	tiles = {"streets_delineator_top.png","streets_delineator.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -20,8 +20,8 @@ minetest.register_node(":streets:delineator", {
 minetest.register_craft({
 	output = "streets:delineator 4",
 	recipe = {
+		{"","",""},
 		{"","default:torch",""},
-		{"","default:stick",""},
-		{"","default:stick",""}
+		{"","default:fence_wood",""}
 	}
 })

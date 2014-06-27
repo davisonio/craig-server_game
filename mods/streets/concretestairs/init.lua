@@ -1,6 +1,11 @@
 --[[
-	StreetsMod: Concrete stairs (not compatible to circular_saw
+	StreetsMod: Concrete stairs (compatible to circular saw)
 ]]
-if streets.extendedBy.stairs == true then
-	 stairs.register_stair_and_slab("concrete", "streets:concrete", {cracky = 2, level = 2}, {"streets_concrete.png"}, "Concrete stair", "Concrete slab", nil)
+if type(register_stair_slab_panel_mirco) == "function" and streets.extendedBy.prefab == false then
+	register_stair_slab_panel_micro("streets", "concrete", "streets:concrete", {cracky=2}, {"streets_concrete.png"}, "Concrete", "concrete", nil)
+	table.insert(circular_saw.known_stairs,"streets:concrete")
+	minetest.register_alias("stairs:stair_concrete","streets:stair_concrete")
+else
+	minetest.register_alias("stairs:stair_concrete","prefab:concrete_stair")
+	minetest.register_alias("stairs:slab_concrete","prefab:concrete_slab")
 end
