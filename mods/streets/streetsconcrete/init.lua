@@ -1,8 +1,10 @@
 --[[
 	StreetsMod: Concrete, Concrete wall (flat), Concrete wall (full)
 ]]
+
+minetest.register_alias("technic:concrete","streets:concrete")
+
 if streets.extendedBy.technic == true then 
-	minetest.register_alias("streets:concrete","technic:concrete")
 	-- Use technic's concrete block for the seperating wall
 	minetest.register_node(":streets:concrete_wall",{
 		description = streets.S("Concrete wall"),
