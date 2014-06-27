@@ -1,5 +1,3 @@
-
-
 -- Remove trees from old mod.
 
 local old_nodes = {"trees:leaves_yellow", "trees:leaves_red", "trees:leaves_green", "trees:leaves_palm", "trees:leaves_mangrove", "trees:leaves_conifer", "trees:tree_palm", "trees:tree_mangrove", "trees:tree_conifer", "trees:wood_conifer", "trees:wood_palm", "trees:wood_mangrove"}
@@ -27,3 +25,21 @@ for _,entity_name in ipairs(old_entities) do
         end,
     })
 end
+
+-- Aliases for industry_pack fail
+
+minetest.register_alias("rubber_industry:rubber_tree_full", "rubber:rubber_tree_full")
+minetest.register_alias("rubber_industry:rubber_tree_empty", "rubber:rubber_tree_empty")
+minetest.register_alias("rubber_industry:rubber_sheet", "rubber_sheet:rubber_sheet")
+minetest.register_alias("rubber_industry:rubber_lump", "rubber_sheet:rubber_base")
+minetest.register_alias("rubber_industry:rubber_storage", "rubber_collector:rubber_collector")
+minetest.register_alias("rubber_industry:autocrafter", "factory:factory")
+minetest.register_alias("rubber_industry:gear", "gears:gear")
+minetest.register_alias("rubber_industry:mechanical_arm", "mecharm:mechanical_arm")
+minetest.register_alias("rubber_industry:crafter", "factory:craft_performer")
+minetest.register_alias("rubber_industry:saw", "handtools:saw")
+minetest.register_alias("rubber_industry:toolbox", "toolbox:toolbox")
+minetest.register_alias("rubber_industry:conveyor_belt", "conveyor:conveyor")
+minetest.register_alias("rubber_industry:transactor_sideways", "transactor:transactor")
+minetest.register_alias("rubber_industry:transactor_downhopper", ":hopper")
+minetest.register_alias("rubber_industry:transactor_up", "dumbwaiter:dumbwaiter")
