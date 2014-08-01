@@ -25,3 +25,5 @@ else
 		cooktime = 2
 	})
 end
+
+minetest.register_alias("streets:asphalt_slab","streets:slab_asphalt")
