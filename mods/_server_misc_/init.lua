@@ -22,3 +22,6 @@ dofile(minetest.get_modpath("_server_misc_").."/ban.lua")
 
 -- Chat Offline
 dofile(minetest.get_modpath("_server_misc_").."/chat_offline.lua")
+
+-- No Interact Messages
+dofile(minetest.get_modpath("_server_misc_").."/nointeract_messages.lua")
