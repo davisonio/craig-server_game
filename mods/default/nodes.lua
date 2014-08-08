@@ -717,13 +717,13 @@ minetest.register_node("default:sign_wall", {
 		meta:set_string("infotext", "\"\"")
 	end,
 	on_receive_fields = function(pos, formname, fields, sender)
-		--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
+-- Nope, we don't want this.
 --		if minetest.is_protected(pos, sender:get_player_name()) then
 --			minetest.record_protection_violation(pos, sender:get_player_name())
 --			return
 --		end
 		local meta = minetest.get_meta(pos)
-		fields.text = fields.text or ""
+		if not fields.text then return end
 		minetest.log("action", (sender:get_player_name() or "").." wrote \""..fields.text..
 				"\" to sign at "..minetest.pos_to_string(pos))
 		meta:set_string("text", fields.text)
