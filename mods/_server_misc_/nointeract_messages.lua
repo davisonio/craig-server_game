@@ -1,7 +1,7 @@
 local TIMER = 0
 minetest.register_globalstep(function(dtime)
 	TIMER = TIMER + dtime
-	if TIMER < 10 then return end
+	if TIMER < 20 then return end
 	TIMER = 0
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local name = player:get_player_name()
