@@ -11,11 +11,13 @@ Here are the rules:
 6)	Punching other players (PVP) is only possible when all players taking part agree.
 7)  Multiple accounts are dissalowed and you are responsible for looking after your account and login details.
 8)	We want to make this world look as nice as possible, so please avoid building 1x1 towers or tunnels and placing random blocks everywhere. A few cool buildings would be nice too :)
+
+Click the accept button and you will be able to build.
 ]]
 
 local function make_formspec()
 	local size = { "size[10,8]" }
-	table.insert(size, "textarea[0.5,0.5;9.5,8;TOS;Here are the rules. Do you agree with them?;"..RULES.."]")
+	table.insert(size, "textarea[0.5,0.5;9.5,8;TOS;Here are the rules. Click accept if you agree with them;"..RULES.."]")
 	table.insert(size, "button_exit[6,7.4;1.5,0.5;accept;I Agree :)]")
 	table.insert(size, "button[7.5,7.4;1.5,0.5;decline;I Disagree :(]")
 	return table.concat(size)
