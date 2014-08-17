@@ -2,6 +2,12 @@
 -- Server Misc Mod --
 ---------------------
 
+-- Seen
+dofile(minetest.get_modpath("_misc").."/seen.lua")
+
+-- Nodename HUD
+dofile(minetest.get_modpath("_misc").."/nodename_hud.lua")
+
 -- Give initial stuff
 dofile(minetest.get_modpath("_misc").."/give_intial_stuff.lua")
 
