@@ -1,4 +1,84 @@
---Spawn command
+--
+-- Edited chat commands from core
+--
+
+-- /me
+-- /help
+-- /privs
+-- /grant
+-- /revoke
+-- /setpassword
+-- /clearpassword
+-- /auth_reload
+-- /teleport
+-- /set
+-- /mods
+-- /give
+-- /giveme
+-- /spawnentity
+-- /pulverize
+-- /rollback_check
+-- /rollback
+-- /status
+
+minetest.register_chatcommand("time", {
+	params = "<0...24000>",
+	description = "set time of day",
+	privs = {settime=true},
+	func = function(name, param)
+		if param == "" then
+			return false, "Missing time."
+		end
+		local newtime = tonumber(param)
+		if newtime == nil then
+			return false, "Invalid time."
+		end
+		minetest.set_timeofday((newtime % 24000) / 24000)
+		minetest.log("action", name .. " sets time " .. newtime)
+		minetest.chat_send_all(name .. " changed the time of day.")
+	end,
+})
+
+minetest.register_chatcommand("shutdown", {
+	description = "shutdown server",
+	privs = {server=true},
+	func = function(name, param)
+		minetest.log("action", name .. " shuts down server")
+		minetest.request_shutdown()
+		minetest.chat_send_all(name .. " just shut down the server.")
+	end,
+})
+
+minetest.register_chatcommand("ban", {
+	params = "<name>",
+	description = "Ban IP of player",
+	privs = {ban=true},
+	func = function(name, param)
+		if param == "" then
+			return true, "Ban list: " .. minetest.get_ban_list()
+		end
+		if not minetest.get_player_by_name(param) then
+			return false, "This player is not online at the moment. Use a /future_ban instead."
+		end
+		if not minetest.ban_player(param) then
+			return false, "Failed to ban player."
+		end
+		local desc = minetest.get_ban_description(param)
+		minetest.log("action", name .. " bans " .. desc .. ".")
+		return true, "Banned " .. desc .. "."
+	end,
+})
+
+-- /unban
+-- /kick
+-- /clearobjects
+-- /msg
+
+--
+-- Other chat commands
+--
+
+-- Spawn command
 minetest.register_chatcommand("spawn", {
     params = "",
     description = "Teleport to the spawn location.",
@@ -11,7 +91,7 @@ minetest.register_chatcommand("spawn", {
     end,
 })
 
---Sethome command
+-- Sethome command
 minetest.register_chatcommand("sethome", {
         params = "",
         description = "Set your home location.",
@@ -30,7 +110,7 @@ minetest.register_chatcommand("sethome", {
         end
 })
 
---Home command
+-- Home command
 minetest.register_chatcommand("home", {
 	params = "",
 	description = "Teleport to your home location.",

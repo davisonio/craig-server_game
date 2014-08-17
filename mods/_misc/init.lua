@@ -2,10 +2,13 @@
 -- Server Misc Mod --
 ---------------------
 
---News
+-- Chat Commands
+dofile(minetest.get_modpath("_misc").."/chatcommands.lua")
+
+-- News
 dofile(minetest.get_modpath("_misc").."/news.lua")
 
---Rules
+-- Rules
 dofile(minetest.get_modpath("_misc").."/rules.lua")
 
 -- Aliases
