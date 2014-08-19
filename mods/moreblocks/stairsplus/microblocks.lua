@@ -1,6 +1,4 @@
--- Load translation library if intllib is installed
-
-local S
+local S -- Load translation library if intllib is installed:
 if intllib then
 	S = intllib.Getter(minetest.get_current_modname())
 else
@@ -77,37 +75,48 @@ function stairsplus:register_micro(modname, subname, recipeitem, fields)
 		end
 		def.description = desc
 		if fields.drop then
-			def.drop = modname..":micro_"..fields.drop..alternate
+			def.drop = modname.. ":micro_" ..fields.drop..alternate
 		end
-		minetest.register_node(":"..modname..":micro_"..subname..alternate, def)
+		minetest.register_node(":" ..modname.. ":micro_" ..subname..alternate, def)
 	end
 
-	minetest.register_alias(modname..":micro_"..subname.."_bottom", modname..":micro_"..subname)
+	minetest.register_alias(modname.. ":micro_" ..subname.. "_bottom", modname.. ":micro_" ..subname)
 	
-	-- Some saw-less recipe.
+	-- Some saw-less recipes:
 	
-		minetest.register_craft({
-		output = "moreblocks:micro_" .. subname .. " 6",
-		recipe = {
-			{"moreblocks:stair_" .. subname},
-		},
+	minetest.register_craft({
+		type = "shapeless",
+		output = modname .. ":micro_" .. subname .. " 7",
+		recipe = {modname .. ":stair_" .. subname .. "_inner"},
 	})
-		minetest.register_craft({
-		output = "moreblocks:micro_" .. subname .. " 4",
-		recipe = {
-			{"moreblocks:slab_" .. subname},
-		},
+	
+	minetest.register_craft({
+	output = modname .. ":micro_" .. subname .. " 6",
+		type = "shapeless",
+	recipe = {modname .. ":stair_" .. subname},
 	})
-		minetest.register_craft({
-		output = "moreblocks:micro_" .. subname .. " 2",
-		recipe = {
-			{"moreblocks:panel_" .. subname},
-		},
+	
+	minetest.register_craft({
+		type = "shapeless",
+		output = modname .. ":micro_" .. subname .. " 5",
+		recipe = {modname .. ":stair_" .. subname .. "_outer"},
 	})
-		minetest.register_craft({
-			type = "shapeless",
-			output = recipeitem,
-			recipe = {"moreblocks:micro_" .. subname, "moreblocks:micro_" .. subname, "moreblocks:micro_" .. subname, "moreblocks:micro_" .. subname, "moreblocks:micro_" .. subname, "moreblocks:micro_" .. subname, "moreblocks:micro_" .. subname, "moreblocks:micro_" .. subname},
+	
+	minetest.register_craft({
+		type = "shapeless",
+		output = modname .. ":micro_" .. subname .. " 4",
+		recipe = {modname .. ":slab_" .. subname},
+	})
+	
+	minetest.register_craft({
+		type = "shapeless",
+		output = modname .. ":micro_" .. subname .. " 2",
+		recipe = {modname .. ":panel_" .. subname},
+	})
+	
+	minetest.register_craft({
+		type = "shapeless",
+		output = recipeitem,
+		recipe = {modname .. ":micro_" .. subname, modname .. ":micro_" .. subname, modname .. ":micro_" .. subname, modname .. ":micro_" .. subname, modname .. ":micro_" .. subname, modname .. ":micro_" .. subname, modname .. ":micro_" .. subname, modname .. ":micro_" .. subname},
 	})
 end
-

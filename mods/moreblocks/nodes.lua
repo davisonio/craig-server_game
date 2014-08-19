@@ -6,102 +6,119 @@ local sound_glass = default.node_sound_glass_defaults()
 local sound_leaves = default.node_sound_leaves_defaults()
 
 local function tile_tiles(name)
-	local tex = "moreblocks_"..name..".png"
-	return {tex, tex, tex, tex, tex.."^[transformR90", tex.."^[transformR90"}
+	local tex = "moreblocks_" ..name.. ".png"
+	return {tex, tex, tex, tex, tex.. "^[transformR90", tex.. "^[transformR90"}
 end
 
 local nodes = {
 	["wood_tile"] = {
 		description = S("Wooden Tile"),
-		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-		paramtype2 = "facedir",
-		tiles = tile_tiles("wood_tile"),
+		groups = {snappy = 1, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+		tiles = {"default_wood.png^moreblocks_wood_tile.png",
+		"default_wood.png^moreblocks_wood_tile.png",
+		"default_wood.png^moreblocks_wood_tile.png",
+		"default_wood.png^moreblocks_wood_tile.png",
+		"default_wood.png^moreblocks_wood_tile.png^[transformR90",
+		"default_wood.png^moreblocks_wood_tile.png^[transformR90"},
 		sounds = sound_wood,
 	},
 	["wood_tile_flipped"] = {
 		description = S("Wooden Tile"),
-		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-		paramtype2 = "facedir",
-		tiles = tile_tiles("wood_tile_flipped"),
+		groups = {snappy = 1, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+		tiles = {"default_wood.png^moreblocks_wood_tile.png^[transformR90",
+		"default_wood.png^moreblocks_wood_tile.png^[transformR90",
+		"default_wood.png^moreblocks_wood_tile.png^[transformR90",
+		"default_wood.png^moreblocks_wood_tile.png^[transformR90",
+		"default_wood.png^moreblocks_wood_tile.png^[transformR180",
+		"default_wood.png^moreblocks_wood_tile.png^[transformR180"},
 		sounds = sound_wood,
 		no_stairs = true,
 	},
 	["wood_tile_center"] = {
 		description = S("Centered Wooden Tile"),
-		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-		paramtype2 = "facedir",
-		tiles = tile_tiles("wood_tile_center"),
+		groups = {snappy = 1, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+		tiles = {"default_wood.png^moreblocks_wood_tile_center.png"},
 		sounds = sound_wood,
 	},
 	["wood_tile_full"] = {
 		description = S("Full Wooden Tile"),
-		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-		paramtype2 = "facedir",
+		groups = {snappy = 1, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 		tiles = tile_tiles("wood_tile_full"),
 		sounds = sound_wood,
 	},
 	["wood_tile_up"] = {
-		description = S("Up Wooden Tile"),
-		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-		paramtype2 = "facedir",
-		tiles = tile_tiles("wood_tile_up"),
+		description = S("Upwards Wooden Tile"),
+		groups = {snappy = 1, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+		tiles = {"default_wood.png^moreblocks_wood_tile_up.png"},
 		sounds = sound_wood,
 		no_stairs = true,
 	},
 	["wood_tile_down"] = {
-		description = S("Down Wooden Tile"),
-		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-		paramtype2 = "facedir",
-		tiles = tile_tiles("wood_tile_down"),
+		description = S("Downwards Wooden Tile"),
+		groups = {snappy = 1, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+		tiles = {"default_wood.png^[transformR180^moreblocks_wood_tile_up.png^[transformR180"},
 		sounds = sound_wood,
 		no_stairs = true,
 	},
 	["wood_tile_left"] = {
-		description = S("Left Wooden Tile"),
-		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-		paramtype2 = "facedir",
-		tiles = tile_tiles("wood_tile_left"),
+		description = S("Leftwards Wooden Tile"),
+		groups = {snappy = 1, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+		tiles = {"default_wood.png^[transformR270^moreblocks_wood_tile_up.png^[transformR270"},
 		sounds = sound_wood,
 		no_stairs = true,
 	},
 	["wood_tile_right"] = {
-		description = S("Right Wooden Tile"),
-		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-		paramtype2 = "facedir",
-		tiles = tile_tiles("wood_tile_right"),
+		description = S("Rightwards Wooden Tile"),
+		groups = {snappy = 1, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+		tiles = {"default_wood.png^[transformR90^moreblocks_wood_tile_up.png^[transformR90"},
 		sounds = sound_wood,
 		no_stairs = true,
 	},
 	["circle_stone_bricks"] = {
 		description = S("Circle Stone Bricks"),
-		groups = {cracky=3},
+		groups = {cracky = 3},
+		sounds = sound_stone,
+	},
+	["grey_bricks"] = {
+		description = S("Stone Bricks"),
+		groups = {cracky = 3},
 		sounds = sound_stone,
 	},
 	["coal_stone_bricks"] = {
 		description = S("Coal Stone Bricks"),
-		groups = {cracky=3},
+		groups = {cracky = 3},
 		sounds = sound_stone,
 	},
 	["iron_stone_bricks"] = {
 		description = S("Iron Stone Bricks"),
-		groups = {cracky=3},
+		groups = {cracky = 3},
 		sounds = sound_stone,
 	},
 	["stone_tile"] = {
 		description = S("Stone Tile"),
-		groups = {cracky=3},
+		groups = {cracky = 3},
 		sounds = sound_stone,
 	},
 	["split_stone_tile"] = {
 		description = S("Split Stone Tile"),
 		tiles = {"moreblocks_split_stone_tile_top.png",
 			"moreblocks_split_stone_tile.png"},
-		groups = {cracky=3},
+		groups = {cracky = 3},
+		sounds = sound_stone,
+	},
+	["split_stone_tile_alt"] = {
+		description = S("Checkered Stone Tile"),
+		groups = {cracky = 3},
+		sounds = sound_stone,
+	},
+	["tar"] = {
+		description = S("Tar"),
+		groups = {cracky = 2},
 		sounds = sound_stone,
 	},
 	["plankstone"] = {
 		description = S("Plankstone"),
-		groups = {cracky=3},
+		groups = {cracky = 3},
 		tiles = tile_tiles("plankstone"),
 		sounds = sound_stone,
 	},
@@ -110,7 +127,7 @@ local nodes = {
 		drawtype = "glasslike_framed",
 		paramtype = "light",
 		sunlight_propagates = true,
-		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
 		sounds = sound_glass,
 	},
 	["coal_glass"] = {
@@ -118,7 +135,7 @@ local nodes = {
 		drawtype = "glasslike_framed",
 		paramtype = "light",
 		sunlight_propagates = true,
-		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
 		sounds = sound_glass,
 	},
 	["clean_glass"] = {
@@ -126,58 +143,69 @@ local nodes = {
 		drawtype = "glasslike_framed",
 		paramtype = "light",
 		sunlight_propagates = true,
-		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
 		sounds = sound_glass,
 	},
 	["cactus_brick"] = {
 		description = S("Cactus Brick"),
-		groups = {cracky=3},
-		paramtype2 = "facedir",
+		groups = {cracky = 3},
 		sounds = sound_stone,
 	},
 	["cactus_checker"] = {
 		description = S("Cactus Checker"),
-		groups = {cracky=3},
-		paramtype2 = "facedir",
-		tiles = tile_tiles("cactus_checker"),
+		groups = {cracky = 3},
+		tiles = {"default_stone.png^moreblocks_cactus_checker.png",
+		"default_stone.png^moreblocks_cactus_checker.png",
+		"default_stone.png^moreblocks_cactus_checker.png",
+		"default_stone.png^moreblocks_cactus_checker.png",
+		"default_stone.png^moreblocks_cactus_checker.png^[transformR90",
+		"default_stone.png^moreblocks_cactus_checker.png^[transformR90"},
 		sounds = sound_stone,
 	},
 	["empty_bookshelf"] = {
 		description = S("Empty Bookshelf"),
 		tiles = {"default_wood.png", "default_wood.png",
 			"moreblocks_empty_bookshelf.png"},
-		groups = {snappy=2,choppy=3,oddly_breakable_by_hand=2,flammable=3},
+		groups = {snappy = 2, choppy = 3, oddly_breakable_by_hand = 2, flammable = 3},
 		sounds = sound_wood,
 		no_stairs = true,
 	},
 	["coal_stone"] = {
 		description = S("Coal Stone"),
-		groups = {cracky=3},
+		groups = {cracky = 3},
 		sounds = sound_stone,
 	},
 	["iron_stone"] = {
 		description = S("Iron Stone"),
-		groups = {cracky=3},
+		groups = {cracky = 3},
 		sounds = sound_stone,
 	},
 	["coal_checker"] = {
 		description = S("Coal Checker"),
-		tiles = tile_tiles("coal_checker"),
-		paramtype2 = "facedir",
-		groups = {cracky=3},
+		tiles = {"default_stone.png^moreblocks_coal_checker.png",
+		"default_stone.png^moreblocks_coal_checker.png",
+		"default_stone.png^moreblocks_coal_checker.png",
+		"default_stone.png^moreblocks_coal_checker.png",
+		"default_stone.png^moreblocks_coal_checker.png^[transformR90",
+		"default_stone.png^moreblocks_coal_checker.png^[transformR90"},
+		groups = {cracky = 3},
 		sounds = sound_stone,
 	},
 	["iron_checker"] = {
 		description = S("Iron Checker"),
-		tiles = tile_tiles("iron_checker"),
-		paramtype2 = "facedir",
-		groups = {cracky=3},
+		tiles = {"default_stone.png^moreblocks_iron_checker.png",
+		"default_stone.png^moreblocks_iron_checker.png",
+		"default_stone.png^moreblocks_iron_checker.png",
+		"default_stone.png^moreblocks_iron_checker.png",
+		"default_stone.png^moreblocks_iron_checker.png^[transformR90",
+		"default_stone.png^moreblocks_iron_checker.png^[transformR90"},
+		groups = {cracky = 3},
 		sounds = sound_stone,
 	},
 	["trap_stone"] = {
 		description = S("Trap Stone"),
 		walkable = false,
-		groups = {cracky=3},
+		groups = {cracky = 3},
 		sounds = sound_stone,
 		no_stairs = true,
 	},
@@ -187,7 +215,7 @@ local nodes = {
 		paramtype = "light",
 		sunlight_propagates = true,
 		walkable = false,
-		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
 		sounds = sound_glass,
 		no_stairs = true,
 	},
@@ -202,21 +230,21 @@ local nodes = {
 			type = "fixed",
 			fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
 		},
-		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=2},
+		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
 		sounds = sound_wood,
 		no_stairs = true,
 	},
 	["all_faces_tree"] = {
 		description = S("All-faces Tree"),
 		tiles = {"default_tree_top.png"},
-		groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+		groups = {tree = 1,snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
 		sounds = sound_wood,
 		furnace_burntime = 30,
 	},
 	["all_faces_jungle_tree"] = {
 		description = S("All-faces Jungle Tree"),
 		tiles = {"default_jungletree_top.png"},
-		groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+		groups = {tree = 1,snappy = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
 		sounds = sound_wood,
 		furnace_burntime = 30,
 	},
@@ -226,7 +254,7 @@ local nodes = {
 		paramtype = "light",
 		sunlight_propagates = true,
 		light_source = 11,
-		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
 		sounds = sound_glass,
 	},
 	["trap_glow_glass"] = {
@@ -236,7 +264,7 @@ local nodes = {
 		sunlight_propagates = true,
 		light_source = 11,
 		walkable = false,
-		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
 		sounds = sound_glass,
 		no_stairs = true,
 	},
@@ -246,7 +274,7 @@ local nodes = {
 		paramtype = "light",
 		sunlight_propagates = true,
 		light_source = 15,
-		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
 		sounds = sound_glass,
 	},
 	["trap_super_glow_glass"] = {
@@ -256,7 +284,7 @@ local nodes = {
 		sunlight_propagates = true,
 		light_source = 15,
 		walkable = false,
-		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
 		sounds = sound_glass,
 		no_stairs = true,
 	},
@@ -278,13 +306,13 @@ local nodes = {
 }
 
 for name, def in pairs(nodes) do
-	def.tiles = def.tiles or {"moreblocks_"..name..".png"}
-	minetest.register_node("moreblocks:"..name, def)
-	minetest.register_alias(name, "moreblocks:"..name)
+	def.tiles = def.tiles or {"moreblocks_" ..name.. ".png"}
+	minetest.register_node("moreblocks:" ..name, def)
+	minetest.register_alias(name, "moreblocks:" ..name)
 	if not def.no_stairs then
-		local groups = {not_in_creative_inventory=1, not_in_craft_guide=1}
+		local groups = {}
 		for k, v in pairs(def.groups) do groups[k] = v end
-		stairsplus:register_all("moreblocks", name, "moreblocks:"..name, {
+		stairsplus:register_all("moreblocks", name, "moreblocks:" ..name, {
 			description = def.description,
 			groups = groups,
 			tiles = def.tiles,
@@ -306,7 +334,7 @@ minetest.register_craftitem("moreblocks:sweeper", {
 minetest.register_craftitem("moreblocks:jungle_stick", {
 	description = S("Jungle Stick"),
 	inventory_image = "moreblocks_junglestick.png",
-	groups = {stick=1},
+	groups = {stick= 1},
 })
 
 minetest.register_craftitem("moreblocks:nothing", {

@@ -10,7 +10,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "default:ladder 3",
+	output = "default:ladder 4",
 	recipe = {
 		{"default:stick", "", "default:stick"},
 		{"default:stick", "default:stick", "default:stick"},
@@ -19,7 +19,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "default:paper 3",
+	output = "default:paper 4",
 	recipe = {
 		{"default:papyrus", "default:papyrus", "default:papyrus"},
 	}
@@ -35,52 +35,13 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "default:axe_wood",
-	recipe = {
-		{"default:wood", "default:wood"},
-		{"default:stick", "default:wood"},
-		{"default:stick", ""},
-	}
-})
-
-minetest.register_craft({
-	output = "default:axe_stone",
-	recipe = {
-		{"default:cobble", "default:cobble"},
-		{"default:stick", "default:cobble"},
-		{"default:stick", ""},
-	}
-})
-
-minetest.register_craft({
-	output = "default:axe_steel",
-	recipe = {
-		{"default:steel_ingot", "default:steel_ingot"},
-		{"default:stick", "default:steel_ingot"},
-		{"default:stick", ""},
-	}
-})
-
-minetest.register_craft({
 	type = "toolrepair",
 	additional_wear = -0.15, -- Tool repair buff (15% bonus instead of 2%).
 })
 
 -- Redefinitions of some default nodes:
 
-if minetest.override_item then -- Don't bother overriding nodes if minetest.override_item isn't available.
-
-if moreblocks.config.wood_facedir then
-	minetest.override_item("default:wood", {
-		paramtype2 = "facedir",
-	})
-	minetest.override_item("default:brick", {
-		paramtype2 = "facedir",
-	})
-end
-
 -- Make glass and obsidian glass framed, like the More Blocks glasses:
-
 minetest.override_item("default:glass", {
 	drawtype = "glasslike_framed",
 })
@@ -90,7 +51,6 @@ minetest.override_item("default:obsidian_glass", {
 })
 
 -- Let there be light. This makes some nodes let light pass through:
-
 minetest.override_item("default:ladder", {
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -134,11 +94,8 @@ minetest.override_item("default:grass_1", {
 })
 
 for i = 2, 5 do
-	minetest.override_item("default:grass_"..i, {
+	minetest.override_item("default:grass_" ..i, {
 		paramtype = "light",
 		sunlight_propagates = true,
 	})
 end
-
-end -- End "if minetest.override_item".
-
