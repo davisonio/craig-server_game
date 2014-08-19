@@ -9,7 +9,7 @@ dofile(minetest.get_modpath("_misc").."/seen.lua")
 dofile(minetest.get_modpath("_misc").."/nodename_hud.lua")
 
 -- Give initial stuff
-dofile(minetest.get_modpath("_misc").."/give_intial_stuff.lua")
+dofile(minetest.get_modpath("_misc").."/give_initial_stuff.lua")
 
 -- Chat Commands
 dofile(minetest.get_modpath("_misc").."/chatcommands.lua")
