@@ -28,13 +28,24 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 --]]
 
 --=====================================================================
+
+-- Boilerplate to support localized strings if intllib mod is installed.
+local S
+if (minetest.get_modpath("intllib")) then
+  dofile(minetest.get_modpath("intllib").."/intllib.lua")
+  S = intllib.Getter(minetest.get_current_modname())
+else
+  S = function ( s ) return s end
+end
+
+
 -- Items/recipes needed to generate the few base colors that are not
 -- provided by the standard dyes mod.
 
 -- Lime
 
 minetest.register_craftitem(":dye:lime", {
-        description = "Lime Dye",
+        description = S("Lime Dye"),
         inventory_image = "unifieddyes_lime.png",
 	groups = { dye=1, excolor_lime=1, unicolor_lime=1, not_in_creative_inventory=1 }
 })
@@ -51,7 +62,7 @@ minetest.register_craft( {
 -- Aqua
 
 minetest.register_craftitem(":dye:aqua", {
-        description = "Aqua Dye",
+        description = S("Aqua Dye"),
         inventory_image = "unifieddyes_aqua.png",
 	groups = { dye=1, excolor_aqua=1, unicolor_aqua=1, not_in_creative_inventory=1 }
 })
@@ -68,7 +79,7 @@ minetest.register_craft( {
 -- Sky blue
 
 minetest.register_craftitem(":dye:skyblue", {
-        description = "Sky-blue Dye",
+        description = S("Sky-blue Dye"),
         inventory_image = "unifieddyes_skyblue.png",
 	groups = { dye=1, excolor_sky_blue=1, unicolor_sky_blue=1, not_in_creative_inventory=1 }
 })
@@ -85,7 +96,7 @@ minetest.register_craft( {
 -- Red-violet
 
 minetest.register_craftitem(":dye:redviolet", {
-        description = "Red-violet Dye",
+        description = S("Red-violet Dye"),
         inventory_image = "unifieddyes_redviolet.png",
 	groups = { dye=1, excolor_red_violet=1, unicolor_red_violet=1, not_in_creative_inventory=1 }
 })
@@ -103,7 +114,7 @@ minetest.register_craft( {
 -- Light grey
 
 minetest.register_craftitem(":dye:light_grey", {
-        description = "Light Grey Dye",
+        description = S("Light Grey Dye"),
         inventory_image = "unifieddyes_lightgrey.png",
 	groups = { dye=1, excolor_lightgrey=1, unicolor_light_grey=1, not_in_creative_inventory=1 }
 })
@@ -310,40 +321,40 @@ for i = 1, 12 do
 	end
 
 	minetest.register_craftitem("unifieddyes:dark_" .. hue .. "_s50", {
-		description = "Dark " .. hue2 .. " Dye (low saturation)",
+		description = S("Dark " .. hue2 .. " Dye (low saturation)"),
 		inventory_image = "unifieddyes_dark_" .. hue .. "_s50.png",
 		groups = { dye=1, ["unicolor_dark_"..hue.."_s50"]=1, not_in_creative_inventory=1 }
 	})
 
 	if hue ~= "green" then
 		minetest.register_craftitem("unifieddyes:dark_" .. hue, {
-			description = "Dark " .. hue2 .. " Dye",
+			description = S("Dark " .. hue2 .. " Dye"),
 			inventory_image = "unifieddyes_dark_" .. hue .. ".png",
 			groups = { dye=1, ["unicolor_dark_"..hue]=1, not_in_creative_inventory=1 }
 		})
 	end
 
 	minetest.register_craftitem("unifieddyes:medium_" .. hue .. "_s50", {
-		description = "Medium " .. hue2 .. " Dye (low saturation)",
+		description = S("Medium " .. hue2 .. " Dye (low saturation)"),
 		inventory_image = "unifieddyes_medium_" .. hue .. "_s50.png",
 		groups = { dye=1, ["unicolor_medium_"..hue.."_s50"]=1, not_in_creative_inventory=1 }
 	})
 
 	minetest.register_craftitem("unifieddyes:medium_" .. hue, {
-		description = "Medium " .. hue2 .. " Dye",
+		description = S("Medium " .. hue2 .. " Dye"),
 		inventory_image = "unifieddyes_medium_" .. hue .. ".png",
 		groups = { dye=1, ["unicolor_medium_"..hue]=1, not_in_creative_inventory=1 }
 	})
 
 	minetest.register_craftitem("unifieddyes:" .. hue .. "_s50", {
-		description = hue2 .. " Dye (low saturation)",
+		description = S(hue2 .. " Dye (low saturation)"),
 		inventory_image = "unifieddyes_" .. hue .. "_s50.png",
 		groups = { dye=1, ["unicolor_"..hue.."_s50"]=1, not_in_creative_inventory=1 }
 	})
 
 	if hue ~= "red" then
 		minetest.register_craftitem("unifieddyes:light_" .. hue, {
-			description = "Light " .. hue2 .. " Dye",
+			description = S("Light " .. hue2 .. " Dye"),
 			inventory_image = "unifieddyes_light_" .. hue .. ".png",
 			groups = { dye=1, ["unicolor_light_"..hue]=1, not_in_creative_inventory=1 }
 		})
@@ -362,5 +373,5 @@ minetest.register_alias("unifieddyes:grey_paint", "dye:grey")
 minetest.register_alias("unifieddyes:darkgrey_paint", "dye:dark_grey")
 minetest.register_alias("unifieddyes:carbon_black", "dye:black")
 
-print("[UnifiedDyes] Loaded!")
+print(S("[UnifiedDyes] Loaded!"))
 
