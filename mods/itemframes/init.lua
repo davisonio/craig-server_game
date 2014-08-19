@@ -182,6 +182,21 @@ minetest.register_node("itemframes:pedestal",{
 	end,
 })
 
+-- automatically restore entities lost from frames/pedestals
+-- due to /clearobjects or similar
+
+minetest.register_abm({
+	nodenames = { "itemframes:frame", "itemframes:pedestal" },
+	interval = 15,
+	chance = 1,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		if #minetest.get_objects_inside_radius(pos, 0.5) > 0 then return end
+		update_item(pos, node)
+	end
+})
+
+-- crafts
+
 minetest.register_craft({
 	output = 'itemframes:frame',
 	recipe = {
