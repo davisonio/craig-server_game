@@ -1,3 +1,5 @@
+-- MOD TO BE REMOVED SOON
+
 default.enderchest_formspec = 
 	"size[8,9]"..
 	"list[detached:enderchest;main;0,0;8,4;]"..
@@ -38,7 +40,7 @@ minetest.register_node("enderchest:enderchest", {
 		"enderchest_side.png",
 		"enderchest_front.png"},
 	groups = {oddly_breakable_by_hand=2},
-	drop = "enderchest:enderchest",
+	drop = "default:diamondblock",
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec",default.enderchest_formspec)
@@ -64,13 +66,3 @@ minetest.register_node("enderchest:enderchest", {
 				" takes stuff from ender chest at "..minetest.pos_to_string(pos))
 	end,
 })
-
-
-minetest.register_craft( {
-    output = 'enderchest:enderchest',
-    recipe = {
-        { 'default:obsidian', 'default:diamond', 'default:obsidian' },
-        { 'default:diamond', 'default:gold_ingot', 'default:diamond' },
-        { 'default:obsidian', 'default:diamond', 'default:obsidian' }
-    }
-} )
