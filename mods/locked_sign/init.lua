@@ -22,7 +22,7 @@ minetest.register_node("locked_sign:sign_wall_locked", {
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("owner", placer:get_player_name() or "")
-		meta:set_string("infotext", "\"\" (owned by " .. placer:get_player_name() .. ")")
+		meta:set_string("infotext", "\"\" [" .. placer:get_player_name() .. "]")
 	end,
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -48,7 +48,7 @@ minetest.register_node("locked_sign:sign_wall_locked", {
 		print(pname.." wrote \""..fields.text..
 				"\" to locked sign at "..minetest.pos_to_string(pos))
 		meta:set_string("text", fields.text)
-		meta:set_string("infotext", "\"" .. fields.text .. "\" (owned by " .. owner .. ")")
+		meta:set_string("infotext", "\"" .. fields.text .. "\" [" .. owner .. "]")
 	end,
 })
 
