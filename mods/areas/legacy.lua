@@ -5,7 +5,7 @@ minetest.register_chatcommand("legacy_load_areas", {
 	params = "<version>",
 	description = "Loads, converts, and saves the areas from"
 		.." a legacy save file.",
-	privs = {areas=true, server=true, privs=true},
+	privs = {areas=true, server=true},
 	func = function(name, param)
 		minetest.chat_send_player(name, "Converting areas...")
 		local version = tonumber(param)
@@ -31,7 +31,7 @@ minetest.register_chatcommand("legacy_load_areas", {
 				nil, nil, nil, nil, nil, nil
 
 			-- Area positions sorting
-			area.pos1, area.pos2 = areas:sortPos(area.pos1, area.pos2)
+			areas:sortPos(area.pos1, area.pos2)
 
 			-- Add name
 			area.name = "unnamed"
@@ -43,7 +43,8 @@ minetest.register_chatcommand("legacy_load_areas", {
 
 		areas:save()
 		minetest.chat_send_player(name, "Converted areas saved. Done.")
-end})
+	end
+})
 
 function areas:node_ownership_load()
 	local filename = minetest.get_worldpath().."/owners.tbl"
@@ -85,7 +86,7 @@ end
 
 -- Checks if a node is owned by you
 function areas.isNodeOwner(pos, name)
-	if minetest.check_player_privs(name, {areas=true}) then
+	if minetest.check_player_privs(name, areas.adminPrivs) then
 		return true
 	end
 	for id, area in pairs(areas:getAreasAtPos(pos)) do
@@ -110,31 +111,22 @@ HasOwner          = areas.hasOwner
 
 -- This is entirely untested and may break in strange and new ways.
 if areas.legacy_table then
-	owner_defs = {}
-	setmetatable(owner_defs, {
+	owner_defs = setmetatable({}, {
 		__index = function(table, key)
 			local a = rawget(areas.areas, key)
-			if a then
-				a.x1 = a.pos1.x
-				a.y1 = a.pos1.y
-				a.z1 = a.pos1.z
-				a.x2 = a.pos2.x
-				a.y2 = a.pos2.y
-				a.z2 = a.pos2.z
-				a.pos1, a.pos2 = nil, nil
-				a.id = key
-			end
-			return a
+			if not a then return a end
+			local b = {}
+			for k, v in pairs(a) do b[k] = v end
+			b.x1, b.y1, b.z1 = b.pos1.x, b.pos1.y, b.pos1.z
+			b.x2, b.y1, b.z2 = b.pos2.x, b.pos2.y, b.pos2.z
+			b.pos1, b.pos2 = nil, nil
+			b.id = key
+			return b
 		end,
 		__newindex = function(table, key, value)
 			local a = value
-			a.pos1, a.pos2 = {}, {}
-			a.pos1.x = a.x1
-			a.pos1.y = a.y1
-			a.pos1.z = a.z1
-			a.pos2.x = a.x2
-			a.pos2.y = a.y2
-			a.pos2.z = a.z2
+			a.pos1, a.pos2 = {x=a.x1, y=a.y1, z=a.z1},
+					{x=a.x2, y=a.y2, z=a.z2}
 			a.x1, a.y1, a.z1, a.x2, a.y2, a.z2 =
 				nil, nil, nil, nil, nil, nil
 			a.name = a.name or "unnamed"
