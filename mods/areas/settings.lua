@@ -21,7 +21,7 @@ areas.self_protection_max_size =
 	minetest.setting_get_pos("areas.self_protection_max_size") or
 			{x=200, y=200, z=200}
 areas.self_protection_max_areas =
-	tonumber(minetest.setting_get("areas.self_protection_max_areas")) or 100
+	tonumber(minetest.setting_get("areas.self_protection_max_areas")) or 1000000
 
 -- Register compatability functions for node_ownership.
 -- legacy_table (owner_defs) compatibility is untested
