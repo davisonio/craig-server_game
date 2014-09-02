@@ -232,7 +232,7 @@ minetest.register_node("default:tree", {
 	is_ground_content = false,
 	groups = {tree=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
 	sounds = default.node_sound_wood_defaults(),
---	on_place = minetest.rotate_node
+	--on_place = minetest.rotate_node
 })
 
 minetest.register_node("default:jungletree", {
@@ -242,7 +242,7 @@ minetest.register_node("default:jungletree", {
 	is_ground_content = false,
 	groups = {tree=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
 	sounds = default.node_sound_wood_defaults(),
---	on_place = minetest.rotate_node
+	--on_place = minetest.rotate_node
 })
 
 minetest.register_node("default:junglewood", {
@@ -378,9 +378,9 @@ minetest.register_node("default:papyrus", {
 
 default.bookshelf_formspec =
 	"size[8,7;]"..
-	gui_bg..
-	gui_bg_img..
-	gui_slots..
+	default.gui_bg..
+	default.gui_bg_img..
+	default.gui_slots..
 	"list[context;books;0,0.3;8,2;]"..
 	"list[current_player;main;0,2.85;8,1;]"..
 	"list[current_player;main;0,4.08;8,3;8]"..
@@ -717,11 +717,11 @@ minetest.register_node("default:sign_wall", {
 		meta:set_string("infotext", "\"\"")
 	end,
 	on_receive_fields = function(pos, formname, fields, sender)
--- Nope, we don't want this.
---		if minetest.is_protected(pos, sender:get_player_name()) then
---			minetest.record_protection_violation(pos, sender:get_player_name())
---			return
---		end
+		--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
+		--if minetest.is_protected(pos, sender:get_player_name()) then
+		--	minetest.record_protection_violation(pos, sender:get_player_name())
+		--	return
+		--end
 		local meta = minetest.get_meta(pos)
 		if not fields.text then return end
 		minetest.log("action", (sender:get_player_name() or "").." wrote \""..fields.text..
@@ -733,9 +733,9 @@ minetest.register_node("default:sign_wall", {
 
 default.chest_formspec = 
 	"size[8,9]"..
-	gui_bg..
-	gui_bg_img..
-	gui_slots..
+	default.gui_bg..
+	default.gui_bg_img..
+	default.gui_slots..
 	"list[current_name;main;0,0.3;8,4;]"..
 	"list[current_player;main;0,4.85;8,1;]"..
 	"list[current_player;main;0,6.08;8,3;8]"..
@@ -745,9 +745,9 @@ function default.get_locked_chest_formspec(pos)
 	local spos = pos.x .. "," .. pos.y .. "," ..pos.z
 	local formspec =
 		"size[8,9]"..
-		gui_bg..
-		gui_bg_img..
-		gui_slots..
+		default.gui_bg..
+		default.gui_bg_img..
+		default.gui_slots..
 		"list[nodemeta:".. spos .. ";main;0,0.3;8,4;]"..
 		"list[current_player;main;0,4.85;8,1;]"..
 		"list[current_player;main;0,6.08;8,3;8]"..
@@ -869,9 +869,9 @@ minetest.register_node("default:chest_locked", {
 function default.furnace_active(pos, percent, item_percent)
     local formspec = 
 	"size[8,8.5]"..
-	gui_bg..
-	gui_bg_img..
-	gui_slots..
+	default.gui_bg..
+	default.gui_bg_img..
+	default.gui_slots..
 	"list[current_name;src;2.75,0.5;1,1;]"..
 	"list[current_name;fuel;2.75,2.5;1,1;]"..
 	"image[2.75,1.5;1,1;default_furnace_fire_bg.png^[lowpart:"..
@@ -903,9 +903,9 @@ end
 
 default.furnace_inactive_formspec =
 	"size[8,8.5]"..
-	gui_bg..
-	gui_bg_img..
-	gui_slots..
+	default.gui_bg..
+	default.gui_bg_img..
+	default.gui_slots..
 	"list[current_name;src;2.75,0.5;1,1;]"..
 	"list[current_name;fuel;2.75,2.5;1,1;]"..
 	"image[2.75,1.5;1,1;default_furnace_fire_bg.png]"..
@@ -946,9 +946,9 @@ minetest.register_node("default:furnace", {
 		return true
 	end,
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
---		if minetest.is_protected(pos, player:get_player_name()) then
---			return 0
---		end
+		--if minetest.is_protected(pos, player:get_player_name()) then
+		--	return 0
+		--end
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		if listname == "fuel" then
@@ -967,9 +967,9 @@ minetest.register_node("default:furnace", {
 		end
 	end,
 	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
-		if minetest.is_protected(pos, player:get_player_name()) then
-			return 0
-		end
+		--if minetest.is_protected(pos, player:get_player_name()) then
+		--	return 0
+		--end
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		local stack = inv:get_stack(from_list, from_index)
@@ -988,12 +988,12 @@ minetest.register_node("default:furnace", {
 			return 0
 		end
 	end,
---	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
---		if minetest.is_protected(pos, player:get_player_name()) then
---			return 0
---		end
---		return stack:get_count()
---	end,
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		--if minetest.is_protected(pos, player:get_player_name()) then
+		--	return 0
+		--end
+		return stack:get_count()
+	end,
 })
 
 minetest.register_node("default:furnace_active", {
@@ -1044,9 +1044,9 @@ minetest.register_node("default:furnace_active", {
 		return true
 	end,
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
---		if minetest.is_protected(pos, player:get_player_name()) then
---			return 0
---		end
+		--if minetest.is_protected(pos, player:get_player_name()) then
+		--	return 0
+		--end
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		if listname == "fuel" then
@@ -1065,9 +1065,9 @@ minetest.register_node("default:furnace_active", {
 		end
 	end,
 	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
---		if minetest.is_protected(pos, player:get_player_name()) then
---			return 0
---		end
+		--if minetest.is_protected(pos, player:get_player_name()) then
+		--	return 0
+		--end
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		local stack = inv:get_stack(from_list, from_index)
@@ -1086,12 +1086,12 @@ minetest.register_node("default:furnace_active", {
 			return 0
 		end
 	end,
---	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
---		if minetest.is_protected(pos, player:get_player_name()) then
---			return 0
---		end
---		return stack:get_count()
---	end,
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		--if minetest.is_protected(pos, player:get_player_name()) then
+		--	return 0
+		--end
+		return stack:get_count()
+	end,
 })
 
 local function swap_node(pos,name)

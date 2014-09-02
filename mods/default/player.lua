@@ -146,15 +146,11 @@ minetest.register_on_joinplayer(function(player)
 	player:set_local_animation({x=0, y=79}, {x=168, y=187}, {x=189, y=198}, {x=200, y=219}, 30)
 	
 	-- set GUI
-	if minetest.setting_getbool("creative_mode") then
-	--	creative.set_creative_formspec(player, 0, 1)
-	else
-		player:set_inventory_formspec(gui_suvival_form)
+	if not minetest.setting_getbool("creative_mode") then
+		player:set_inventory_formspec(default.gui_suvival_form)
 	end
-	minetest.after(0.5,function()
-		player:hud_set_hotbar_image("gui_hotbar.png")
-		player:hud_set_hotbar_selected_image("gui_hotbar_selected.png")
-	end)
+	player:hud_set_hotbar_image("gui_hotbar.png")
+	player:hud_set_hotbar_selected_image("gui_hotbar_selected.png")
 end)
 
 minetest.register_on_leaveplayer(function(player)
@@ -166,6 +162,7 @@ end)
 
 -- Localize for better performance.
 local player_set_animation = default.player_set_animation
+local player_attached = default.player_attached
 
 -- Check each player and apply animations
 minetest.register_globalstep(function(dtime)
@@ -173,7 +170,7 @@ minetest.register_globalstep(function(dtime)
 		local name = player:get_player_name()
 		local model_name = player_model[name]
 		local model = model_name and models[model_name]
-		if model and not default.player_attached[name] then
+		if model and not player_attached[name] then
 			local controls = player:get_player_control()
 			local walking = false
 			local animation_speed_mod = model.animation_speed or 30
