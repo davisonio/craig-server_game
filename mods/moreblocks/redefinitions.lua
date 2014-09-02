@@ -71,11 +71,6 @@ minetest.override_item("default:papyrus", {
 	sunlight_propagates = true,
 })
 
-minetest.override_item("default:fence_wood", {
-	paramtype = "light",
-	sunlight_propagates = true,
-})
-
 minetest.override_item("default:junglegrass", {
 	paramtype = "light",
 	sunlight_propagates = true,
