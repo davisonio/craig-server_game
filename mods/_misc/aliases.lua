@@ -26,6 +26,16 @@ for _,entity_name in ipairs(old_entities) do
     })
 end
 
+-- Cloud redefinition
+
+minetest.register_node(":default:cloud", {
+	description = "Cloud",
+	tiles = {"default_cloud.png"},
+	is_ground_content = true,
+	groups = {unbreakable=1},
+	sounds = default.node_sound_defaults(),
+})
+
 -- Aliases for industry_pack fail
 
 minetest.register_alias("rubber_industry:rubber_tree_full", "rubber:rubber_tree_full")
@@ -43,3 +53,12 @@ minetest.register_alias("rubber_industry:conveyor_belt", "conveyor:conveyor")
 minetest.register_alias("rubber_industry:transactor_sideways", "transactor:transactor")
 minetest.register_alias("rubber_industry:transactor_down", "hopper:hopper")
 minetest.register_alias("rubber_industry:transactor_up", "dumbwaiter:dumbwaiter")
+
+-- Other aliases
+
+minetest.register_alias("maptools:fake_fire", "")
+minetest.register_alias("amt:fake_fire", "")
+
+minetest.register_alias("amt:remove_stick", "_misc:remove_stick")
+minetest.register_alias("amt:pick_admin", "_misc:pick_admin")
+minetest.register_alias("amt:sapple", "_misc:super_apple")
