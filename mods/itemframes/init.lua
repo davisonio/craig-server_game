@@ -66,6 +66,7 @@ local update_item = function(pos, node)
 	if meta:get_string("item") ~= "" then
 		if node.name == "itemframes:frame" then
 			local posad = facedir[node.param2]
+			if not posad then return end
 			pos.x = pos.x + posad.x*6.5/16
 			pos.y = pos.y + posad.y*6.5/16
 			pos.z = pos.z + posad.z*6.5/16
