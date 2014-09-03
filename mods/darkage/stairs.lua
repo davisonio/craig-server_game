@@ -107,49 +107,49 @@ function darkage.register_stairs(modname, item, groups, images, description)
 end
 
 darkage.register_stairs("darkage","basalt_cobble",
-	{cracky=3},
+	{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 	{"darkage_basalt_cobble.png"},
 	"Basalt Cobble"
 )
 
 darkage.register_stairs("darkage","slate_tile",
-	{cracky=3},
+	{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 	{"darkage_slate_tile.png"},
 	"Slate Tile"
 )
 
 darkage.register_stairs("darkage","straw",
-	 {snappy=3, flammable=2},
+	 {snappy=3, flammable=2, not_in_creative_inventory=1, not_in_craft_guide=1},
 	{"darkage_straw.png"},
 	"Straw"
 )
 
 darkage.register_stairs("darkage","stone_brick",
-	{cracky=3},
+	{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 	{"darkage_stone_brick.png"},
 	"Stone Brick"
 )
 
 darkage.register_stairs("darkage","marble",
-	{cracky=3},
+	{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 	{"darkage_marble.png"},
 	"Marble"
 )
 
 darkage.register_stairs("darkage","marble_tile",
-	{cracky=3},
+	{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 	{"darkage_marble_tile.png"},
 	"Marble Tile"
 )
 
 darkage.register_stairs("darkage","ors_cobble",
-	{cracky=3},
+	{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 	{"darkage_ors_cobble.png"},
 	"Old Red Sandstone"
 )
 
 darkage.register_stairs("darkage","serpentine",
-	{cracky=3},
+	{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 	{"darkage_serpentine.png"},
 	"Serpentine"
 )

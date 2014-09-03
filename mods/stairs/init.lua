@@ -213,77 +213,77 @@ function stairs.register_stair_and_slab(subname, recipeitem, groups, images, des
 end
 
 stairs.register_stair_and_slab("wood", "default:wood",
-		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_wood.png"},
 		"Wooden Stair",
 		"Wooden Slab",
 		default.node_sound_wood_defaults())
 
 stairs.register_stair_and_slab("stone", "default:stone",
-		{cracky=3},
+		{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_stone.png"},
 		"Stone Stair",
 		"Stone Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("cobble", "default:cobble",
-		{cracky=3},
+		{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_cobble.png"},
 		"Cobblestone Stair",
 		"Cobblestone Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("desert_stone", "default:desert_stone",
-		{cracky=3},
+		{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_desert_stone.png"},
 		"Desertstone Stair",
 		"Desertstone Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("desert_cobble", "default:desert_cobble",
-		{cracky=3},
+		{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_desert_cobble.png"},
 		"Desert Cobblestone Stair",
 		"Desert Cobblestone Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("desert_stonebrick", "default:desert_stonebrick",
-		{cracky=3},
+		{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_desert_stone_brick.png"},
 		"Desert Stone Brick Stair",
 		"Desert Stone Brick Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("brick", "default:brick",
-		{cracky=3},
+		{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_brick.png"},
 		"Brick Stair",
 		"Brick Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("sandstone", "default:sandstone",
-		{crumbly=2,cracky=2},
+		{crumbly=2,cracky=2, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_sandstone.png"},
 		"Sandstone Stair",
 		"Sandstone Slab",
 		default.node_sound_stone_defaults())
 		
 stairs.register_stair_and_slab("sandstonebrick", "default:sandstonebrick",
-		{crumbly=2,cracky=2},
+		{crumbly=2,cracky=2, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_sandstone_brick.png"},
 		"Sandstone Brick Stair",
 		"Sandstone Brick Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("junglewood", "default:junglewood",
-		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_junglewood.png"},
 		"Junglewood Stair",
 		"Junglewood Slab",
 		default.node_sound_wood_defaults())
 
 stairs.register_stair_and_slab("stonebrick", "default:stonebrick",
-		{cracky=3},
+		{cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 		{"default_stone_brick.png"},
 		"Stone Brick Stair",
 		"Stone Brick Slab",

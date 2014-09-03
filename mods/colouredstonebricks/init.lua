@@ -63,7 +63,7 @@ for number = 1, 15 do
     stairsplus:register_all("colouredstonebricks", colour2, "colouredstonebricks:"..colour2, {
         description = colour.." Stone Brick",
 		tiles = {"colouredstonebricks_"..colour2..".png"},
-		groups = {cracky=3},
+		groups = {cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
 		sounds = default.node_sound_defaults(),
         sunlight_propagates = true,
     })

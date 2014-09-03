@@ -226,7 +226,7 @@ if minetest.get_modpath("moreblocks") then
             "gloopblocks_oerkkiblock_sides.png",
             "gloopblocks_oerkkiblock_front.png"
         },
-        groups = {cracky=2, not_in_creative_inventory=1},
+        groups = {cracky=2, not_in_creative_inventory=1, not_in_craft_guide=1},
         sounds = default.node_sound_stone_defaults(),
         sunlight_propagates = true,
     })
@@ -234,7 +234,7 @@ if minetest.get_modpath("moreblocks") then
     stairsplus:register_all("gloopblocks", "mossy_stone_brick", "gloopblocks:stone_brick_mossy", {
         description = "Mossy Stone Brick",
         tiles = {"gloopblocks_stone_brick_mossy.png"},
-        groups = {cracky=1, not_in_creative_inventory=1},
+        groups = {cracky=1, not_in_creative_inventory=1, not_in_craft_guide=1},
         sounds = default.node_sound_stone_defaults(),
         sunlight_propagates = true,
     })
@@ -242,7 +242,7 @@ if minetest.get_modpath("moreblocks") then
     stairsplus:register_all("gloopblocks", "stone_mossy", "gloopblocks:stone_mossy", {
         description = "Mossy Stone",
         tiles = {"gloopblocks_stone_mossy.png"},
-        groups = {cracky=1, not_in_creative_inventory=1},
+        groups = {cracky=1, not_in_creative_inventory=1, not_in_craft_guide=1},
         sounds = default.node_sound_stone_defaults(),
         sunlight_propagates = true,
     })
@@ -250,7 +250,7 @@ if minetest.get_modpath("moreblocks") then
     stairsplus:register_all("gloopblocks", "cobble_road", "gloopblocks:cobble_road", {
         description = "Cobblestone Roadbed",
         tiles = {"gloopblocks_cobble_road.png"},
-        groups = {cracky=3, stone=1, not_in_creative_inventory=1},
+        groups = {cracky=3, stone=1, not_in_creative_inventory=1, not_in_craft_guide=1},
         sounds = default.node_sound_stone_defaults(),
         sunlight_propagates = true,
     })
@@ -258,7 +258,7 @@ if minetest.get_modpath("moreblocks") then
     stairsplus:register_all("gloopblocks", "cobble_road_mossy", "gloopblocks:cobble_road_mossy", {
         description = "Mossy Cobblestone Roadbed",
         tiles = {"gloopblocks_cobble_road_mossy.png"},
-        groups = {cracky=3, stone=1, not_in_creative_inventory=1},
+        groups = {cracky=3, stone=1, not_in_creative_inventory=1, not_in_craft_guide=1},
         sounds = default.node_sound_stone_defaults(),
         sunlight_propagates = true,
     })
@@ -266,7 +266,7 @@ if minetest.get_modpath("moreblocks") then
     stairsplus:register_all("gloopblocks", "cement", "gloopblocks:cement", {
         description = "Cement",
         tiles = {"gloopblocks_cement.png"},
-        groups = {cracky=2, not_in_creative_inventory=1},
+        groups = {cracky=2, not_in_creative_inventory=1, not_in_craft_guide=1},
         sounds = default.node_sound_stone_defaults(),
         sunlight_propagates = true,
     })
@@ -274,7 +274,7 @@ if minetest.get_modpath("moreblocks") then
     stairsplus:register_all("gloopblocks", "pavement", "gloopblocks:pavement", {
         description = "Pavement",
         tiles = {"gloopblocks_pavement.png"},
-        groups = {cracky=2, not_in_creative_inventory=1},
+        groups = {cracky=2, not_in_creative_inventory=1, not_in_craft_guide=1},
         sounds = default.node_sound_stone_defaults(),
         sunlight_propagates = true,
     })
@@ -282,7 +282,7 @@ if minetest.get_modpath("moreblocks") then
     stairsplus:register_all("gloopblocks", "rainbow_block", "gloopblocks:rainbow_block", {
         description = "Rainbow Block",
         tiles = {"gloopblocks_rainbow_block.png"},
-        groups = {cracky=3, not_in_creative_inventory=1},
+        groups = {cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
         sounds = default.node_sound_defaults(),
         sunlight_propagates = true,
     })
@@ -290,7 +290,7 @@ if minetest.get_modpath("moreblocks") then
     stairsplus:register_all("gloopblocks", "evil_block", "gloopblocks:evil_block", {
         description = "Evil Block",
         tiles = {"gloopblocks_evil_block.png"},
-        groups = {cracky=3, not_in_creative_inventory=1},
+        groups = {cracky=3, not_in_creative_inventory=1, not_in_craft_guide=1},
         sounds = default.node_sound_defaults(),
         light_source = 5,
         sunlight_propagates = true,
@@ -319,7 +319,7 @@ if minetest.get_modpath("moreblocks") then
 		local colordesc = colorlist[i][2]
 
 		register_stair_slab_panel_micro( "wool", color, "wool:"..color,
-			{ snappy=2, choppy=2, oddly_breakable_by_hand=3, flammable=3, wool=1, not_in_creative_inventory=1 },
+			{ snappy=2, choppy=2, oddly_breakable_by_hand=3, flammable=3, wool=1, not_in_creative_inventory=1, not_in_craft_guide=1 },
 			{ "wool_"..color..".png" },
 			S(colordesc.." Wool"),
 			color,
