@@ -318,7 +318,7 @@ if minetest.get_modpath("moreblocks") then
 		local color = colorlist[i][1]
 		local colordesc = colorlist[i][2]
 		
-		stairsplus:register_all("wool:", color, "wool:"..color, {
+		stairsplus:register_all("wool", color, "wool:"..color, {
 			description = colordesc.." Wool",
 			tiles = {"wool_"..color..".png"},
 			groups = {snappy=2, choppy=2, oddly_breakable_by_hand=3, flammable=3, wool=1, not_in_creative_inventory=1},
