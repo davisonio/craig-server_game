@@ -40,3 +40,6 @@ dofile(minetest.get_modpath("_misc").."/nointeract_messages.lua")
 
 -- Craft Obsidian
 dofile(minetest.get_modpath("_misc").."/craft_obsidian.lua")
+
+-- Admin Tools
+dofile(minetest.get_modpath("_misc").."/admin_tools.lua")

@@ -56,8 +56,8 @@ minetest.register_alias("rubber_industry:transactor_up", "dumbwaiter:dumbwaiter"
 
 -- Other aliases
 
-minetest.register_alias("maptools:fake_fire", "")
-minetest.register_alias("amt:fake_fire", "")
+minetest.register_alias("maptools:fake_fire", "fake_fire:fake_fire")
+minetest.register_alias("amt:fake_fire", "fake_fire:fake_fire")
 
 minetest.register_alias("amt:remove_stick", "_misc:remove_stick")
 minetest.register_alias("amt:pick_admin", "_misc:pick_admin")
