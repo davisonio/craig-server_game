@@ -247,3 +247,112 @@ minetest.register_node('homedecor:glowlight_small_cube_white', {
 	on_place = minetest.rotate_node
 })
 
+minetest.register_node("homedecor:plasma_lamp", {
+	description = "Plasma Lamp",
+	drawtype = "glasslike_framed",
+	tiles = {"homedecor_gold_block.png","homedecor_glass_face_clean.png"},
+	special_tiles = {
+		{
+			name="homedecor_plasma_storm.png",
+			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=2.0},
+		}
+	},
+--	use_texture_alpha = true,
+	paramtype = "light",
+	light_source = LIGHT_MAX - 1,
+	sunlight_propagates = true,
+	groups = {cracky=3,oddly_breakable_by_hand=3},
+	sounds = default.node_sound_glass_defaults(),
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		minetest.swap_node(pos, {name = "homedecor:plasma_lamp", param2 = 255})
+	end
+})
+
+minetest.register_node('homedecor:candle', {
+	description = S("Candle"),
+	drawtype = "nodebox",
+	tiles = {
+		'homedecor_candle_top.png',
+		'homedecor_candle_bottom.png',
+		{name="homedecor_candle_sides.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}},
+	},
+    node_box = {
+            type = "fixed",
+            fixed = { 
+				{ -0.125, -0.5, -0.125, 0.125, 0, 0.125 },
+				{ -0.125, 0, 0, 0.125, 0.5, 0 },
+				{ 0, 0, -0.125, 0, 0.5, 0.125 }
+			}	
+    },
+    selection_box = {
+            type = "fixed",
+            fixed = { 
+				{ -0.1875, -0.5, -0.1875, 0.1875, 0.5, 0.1875 },
+			}	
+    },
+	sunlight_propagates = true,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	walkable = true,
+	groups = { snappy = 3 },
+	light_source = LIGHT_MAX-4,
+	sounds = default.node_sound_wood_defaults(),
+})
+
+minetest.register_node('homedecor:oil_lamp', {
+	description = S("Oil lamp"),
+	drawtype = "plantlike",
+	tiles = { 'homedecor_oil_lamp.png' },
+	inventory_image = 'homedecor_oil_lamp.png',
+	sunlight_propagates = true,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	walkable = true,
+    selection_box = {
+            type = "fixed",
+            fixed = { 
+				{ -0.3, -0.5, -0.3, 0.3, 0.5, 0.3 },
+			}	
+    },
+	groups = { snappy = 3 },
+	light_source = LIGHT_MAX-4,
+	sounds = default.node_sound_wood_defaults(),
+})
+
+minetest.register_node('homedecor:lattice_lantern_large', {
+	description = S("Lattice lantern (large)"),
+	tiles = { 'homedecor_lattice_lantern_large.png' },
+	sunlight_propagates = false,
+	paramtype = "light",
+	walkable = true,
+	groups = { snappy = 3 },
+	light_source = LIGHT_MAX,
+	sounds = default.node_sound_wood_defaults(),
+})
+
+minetest.register_node('homedecor:lattice_lantern_small', {
+	description = S("Lattice lantern (small)"),
+	drawtype = "nodebox",
+	tiles = {
+		'homedecor_lattice_lantern_small_tb.png',
+		'homedecor_lattice_lantern_small_tb.png',
+		'homedecor_lattice_lantern_small_sides.png'
+	},
+    selection_box = {
+            type = "fixed",
+            fixed = { -0.25, -0.5, -0.25, 0.25, 0, 0.25 }
+    },
+    node_box = {
+            type = "fixed",
+            fixed = { -0.25, -0.5, -0.25, 0.25, 0, 0.25 }
+    },
+	sunlight_propagates = false,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	walkable = true,
+	groups = { snappy = 3 },
+	light_source = LIGHT_MAX-1,
+	sounds = default.node_sound_wood_defaults(),
+	on_place = minetest.rotate_node
+})
+

@@ -128,7 +128,7 @@ function homedecor.register_furnace(name, furnacedef)
 			if listname == "fuel" then
 				if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
 					if inv:is_empty("src") then
-						meta:set_string("infotext", desc.." is empty")
+						meta:set_string("infotext", S("%s is empty"):format(desc))
 					end
 					return stack:get_count()
 				else
@@ -147,7 +147,7 @@ function homedecor.register_furnace(name, furnacedef)
 			if to_list == "fuel" then
 				if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
 					if inv:is_empty("src") then
-						meta:set_string("infotext", desc.." is empty")
+						meta:set_string("infotext", S("%s is empty"):format(desc))
 					end
 					return count
 				else
@@ -198,7 +198,7 @@ function homedecor.register_furnace(name, furnacedef)
 			if listname == "fuel" then
 				if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
 					if inv:is_empty("src") then
-						meta:set_string("infotext",desc.." is empty")
+						meta:set_string("infotext",S("%s is empty"):format(desc))
 					end
 					return stack:get_count()
 				else
@@ -217,7 +217,7 @@ function homedecor.register_furnace(name, furnacedef)
 			if to_list == "fuel" then
 				if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
 					if inv:is_empty("src") then
-						meta:set_string("infotext",desc.." is empty")
+						meta:set_string("infotext",S("%s is empty"):format(desc))
 					end
 					return count
 				else
@@ -291,7 +291,7 @@ function homedecor.register_furnace(name, furnacedef)
 			if meta:get_float("fuel_time") < meta:get_float("fuel_totaltime") then
 				local percent = math.floor(meta:get_float("fuel_time") /
 						meta:get_float("fuel_totaltime") * 100)
-				meta:set_string("infotext",desc..((" active: %d%%"):format(percent)))
+				meta:set_string("infotext",S("%s active: %d%%"):format(desc,percent))
 				hacky_swap_node(pos,name_active)
 				meta:set_string("formspec", make_formspec(furnacedef, percent))
 				return
@@ -311,7 +311,7 @@ function homedecor.register_furnace(name, furnacedef)
 			end
 
 			if (not fuel) or (fuel.time <= 0) then
-				meta:set_string("infotext",desc..": Out of fuel")
+				meta:set_string("infotext",desc..S(": Out of fuel"))
 				hacky_swap_node(pos,name)
 				meta:set_string("formspec", make_formspec(furnacedef, 0))
 				return
@@ -319,7 +319,7 @@ function homedecor.register_furnace(name, furnacedef)
 
 			if cooked.item:is_empty() then
 				if was_active then
-					meta:set_string("infotext",desc.." is empty")
+					meta:set_string("infotext",S("%s is empty"):format(desc))
 					hacky_swap_node(pos,name)
 					meta:set_string("formspec", make_formspec(furnacedef, 0))
 				end
@@ -327,7 +327,7 @@ function homedecor.register_furnace(name, furnacedef)
 			end
 
 			if not inv:room_for_item("dst", cooked.item) then
-				meta:set_string("infotext", desc..": output bins are full")
+				meta:set_string("infotext", desc..S(": output bins are full"))
 				hacky_swap_node(pos, name)
 				meta:set_string("formspec", make_formspec(furnacedef, 0))
 				return
@@ -343,15 +343,23 @@ function homedecor.register_furnace(name, furnacedef)
 end
 
 homedecor.register_furnace("homedecor:oven", {
-	description = "Oven",
+	description = S("Oven"),
 	tile_format = "homedecor_oven_%s%s.png",
 	output_slots = 4,
 	output_width = 2,
 	cook_speed = 1.25,
 })
 
+homedecor.register_furnace("homedecor:oven_steel", {
+	description = S("Oven (stainless steel)"),
+	tile_format = "homedecor_oven_steel_%s%s.png",
+	output_slots = 4,
+	output_width = 2,
+	cook_speed = 1.25,
+})
+
 homedecor.register_furnace("homedecor:microwave_oven", {
-	description = "Microwave Oven",
+	description = S("Microwave Oven"),
 	tiles = {
 		"homedecor_microwave_top.png", "homedecor_microwave_bottom.png",
 		"homedecor_microwave_right.png", "homedecor_microwave_left.png",

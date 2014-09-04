@@ -3,14 +3,7 @@ local S = homedecor.gettext
 
 minetest.register_node("homedecor:bars", {
     description = S("Bars"),
-    tiles = {
-        "forniture_black_metal.png",
-        "forniture_black_metal.png",
-        "forniture_black_metal_s1.png",
-        "forniture_black_metal_s1.png",
-        "forniture_black_metal_s2.png",
-        "forniture_black_metal_s2.png",
-    },
+    tiles = { "forniture_black_metal.png" },
     drawtype = "nodebox",
     sunlight_propagates = true,
     paramtype = "light",
@@ -35,14 +28,7 @@ minetest.register_node("homedecor:bars", {
 --L Binding Bars
 minetest.register_node("homedecor:L_binding_bars", {
     description = S("Binding Bars"),
-    tiles = {
-        "forniture_black_metal.png",
-        "forniture_black_metal.png",
-        "forniture_black_metal_s1.png",
-        "forniture_black_metal_s1.png",
-        "forniture_black_metal_s2.png",
-        "forniture_black_metal_s2.png",
-    },
+    tiles = { "forniture_black_metal.png" },
     drawtype = "nodebox",
     sunlight_propagates = true,
     paramtype = "light",
@@ -64,14 +50,7 @@ minetest.register_node("homedecor:L_binding_bars", {
 
 minetest.register_node("homedecor:chains", {
     description = S("Chains"),
-    tiles = {
-        "forniture_black_metal.png",
-        "forniture_black_metal.png",
-        "forniture_black_metal_s1.png",
-        "forniture_black_metal_s1.png",
-        "forniture_black_metal_s2.png",
-        "forniture_black_metal_s2.png",
-    },
+    tiles = { "forniture_black_metal.png" },
     inventory_image="3dforniture_inv_chains.png",
     drawtype = "nodebox",
     sunlight_propagates = true,

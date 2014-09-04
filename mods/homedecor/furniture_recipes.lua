@@ -3,7 +3,34 @@ minetest.register_craft({
     output = "homedecor:table", "homedecor:chair 2",
     recipe = {
         { "group:wood","group:wood", "group:wood" },
-        { "default:stick", "", "default:stick" },
+        { "group:stick", "", "group:stick" },
+    },
+})
+
+minetest.register_craft({
+	type = "shapeless",
+    output = "homedecor:table_mahogany",
+    recipe = {
+		"homedecor:table",
+		"dye:brown",
+    },
+})
+
+minetest.register_craft({
+	type = "shapeless",
+    output = "homedecor:table_mahogany",
+    recipe = {
+		"homedecor:table",
+		"unifieddyes:dark_orange",
+    },
+})
+
+minetest.register_craft({
+	type = "shapeless",
+    output = "homedecor:table_white",
+    recipe = {
+		"homedecor:table",
+		"dye:white",
     },
 })
 
@@ -14,19 +41,61 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-    output = "homedecor:chair 2",
-    recipe = {
-        { "default:stick",""},
-        { "group:wood","group:wood" },
-        { "default:stick","default:stick" },
-    },
+    type = "fuel",
+    recipe = "homedecor:table_mahogany",
+    burntime = 30,
 })
 
 minetest.register_craft({
     type = "fuel",
-    recipe = "homedecor:chair",
-    burntime = 15,
+    recipe = "homedecor:table_white",
+    burntime = 30,
 })
+
+minetest.register_craft({
+	output = "homedecor:chair 2",
+	recipe = {
+	    { "group:stick",""},
+	    { "group:wood","group:wood" },
+	    { "group:stick","group:stick" },
+	},
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "homedecor:chair",
+	burntime = 15,
+})
+
+local chaircolors = { "black", "red", "pink", "violet", "blue", "dark_green" }
+
+for _, color in ipairs(chaircolors) do
+
+	minetest.register_craft({
+		type = "shapeless",
+		output = "homedecor:chair_"..color,
+		recipe = {
+			"homedecor:chair",
+			"wool:white",
+			"dye:"..color
+		},
+	})
+
+	minetest.register_craft({
+		type = "shapeless",
+		output = "homedecor:chair_"..color,
+		recipe = {
+			"homedecor:chair",
+			"wool:"..color
+		},
+	})
+
+	minetest.register_craft({
+		type = "fuel",
+		recipe = "homedecor:chair_"..color,
+		burntime = 15,
+	})
+end
 
 minetest.register_craft({
     type = "fuel",
@@ -35,12 +104,21 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-    output = "homedecor:table_lamp_off",
-    recipe = {
-        {"default:paper","default:torch" ,"default:paper"},
-        {"","default:stick",""},
-        {"","stairs:slab_wood",""},
-    },
+	output = "homedecor:table_lamp_off",
+	recipe = {
+	    {"default:paper","default:torch" ,"default:paper"},
+	    {"","group:stick",""},
+	    {"","stairs:slab_wood",""},
+	},
+})
+
+minetest.register_craft({
+	output = "homedecor:table_lamp_off",
+	recipe = {
+	    {"default:paper","default:torch" ,"default:paper"},
+	    {"","group:stick",""},
+	    {"","moreblocks:slab_wood",""},
+	},
 })
 
 minetest.register_craft({
@@ -49,11 +127,50 @@ minetest.register_craft({
     burntime = 10,
 })
 
+local lamp_colors = { "blue", "green", "pink", "red", "violet" }
+
+for _, color in ipairs(lamp_colors) do
+
+	minetest.register_craft({
+		output = "homedecor:table_lamp_"..color.."_off",
+		recipe = {
+		    {"wool:"..color,"default:torch" ,"wool:"..color},
+		    {"","group:stick",""},
+		    {"","stairs:slab_wood",""},
+		},
+	})
+
+	minetest.register_craft({
+		output = "homedecor:table_lamp_"..color.."_off",
+		recipe = {
+		    {"wool:"..color,"default:torch" ,"wool:"..color},
+		    {"","group:stick",""},
+		    {"","moreblocks:slab_wood",""},
+		},
+	})
+
+	minetest.register_craft({
+		type = "shapeless",
+		output = "homedecor:table_lamp_"..color.."_off",
+		recipe = {
+			"dye:"..color,
+			"homedecor:table_lamp_off",
+		},
+	})
+
+	minetest.register_craft({
+		type = "fuel",
+		recipe = "homedecor:table_lamp_"..color.."_off",
+		burntime = 10,
+	})
+
+end
+
 minetest.register_craft({
     output = "homedecor:toilet",
     recipe = {
         {"","","bucket:bucket_water"},
-        { "default:cobble","default:cobble", "default:cobble" },
+        { "building_blocks:Marble","building_blocks:Marble", "building_blocks:Marble" },
         { "", "bucket:bucket_empty", "" },
     },
 })
@@ -61,7 +178,7 @@ minetest.register_craft({
 minetest.register_craft({
     output = "homedecor:sink",
     recipe = {
-        { "default:cobble","bucket:bucket_empty", "default:cobble" },
+        { "building_blocks:Marble","bucket:bucket_empty", "building_blocks:Marble" },
     },
 })
 
@@ -75,7 +192,7 @@ minetest.register_craft({
 minetest.register_craft({
     output = "homedecor:shower_tray",
     recipe = {
-        { "default:cobble","bucket:bucket_water", "default:cobble" },
+        { "building_blocks:Marble","bucket:bucket_water", "building_blocks:Marble" },
     },
 })
 
@@ -87,36 +204,18 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-    output = "homedecor:bars 10",
+    output = "homedecor:bars 6",
     recipe = {
         { "default:steel_ingot","default:steel_ingot","default:steel_ingot" },
-        { "default:steel_ingot","default:steel_ingot","default:steel_ingot" },
+        { "homedecor:pole_wrought_iron","homedecor:pole_wrought_iron","homedecor:pole_wrought_iron" },
     },
 })
 
 minetest.register_craft({
-    output = "homedecor:L_binding_bars 4",
+    output = "homedecor:L_binding_bars 3",
     recipe = {
         { "homedecor:bars","" },
         { "homedecor:bars","homedecor:bars" },
-    },
-})
-
-minetest.register_craft({
-    output = "homedecor:chains 4",
-    recipe = {
-        {"","default:steel_ingot","default:steel_ingot"},
-        { "default:steel_ingot","", "default:steel_ingot" },
-        { "default:steel_ingot", "default:steel_ingot", "" },
-    },
-})
-
-minetest.register_craft({
-    output = "homedecor:chains 4",
-    recipe = {
-        { "default:steel_ingot", "", "default:steel_ingot"},
-        { "glooptest:chainlink", "", "glooptest:chainlink" },
-        { "glooptest:chainlink", "", "glooptest:chainlink" },
     },
 })
 

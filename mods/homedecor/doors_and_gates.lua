@@ -412,13 +412,6 @@ minetest.register_alias("homedecor:fence_picket_gate_white_closed", "homedecor:g
 
 ----- helper functions
 
-local function get_nodedef_field(nodename, fieldname)
-	if not minetest.registered_nodes[nodename] then
-		return nil
-	end
-	return minetest.registered_nodes[nodename][fieldname]
-end
-
 function homedecor.place_door(itemstack, placer, pointed_thing, name, forceright)
 
 	local pointed = pointed_thing.under
@@ -459,8 +452,8 @@ function homedecor.place_door(itemstack, placer, pointed_thing, name, forceright
 			return
 		end
 
-		if not get_nodedef_field(node_bottom.name, "buildable_to") 
-		    or not get_nodedef_field(node_top.name, "buildable_to") then
+		if not homedecor.get_nodedef_field(node_bottom.name, "buildable_to") 
+		    or not homedecor.get_nodedef_field(node_top.name, "buildable_to") then
 			minetest.chat_send_player( placer:get_player_name(), S('Not enough space above that spot to place a door!') )
 		else
 			local fdir = minetest.dir_to_facedir(placer:get_look_dir())
@@ -571,4 +564,96 @@ function homedecor.flip_gate(pos, node, player, gate, oc)
         addDoorNode(below, def, isClosed)
 	end
 end
+
+-- Japanese "paper" door/wall
+
+minetest.register_node("homedecor:japanese_wall_top", {
+	tiles = {
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_top.png",
+		"homedecor_japanese_wall_top.png"
+	},
+	description = "Japanese wall (top)",
+	drawtype = "nodebox",
+	paramtype = "light",
+    paramtype2 = "facedir",
+	use_texture_alpha = true,
+    groups = {snappy=3},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, 0, 0.5, 0.5, 0.0625}, -- NodeBox1
+		}
+	}
+})
+
+minetest.register_node("homedecor:japanese_wall_middle", {
+	tiles = {
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_middle.png",
+		"homedecor_japanese_wall_middle.png"
+	},
+	description = "Japanese wall",
+	drawtype = "nodebox",
+	paramtype = "light",
+    paramtype2 = "facedir",
+	use_texture_alpha = true,
+    groups = {snappy=3},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, 0, 0.5, 0.5, 0.0625}, -- NodeBox1
+		}
+	}
+})
+
+minetest.register_node("homedecor:japanese_wall_bottom", {
+	tiles = {
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_edges.png",
+		"homedecor_japanese_wall_bottom.png",
+		"homedecor_japanese_wall_bottom.png"
+	},
+	description = "Japanese wall (bottom)",
+	drawtype = "nodebox",
+	paramtype = "light",
+    paramtype2 = "facedir",
+	use_texture_alpha = true,
+    groups = {snappy=3},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, 0, 0.5, 0.5, 0.0625}, -- NodeBox1
+		}
+	}
+})
+
+minetest.register_node("homedecor:tatami_mat", {
+	tiles = {
+		"homedecor_tatami.png",
+		"homedecor_tatami.png",
+		"homedecor_tatami.png",
+		"homedecor_tatami.png",
+		"homedecor_tatami.png",
+		"homedecor_tatami.png"
+	},
+	description = "Japanese tatami",
+	drawtype = "nodebox",
+	paramtype = "light",
+    groups = {snappy=3},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5},
+		}
+	}
+})
 

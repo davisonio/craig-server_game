@@ -1,5 +1,4 @@
 -- Home Decor mod by VanessaE
--- 2013-03-17
 --
 -- Mostly my own code, with bits and pieces lifted from Minetest's default
 -- lua files and from ironzorg's flowers mod.  Many thanks to GloopMaster
@@ -7,13 +6,14 @@
 --
 -- The code for ovens, nightstands, refrigerators are basically modified 
 -- copies of the code for chests and furnaces.
---
--- License: LGPL 2.0 or higher
---
 
 homedecor = {}
 
 homedecor.debug = 0
+
+-- detail level for roofing slopes and also cobwebs
+
+homedecor.detail_level = 16
 
 homedecor.modpath = minetest.get_modpath("homedecor")
 homedecor.intllib_modpath = minetest.get_modpath("intllib")
@@ -58,10 +58,18 @@ function homedecor.table_copy(t)
     return nt
 end
 
+-- 
+
+function homedecor.get_nodedef_field(nodename, fieldname)
+	if not minetest.registered_nodes[nodename] then
+		return nil
+	end
+	return minetest.registered_nodes[nodename][fieldname]
+end
 
 -- load various other components
 
-dofile(homedecor.modpath.."/misc_nodes.lua")					-- the catch-all for all misc nodes
+dofile(homedecor.modpath.."/misc-nodes.lua")					-- the catch-all for all misc nodes
 dofile(homedecor.modpath.."/tables.lua")
 dofile(homedecor.modpath.."/electronics.lua")
 dofile(homedecor.modpath.."/shutters.lua")
@@ -76,8 +84,17 @@ dofile(homedecor.modpath.."/fences.lua")
 dofile(homedecor.modpath.."/lighting.lua")
 dofile(homedecor.modpath.."/kitchen_cabinet.lua")
 dofile(homedecor.modpath.."/refrigerator.lua")
+
+dofile(homedecor.modpath.."/misc-bathroom.lua")
+
+dofile(homedecor.modpath.."/laundry.lua")
+
 dofile(homedecor.modpath.."/furnaces.lua")
 dofile(homedecor.modpath.."/nightstands.lua")
+dofile(homedecor.modpath.."/clocks.lua")
+dofile(homedecor.modpath.."/misc-electrical.lua")
+
+dofile(homedecor.modpath.."/window_treatments.lua")
 
 dofile(homedecor.modpath.."/crafts.lua")
 
@@ -85,7 +102,10 @@ dofile(homedecor.modpath.."/furniture.lua")
 dofile(homedecor.modpath.."/furniture_medieval.lua")
 dofile(homedecor.modpath.."/furniture_bathroom.lua")
 dofile(homedecor.modpath.."/furniture_recipes.lua")
+dofile(homedecor.modpath.."/climate-control.lua")
 
 dofile(homedecor.modpath.."/locked.lua")
+
+
 
 print("[HomeDecor] "..S("Loaded!"))

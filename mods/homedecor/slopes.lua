@@ -4,8 +4,6 @@ local S = homedecor.gettext
 
 -- Corner shingle nodes, courtesy Bas080
 
-homedecor.detail_level = 16
-
 homedecor.register_outer_corner = function(modname, subname, groups, images, description)
 	local slopeboxedge = {}
 	local detail = homedecor.detail_level

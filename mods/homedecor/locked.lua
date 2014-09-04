@@ -1,11 +1,7 @@
 -- Locked Stuff for Home Decor mod, by Kaeza
--- 2013-02-19
 --
 -- The code is mostly copypasta from default:chest_locked, with a few
 -- tidbits to ease creation of new items, should need arise.
---
--- License: LGPL
---
 
 local S = homedecor.gettext
 
@@ -119,10 +115,18 @@ local function create_locked ( name, infotext )
 end
 
 local items = {
-    { "refrigerator",
-      "Cabinet" },
+    { "refrigerator_white_bottom",
+      "Refrigerator" },
+    { "refrigerator_steel_bottom",
+      "Refrigerator (stainless steel)" },
     { "kitchen_cabinet",
       "Cabinet" },
+    { "kitchen_cabinet_steel",
+      "Cabinet (stainless steel top)" },
+    { "kitchen_cabinet_granite",
+      "Cabinet (granite top)" },
+    { "kitchen_cabinet_marble",
+      "Cabinet (marble top)" },
     { "kitchen_cabinet_half",
       "Cabinet" },
     { "kitchen_cabinet_with_sink",
@@ -135,10 +139,16 @@ local items = {
       "Nightstand" },
     { "nightstand_mahogany_two_drawers",
       "Nightstand" },
+    { "filing_cabinet",
+      "Filing cabinet" },
     { "oven",
       "Oven" },
     { "oven_active",
       "Oven (active)" },
+    { "oven_steel",
+      "Oven (stainless steel)" },
+    { "oven_steel_active",
+      "Oven (stainless steel, active)" },
     { "microwave_oven",
       "Microwave Oven" },
     { "microwave_oven_active",

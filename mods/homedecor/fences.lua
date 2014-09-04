@@ -272,7 +272,7 @@ minetest.register_node("homedecor:fence_privacy", {
 
 minetest.register_node("homedecor:fence_privacy_corner", {
 	drawtype = "nodebox",
-        description = S("Wooden Privacy Fence"),
+        description = S("Wooden Privacy Fence Corner"),
         tiles = {
 		"homedecor_fence_privacy_corner_top.png",
 		"homedecor_fence_privacy_corner_bottom.png",
@@ -336,7 +336,7 @@ minetest.register_node("homedecor:fence_barbed_wire", {
 
 minetest.register_node("homedecor:fence_barbed_wire_corner", {
 	drawtype = "nodebox",
-        description = S("Barbed Wire Fence"),
+        description = S("Barbed Wire Fence Corner"),
         tiles = {
 		"homedecor_fence_barbed_wire.png"
 	},
@@ -401,7 +401,7 @@ minetest.register_node("homedecor:fence_chainlink", {
 
 minetest.register_node("homedecor:fence_chainlink_corner", {
 	drawtype = "nodebox",
-	description = "Chainlink Fence",
+	description = S("Chainlink Fence Corner"),
 	tiles = {
 		"homedecor_fence_chainlink_corner_top.png",
 		"homedecor_fence_chainlink_corner_bottom.png",

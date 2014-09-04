@@ -1,4 +1,3 @@
-
 ##########################
 # Template language file #
 ##########################
@@ -32,7 +31,7 @@ right =
 
 
 ### door_nodes.lua ###
-Not enough vertical space to place a door! =
+Not enough space above that spot to place a door! =
 
 ### crafts.lua ###
 Brass Ingot =
@@ -53,20 +52,37 @@ Unprocessed Plastic base =
 
 ### fences.lua ###
 Barbed Wire Fence =
+Barbed Wire Fence Corner =
 Barbed Wire Fence Gate =
 Brass Fence/railing =
 Brass Fence/railing with sign =
 Chainlink Fence =
+Chainlink Fence Corner =
 Chainlink Fence Gate =
-Chainlink Fence Gate (open) =
 Unpainted Picket Fence =
+Unpainted Picket Fence Corner =
 Unpainted Picket Fence Gate =
 White Picket Fence =
+White Picket Fence Corner =
 White Picket Fence Gate =
 Wooden Privacy Fence =
+Wooden Privacy Fence Corner =
 Wrought Iron Fence/railing =
 Wrought Iron Fence/railing with sign =
 want to simply place the wielded item like usual. =
+
+### furniture.lua ###
+Table =
+Chair =
+Black =
+Red =
+Pink =
+Violet =
+Blue =
+Dark Green =
+## 1: Color name
+Armchair (%s) =
+Table Lamp =
 
 ### furniture_medieval.lua ###
 Bars =
@@ -83,10 +99,14 @@ Shower Head =
 
 ### init.lua ###
 Loaded! =
+Air Conditioner =
 Asphalt Shingles =
+Asphalt Shingles (outer corner) =
+Asphalt Shingles (inner corner) =
 Black Plastic Flower Pot =
 Brass Pole =
 Brass Table Legs =
+Wrought Iron Table Legs =
 red =
 green =
 blue =
@@ -97,11 +117,13 @@ violet =
 Curtains (%s) =
 Drop-Ceiling Tile =
 Glass Skylight =
+Glass Skylight Frosted  =
 Glass Table (Small, Round) =
 Glass Table (Small, Square) =
+Glass Table Piece (large) =
 Green Plastic Flower Pot =
 Large Area Rug =
-Large Glass Table Piece =
+Glass Table Piece (large) =
 Large Stereo Speaker =
 Legs for Utility Table =
 Projection Screen Material =
@@ -109,25 +131,29 @@ Small Surround Speaker =
 Small Throw Rug =
 Stereo Receiver =
 Terracotta Flower Pot =
-Terracotta Roofing =
+Terracotta Shingles =
+Terracotta Shingles (outer corner) =
+Terracotta Shingles (inner corner) =
 Textured Ceiling Paint =
 Utility Table =
 Utility table mk2 =
 Wooden Shutter (Black) =
-Wooden Shutter (Dark Grey) =
-Wooden Shutter (Forest Green) =
+Wooden Shutter (Dark grey) =
+Wooden Shutter (Forest green) =
 Wooden Shutter (Grey) =
-Wooden Shutter (Light Blue) =
-Wooden Shutter (Purple) =
+Wooden Shutter (Light blue) =
+Wooden Shutter (Violet) =
 Wooden Shutter (Red) =
-Wooden Shutter (Unpainted Mahogany) =
-Wooden Shutter (Unpainted Oak) =
+Wooden Shutter (Mahogany) =
+Wooden Shutter (Unpainted oak) =
 Wooden Shutter (White) =
 Wooden Shutter (Yellow) =
-Wooden Tabletop piece =
-Wooden Tabletop (Small, Round) =
-Wooden Tabletop (Small, Square) =
+Wood Table Piece (large)=
+Wood Table (Small, Round) =
+Wood Table (Small, Square) =
 Wood Shingles =
+Wood Shingles (outer corner) =
+Wood Shingles (inner corner) =
 Wrought Iron Pole =
 someone =
 ## 1: Player name
@@ -154,8 +180,13 @@ Yellow Glowlight (thin, on wall) =
 %s tried to access a %s belonging to %s at %s =
 ## 1: Item description
 %s (Locked) =
+Locked Fridge =
 Locked Cabinet =
 Locked Nightstand =
+Locked Oven =
+Locked Oven (active) =
+Locked Microwave Oven =
+Locked Microwave Oven (active) =
 
 ### nightstands.lua ###
 Mahogany Nightstand with One Drawer =
@@ -171,12 +202,15 @@ Two-drawer Nightstand =
 
 ### oven.lua ###
 Oven =
-## 1: Item name
+Microwave Oven =
+## 1: Item descrition
 Could not insert '%s' =
-## 1: Percentage
-Oven active: %d%% =
-Oven out of fuel =
-Oven is empty =
+## 1: Item description, 2: Percentage
+%s active: %d%% =
+## 1: Item description
+%s is empty =
+: Out of fuel =
+: output bins are full =
 
 ### refrigerator.lua ###
 Refrigerator =
