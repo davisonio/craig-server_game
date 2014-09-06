@@ -30,7 +30,7 @@ minetest.register_node("homedecor:cobweb_centered", {
 	walkable = false,
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}
+		fixed = { -0.5, -0.5, -0.1, 0.5, 0.5, 0.1 }
 	},
 	node_box = {
 		type = "fixed",
