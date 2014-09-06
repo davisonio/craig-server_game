@@ -40,6 +40,27 @@ minetest.register_node("homedecor:cobweb_centered", {
 	drop = "homedecor:cobweb_corner"
 })
 
+minetest.register_node("homedecor:cobweb_flat", {
+	description = "Cobweb",
+	drawtype = "nodebox",
+	tiles = { "homedecor_cobweb.png" },
+	inventory_image = "homedecor_cobweb_inv.png",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, 0.4, 0.5, 0.5, 0.5 }
+	},
+	node_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, 0.495, 0.5, 0.5, 0.495 }
+	},
+	groups = { snappy = 3, not_in_creative_inventory = 1 },
+	drop = "homedecor:cobweb_corner"
+})
+
 minetest.register_node("homedecor:cobweb_plantlike", {
 	description = "Cobweb",
 	drawtype = "plantlike",
@@ -71,11 +92,6 @@ function homedecor.rotate_cobweb(pos)
 	local iswall_zm = (wall_zm ~= "air")
 	local iswall_zp = (wall_zp ~= "air")
 
-	print("wall_xm: "..dump(wall_xm))
-	print("wall_xp: "..dump(wall_xp))
-	print("wall_zm: "..dump(wall_zm))
-	print("wall_zp: "..dump(wall_zp))
-
 	-- only xm+zp, or only xp+zm means on-floor torchlike
 
 	if (iswall_xm and iswall_zp and not iswall_xp and not iswall_zm)
@@ -97,6 +113,21 @@ function homedecor.rotate_cobweb(pos)
 
 	elseif iswall_zm and iswall_zp and not iswall_xm and not iswall_xp then 
 		minetest.set_node(pos, {name = "homedecor:cobweb_centered", param2 = 1})
+
+	-- ok, there aren't any simple two-wall corners or opposing walls.
+	-- Are there any standalone walls?
+
+	elseif iswall_xm and not iswall_xp and not iswall_zm and not iswall_zp then
+		minetest.set_node(pos, {name = "homedecor:cobweb_flat", param2 = 3})
+
+	elseif iswall_xp and not iswall_xm and not iswall_zm and not iswall_zp then
+		minetest.set_node(pos, {name = "homedecor:cobweb_flat", param2 = 1})
+
+	elseif iswall_zm and not iswall_xm and not iswall_xp and not iswall_zp then
+		minetest.set_node(pos, {name = "homedecor:cobweb_flat", param2 = 2})
+
+	elseif iswall_zp and not iswall_xm and not iswall_xp and not iswall_zm then
+		minetest.set_node(pos, {name = "homedecor:cobweb_flat", param2 = 0})
 	
 	-- if all else fails, place the plantlike version as a fallback.
 
@@ -113,6 +144,6 @@ minetest.register_abm({
 	interval = 1,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
-		homedecor_rotate_cobweb(pos)
+		homedecor.rotate_cobweb(pos)
 	end
 })
