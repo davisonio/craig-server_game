@@ -408,13 +408,6 @@ minetest.register_node('homedecor:utility_table_legs', {
 	},
 })
 
-local fdir_to_right = {
-	{  1,  0 },
-	{  0, -1 },
-	{ -1,  0 },
-	{  0,  1 },
-}
-
 minetest.register_node("homedecor:desk", {
 	drawtype = "nodebox",
 	description = "Desk",
@@ -445,36 +438,13 @@ minetest.register_node("homedecor:desk", {
 	},
 	groups = { snappy = 3 },
 	on_place = function(itemstack, placer, pointed_thing)
-		local pos = pointed_thing.under
-		local pnode = minetest.get_node(pointed_thing.under)
-		local rnodedef = minetest.registered_nodes[pnode.name]
-
-		if not rnodedef["buildable_to"] then
-			pos = pointed_thing.above
-		end
-
-		local fdir = minetest.dir_to_facedir(placer:get_look_dir())
-		local pos2 = { x = pos.x + fdir_to_right[fdir+1][1], y=pos.y, z = pos.z + fdir_to_right[fdir+1][2] }
-
-		local tnode = minetest.get_node(pos)
-		local tnode2 = minetest.get_node(pos2)
-
-		if homedecor.get_nodedef_field(tnode.name, "buildable_to")
-		  and homedecor.get_nodedef_field(tnode2.name, "buildable_to")
-		  and not minetest.is_protected(pos, placer:get_player_name())
-		  and not minetest.is_protected(pos2, placer:get_player_name()) then
-			minetest.add_node(pos, { name = "homedecor:desk", param2 = fdir })
-			minetest.add_node(pos2, { name = "homedecor:desk_r", param2 = fdir })
-			if not homedecor.expect_infinite_stacks then
-				itemstack:take_item()
-				return itemstack
-			end
-		end
+		return homedecor.stack_sideways(itemstack, placer, pointed_thing,
+			"homedecor:desk", "homedecor:desk_r", true)
 	end,
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		local fdir = oldnode.param2
 		if not fdir or fdir > 3 then return end
-		local pos2 = { x = pos.x + fdir_to_right[fdir+1][1], y=pos.y, z = pos.z + fdir_to_right[fdir+1][2] }
+		local pos2 = { x = pos.x + homedecor.fdir_to_right[fdir+1][1], y=pos.y, z = pos.z + homedecor.fdir_to_right[fdir+1][2] }
 		if minetest.get_node(pos2).name == "homedecor:desk_r" then
 			minetest.remove_node(pos2)
 		end

@@ -58,7 +58,6 @@ minetest.register_node("homedecor:refrigerator_steel_bottom", {
 		fixed = { -0.5, -0.5, -0.5, 0.5, 1.5, 0.5 }
 	},
 	on_place = function(itemstack, placer, pointed_thing)
-		print("started on_place")
 		local pos = pointed_thing.under
 		local pnode = minetest.get_node(pointed_thing.under)
 		local rnodedef = minetest.registered_nodes[pnode.name]
@@ -177,7 +176,6 @@ minetest.register_node("homedecor:refrigerator_white_bottom", {
 		fixed = { -0.5, -0.5, -0.5, 0.5, 1.5, 0.5 }
 	},
 	on_place = function(itemstack, placer, pointed_thing)
-		print("started on_place")
 		local pos = pointed_thing.under
 		local pnode = minetest.get_node(pointed_thing.under)
 		local rnodedef = minetest.registered_nodes[pnode.name]

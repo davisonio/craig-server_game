@@ -1885,6 +1885,98 @@ minetest.register_craft( {
     },
 })
 
+-- paintings
+--[[
+minetest.register_craft({
+    output = "homedecor:blank_canvas",
+    recipe = {
+		{ "", "group:stick", "" },
+		{ "group:stick", "wool:white", "group:stick" },
+		{ "", "group:stick", "" },
+    }
+})
+
+local painting_patterns = {
+	[1] = {	{ "brown", "red", "brown" },
+	 		{ "dark_green", "red", "green" } },
+
+	[2] = {	{ "green", "yellow", "green" },
+	 		{ "green", "yellow", "green" } },
+
+	[3] = {	{ "green", "pink", "green" },
+	 		{ "brown", "pink", "brown" } },
+
+	[4] = {	{ "black", "orange", "grey" },
+	 		{ "dark_green", "orange", "orange" } },
+
+	[5] = {	{ "blue", "orange", "yellow" },
+	 		{ "green", "red", "brown" } },
+
+	[6] = {	{ "green", "red", "orange" },
+	 		{ "orange", "yellow", "green" } },
+
+	[7] = {	{ "blue", "dark_green", "dark_green" },
+	 		{ "green", "grey", "green" } },
+
+	[8] = {	{ "blue", "blue", "blue" },
+	 		{ "green", "green", "green" } },
+
+	[9] = {	{ "blue", "blue", "dark_green" },
+	 		{ "green", "grey", "dark_green" } },
+
+	[10] = { { "green", "white", "green" },
+	 		 { "dark_green", "white", "dark_green" } },
+
+	[11] = { { "blue", "white", "blue" },
+	 		 { "blue", "grey", "dark_green" } },
+
+	[12] = { { "green", "green", "green" },
+	 		 { "grey", "grey", "green" } },
+
+	[13] = { { "blue", "blue", "grey" },
+	 		 { "dark_green", "white", "white" } },
+
+	[14] = { { "red", "yellow", "blue" },
+	 		 { "blue", "green", "violet" } },
+
+	[15] = { { "blue", "yellow", "blue" },
+	 		 { "black", "black", "black" } },
+
+	[16] = { { "red", "orange", "blue" },
+	 		 { "black", "dark_grey", "grey" } },
+
+	[17] = { { "orange", "yellow", "orange" },
+	 		 { "black", "black", "black" } },
+
+	[18] = { { "grey", "dark_green", "grey" },
+	 		 { "white", "white", "white" } },
+
+	[19] = { { "white", "brown", "green" },
+	 		 { "green", "brown", "brown" } },
+
+	[20] = { { "blue", "blue", "blue" },
+	 		 { "red", "brown", "grey" } }
+}
+
+for i,recipe in pairs(painting_patterns) do
+
+	local item1 = "dye:"..recipe[1][1]
+	local item2 = "dye:"..recipe[1][2]
+	local item3 = "dye:"..recipe[1][3]
+	local item4 = "dye:"..recipe[2][1]
+	local item5 = "dye:"..recipe[2][2]
+	local item6 = "dye:"..recipe[2][3]
+
+	minetest.register_craft({
+		output = "homedecor:painting_"..i,
+		recipe = {
+			{ item1, item2, item3 },
+			{ item4, item5, item6 },
+			{"", "homedecor:blank_canvas", "" }
+		}
+	})
+end
+]]--
 -- more misc stuff here
 
 minetest.register_craft({
@@ -2025,6 +2117,15 @@ minetest.register_craft({
     output = "homedecor:ceiling_fan",
     recipe = {
 		{ "homedecor:motor" },
+		{ "homedecor:fan_blades" },
+		{ "homedecor:glowlight_small_cube_white" }
+	}
+})
+
+minetest.register_craft({
+    output = "homedecor:ceiling_fan",
+    recipe = {
+		{ "technic:motor" },
 		{ "homedecor:fan_blades" },
 		{ "homedecor:glowlight_small_cube_white" }
 	}
@@ -2416,7 +2517,34 @@ minetest.register_craft( {
 			{ "moreblocks:slab_wood", "", "moreblocks:slab_wood" }
         },
 })
+--[[
+local bedcolors = {
+	{ "red", "red"},
+	{ "orange", "orange" },
+	{ "yellow", "yellow"},
+	{ "green", "dark_green"},
+	{ "blue", "blue"},
+	{ "violet", "violet"},
+	{ "pink", "pink"},
+	{ "darkgrey", "dark_grey"},
+	{ "brown", "brown" },
+}
 
+for c in ipairs(bedcolors) do
+	local color = bedcolors[c][1]
+	local woolcolor = bedcolors[c][2]
+
+	minetest.register_craft( {
+		    output = "homedecor:bed_"..color.."_foot",
+		    recipe = {
+				{ "group:stick", "", "group:stick" },
+				{ "wool:white", "wool:"..woolcolor, "wool:"..woolcolor },
+				{ "group:wood", "", "group:wood" },
+		    },
+	})
+
+end
+]]--
 minetest.register_craft( {
         output = "homedecor:bottle_green",
         recipe = {
