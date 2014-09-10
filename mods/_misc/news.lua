@@ -44,5 +44,5 @@ minetest.register_chatcommand("news",{
 })
 
 minetest.register_on_joinplayer(function (player)
-	minetest.after(0.5,news.show_formspec,player)
+	minetest.after(2,news.show_formspec,player)
 end)
