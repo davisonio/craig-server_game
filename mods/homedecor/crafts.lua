@@ -2163,7 +2163,7 @@ minetest.register_craft({
 		"dye:white",
 		"dye:white",
 		"dye:white",
-		"building_blocks:woodglass"
+		"default:glass"
     }
 })
 
@@ -2613,9 +2613,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "homedecor:piano_left",
 	recipe = {
-		{ "", "homedecor:steel_wire", "building_blocks:hardwood" },
-		{ "homedecor:plastic_strips", "homedecor:steel_wire", "building_blocks:hardwood" },
-		{ "building_blocks:hardwood", "default:steelblock", "building_blocks:hardwood" }
+		{ "default:tree", "homedecor:steel_wire", "default:tree" },
+		{ "homedecor:plastic_strips", "homedecor:steel_wire", "default:tree" },
+		{ "default:tree", "default:steelblock", "default:tree" }
 	},
 })
 
