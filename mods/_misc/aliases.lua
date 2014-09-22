@@ -62,3 +62,5 @@ minetest.register_alias("amt:fake_fire", "fake_fire:fake_fire")
 minetest.register_alias("amt:remove_stick", "_misc:remove_stick")
 minetest.register_alias("amt:pick_admin", "_misc:pick_admin")
 minetest.register_alias("amt:sapple", "_misc:super_apple")
+
+minetest.register_alias("enderchest:enderchest", "default:diamondblock")
