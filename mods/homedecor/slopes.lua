@@ -284,3 +284,12 @@ homedecor.register_slope("homedecor", "terracotta",
 	"Terracotta Shingles"
 )
 
+homedecor.register_slope("homedecor", "glass",
+	"homedecor:shingles_glass",
+	{ snappy = 3 },
+	{
+		"homedecor_shingles_glass_top.png",
+		"homedecor_shingles_glass.png"
+	},
+	"Glass Shingles"
+)

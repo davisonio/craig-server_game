@@ -146,6 +146,54 @@ function homedecor.stack_sideways(itemstack, placer, pointed_thing, node1, node2
 	end
 end
 
+-- Determine if the item being pointed at is the underside of a node (e.g a ceiling)
+
+function homedecor.find_ceiling(itemstack, placer, pointed_thing)
+	-- most of this is copied from the rotate-and-place function in builtin
+	local unode = core.get_node_or_nil(pointed_thing.under)
+	if not unode then
+		return
+	end
+	local undef = core.registered_nodes[unode.name]
+	if undef and undef.on_rightclick then
+		undef.on_rightclick(pointed_thing.under, unode, placer,
+				itemstack, pointed_thing)
+		return
+	end
+	local pitch = placer:get_look_pitch()
+	local fdir = core.dir_to_facedir(placer:get_look_dir())
+	local wield_name = itemstack:get_name()
+
+	local above = pointed_thing.above
+	local under = pointed_thing.under
+	local iswall = (above.y == under.y)
+	local isceiling = not iswall and (above.y < under.y)
+	local anode = core.get_node_or_nil(above)
+	if not anode then
+		return
+	end
+	local pos = pointed_thing.above
+	local node = anode
+
+	if undef and undef.buildable_to then
+		pos = pointed_thing.under
+		node = unode
+		iswall = false
+	end
+
+	if core.is_protected(pos, placer:get_player_name()) then
+		core.record_protection_violation(pos,
+				placer:get_player_name())
+		return
+	end
+
+	local ndef = core.registered_nodes[node.name]
+	if not ndef or not ndef.buildable_to then
+		return
+	end
+	return isceiling, pos
+end
+
 -- load various other components
 
 dofile(homedecor.modpath.."/misc-nodes.lua")					-- the catch-all for all misc nodes
@@ -173,6 +221,7 @@ dofile(homedecor.modpath.."/nightstands.lua")
 dofile(homedecor.modpath.."/clocks.lua")
 dofile(homedecor.modpath.."/misc-electrical.lua")
 
+dofile(homedecor.modpath.."/paintings.lua")
 dofile(homedecor.modpath.."/window_treatments.lua")
 
 dofile(homedecor.modpath.."/crafts.lua")

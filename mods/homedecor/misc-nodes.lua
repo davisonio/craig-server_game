@@ -1036,17 +1036,17 @@ minetest.register_node("homedecor:kitchen_faucet", {
 		type = "fixed",
 		fixed = {
 			{0, -0.5, 0.375, 0.0625, -0.1875, 0.4375}, -- NodeBox1
-			{0, -0.1875, 0.352697, 0.0625, -0.147303, 0.4375}, -- NodeBox2
-			{0, -0.109959, 0.319502, 0.0625, -0.147303, 0.406639}, -- NodeBox3
-			{0.0070, -0.119556, 0.17, 0.0550,-0.109959, 0.1285}, -- NodeBox4
-			{0, -0.109959, 0.125, 0.0625, -0.0726142, 0.352697}, -- NodeBox5
-			{-0.06, -0.479253, 0.385892, 0.125, -0.454357, 0.427386}, -- NodeBox6
-			{-0.06, -0.490701, 0.394191, 0.125, -0.444357, 0.419087}, -- NodeBox7
+			{0, -0.1875, 0.35, 0.0625, -0.15, 0.4375}, -- NodeBox2
+			{0, -0.15, 0.32, 0.0625, -0.11, 0.41}, -- NodeBox3
+			{0.007, -0.12, 0.17, 0.055, -0.11, 0.1285}, -- NodeBox4
+			{0, -0.11, 0.125, 0.0625, -0.07, 0.37}, -- NodeBox5
+			{-0.05, -0.48, 0.385, 0.115, -0.455, 0.43}, -- NodeBox6
+			{-0.05, -0.49, 0.395, 0.115, -0.445, 0.42}, -- NodeBox7
 		}
 	},
 	selection_box = {
 		type = "fixed",
-		fixed = { -0.0625, -0.5, 0.125, 0.125, -0.0625, 0.4375 }
+		fixed = { -0.055, -0.5, 0.125, 0.12, -0.065, 0.4375 }
 	},
 })
 
@@ -1354,4 +1354,607 @@ minetest.register_abm({
 	end
 })
 
+minetest.register_node("homedecor:trophy", {
+        description = "Trophy",
+	tiles = {
+		"default_gold_block.png"
+	},
+	inventory_image = "homedecor_trophy_inv.png",
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+        groups = { snappy=3 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
+			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
+			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
+			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
+			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
+			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
+			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
+			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
+			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
+			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
+			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
+			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
+			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
+			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
+			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
+	}
+})
 
+minetest.register_node("homedecor:sportbench", {
+	description = "Sport bench",
+	tiles = {
+		"homedecor_sportbench_top.png",
+		"wool_black.png",
+		"homedecor_sportbench_right.png", 
+		"homedecor_sportbench_left.png",
+		"homedecor_sportbench_bottom.png",
+		"homedecor_sportbench_front.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.3125, -0.5, 0.1875, -0.25, 0.5}, -- NodeBox1
+			{-0.1875, -0.5, -0.5, -0.125, -0.3125, -0.4375}, -- NodeBox2
+			{0.125, -0.5, -0.5, 0.1875, -0.3125, -0.4375}, -- NodeBox3
+			{0.1875, -0.5, 0.375, 0.25, 0.375, 0.4375}, -- NodeBox4
+			{-0.25, -0.5, 0.375, -0.1875, 0.375, 0.4375}, -- NodeBox5
+			{-0.5, 0.125, 0.36, 0.5, 0.14, 0.375}, -- NodeBox6
+			{0.3125, 0, 0.225, 0.35, 0.285, 0.5}, -- NodeBox7
+			{-0.35, 0, 0.225, -0.3125, 0.285, 0.5}, -- NodeBox8
+			{-0.1875, -0.375, 0.375, 0.1875, -0.3125, 0.4375}, -- NodeBox9
+			{-0.23, 0.11, 0.33, -0.2075, 0.125, 0.375}, -- NodeBox10
+			{0.2075, 0.11, 0.33, 0.23, 0.125, 0.375}, -- NodeBox11
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.4, -0.5, -0.5, 0.4, 0.375, 0.5 }
+	}
+})
+
+minetest.register_node("homedecor:skateboard", {
+        description = "Skateboard",
+	tiles = {
+		"homedecor_skateboard_top.png",
+		"homedecor_skateboard_bottom.png",
+		"homedecor_skateboard_sides.png"
+	},
+	inventory_image = "homedecor_skateboard_inv.png",
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.4375, -0.1875, 0.4375, -0.415, 0.125}, -- NodeBox1
+			{-0.375, -0.5, 0.0625, -0.3125, -0.4375, 0.125}, -- NodeBox2
+			{-0.375, -0.5, -0.1875, -0.3125, -0.4375, -0.125}, -- NodeBox3
+			{0.3125, -0.5, 0.0625, 0.375, -0.4375, 0.125}, -- NodeBox4
+			{0.3125, -0.5, -0.1875, 0.375, -0.4375, -0.125}, -- NodeBox5
+			{-0.5, -0.4375, -0.16, -0.4375, -0.415, 0.0975}, -- NodeBox6
+			{0.4375, -0.4375, -0.16, 0.5, -0.415, 0.0975}, -- NodeBox7
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, -0.2, 0.5, -0.40, 0.125 }
+	},
+	on_place = minetest.rotate_node
+})
+
+minetest.register_node("homedecor:copper_pans", {
+	description = "Copper pans",
+	tiles = {
+		"homedecor_polished_copper.png"
+	},
+	inventory_image = "homedecor_copper_pans_inv.png",
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.1875, -0.0625, -0.48, 0.125}, -- NodeBox1
+			{-0.375, -0.48, -0.1875, -0.36, -0.3125, 0.125}, -- NodeBox2
+			{-0.0775, -0.48, -0.1875, -0.0625, -0.3125, 0.125}, -- NodeBox3
+			{-0.375, -0.48, 0.11, -0.0625, -0.3125, 0.125}, -- NodeBox4
+			{-0.375, -0.48, -0.1875, -0.0625, -0.3125, -0.1725}, -- NodeBox5
+			{-0.25, -0.36, -0.5, -0.1875, -0.33, -0.1875}, -- NodeBox6
+			{0.0625, -0.5, 0, 0.375, -0.48, 0.3125}, -- NodeBox7
+			{0.0625, -0.48, 0, 0.0775, -0.3125, 0.3125}, -- NodeBox8
+			{0.36, -0.48, 0, 0.375, -0.3125, 0.3125}, -- NodeBox9
+			{0.0625, -0.48, 0, 0.375, -0.3125, 0.0175}, -- NodeBox10
+			{0.0625, -0.48, 0.295, 0.375, -0.3125, 0.3125}, -- NodeBox11
+			{0.1875, -0.36, -0.3125, 0.25, -0.33, 0}, -- NodeBox12
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.375, -0.5, -0.5, 0.375, -0.3125, 0.3125 }
+	},
+	on_place = minetest.rotate_node
+})
+
+minetest.register_node("homedecor:paper_towel", {
+	tiles = {
+		"homedecor_paper_towel_sides.png",
+		"homedecor_paper_towel_sides.png",
+		"homedecor_paper_towel_ends.png",
+		"homedecor_paper_towel_ends.png",
+		"homedecor_paper_towel_sides.png",
+		"homedecor_paper_towel_sides.png"
+	},
+	inventory_image = "homedecor_paper_towel_inv.png",
+	description = "Paper towels",
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, 0.1875, 0.4375, -0.375, 0.375, 0.5}, -- NodeBox1
+			{0.375, 0.1875, 0.4375, 0.4375, 0.375, 0.5}, -- NodeBox2
+			{-0.4375, 0.25, 0.1875, -0.375, 0.3125, 0.5}, -- NodeBox3
+			{0.375, 0.25, 0.1875, 0.4375, 0.3125, 0.5}, -- NodeBox4
+			{-0.375, 0.125, 0.125, 0.375, 0.4375, 0.3125}, -- NodeBox5
+			{-0.375, 0.1875, 0.0625, 0.375, 0.375, 0.375}, -- NodeBox6
+		}
+	},
+	groups = { snappy=3 }
+})
+
+minetest.register_node("homedecor:stonepath", {
+	description = "Garden stone path",
+	tiles = {
+		"default_stone.png"
+	},
+	inventory_image = "homedecor_stonepath_inv.png",
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, 0.3125, -0.3125, -0.48, 0.4375}, -- NodeBox1
+			{-0.25, -0.5, 0.125, 0, -0.48, 0.375}, -- NodeBox2
+			{0.125, -0.5, 0.125, 0.4375, -0.48, 0.4375}, -- NodeBox3
+			{-0.4375, -0.5, -0.125, -0.25, -0.48, 0.0625}, -- NodeBox4
+			{-0.0625, -0.5, -0.25, 0.25, -0.48, 0.0625}, -- NodeBox5
+			{0.3125, -0.5, -0.25, 0.4375, -0.48, -0.125}, -- NodeBox6
+			{-0.3125, -0.5, -0.375, -0.125, -0.48, -0.1875}, -- NodeBox7
+			{0.125, -0.5, -0.4375, 0.25, -0.48, -0.3125}, -- NodeBox8
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.4375, -0.5, -0.4375, 0.4375, -0.4, 0.4375 }
+	}
+})
+
+minetest.register_node("homedecor:barbecue", {
+	description = "Barbecue",
+	tiles = {
+		{name="homedecor_barbecue_top.png", animation={type="vertical_frames",
+		aspect_w=16, aspect_h=16, length=2}},
+		"forniture_black_metal.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3 },
+	light_source = 9,
+	node_box = {
+		type = "fixed",
+		fixed = {
+                        {-0.5, -0.5, 0.25, -0.4375, 0.0625, 0.3125}, -- NodeBox1
+			{0.4375, -0.5, 0.25, 0.5, 0.0625, 0.3125}, -- NodeBox2
+			{-0.5, -0.5, -0.3125, -0.4375, 0.0625, -0.25}, -- NodeBox3
+			{0.4375, -0.5, -0.3125, 0.5, 0.0625, -0.25}, -- NodeBox4
+			{-0.5, 0.0625, -0.3125, 0.5, 0.375, 0.3125}, -- NodeBox5
+			{-0.375, 0.5, -0.25, -0.313, 0.5, 0.251}, -- NodeBox6
+			{-0.25, 0.5, -0.25, -0.188, 0.5, 0.251}, -- NodeBox7
+			{-0.125, 0.5, -0.25, -0.063, 0.5, 0.251}, -- NodeBox8
+			{0, 0.5, -0.25, 0.062, 0.5, 0.251}, -- NodeBox9
+			{0.125, 0.5, -0.25, 0.187, 0.5, 0.251}, -- NodeBox10
+			{0.25, 0.5, -0.25, 0.312, 0.5, 0.251}, -- NodeBox11
+			{0.375, 0.5, -0.25, 0.437, 0.5, 0.251}, -- NodeBox12
+			{-0.5, 0.375, 0.251, 0.5, 0.5, 0.3125}, -- NodeBox13
+			{-0.5, 0.0625, -0.3125, 0.5, 0.5, -0.25}, -- NodeBox14
+			{-0.5, 0.0625, -0.3125, -0.438, 0.5, 0.3125}, -- NodeBox15
+			{0.4375, 0.0625, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox16
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, -0.3125, 0.5, 0.625, 0.3125 }
+        },
+	on_place = function(itemstack, placer, pointed_thing)
+		return homedecor.stack_vertically(itemstack, placer, pointed_thing,
+			"homedecor:barbecue", "homedecor:barbecue_meat")
+	end,
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local pos2 = { x = pos.x, y=pos.y + 1, z = pos.z }
+		if minetest.get_node(pos2).name == "homedecor:barbecue_meat" then
+			minetest.remove_node(pos2)
+		end
+	end
+})
+
+minetest.register_node("homedecor:barbecue_meat", {
+	tiles = {
+		"homedecor_barbecue_meat.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3, not_in_creative_inventory=1 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.125, -0.0625, -0.4375, 0.125}, -- NodeBox1
+			{0.125, -0.5, -0.125, 0.3125, -0.4375, 0.125}, -- NodeBox2
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { 0, 0, 0, 0, 0, 0 }
+       }
+})
+
+minetest.register_node("homedecor:beer_tap", {
+	description = "Beer tap",
+	tiles = {
+		"homedecor_beertap_front.png",
+		"homedecor_beertap_front.png",
+		"homedecor_beertap_right.png",
+		"homedecor_beertap_left.png",
+		"homedecor_beertap_front.png",
+		"homedecor_beertap_front.png"
+	},
+	inventory_image = "homedecor_beertap_inv.png",
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.5, -0.4375, 0.25, -0.48, 0}, -- NodeBox1
+			{-0.0625, -0.48, -0.1875, 0.0625, 0.125, -0.0625}, -- NodeBox2
+			{-0.1875, 0, -0.375, -0.125, 0.0315, -0.125}, -- NodeBox3
+			{-0.1875, 0, -0.1875, 0.1875, 0.0315, -0.125}, -- NodeBox4
+			{0.125, 0, -0.375, 0.1875, 0.0315, -0.125}, -- NodeBox5
+			{0.135, 0.0315, -0.3225, 0.1775, 0.235, -0.29}, -- NodeBox6
+			{-0.1775, 0.0315, -0.3225, -0.135, 0.235, -0.29}, -- NodeBox7
+			{-0.1675, -0.0825, -0.355, -0.145, 0, -0.3325}, -- NodeBox8
+			{0.145, -0.0825, -0.355, 0.1675, 0, -0.3325}, -- NodeBox9
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.25, -0.5, -0.4375, 0.25, 0.235, 0 }
+	},
+	on_punch = function(pos, node, puncher, pointed_thing)
+		local wielditem = puncher:get_wielded_item()
+		local inv = puncher:get_inventory()
+
+		local wieldname = wielditem:get_name()
+		if wieldname == "vessels:drinking_glass" then 
+			if inv:room_for_item("main", "homedecor:beer_mug 1") then
+				wielditem:take_item()
+				puncher:set_wielded_item(wielditem)
+				inv:add_item("main", "homedecor:beer_mug 1")
+				minetest.chat_send_player(puncher:get_player_name(), "Ahh, a frosty cold beer - look in your inventory for it!")
+			else
+				minetest.chat_send_player(puncher:get_player_name(), "No room in your inventory to add a beer mug!")
+			end
+		end
+	end
+})
+
+minetest.register_node("homedecor:beer_mug", {
+	description = "Beer mug",
+	tiles = {
+		"homedecor_beer_top.png",
+		"homedecor_beer_bottom.png",
+		"homedecor_beer_right.png",
+		"homedecor_beer_left.png",
+		"homedecor_beer_back.png",
+		"homedecor_beer_front.png"
+	},
+	inventory_image = "homedecor_beer_inv.png",
+	use_texture_alpha = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3, oddly_breakable_by_hand=3 },
+	sounds = default.node_sound_glass_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+                	{-0.125, -0.5, -0.25, 0.0625, -0.25, -0.0625}, -- NodeBox1
+			{0.0625, -0.3125, -0.18, 0.135, -0.285, -0.14}, -- NodeBox2
+			{0.1, -0.465, -0.18, 0.135, -0.285, -0.14}, -- NodeBox3
+			{0.0625, -0.465, -0.18, 0.135, -0.4375, -0.14}, -- NodeBox4
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.125, -0.5, -0.25, 0.135, -0.25, -0.0625 }
+	}
+})
+
+minetest.register_node("homedecor:tool_cabinet_bottom", {
+	description = "Metal tool cabinet and work table",
+	tiles = {
+		"homedecor_tool_cabinet_bottom_top.png",
+		"homedecor_tool_cabinet_bottom_sides.png",
+		"homedecor_tool_cabinet_bottom_sides.png",
+		"homedecor_tool_cabinet_bottom_sides.png",
+		"homedecor_tool_cabinet_bottom_sides.png", 
+		"homedecor_tool_cabinet_bottom_front.png"
+	},
+	inventory_image = "homedecor_tool_cabinet_inv.png",
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, 0.4375, -0.4375, -0.375, 0.5}, -- NodeBox1
+			{-0.5, -0.5, -0.5, -0.4375, -0.375, -0.4375}, -- NodeBox2
+			{0.4375, -0.5, 0.4375, 0.5, -0.375, 0.5}, -- NodeBox3
+			{0.4375, -0.5, -0.5, 0.5, -0.375, -0.4375}, -- NodeBox4
+			{-0.5, -0.375, -0.5, 0.5, 0.5, 0.5}, -- NodeBox5
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, -0.5, 0.5, 1.5, 0.5 }
+	},
+	on_place = function(itemstack, placer, pointed_thing)
+		return homedecor.stack_vertically(itemstack, placer, pointed_thing,
+			"homedecor:tool_cabinet_bottom", "homedecor:tool_cabinet_top")
+	end,
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local pos2 = { x = pos.x, y=pos.y + 1, z = pos.z }
+		if minetest.get_node(pos2).name == "homedecor:tool_cabinet_top" then
+			minetest.remove_node(pos2)
+		end
+	end
+})
+
+minetest.register_node("homedecor:tool_cabinet_top", {
+	tiles = {
+		"homedecor_tool_cabinet_top_top.png",
+		"homedecor_tool_cabinet_top_bottom.png",
+		"homedecor_tool_cabinet_top_right.png",
+		"homedecor_tool_cabinet_top_left.png",
+		"homedecor_tool_cabinet_top_back.png",
+		"homedecor_tool_cabinet_top_front.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3, not_in_creative_inventory=1 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5, 0.4375, 0.5, 0.5, 0.5}, -- NodeBox1
+			{-0.5, -0.5, -0.4375, -0.1875, -0.4375, 0.125}, -- NodeBox2
+			{-0.375, -0.4375, 0, -0.3125, 0.1875, 0.0625}, -- NodeBox3
+			{-0.4375, -0.1875, -0.375, -0.25, 0.125, 0.125}, -- NodeBox4
+			{-0.25, -0.0625, -0.3125, -0.22, 0.3125, -0.2825}, -- NodeBox5
+			{-0.375, -0.1875, -0.25, -0.3125, -0.218, -0.3125}, -- NodeBox6
+			{-0.35, -0.32, -0.285, -0.3375, -0.218, -0.2725}, -- NodeBox7
+			{0, -0.3125, 0.375, 0.0625, 0.1875, 0.4375}, -- NodeBox8
+			{0.125, 0.1875, 0.375, 0.1875, 0.25, 0.4375}, -- NodeBox9
+			{-0.0625, 0.1875, 0.375, 0.125, 0.3125, 0.4375}, -- NodeBox10
+			{0.343, -0.125, 0.42, 0.375, 0.125, 0.4375}, -- NodeBox11
+			{0.3125, 0.095, 0.42, 0.343, 0.1575, 0.4375}, -- NodeBox12
+			{0.375, 0.095, 0.42, 0.405, 0.1575, 0.4375}, -- NodeBox13
+			{0.3125, -0.155, 0.42, 0.343, -0.093, 0.4375}, -- NodeBox14
+			{0.375, -0.155, 0.42, 0.405, -0.093, 0.4375}, -- NodeBox15
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { 0, 0, 0, 0, 0, 0 }
+	}
+})
+
+minetest.register_node("homedecor:swing", {
+	description = "Tree's swing",
+	tiles = {
+		"homedecor_swing_top.png",
+		"homedecor_swing_bottom.png",
+		"homedecor_swing_sides.png"
+	},
+	inventory_image = "homedecor_swing_inv.png",
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3, oddly_breakable_by_hand=3 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, 0.33, -0.125,  0.3125, 0.376, 0.1875}, -- NodeBox1
+			{-0.3125, 0.376, 0.025, -0.3,    0.5,   0.0375}, -- NodeBox2
+			{ 0.3,    0.376, 0.025,  0.3125, 0.5,   0.0375}, -- NodeBox3
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.3125, 0.33, -0.125, 0.3125, 0.5, 0.1875 }
+	},
+	on_place = function(itemstack, placer, pointed_thing)
+		isceiling, pos = homedecor.find_ceiling(itemstack, placer, pointed_thing)
+		if isceiling then
+			local height = 0
+
+			for i = 0, 4 do	-- search up to 5 spaces downward from the ceiling for the first non-buildable-to node...
+				height = i
+				local testpos = { x=pos.x, y=pos.y-i-1, z=pos.z }
+				local testnode = minetest.get_node(testpos)
+				local testreg = core.registered_nodes[testnode.name]
+
+				if not testreg.buildable_to then
+					if i < 1 then
+						minetest.chat_send_player(placer:get_player_name(), "No room under there to hang a swing.")
+						return
+					else
+						break
+					end
+				end
+			end
+
+			for j = 0, height do -- then fill that space with ropes...
+				local testpos = { x=pos.x, y=pos.y-j, z=pos.z }
+				local testnode = minetest.get_node(testpos)
+				local testreg = core.registered_nodes[testnode.name]
+				minetest.set_node(testpos, { name = "homedecor:swing_rope", param2 = fdir })
+			end
+
+			minetest.set_node({ x=pos.x, y=pos.y-height, z=pos.z }, { name = "homedecor:swing", param2 = fdir })
+
+			if not homedecor.expect_infinite_stacks then
+				itemstack:take_item()
+				return itemstack
+			end
+
+		else
+			minetest.chat_send_player(placer:get_player_name(), "You have to point at the bottom side of an overhanging object to place a swing.")
+		end
+	end,
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		for i = 0, 4 do
+			local testpos = { x=pos.x, y=pos.y+i+1, z=pos.z }
+			if minetest.get_node(testpos).name == "homedecor:swing_rope" then
+				minetest.remove_node(testpos)
+			else
+				return
+			end
+		end
+	end
+})
+
+minetest.register_node("homedecor:swing_rope", {
+	tiles = {
+		"homedecor_swingrope_sides.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { not_in_creative_inventory=1 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5, 0.025, -0.3, 0.5, 0.0375}, -- NodeBox1
+			{0.3, -0.5, 0.025, 0.3125, 0.5, 0.0375}, -- NodeBox2
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { 0, 0, 0, 0, 0, 0 }
+	}
+})
+
+local bookcolors = {
+	"red",
+	"green",
+	"blue"
+}
+
+for c in ipairs(bookcolors) do
+	local color = bookcolors[c]
+	local color_d = S(bookcolors[c])
+
+minetest.register_node("homedecor:book_"..color, {
+	description = S("Book (%s)"):format(color_d),
+	tiles = {
+		"homedecor_book_"..color.."_top.png",
+		"homedecor_book_"..color.."_bottom.png",
+		"homedecor_book_right.png",
+		"homedecor_book_"..color.."_left.png",
+		"homedecor_book_back.png",
+		"homedecor_book_front.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3, oddly_breakable_by_hand=3 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{0, -0.5, -0.375, 0.3125, -0.4375, 0.0625}, -- NodeBox1
+		}
+	},
+	on_punch = function(pos, node, puncher, pointed_thing)
+		local fdir = node.param2
+		minetest.set_node(pos, { name = "homedecor:book_open_"..color, param2 = fdir })
+	end,
+})
+
+minetest.register_node("homedecor:book_open_"..color, {
+	tiles = {
+		"homedecor_book_open_top.png",
+		"homedecor_book_open_"..color.."_bottom.png",
+		"homedecor_book_open_sides.png",
+		"homedecor_book_open_sides.png",
+		"homedecor_book_open_sides.png",
+		"homedecor_book_open_sides.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = { snappy=3, oddly_breakable_by_hand=3, not_in_creative_inventory=1 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5, -0.375, 0.3125, -0.47, 0.0625}, -- NodeBox1
+		}
+	},
+	drop = "homedecor:book_"..color,
+	on_punch = function(pos, node, puncher, pointed_thing)
+		local fdir = node.param2
+		minetest.set_node(pos, { name = "homedecor:book_"..color, param2 = fdir })
+	end,
+})
+
+end
+
+minetest.register_node("homedecor:calendar", {
+	description = "Calendar",
+	drawtype = "signlike",
+	tiles = {"homedecor_calendar.png"},
+	inventory_image = "homedecor_calendar.png",
+	wield_image = "homedecor_calendar.png",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	sunlight_propagates = true,
+	walkable = false,
+	selection_box = {
+		type = "wallmounted",
+	},
+	groups = {choppy=2,dig_immediate=2,attached_node=1},
+	legacy_wallmounted = true,
+	sounds = default.node_sound_defaults(),
+})

@@ -299,6 +299,37 @@ minetest.register_node('homedecor:candle', {
 	sounds = default.node_sound_wood_defaults(),
 })
 
+minetest.register_node('homedecor:candle_thin', {
+	description = S("Candle"),
+	drawtype = "nodebox",
+	tiles = {
+		'homedecor_candle_top.png',
+		'homedecor_candle_bottom.png',
+		{name="homedecor_candle_sides.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}},
+	},
+    node_box = {
+            type = "fixed",
+            fixed = { 
+				{ -0.0625, -0.5, -0.0625, 0.0625, 0, 0.0625 },
+				{ -0.125, 0, 0, 0.125, 0.5, 0 },
+				{ 0, 0, -0.125, 0, 0.5, 0.125 }
+			}	
+    },
+    selection_box = {
+            type = "fixed",
+            fixed = { 
+				{ -0.125, -0.5, -0.125, 0.125, 0.35, 0.125 },
+			}	
+    },
+	sunlight_propagates = true,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	walkable = true,
+	groups = { snappy = 3 },
+	light_source = LIGHT_MAX-4,
+	sounds = default.node_sound_wood_defaults(),
+})
+
 minetest.register_node('homedecor:oil_lamp', {
 	description = S("Oil lamp"),
 	drawtype = "plantlike",

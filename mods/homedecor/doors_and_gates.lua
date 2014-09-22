@@ -169,7 +169,7 @@ for i in ipairs(sides) do
 		local lower_top_side = "homedecor_door_"..doorname.."_tb.png"
 		local upper_bottom_side = "homedecor_door_"..doorname.."_tb.png"
 
-		if doorname == "glass" then
+		if doorname == "glass" or doorname == "wrought_iron" then
 			lower_top_side = "homedecor_blanktile.png"
 			upper_bottom_side = "homedecor_blanktile.png"
 		end
