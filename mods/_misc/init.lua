@@ -43,3 +43,6 @@ dofile(minetest.get_modpath("_misc").."/craft_obsidian.lua")
 
 -- Admin Tools
 dofile(minetest.get_modpath("_misc").."/admin_tools.lua")
+
+-- Death Messages
+dofile(minetest.get_modpath("_misc").."/death_messages.lua")
