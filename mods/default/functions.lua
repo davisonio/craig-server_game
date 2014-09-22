@@ -87,25 +87,6 @@ function default.node_sound_glass_defaults(table)
 end
 
 --
--- Legacy
---
-
-function default.spawn_falling_node(p, nodename)
-	spawn_falling_node(p, nodename)
-end
-
--- Horrible crap to support old code
--- Don't use this and never do what this does, it's completely wrong!
--- (More specifically, the client and the C++ code doesn't get the group)
-function default.register_falling_node(nodename, texture)
-	minetest.log("error", debug.traceback())
-	minetest.log('error', "WARNING: default.register_falling_node is deprecated")
-	if minetest.registered_nodes[nodename] then
-		minetest.registered_nodes[nodename].groups.falling_node = 1
-	end
-end
-
---
 -- Global callbacks
 --
 
@@ -128,57 +109,6 @@ minetest.register_on_dignode(on_dignode)
 function on_punchnode(p, node)
 end
 minetest.register_on_punchnode(on_punchnode)
-
-
---
--- Grow trees
---
-
-minetest.register_abm({
-	nodenames = {"default:sapling"},
-	interval = 10,
-	chance = 50,
-	action = function(pos, node)
-		local nu =  minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-		local is_soil = minetest.get_item_group(nu, "soil")
-		if is_soil == 0 then
-			return
-		end
-		
-		minetest.log("action", "A sapling grows into a tree at "..minetest.pos_to_string(pos))
-		local vm = minetest.get_voxel_manip()
-		local minp, maxp = vm:read_from_map({x=pos.x-16, y=pos.y, z=pos.z-16}, {x=pos.x+16, y=pos.y+16, z=pos.z+16})
-		local a = VoxelArea:new{MinEdge=minp, MaxEdge=maxp}
-		local data = vm:get_data()
-		default.grow_tree(data, a, pos, math.random(1, 4) == 1, math.random(1,100000))
-		vm:set_data(data)
-		vm:write_to_map(data)
-		vm:update_map()
-	end
-})
-
-minetest.register_abm({
-	nodenames = {"default:junglesapling"},
-	interval = 10,
-	chance = 50,
-	action = function(pos, node)
-		local nu =  minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-		local is_soil = minetest.get_item_group(nu, "soil")
-		if is_soil == 0 then
-			return
-		end
-		
-		minetest.log("action", "A jungle sapling grows into a tree at "..minetest.pos_to_string(pos))
-		local vm = minetest.get_voxel_manip()
-		local minp, maxp = vm:read_from_map({x=pos.x-16, y=pos.y-1, z=pos.z-16}, {x=pos.x+16, y=pos.y+16, z=pos.z+16})
-		local a = VoxelArea:new{MinEdge=minp, MaxEdge=maxp}
-		local data = vm:get_data()
-		default.grow_jungletree(data, a, pos, math.random(1,100000))
-		vm:set_data(data)
-		vm:write_to_map(data)
-		vm:update_map()
-	end
-})
 
 --
 -- Papyrus and cactus growing
