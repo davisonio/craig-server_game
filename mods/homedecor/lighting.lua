@@ -269,7 +269,7 @@ minetest.register_node("homedecor:plasma_lamp", {
 })
 
 minetest.register_node('homedecor:candle', {
-	description = S("Candle"),
+	description = S("Thick Candle"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_candle_top.png',
@@ -300,7 +300,7 @@ minetest.register_node('homedecor:candle', {
 })
 
 minetest.register_node('homedecor:candle_thin', {
-	description = S("Candle"),
+	description = S("Thin Candle"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_candle_top.png',
