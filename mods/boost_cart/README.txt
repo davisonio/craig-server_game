@@ -1,6 +1,7 @@
-Minetest 0.4 mod: carts
+Minetest mod: boost_cart
 =======================
-by PilzAdam
+Based on the mod "carts" by PilzAdam
+Target: Run smoothly and do not use too much CPU
 
 License of source code:
 -----------------------
@@ -20,6 +21,3 @@ kddekadenz:
 Zeg9:
   cart.x
   cart.png
-
-rarkenin:
-  cart_rail_*.png
