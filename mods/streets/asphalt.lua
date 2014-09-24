@@ -193,21 +193,21 @@ minetest.register_craft({
 stairsplus:register_all("streets", "asphalt", "streets:asphalt", {
 	description = "Asphalt",
 	tiles = {"streets_asphalt.png"},
-	groups = {cracky=1,level=2},
+	groups = {cracky=1,level=2,not_in_craft_guide=1},
 	sunlight_propagates = true,
 })
 
 stairsplus:register_all("streets", "asphalt_solid_line", "streets:asphalt_solid_line", {
 	description = "Asphalt with solid line",
 	tiles = {"streets_asphalt.png^streets_asphalt_solid_line.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png^streets_asphalt_solid_line.png"},
-	groups = {cracky=1,level=2},
+	groups = {cracky=1,level=2,not_in_craft_guide=1},
 	sunlight_propagates = true,
 })
 
 stairsplus:register_all("streets", "asphalt_dashed_line", "streets:asphalt_dashed_line", {
 	description = "Asphalt with dashed line",
 	tiles = {"streets_asphalt.png^streets_asphalt_dashed_line.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png^streets_asphalt_dashed_line.png"},
-	groups = {cracky=1,level=2},
+	groups = {cracky=1,level=2,not_in_craft_guide=1},
 	sunlight_propagates = true,
 })
 
@@ -215,7 +215,7 @@ stairsplus:register_all("streets", "asphalt_dashed_line", "streets:asphalt_dashe
 minetest.register_node("streets:asphalt_side_stair_l",{
 	description = streets.S("Asphalt stair"),
 	tiles = {"streets_asphalt.png^streets_asphalt_side.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png^streets_asphalt_side.png"},
-	groups = {cracky=1,level=2},
+	groups = {cracky=1,level=2,not_in_craft_guide=1},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	drawtype = "nodebox",
@@ -231,7 +231,7 @@ minetest.register_node("streets:asphalt_side_stair_l",{
 minetest.register_node("streets:asphalt_side_stair_r",{
 	description = streets.S(streets.S("Asphalt stair")),
 	tiles = {"streets_asphalt.png^streets_asphalt_side_r.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png^streets_asphalt_side_r.png"},
-	groups = {cracky=1,level=2},
+	groups = {cracky=1,level=2,not_in_craft_guide=1},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	drawtype = "nodebox",
@@ -278,7 +278,7 @@ minetest.register_craft({
 minetest.register_node("streets:asphalt_side_slab_l",{
 	description = streets.S(streets.S("Asphalt slab")),
 	tiles = {"streets_asphalt.png^streets_asphalt_side.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png^streets_asphalt_side.png"},
-	groups = {cracky=1,level=2},
+	groups = {cracky=1,level=2,not_in_craft_guide=1},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	drawtype = "nodebox",
@@ -293,7 +293,7 @@ minetest.register_node("streets:asphalt_side_slab_l",{
 minetest.register_node("streets:asphalt_side_slab_r",{
 	description = streets.S(streets.S("Asphalt slab")),
 	tiles = {"streets_asphalt.png^streets_asphalt_side_r.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png","streets_asphalt.png^streets_asphalt_side_r.png"},
-	groups = {cracky=1,level=2},
+	groups = {cracky=1,level=2,not_in_craft_guide=1},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	drawtype = "nodebox",

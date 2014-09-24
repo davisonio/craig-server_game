@@ -62,6 +62,6 @@ minetest.register_craft({
 stairsplus:register_all("streets", "concrete", "streets:concrete", {
 	description = "Concrete",
 	tiles = {"streets_concrete.png"},
-	groups = {cracky=1,level=2},
+	groups = {cracky=1,level=2,not_in_craft_guide=1},
 	sunlight_propagates = true,
 })
