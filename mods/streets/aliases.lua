@@ -11,3 +11,7 @@ minetest.register_alias("streets:asphalt_middle","streets:asphalt_solid_line")
 minetest.register_alias("streets:asphalt_middle_dashed","streets:asphalt_dashed_line")
 
 minetest.register_alias("streets:asphalt_dashed_line_stair","streets:stair_asphalt_dashed_line")
+minetest.register_alias("streets:asphalt_solid_line_stair","streets:stair_asphalt_solid_line")
+
+minetest.register_alias("streets:asphalt_dashed_line_slab","streets:slab_asphalt_dashed_line")
+minetest.register_alias("streets:asphalt_solid_line_slab","streets:slab_asphalt_solid_line")
