@@ -389,14 +389,6 @@ minetest.register_node("money:shop", {
  })
 --End.
 
-minetest.register_craft({--Shop recipe.
-	output = "money:shop",
-	recipe = {
-		{"default:chest_locked"},
-		{"locked_sign:sign_wall_locked"},
-	},
-})
-
 minetest.register_alias("shop", "money:shop")
 
 --Barter shop.
@@ -520,14 +512,6 @@ minetest.register_node("money:barter_shop", {
 	end,
 })
 --End.
-	
-minetest.register_craft({--Barter shop recipe.
-	output = "money:barter_shop",
-	recipe = {
-		{"locked_sign:sign_wall_locked"},
-		{"default:chest_locked"},
-	},
-})
 
 minetest.register_alias("barter_shop", "money:barter_shop")
 
