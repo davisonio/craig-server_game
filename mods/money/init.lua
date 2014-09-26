@@ -70,15 +70,6 @@ minetest.register_on_joinplayer(function(player)
 		end
 	end
 end)
---End.
-	
---Registration privileges.
-minetest.register_privilege("money", "Can use /money [pay <account> <amount>] command")
-minetest.register_privilege("money_admin", {
-	description = "Can use /money <account> | freeze/unfreeze <account> | take/set/inc/dec <account> <amount>",
-	give_to_singleplayer = false,
-})
---End.
 
 --Registration "money" command.
 minetest.register_chatcommand("money", {
