@@ -24,7 +24,7 @@ minetest.register_globalstep(function(dtime)
 			if players_income[name] == nil then
 				players_income[name] = 0
 			end
-			players_income[name] = 5
+			players_income[name] = 3
 		end
 	end
 end)
