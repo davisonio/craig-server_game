@@ -2,7 +2,7 @@
 	Mod by kotolegokot
 	Version 2012.8.13.0
 ]]
-minetest.register_privilege("sign_editor", "Can edit all locked signs")
+
 minetest.register_node("locked_sign:sign_wall_locked", {
 	description = "Locked Sign",
 	drawtype = "signlike",
@@ -34,7 +34,7 @@ minetest.register_node("locked_sign:sign_wall_locked", {
 		local owner = meta:get_string("owner")
 		local pname = player:get_player_name()
 		return pname == owner or pname == minetest.setting_get("name")
-			or minetest.check_player_privs(pname, {sign_editor=true})
+			or minetest.check_player_privs(pname, {access=true})
 	end,
 	on_receive_fields = function(pos, formname, fields, sender)
 		if not fields.text then return end
@@ -42,7 +42,7 @@ minetest.register_node("locked_sign:sign_wall_locked", {
 		local owner = meta:get_string("owner")
 		local pname = sender:get_player_name() or ""
 		if pname ~= owner and pname ~= minetest.setting_get("name")
-		  and not minetest.check_player_privs(pname, {sign_editor=true}) then
+		  and not minetest.check_player_privs(pname, {access=true}) then
 			return
 		end
 		print(pname.." wrote \""..fields.text..
