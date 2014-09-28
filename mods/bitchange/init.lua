@@ -8,7 +8,7 @@ dofile(minetest.get_modpath("bitchange").."/old.lua")
 
 -- Access
 function bitchange_has_access(owner, player_name)
-	return (player_name == owner or owner == "" or minetest.get_player_privs(player_name).server or minetest.get_player_privs(player_name).access)
+	return (player_name == owner or owner == "" or minetest.get_player_privs(player_name).access)
 end
 
 -- Income
