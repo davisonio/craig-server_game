@@ -69,7 +69,7 @@ minetest.register_craft({
 	output = "bitchange:donationbox",
 	recipe = {
 		{"default:wood", "", "default:wood"},
-		{"default:wood", "bitchange:minecoin", "default:wood"},
+		{"default:wood", "bitchange:bitcoin", "default:wood"},
 		{"default:wood", "default:wood", "default:wood"}
 	}
 })
