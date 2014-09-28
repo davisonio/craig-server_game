@@ -279,7 +279,6 @@ minetest.register_node("bitchange:shop", {
 
 minetest.register_craft({
 	output = "bitchange:shop",
-	type = "shapeless",
 	recipe = {
 		{"default:sign_wall"},
 		{"default:chest_locked"},
