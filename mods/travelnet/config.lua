@@ -1,4 +1,3 @@
-
 travelnet.MAX_STATIONS_PER_NETWORK = 24;
 
 -- set this to true if you want a simulated beam effect
@@ -23,9 +22,9 @@ travelnet.travelnet_recipe = {
                 {"default:glass", "default:steel_ingot", "default:glass", }
 }
 travelnet.elevator_recipe = {
-	        {"default:steel_ingot", "default:glass", "default:steel_ingot", },
-		{"default:steel_ingot", "",              "default:steel_ingot", },
-		{"default:steel_ingot", "default:glass", "default:steel_ingot", }
+				{"default:steel_ingot", "default:glass", "default:steel_ingot", },
+				{"default:steel_ingot", "",              "default:steel_ingot", },
+				{"default:steel_ingot", "default:glass", "default:steel_ingot", }
 }
 
 -- if this function returns true, the player with the name player_name is

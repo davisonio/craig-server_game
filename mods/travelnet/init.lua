@@ -1,60 +1,4 @@
-
-          
---[[
-    Teleporter networks that allow players to choose a destination out of a list
-    Copyright (C) 2013 Sokomine
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
- Version: 2.1 (with config file)
-    
- Please configure this mod in config.lua
-
- Changelog:
- 19.11.13 - moved doors and travelnet definition into an extra file
-          - moved configuration to config.lua
- 05.08.13 - fixed possible crash when the node in front of the travelnet is unknown
- 26.06.13 - added inventory image for elevator (created by VanessaE)
- 21.06.13 - bugfix: wielding an elevator while digging a door caused the elevator_top to be placed
-          - leftover floating elevator_top nodes can be removed by placing a new travelnet:elevator underneath them and removing that afterwards
-          - homedecor-doors are now opened and closed correctly as well
-          - removed nodes that are not intended for manual use from creative inventory
-          - improved naming of station levels for the elevator
- 21.06.13 - elevator stations are sorted by height instead of date of creation as is the case with travelnet boxes
-          - elevator stations are named automaticly
- 20.06.13 - doors can be opened and closed from inside the travelnet box/elevator
-          - the elevator can only move vertically; the network name is defined by its x and z coordinate
- 13.06.13 - bugfix
-          - elevator added (written by kpoppel) and placed into extra file
-          - elevator doors added
-          - groups changed to avoid accidental dig/drop on dig of node beneath
-          - added new priv travelnet_remove for digging of boxes owned by other players
-          - only the owner of a box or players with the travelnet_remove priv can now dig it
-          - entering your own name as owner_name does no longer abort setup
- 22.03.13 - added automatic detection if yaw can be set
-          - beam effect is disabled by default
- 20.03.13 - added inventory image provided by VanessaE
-          - fixed bug that made it impossible to remove stations from the net
-          - if the station a player beamed to no longer exists, the station will be removed automaticly
-          - with the travelnet_attach priv, you can now attach your box to the nets of other players
-          - in newer versions of Minetest, the players yaw is set so that he/she looks out of the receiving box
-          - target list is now centered if there are less than 9 targets
---]]
-
-
-minetest.register_privilege("travelnet_attach", { description = "allows to attach travelnet boxes to travelnets of other players", give_to_singleplayer = false});
-minetest.register_privilege("travelnet_remove", { description = "allows to dig travelnet boxes which belog to nets of other players", give_to_singleplayer = false});
+minetest.register_privilege("travelnet", "Travelnet admin.")
 
 travelnet = {};
 
@@ -317,10 +261,10 @@ travelnet.add_target = function( station_name, network_name, pos, player_name, m
       minetest.chat_send_player(player_name, "There is no network named "..tostring( network_name ).." owned by "..tostring( owner_name )..". Aborting.");
       return;
 
-   elseif( not( minetest.check_player_privs(player_name, {travelnet_attach=true}))
+   elseif( not( minetest.check_player_privs(player_name, {travelnet=true}))
        and not( travelnet.allow_attach( player_name, owner_name, network_name ))) then
 
-        minetest.chat_send_player(player_name, "You do not have the travelnet_attach priv which is required to attach your box to the network of someone else. Aborting.");
+        minetest.chat_send_player(player_name, "You do not have the travelnet priv which is required to attach your box to the network of someone else. Aborting.");
       return;
    end
 
@@ -598,7 +542,7 @@ travelnet.can_dig = function( pos, player, description )
    local name          = player:get_player_name();
 
    -- players with that priv can dig regardless of owner
-   if( minetest.check_player_privs(name, {travelnet_remove=true})
+   if( minetest.check_player_privs(name, {travelnet=true})
        or travelnet.allow_dig( player_name, owner_name, network_name )) then
       return true;
    end
