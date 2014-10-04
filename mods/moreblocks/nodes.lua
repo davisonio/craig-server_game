@@ -124,8 +124,7 @@ local nodes = {
 	},
 	["iron_glass"] = {
 		description = S("Iron Glass"),
-		drawtype = "glasslike_framed",
-		tiles = {"moreblocks_iron_glass.png", "moreblocks_iron_glass_detail.png"},
+		drawtype = "glasslike",
 		paramtype = "light",
 		sunlight_propagates = true,
 		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
@@ -133,8 +132,7 @@ local nodes = {
 	},
 	["coal_glass"] = {
 		description = S("Coal Glass"),
-		drawtype = "glasslike_framed",
-		tiles = {"moreblocks_coal_glass.png", "moreblocks_coal_glass_detail.png"},
+		drawtype = "glasslike",
 		paramtype = "light",
 		sunlight_propagates = true,
 		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
@@ -142,8 +140,7 @@ local nodes = {
 	},
 	["clean_glass"] = {
 		description = S("Clean Glass"),
-		drawtype = "glasslike_framed",
-		tiles = {"moreblocks_iron_glass.png", "moreblocks_iron_glass_detail.png"},
+		drawtype = "glasslike",
 		paramtype = "light",
 		sunlight_propagates = true,
 		groups = {snappy = 2, cracky = 3, oddly_breakable_by_hand = 3},
@@ -214,8 +211,7 @@ local nodes = {
 	},
 	["trap_glass"] = {
 		description = S("Trap Glass"),
-		drawtype = "glasslike_framed",
-		tiles = {"moreblocks_trap_glass.png", "moreblocks_trap_glass_detail.png"},
+		drawtype = "glasslike",
 		paramtype = "light",
 		sunlight_propagates = true,
 		walkable = false,
@@ -254,8 +250,7 @@ local nodes = {
 	},
 	["glow_glass"] = {
 		description = S("Glow Glass"),
-		drawtype = "glasslike_framed",
-		tiles = {"moreblocks_glow_glass.png", "moreblocks_glow_glass_detail.png"},
+		drawtype = "glasslike",
 		paramtype = "light",
 		sunlight_propagates = true,
 		light_source = 11,
@@ -264,8 +259,7 @@ local nodes = {
 	},
 	["trap_glow_glass"] = {
 		description = S("Trap Glow Glass"),
-		drawtype = "glasslike_framed",
-		tiles = {"moreblocks_trap_glow_glass.png", "moreblocks_trap_glow_glass_detail.png"},
+		drawtype = "glasslike",
 		paramtype = "light",
 		sunlight_propagates = true,
 		light_source = 11,
@@ -276,8 +270,7 @@ local nodes = {
 	},
 	["super_glow_glass"] = {
 		description = S("Super Glow Glass"),
-		drawtype = "glasslike_framed",
-		tiles = {"moreblocks_super_glow_glass.png", "moreblocks_super_glow_glass_detail.png"},
+		drawtype = "glasslike",
 		paramtype = "light",
 		sunlight_propagates = true,
 		light_source = 15,
@@ -286,8 +279,7 @@ local nodes = {
 	},
 	["trap_super_glow_glass"] = {
 		description = S("Trap Super Glow Glass"),
-		drawtype = "glasslike_framed",
-		tiles = {"moreblocks_trap_super_glow_glass.png", "moreblocks_trap_super_glow_glass_detail.png"},
+		drawtype = "glasslike",
 		paramtype = "light",
 		sunlight_propagates = true,
 		light_source = 15,
@@ -349,4 +341,3 @@ minetest.register_craftitem("moreblocks:nothing", {
 	inventory_image = "invisible.png",
 	on_use = function() end,
 })
-

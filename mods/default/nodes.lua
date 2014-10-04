@@ -446,8 +446,8 @@ minetest.register_node("default:bookshelf", {
 
 minetest.register_node("default:glass", {
 	description = "Glass",
-	drawtype = "glasslike_framed",
-	tiles = {"default_glass.png", "default_glass_detail.png"},
+	drawtype = "glasslike",
+	tiles = {"default_glass.png"},
 	inventory_image = minetest.inventorycube("default_glass.png"),
 	paramtype = "light",
 	sunlight_propagates = true,
