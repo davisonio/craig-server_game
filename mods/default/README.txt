@@ -97,6 +97,8 @@ Splizard (CC BY-SA 3.0):
   default_snow.png
   default_snow_side.png
   default_ice.png
+  default_pineneedles.png
+  default_pinesapling.png
 
 Zeg9 (CC BY-SA 3.0):
   default_coal_block.png
@@ -107,6 +109,9 @@ Zeg9 (CC BY-SA 3.0):
 
 paramat (CC BY-SA 3.0):
   wieldhand.png, based on character.png by Jordach (CC BY-SA 3.0)
+  default_pinetree.png
+  default_pinetreetop.png
+  default_pinewood.png
 
 brunob.santos (CC BY-SA 4.0):
   default_desert_cobble.png

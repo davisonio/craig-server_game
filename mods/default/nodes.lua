@@ -1461,3 +1461,60 @@ minetest.register_node("default:snowblock", {
 		dug = {name="default_snow_footstep", gain=0.75},
 	}),
 })
+
+minetest.register_node("default:pineneedles",{
+	description = "Pine Needles",
+	drawtype = "allfaces_optional",
+	visual_scale = 1.3,
+	tiles = {"default_pineneedles.png"},
+	waving = 1,
+	paramtype = "light",
+	groups = {snappy=3,leafdecay=3,leaves=1},
+	drop = {
+		max_items = 1,
+		items = {
+			{
+				-- player will get sapling with 1/20 chance
+				items = {"default:pinesapling"},
+				rarity = 20,
+			},
+			{
+				-- player will get leaves only if he get no saplings,
+				-- this is because max_items is 1
+				items = {"default:pineneedles"},
+			}
+		}
+	},
+	sounds = default.node_sound_leaves_defaults(),
+})
+
+minetest.register_node("default:pinesapling", {
+	description = "Pine Sapling",
+	drawtype = "plantlike",
+	visual_scale = 1.0,
+	tiles = {"default_pinesapling.png"},
+	inventory_image = "default_pinesapling.png",
+	wield_image = "default_pinesapling.png",
+	paramtype = "light",
+	walkable = false,
+	groups = {snappy=2,dig_immediate=3},
+	sounds = default.node_sound_defaults(),
+})
+
+minetest.register_node("default:pinetree", {
+	description = "Pine Tree",
+	tiles = {"default_pinetreetop.png", "default_pinetreetop.png", "default_pinetree.png"},
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	groups = {tree=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+	sounds = default.node_sound_wood_defaults(),
+	on_place = minetest.rotate_node
+})
+
+minetest.register_node("default:pinewood", {
+	description = "Pinewood Planks",
+	tiles = {"default_pinewood.png"},
+	groups = {choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1},
+	sounds = default.node_sound_wood_defaults(),
+})
+
