@@ -3,7 +3,7 @@
 
 boost_cart = {}
 boost_cart.modpath = minetest.get_modpath("boost_cart")
-boost_cart.speed_max = 10
+boost_cart.speed_max = 11
 
 function vector.floor(v)
 	return {
@@ -29,7 +29,8 @@ boost_cart.cart = {
 	velocity = {x=0, y=0, z=0}, -- only used on punch
 	old_dir = {x=0, y=0, z=0},
 	old_pos = nil,
-	old_switch = nil
+	old_switch = nil,
+	attached_items = {}
 }
 
 function boost_cart.cart:on_rightclick(clicker)
@@ -42,6 +43,7 @@ function boost_cart.cart:on_rightclick(clicker)
 		clicker:set_detach()
 	elseif not self.driver then
 		self.driver = player_name
+		default.player_attached[player_name] = true
 		clicker:set_attach(self.object, "", {x=0, y=3, z=0}, {x=0, y=0, z=0})
 	end
 end
@@ -57,12 +59,21 @@ function boost_cart.cart:on_punch(puncher, time_from_last_punch, tool_capabiliti
 
 	if puncher:get_player_control().sneak then
 		if self.driver then
+			if self.old_pos then
+				self.object:setpos(self.old_pos)
+			end
 			default.player_attached[self.driver] = nil
 			local player = minetest.get_player_by_name(self.driver)
 			if player then
 				player:set_detach()
 			end
 		end
+		for _,obj_ in ipairs(self.attached_items) do
+			if obj_ then
+				obj_:set_detach()
+			end
+		end
+		
 		self.object:remove()
 		puncher:get_inventory():add_item("main", "carts:cart")
 		return
@@ -109,6 +120,7 @@ end
 
 function boost_cart.cart:on_step(dtime)
 	local vel = self.object:getvelocity()
+	local is_realpunch = self.punch
 	if self.punch then
 		vel = vector.add(vel, self.velocity)
 		self.velocity = {x=0, y=0, z=0}
@@ -143,7 +155,6 @@ function boost_cart.cart:on_step(dtime)
 					pos = vector.new(expected_pos)
 					self.punch = true
 				end
-				--minetest.log("action", "Cart moving too fast at "..minetest.pos_to_string(expected_pos))
 				break
 			end
 		end
@@ -237,16 +248,20 @@ function boost_cart.cart:on_step(dtime)
 		end
 	end
 	
+	if not self.punch then
+		return
+	end
+	
 	local yaw = 0
 	if dir.x < 0 then
 		yaw = 0.5
 	elseif dir.x > 0 then
-		yaw = 3 / 2
+		yaw = 1.5
 	elseif dir.z < 0 then
 		yaw = 1
 	end
 	self.object:setyaw(yaw * math.pi)
-
+	
 	local anim = {x=0, y=0}
 	if dir.y == -1 then
 		anim = {x=1, y=1}
@@ -255,9 +270,19 @@ function boost_cart.cart:on_step(dtime)
 	end
 	self.object:set_animation(anim, 1, 0)
 	
-	if self.punch then
-		self.object:setvelocity(vel)
-		self.object:setpos(pos)
+	self.object:setvelocity(vel)
+	self.object:setpos(pos)
+	
+	if is_realpunch then
+		for _,obj_ in ipairs(minetest.get_objects_inside_radius(pos, 1)) do
+			if not obj_:is_player() and
+					obj_:get_luaentity() and
+					not obj_:get_luaentity().physical_state and
+					obj_:get_luaentity().name == "__builtin:item" then
+				obj_:set_attach(self.object, "", {x=0, y=0, z=0}, {x=0, y=0, z=0})
+				self.attached_items[#self.attached_items + 1] = obj_
+			end
+		end
 	end
 	self.punch = false
 end
