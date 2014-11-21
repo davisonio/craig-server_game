@@ -2,18 +2,26 @@ ARMOR_INIT_DELAY = 1
 ARMOR_INIT_TIMES = 1
 ARMOR_BONES_DELAY = 1
 ARMOR_UPDATE_TIME = 1
-ARMOR_DROP = true
+ARMOR_DROP = minetest.get_modpath("bones") ~= nil
 ARMOR_DESTROY = false
 ARMOR_LEVEL_MULTIPLIER = 1
 ARMOR_HEAL_MULTIPLIER = 1
 
 local modpath = minetest.get_modpath(ARMOR_MOD_NAME)
+local worldpath = minetest.get_worldpath()
 local input = io.open(modpath.."/armor.conf", "r")
 if input then
 	dofile(modpath.."/armor.conf")
 	input:close()
 	input = nil
 end
+input = io.open(worldpath.."/armor.conf", "r")
+if input then
+	dofile(worldpath.."/armor.conf")
+	input:close()
+	input = nil
+end
+
 local time = 0
 
 armor = {
@@ -80,7 +88,11 @@ armor.set_player_armor = function(self, player)
 	end
 	local name = player:get_player_name()
 	local player_inv = player:get_inventory()
-	if not name or not player_inv then
+	if not name then
+		minetest.log("error", "Failed to read player name")
+		return
+	elseif not player_inv then
+		minetest.log("error", "Failed to read player inventory")
 		return
 	end
 	local armor_texture = "3d_armor_trans.png"
@@ -157,6 +169,9 @@ armor.set_player_armor = function(self, player)
 	self.def[name].count = items
 	self.def[name].level = armor_level
 	self.def[name].heal = armor_heal
+	self.def[name].jump = physics_o.jump
+	self.def[name].speed = physics_o.speed
+	self.def[name].gravity = physics_o.gravity
 	self:update_player_visuals(player)
 end
 
@@ -172,7 +187,11 @@ armor.update_armor = function(self, player)
 	if self.player_hp[name] > hp then
 		local player_inv = player:get_inventory()
 		local armor_inv = minetest.get_inventory({type="detached", name=name.."_armor"})
-		if not armor_inv then
+		if not player_inv then
+			minetest.log("error", "Failed to read player inventory")
+			return
+		elseif not armor_inv then
+			minetest.log("error", "Failed to read detached inventory")
 			return
 		end
 		local heal_max = 0
@@ -276,7 +295,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		return
 	end
 	for field, _ in pairs(fields) do
-		if string.find(field, "skins_set_") then
+		if string.find(field, "skins_set") then
 			minetest.after(0, function(player)
 				local skin = armor:get_player_skin(name)
 				armor.textures[name].skin = skin..".png"
@@ -342,6 +361,9 @@ minetest.register_on_joinplayer(function(player)
 		count = 0,
 		level = 0,
 		heal = 0,
+		jump = 1,
+		speed = 1,
+		gravity = 1,
 	}
 	armor.textures[name] = {
 		skin = armor.default_skin..".png",
@@ -353,6 +375,11 @@ minetest.register_on_joinplayer(function(player)
 		local skin = skins.skins[name]
 		if skin and skins.get_type(skin) == skins.type.MODEL then
 			armor.textures[name].skin = skin..".png"
+		end
+	elseif minetest.get_modpath("simple_skins") then
+		local skin = skins.skins[name]
+		if skin then
+		    armor.textures[name].skin = skin..".png"
 		end
 	elseif minetest.get_modpath("u_skins") then
 		local skin = u_skins.u_skins[name]
