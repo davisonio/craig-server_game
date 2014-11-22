@@ -3,16 +3,17 @@
 local RULES = [[
 Here are the rules:
 
-1)	Do not attempt to crash, lag, damage, disable, exploit or disturb the server or game.
-2)	No greifing (affecting other creations and buildings in a deliberate and destructive manner)
-3)	Don't be harrassful. This includes (but is not limited to) asking for stuff constantly, being rude or inconsiderate and spamming.
-4)	Everywhere in the world is free to walk around but if the area is clearly private stay out!
-5)	Do not take anything which is not yours unless otherwise stated.
-6)	Punching other players (PVP) is only possible when all players taking part agree.
+1)	Don't attempt to crash, lag, damage, disable, exploit or disturb the server or game.
+2)	Don't ruin creations not owned by yourself.
+3)	Don't be harrassful. This includes (but is not limited to) asking for stuff constantly, being rude, beingh inconsiderate or spamming the chat.
+4)	Feel free to walk around whereever, but if the area is clearly private stay out!
+5)	Don't take items from other's chests unless otherwise stated.
+6)	Don't take part in PVP (punching other players) unless all players taking part agree.
 7)  Multiple accounts are dissalowed and you are responsible for looking after your account and login details.
 8)	We want to make this world look as nice as possible, so please avoid building 1x1 towers or tunnels and placing random blocks everywhere. A few cool buildings would be nice too :)
 
 Click the accept button and you will be able to build.
+Thanks :)
 ]]
 
 local function make_formspec()
