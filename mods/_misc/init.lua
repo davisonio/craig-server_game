@@ -49,6 +49,3 @@ dofile(minetest.get_modpath("_misc").."/death_messages.lua")
 
 -- Privs
 dofile(minetest.get_modpath("_misc").."/privs.lua")
-
--- Important
-dofile(minetest.get_modpath("_misc").."/important.lua")
