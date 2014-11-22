@@ -5,8 +5,8 @@ Here are the rules:
 
 1)	Don't attempt to crash, lag, damage, disable, exploit or disturb the server or game.
 2)	Don't ruin creations not owned by yourself.
-3)	Don't be harrassful. This includes (but is not limited to) asking for stuff constantly, being rude, beingh inconsiderate or spamming the chat.
-4)	Feel free to walk around whereever, but if the area is clearly private stay out!
+3)	Don't be harrassful. This includes (but is not limited to) asking for stuff constantly, being rude, being inconsiderate or spamming the chat.
+4)	Feel free to walk around wherever, but if the area is clearly private stay out!
 5)	Don't take items from other's chests unless otherwise stated.
 6)	Don't take part in PVP (punching other players) unless all players taking part agree.
 7)  Multiple accounts are dissalowed and you are responsible for looking after your account and login details.
