@@ -89,11 +89,12 @@ minetest.register_node("homedecor:sink", {
             { -0.30,  0.45,  0.10, -0.25,  0.50,  0.40, },
             {  0.25,  0.45,  0.10,  0.30,  0.50,  0.40, },
             { -0.25,  0.45,  0.10,  0.25,  0.50,  0.15, },
+	    {-0.1, -0.5, 0.3, 0.1, 0.4, 0.5},
         },
     },
     selection_box = {
         type = "fixed",
-        fixed = {-0.3,0.35,0.1, 0.3,0.5,0.5},
+        fixed = {-0.3,-0.5,0.1, 0.3,0.5,0.5},
     },
     groups = {cracky=2,},
     sounds = default.node_sound_stone_defaults(),

@@ -67,6 +67,7 @@ minetest.register_node("homedecor:fence_brass_with_sign", {
 	groups = {snappy=3,not_in_creative_inventory=1},
 	sounds = default.node_sound_wood_defaults(),
 	walkable = true,
+	sunlight_propagates = true,
 	drop = {
 		max_items = 2,
 		items = {
@@ -107,6 +108,7 @@ minetest.register_node("homedecor:fence_wrought_iron_with_sign", {
 	groups = {snappy=3,not_in_creative_inventory=1},
 	sounds = default.node_sound_wood_defaults(),
 	walkable = true,
+	sunlight_propagates = true,
 	drop = {
 		max_items = 2,
 		items = {
@@ -404,11 +406,11 @@ minetest.register_node("homedecor:fence_chainlink_corner", {
 	description = S("Chainlink Fence Corner"),
 	tiles = {
 		"homedecor_fence_chainlink_corner_top.png",
-		"homedecor_fence_chainlink_corner_bottom.png",
-		"homedecor_fence_chainlink_corner_left.png",
-		"homedecor_fence_chainlink_corner_right.png",
+		"homedecor_fence_chainlink_corner_top.png",
 		"homedecor_fence_chainlink_corner_front.png",
-		"homedecor_fence_chainlink_corner_back.png",
+		"homedecor_fence_chainlink_corner_front.png",
+		"homedecor_fence_chainlink_corner_front.png",
+		"homedecor_fence_chainlink_corner_front.png",
 	},
 	paramtype = "light",
 	is_ground_content = true,
@@ -438,3 +440,83 @@ minetest.register_node("homedecor:fence_chainlink_corner", {
 		}
 	},
 })
+
+minetest.register_node("homedecor:fence_wrought_iron_2", {
+	drawtype = "nodebox",
+        description = S("Wrought Iron fence (type 2)"),
+        tiles = {
+		"homedecor_fence_wrought_iron_2_tb.png",
+		"homedecor_fence_wrought_iron_2_tb.png",
+		"homedecor_fence_wrought_iron_2_sides.png",
+		"homedecor_fence_wrought_iron_2_sides.png",
+		"homedecor_fence_wrought_iron_2_fb.png",
+		"homedecor_fence_wrought_iron_2_fb.png"
+	},
+        paramtype = "light",
+        is_ground_content = true,
+        groups = {snappy=3},
+        sounds = default.node_sound_wood_defaults(),
+	walkable = true,
+	paramtype2 = "facedir",
+        selection_box = {
+                type = "fixed",
+                fixed = { -0.5, -0.5, 0.42, 0.5, 0.5, 0.5 }
+        },
+        node_box = {
+                type = "fixed",
+		fixed = {
+			{ -8/16, -8/16,  14/32, -7.75/16,  8/16,  16/32 }, -- left post
+			{  7.75/16, -8/16,  14/32,  8/16,  8/16,  16/32 }, -- right post
+			{ -8/16,  7.75/16, 14/32,  8/16,  8/16, 16/32 }, -- top piece
+			{ -8/16,  -0.015625, 14.75/32,  8/16,  0.015625, 15.25/32 }, -- cross piece
+			{ -0.015625, -8/16,  14.75/32,  0.015625,  8/16,  15.25/32 }, -- cross piece
+			{ -8/16, -8/16, 14/32,  8/16, -7.75/16, 16/32 }, -- bottom piece
+			{ -8/16, -8/16,  15/32,  8/16,  8/16,  15/32 }	-- the grid itself
+		}		
+        },
+})
+
+minetest.register_node("homedecor:fence_wrought_iron_2_corner", {
+	drawtype = "nodebox",
+	description = S("Wrought Iron fence (type 2) Corner"),
+	tiles = {
+		"homedecor_fence_corner_wrought_iron_2_tb.png",
+		"homedecor_fence_corner_wrought_iron_2_tb.png",
+		"homedecor_fence_corner_wrought_iron_2_lr.png",
+		"homedecor_fence_corner_wrought_iron_2_lr.png^[transformFX",
+		"homedecor_fence_corner_wrought_iron_2_fb.png^[transformFX",
+		"homedecor_fence_corner_wrought_iron_2_fb.png"
+	},
+	paramtype = "light",
+	is_ground_content = true,
+	groups = {snappy=3},
+	sounds = default.node_sound_wood_defaults(),
+	walkable = true,
+	paramtype2 = "facedir",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{ -0.5, -0.5, 0.42, 0.5, 0.5, 0.5 },
+			{ -0.5, -0.5, -0.5, -0.42, 0.5, 0.5 }
+		}
+	},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{ -0.5, -0.5, 0.453125, -0.453125, 0.5, 0.5 }, -- corner edge
+			{ -7.5/16,  7.75/16, 14/32,  8/16,  8/16, 16/32 },	-- top piece
+			{ -7.5/16, -8/16, 14/32,  8/16, -7.75/16, 16/32 },	-- bottom piece
+			{ -16/32,  7.75/16, -8/16, -14/32,  8/16,  8/16 },	-- top piece, side
+			{ -16/32, -8/16, -8/16, -14/32, -7.75/16,  8/16 },	-- bottom piece, side
+			{ -7.5/16, -8/16,  7.5/16,  8/16,  8/16,  7.5/16 },	-- the grid itself
+			{ -7.5/16, -8/16, -8/16,  -7.5/16,  8/16,  7.5/16 },	-- the grid itself, side
+			{ -15.5/32, -0.5, -0.5, -14.5/32, 0.5, -0.484375 }, -- left post side
+			{  7.75/16, -8/16,  14.5/32,  8/16,  8/16,  15.5/32 }, -- right post
+			{ -8/16,  -0.015625, 14.75/32,  8/16,  0.015625, 15.25/32 }, -- cross piece
+			{ -0.015625, -8/16,  14.75/32,  0.015625,  8/16,  15.25/32 }, -- cross piece
+			{ -15.25/32, -0.5, -0.015625, -14.75/32, 0.5, 0.015625 }, -- cross piece side
+			{ -15.25/32, -0.015625, -0.5, -14.75/32, 0.015625, 0.5 } -- cross piece side
+		}
+	},
+})
+

@@ -288,11 +288,15 @@ function homedecor.register_furnace(name, furnacedef)
 				end
 			end
 
+			-- XXX: Quick patch, make it better in the future.
+			local locked = node.name:find("_locked$") and "_locked" or ""
+			local desc = minetest.registered_nodes[name..locked].description
+
 			if meta:get_float("fuel_time") < meta:get_float("fuel_totaltime") then
 				local percent = math.floor(meta:get_float("fuel_time") /
 						meta:get_float("fuel_totaltime") * 100)
 				meta:set_string("infotext",S("%s active: %d%%"):format(desc,percent))
-				hacky_swap_node(pos,name_active)
+				hacky_swap_node(pos,name_active..locked)
 				meta:set_string("formspec", make_formspec(furnacedef, percent))
 				return
 			end
@@ -312,7 +316,7 @@ function homedecor.register_furnace(name, furnacedef)
 
 			if (not fuel) or (fuel.time <= 0) then
 				meta:set_string("infotext",desc..S(": Out of fuel"))
-				hacky_swap_node(pos,name)
+				hacky_swap_node(pos,name..locked)
 				meta:set_string("formspec", make_formspec(furnacedef, 0))
 				return
 			end
@@ -320,7 +324,7 @@ function homedecor.register_furnace(name, furnacedef)
 			if cooked.item:is_empty() then
 				if was_active then
 					meta:set_string("infotext",S("%s is empty"):format(desc))
-					hacky_swap_node(pos,name)
+					hacky_swap_node(pos,name..locked)
 					meta:set_string("formspec", make_formspec(furnacedef, 0))
 				end
 				return
@@ -328,7 +332,7 @@ function homedecor.register_furnace(name, furnacedef)
 
 			if not inv:room_for_item("dst", cooked.item) then
 				meta:set_string("infotext", desc..S(": output bins are full"))
-				hacky_swap_node(pos, name)
+				hacky_swap_node(pos, name..locked)
 				meta:set_string("formspec", make_formspec(furnacedef, 0))
 				return
 			end
@@ -361,14 +365,14 @@ homedecor.register_furnace("homedecor:oven_steel", {
 homedecor.register_furnace("homedecor:microwave_oven", {
 	description = S("Microwave Oven"),
 	tiles = {
-		"homedecor_microwave_top.png", "homedecor_microwave_bottom.png",
-		"homedecor_microwave_right.png", "homedecor_microwave_left.png",
-		"homedecor_microwave_back.png", "homedecor_microwave_front.png"
+		"homedecor_microwave_top.png", "homedecor_microwave_top.png^[transformR180",
+		"homedecor_microwave_top.png^[transformR270", "homedecor_microwave_top.png^[transformR90",
+		"homedecor_microwave_top.png^[transformR180", "homedecor_microwave_front.png"
 	},
 	tiles_active = {
-		"homedecor_microwave_top.png", "homedecor_microwave_bottom.png",
-		"homedecor_microwave_right.png", "homedecor_microwave_left.png",
-		"homedecor_microwave_back.png", "homedecor_microwave_front_active.png"
+		"homedecor_microwave_top.png", "homedecor_microwave_top.png^[transformR180",
+		"homedecor_microwave_top.png^[transformR270", "homedecor_microwave_top.png^[transformR90",
+		"homedecor_microwave_top.png^[transformR180", "homedecor_microwave_front_active.png"
 	},
 	output_slots = 2,
 	output_width = 2,

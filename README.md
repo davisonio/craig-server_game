@@ -33,7 +33,7 @@ fences              | Various fence types. |
 flowers             | Pretty flowers. |
 gloopblocks         | Some more blocks and evil tools. | Tools to be removed/replaced sometime.
 home_gui            | Set your home via the inventory. |
-homedecor           | Makes a house a home. | Beds and painting are not there
+homedecor           | Makes a house a home. | **Many crafts don't work** - feel free to submit pull requests if you want to be able to craft certain blocks from this mod. (We don't use mods such as technic and building_blocks - this causes the crafts to not work)
 industry_pack       | Rubber trees ect. | **Extremely Experiemental** If the whole server ends up crashing whenever you join - this is the reason. Needs to be replaced with another similar mod sometime.
 inventory_plus      | Tool used by other mods to add buttons to the inventory.
 itemframes          | Showcase your items on a frame or pedestal.

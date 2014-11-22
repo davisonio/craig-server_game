@@ -156,24 +156,31 @@ homedecor.register_slope = function(modname, subname, recipeitem, groups, images
 end
 
 minetest.register_craft( {
-        output = "homedecor:roof_tile_terracotta 8",
-        recipe = {
-			{ "homedecor:shingle_outer_corner_terracotta", "homedecor:shingle_outer_corner_terracotta" }
-		}
+	output = "homedecor:shingle_side_glass",
+	recipe = {
+		{ "homedecor:skylight", "homedecor:skylight", "homedecor:skylight" }
+	}
 })
 
 minetest.register_craft( {
-        output = "homedecor:roof_tile_terracotta 8",
-        recipe = {
-			{ "homedecor:shingle_inner_corner_terracotta", "homedecor:shingle_inner_corner_terracotta" }
-		}
+	output = "homedecor:roof_tile_terracotta 8",
+	recipe = {
+		{ "homedecor:shingle_outer_corner_terracotta", "homedecor:shingle_outer_corner_terracotta" }
+	}
 })
 
 minetest.register_craft( {
-        output = "homedecor:roof_tile_terracotta 8",
-        recipe = {
-			{ "homedecor:shingle_side_terracotta", "homedecor:shingle_side_terracotta" }
-		}
+	output = "homedecor:roof_tile_terracotta 8",
+	recipe = {
+		{ "homedecor:shingle_inner_corner_terracotta", "homedecor:shingle_inner_corner_terracotta" }
+	}
+})
+
+minetest.register_craft( {
+	output = "homedecor:roof_tile_terracotta 8",
+	recipe = {
+		{ "homedecor:shingle_side_terracotta", "homedecor:shingle_side_terracotta" }
+	}
 })
 
 minetest.register_craft({
@@ -293,3 +300,4 @@ homedecor.register_slope("homedecor", "glass",
 	},
 	"Glass Shingles"
 )
+

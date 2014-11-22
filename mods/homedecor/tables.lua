@@ -412,11 +412,11 @@ minetest.register_node("homedecor:desk", {
 	drawtype = "nodebox",
 	description = "Desk",
 	tiles = {
-		"homedecor_desk_top_l.png",
-		"homedecor_desk_bottom_l.png",
-		"homedecor_desk_rside_l.png",
-		"homedecor_desk_lside_l.png",
-		"homedecor_desk_back_l.png",
+		"forniture_wood.png",
+		"forniture_wood.png",
+		"forniture_wood.png",
+		"forniture_wood.png",
+		"forniture_wood.png",
 		"homedecor_desk_front_l.png"
 	},
 	inventory_image = "homedecor_desk_inv.png",
@@ -454,10 +454,10 @@ minetest.register_node("homedecor:desk", {
 minetest.register_node("homedecor:desk_r", {
 	drawtype = "nodebox",
 	tiles = {
-		"homedecor_desk_top_r.png",
-		"homedecor_desk_bottom_r.png",
-		"homedecor_desk_rside_r.png",
-		"homedecor_desk_lside_r.png",
+		"forniture_wood.png",
+		"forniture_wood.png",
+		"forniture_wood.png",
+		"forniture_wood.png",
 		"homedecor_desk_back_r.png",
 		"homedecor_desk_front_r.png"
 	},

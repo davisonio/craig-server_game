@@ -87,10 +87,10 @@ function homedecor.rotate_cobweb(pos)
 	local wall_zm = minetest.get_node({ x=pos.x,   y=pos.y, z=pos.z-1}).name
 	local wall_zp = minetest.get_node({ x=pos.x,   y=pos.y, z=pos.z+1}).name
 
-	local iswall_xm = (wall_xm ~= "air")
-	local iswall_xp = (wall_xp ~= "air")
-	local iswall_zm = (wall_zm ~= "air")
-	local iswall_zp = (wall_zp ~= "air")
+	local iswall_xm = (wall_xm ~= "air" and not string.find(wall_xm, "homedecor:cobweb"))
+	local iswall_xp = (wall_xp ~= "air" and not string.find(wall_xp, "homedecor:cobweb"))
+	local iswall_zm = (wall_zm ~= "air" and not string.find(wall_zm, "homedecor:cobweb"))
+	local iswall_zp = (wall_zp ~= "air" and not string.find(wall_zp, "homedecor:cobweb"))
 
 	-- only xm+zp, or only xp+zm means on-floor torchlike
 

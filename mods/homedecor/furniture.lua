@@ -64,8 +64,8 @@ for i in ipairs(chaircolors) do
 			"forniture_wood.png",
 			"forniture_kitchen_chair_sides"..color..".png",
 			"forniture_kitchen_chair_sides"..color..".png^[transformFX",
-			"forniture_kitchen_chair_back"..color..".png",
-			"forniture_kitchen_chair_front"..color..".png",
+			"forniture_kitchen_chair_sides"..color..".png",
+			"forniture_kitchen_chair_sides"..color..".png^[transformFX",
 		 },
 		drawtype = "nodebox",
 		paramtype = "light",
@@ -131,133 +131,6 @@ for i in ipairs(chaircolors) do
 	end
 end
 
-local repl = { off="low", low="med", med="hi", hi="max", max="off", }
-local lamp_colors = { "", "blue", "green", "pink", "red", "violet" }
-
-local function reg_lamp(suffix, nxt, desc, tilesuffix, light, color)
-	local lampcolor = "_"..color
-	if color == "" then	lampcolor = "" end
-	minetest.register_node("homedecor:table_lamp"..lampcolor.."_"..suffix, {
-	description = S(desc),
-	drawtype = "nodebox",
-	tiles = {
-		"forniture_table_lamp_s"..tilesuffix..".png",
-		"forniture_table_lamp_s"..tilesuffix..".png",
-		"forniture_table_lamp"..lampcolor.."_l"..tilesuffix..".png",
-	},
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{ -0.1500, -0.500, -0.1500,  0.1500, -0.45,  0.1500 },
-			{ -0.0500, -0.450, -0.0500,  0.0500, -0.40,  0.0500 },
-			{ -0.0250, -0.400, -0.0250,  0.0250, -0.10,  0.0250 },
-			{ -0.0125, -0.125, -0.2000,  0.0125, -0.10,  0.2000 },
-			{ -0.2000, -0.125, -0.0125,  0.2000, -0.10,  0.0125 },
-			{ -0.2000, -0.100, -0.2000, -0.1750,  0.30,  0.2000 },
-			{  0.1750, -0.100, -0.2000,  0.2000,  0.30,  0.2000 },
-			{ -0.1750, -0.100, -0.2000,  0.1750,  0.30, -0.1750 },
-			{ -0.1750, -0.100,  0.1750,  0.1750,  0.30,  0.2000 },
-		},
-	},
-	walkable = false,
-	light_source = light,
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.2, -0.5, -0.2, 0.2, 0.30, 0.2 },
-	},
-	groups = {cracky=2,oddly_breakable_by_hand=1,
-		not_in_creative_inventory=((desc == nil) and 1) or nil,
-	},
-	drop = "homedecor:table_lamp"..lampcolor.."_off",
-	on_punch = function(pos, node, puncher)
-		node.name = "homedecor:table_lamp"..lampcolor.."_"..repl[suffix]
-		minetest.set_node(pos, node)
-		nodeupdate(pos)
-	end,
-	})
-	if lampcolor == "" then 
-		minetest.register_alias("3dforniture:table_lamp_"..suffix, "homedecor:table_lamp_"..suffix)
-	end
-
-	minetest.register_node("homedecor:standing_lamp_bottom"..lampcolor.."_"..suffix, {
-	description = S(desc),
-	drawtype = "nodebox",
-	tiles = {
-		"forniture_table_lamp_s"..tilesuffix..".png",
-		"homedecor_standing_lamp_bottom_sides.png",
-	},
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-                        { -0.1500, -0.500, -0.1500,  0.1500, -0.45,  0.1500 },
-			{ -0.0500, -0.450, -0.0500,  0.0500, -0.40,  0.0500 },
-			{ -0.0250, -0.400, -0.0250,  0.0250, 0.50,  0.0250 },
-		},
-	},
-	walkable = false,
-	light_source = light,
-	selection_box = {
-		type = "fixed",
-		fixed = { 0, 0, 0, 0, 0, 0}
-	},
-	groups = {snappy=3},
-		on_place = function(itemstack, placer, pointed_thing)
-		return homedecor.stack_vertically(itemstack, placer, pointed_thing,
-			"homedecor:standing_lamp_bottom"..lampcolor.."_"..suffix, "homedecor:standing_lamp_top"..lampcolor.."_"..suffix)
-	end,
-	})
-	
-	minetest.register_node("homedecor:standing_lamp_top"..lampcolor.."_"..suffix, {
-	drawtype = "nodebox",
-	tiles = {
-		"forniture_table_lamp_s"..tilesuffix..".png",
-		"forniture_standing_lamp"..lampcolor.."_l"..tilesuffix..".png",
-	},
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{ -0.0250, -0.500, -0.0250,  0.0250, 0.10,  0.0250 },
-			{ -0.0125, 0.0625, -0.2000,  0.0125, 0.10,  0.2000 },
-			{ -0.2000, 0.0625, -0.0125,  0.2000, 0.10,  0.0125 },
-			{ -0.2000, 0.100, -0.2000, -0.1750,  0.50,  0.2000 },
-			{  0.1750, 0.100, -0.2000,  0.2000,  0.50,  0.2000 },
-			{ -0.1750, 0.100, -0.2000,  0.1750,  0.50, -0.1750 },
-			{ -0.1750, 0.100,  0.1750,  0.1750,  0.50,  0.2000 },
-		},
-	},
-	walkable = false,
-	light_source = light,
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.2, -1.5, -0.2, 0.2, 0.5, 0.2 },
-	},
-	groups = {snappy=3, not_in_creative_inventory=1},
-	on_punch = function(pos, node, puncher)
-		node.name = "homedecor:standing_lamp_top"..lampcolor.."_"..repl[suffix]
-		minetest.set_node(pos, node)
-		nodeupdate(pos)
-	end,
-	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		local pos2 = { x = pos.x, y=pos.y - 1, z = pos.z }
-		if minetest.get_node(pos2).name == "homedecor:standing_lamp_bottom"..lampcolor.."_off" then
-			minetest.remove_node(pos2)
-		end
-	end,
-	drop = "homedecor:standing_lamp_bottom"..lampcolor.."_off"
-	})
-end
-
-for _, color in ipairs(lamp_colors) do
-	reg_lamp("off", "low", "Table Lamp",  "", nil,	color )
-	reg_lamp("low", "med", nil,          "l", 3,	color )
-	reg_lamp("med", "hi" , nil,          "m", 7,	color )
-	reg_lamp("hi" , "max", nil,          "h", 11,	color )
-	reg_lamp("max", "off", nil,          "x", 14,	color )
-end
-
 minetest.register_node(":homedecor:openframe_bookshelf", {
 	description = "Bookshelf (open-frame)",
 	drawtype = "nodebox",
@@ -268,7 +141,7 @@ minetest.register_node(":homedecor:openframe_bookshelf", {
 		"3dbookshelf_openframe_top.png",
 		"3dbookshelf_openframe_bottom.png",
 		"3dbookshelf_openframe_right.png",
-		"3dbookshelf_openframe_left.png",
+		"3dbookshelf_openframe_right.png^[transformFX",
 		"3dbookshelf_openframe_back.png",
 		"3dbookshelf_openframe_front.png"
 
@@ -309,201 +182,13 @@ minetest.register_node(":homedecor:openframe_bookshelf", {
 	}
 })
 
-local bedcolors = {
-	"red",
-	"green",
-	"blue",
-	"violet",
-	"brown",
-	"darkgrey",
-	"orange",
-	"yellow",
-	"pink",
-}
-
-local function bed_extension(pos, color)
-
-	local topnode = minetest.get_node({x=pos.x, y=pos.y+1.0, z=pos.z})
-	local thisnode = minetest.get_node(pos)
-	local bottomnode = minetest.get_node({x=pos.x, y=pos.y-1.0, z=pos.z})
-
-	local fdir = thisnode.param2
-
-	if string.find(topnode.name, "homedecor:bed_.*_foot$") then
-		if fdir == topnode.param2 then
-			local newnode = string.gsub(thisnode.name, "_foot", "_footext")
-			minetest.set_node(pos, { name = newnode, param2 = fdir})
-		end
-	end
-
-    if string.find(bottomnode.name, "homedecor:bed_.*_foot$") then
-		if fdir == bottomnode.param2 then
-			local newnode = string.gsub(bottomnode.name, "_foot", "_footext")
-		    minetest.set_node({x=pos.x, y=pos.y-1.0, z=pos.z}, { name = newnode, param2 = fdir})
-		end
-    end
-end
-
-local function unextend_bed(pos, color)
-	local bottomnode = minetest.get_node({x=pos.x, y=pos.y-1.0, z=pos.z})
-	local fdir = bottomnode.param2
-	if  string.find(bottomnode.name, "homedecor:bed_.*_footext$") then
-		local newnode = string.gsub(bottomnode.name, "_footext", "_foot")
-		minetest.set_node({x=pos.x, y=pos.y-1.0, z=pos.z}, { name = newnode, param2 = fdir})
-	end
-end
-
-for _, color in ipairs(bedcolors) do
- 
-	minetest.register_node("homedecor:bed_"..color.."_head", {
-		tiles = {
-			"homedecor_bed_"..color.."_top1.png",
-			"homedecor_bed_bottom1.png",
-			"homedecor_bed_"..color.."_side1.png",
-			"homedecor_bed_"..color.."_side1.png^[transformFX",
-			"homedecor_bed_"..color.."_head1.png",
-			"homedecor_bed_"..color.."_head2.png"
-		},
-		drawtype = "nodebox",
-		paramtype = "light",
-		paramtype2 = "facedir",
-		groups = {snappy=3, not_in_creative_inventory=1},
-		node_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5,     -0.5,     0.4375,   -0.375,  0.5,      0.5},      --  NodeBox1
-				{0.375,    -0.5,     0.4375,   0.5,     0.5,      0.5},      --  NodeBox2
-				{-0.5,     0.25,     0.4375,   0.5,     0.4375,   0.5},      --  NodeBox3
-				{-0.5,     0,        0.4375,   0.5,     0.1875,   0.5},      --  NodeBox4
-				{-0.5,     -0.375,   0.4375,   0.5,     -0.125,   0.5},      --  NodeBox5
-				{-0.4375,  -0.375,   -0.5,     -0.375,  -0.125,   0.5},      --  NodeBox6
-				{0.375,    -0.375,   -0.5,     0.4375,  -0.125,   0.5},      --  NodeBox7
-				{-0.375,   -0.375,   0.25,     0.375,   -0.3125,  0.375},    --  NodeBox8
-				{-0.375,   -0.375,   0.0625,   0.375,   -0.3125,  0.1875},   --  NodeBox9
-				{-0.375,   -0.375,   -0.125,   0.375,   -0.3125,  0},        --  NodeBox10
-				{-0.375,   -0.375,   -0.3125,  0.375,   -0.3125,  -0.1875},  --  NodeBox11
-				{-0.375,   -0.375,   -0.5,     0.375,   -0.3125,  -0.375},   --  NodeBox12
-				{-0.375,   -0.3125,  -0.5,     0.375,   -0.0625,  0.4375},   --  NodeBox13
-				{-0.3125,  -0.125,   0.0625,   0.3125,  0.0625,   0.4375},   --  NodeBox14
-			}
-		},
-		selection_box = {
-			type = "fixed",
-			fixed = { 0, 0, 0, 0, 0, 0 }
-		}
-	})
-
-	minetest.register_node("homedecor:bed_"..color.."_foot", {
-		tiles = {
-			"homedecor_bed_"..color.."_top2.png",
-			"homedecor_bed_bottom2.png",
-			"homedecor_bed_"..color.."_side2.png",
-			"homedecor_bed_"..color.."_side2.png^[transformFX",
-			"homedecor_bed_foot2.png",
-			"homedecor_bed_"..color.."_foot1.png"
-		},
-		inventory_image = "homedecor_bed_"..color.."_inv.png",
-		description = S("Bed (%s)"):format(color),
-		drawtype = "nodebox",
-		paramtype = "light",
-		paramtype2 = "facedir",
-		groups = {snappy=3},
-		node_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5,     -0.5,     -0.5,     -0.375,  0.1875,   -0.4375},  --  NodeBox1
-				{0.375,    -0.5,     -0.5,     0.5,     0.1875,   -0.4375},  --  NodeBox2
-				{-0.5,     0,        -0.5,     0.5,     0.125,    -0.4375},  --  NodeBox3
-				{-0.5,     -0.375,   -0.5,     0.5,     -0.125,   -0.4375},  --  NodeBox4
-				{-0.4375,  -0.375,   -0.5,     -0.375,  -0.125,   0.5},      --  NodeBox5
-				{0.375,    -0.375,   -0.5,     0.4375,  -0.125,   0.5},      --  NodeBox6
-				{-0.375,   -0.375,   0.3125,   0.375,   -0.3125,  0.4375},   --  NodeBox7
-				{-0.375,   -0.375,   0.125,    0.375,   -0.3125,  0.25},     --  NodeBox8
-				{-0.375,   -0.375,   -0.0625,  0.375,   -0.3125,  0.0625},   --  NodeBox9
-				{-0.375,   -0.375,   -0.25,    0.375,   -0.3125,  -0.125},   --  NodeBox10
-				{-0.375,   -0.375,   -0.4375,  0.375,   -0.3125,  -0.3125},  --  NodeBox11
-				{-0.375,   -0.3125,  -0.4375,  0.375,   -0.0625,  0.5},      --  NodeBox12
-			}
-		},
-		selection_box = {
-			type = "fixed",
-			fixed = { -0.5, -0.5, -0.5, 0.5, 0.5, 1.5 }
-		},
-		on_construct = function(pos)
-			bed_extension(pos, color)
-		end,
- 
-		on_place = function(itemstack, placer, pointed_thing)
-			return homedecor.stack_sideways(itemstack, placer, pointed_thing,
-				"homedecor:bed_"..color.."_foot", "homedecor:bed_"..color.."_head", false)
-		end,
- 
-		after_dig_node = function(pos, oldnode, oldmetadata, digger)
-			local fdir = oldnode.param2
-			if not fdir or fdir > 3 then return end
-			local pos2 = { x = pos.x + homedecor.fdir_to_fwd[fdir+1][1], y=pos.y, z = pos.z + homedecor.fdir_to_fwd[fdir+1][2] }
-			if minetest.get_node(pos2).name == "homedecor:bed_"..color.."_head" then
-				minetest.remove_node(pos2)
-			end
-			unextend_bed(pos, color)
-		 end
-	})
- 
-	minetest.register_node("homedecor:bed_"..color.."_footext", {
-		tiles = {
-			"homedecor_bed_"..color.."_top2.png",
-			"homedecor_bed_bottom2.png",
-			"homedecor_bed_"..color.."_side2ext.png",
-			"homedecor_bed_"..color.."_side2ext.png^[transformFX",
-			"homedecor_bed_foot2ext.png",
-			"homedecor_bed_"..color.."_foot1ext.png"
-		},
-		drawtype = "nodebox",
-		paramtype = "light",
-		paramtype2 = "facedir",
-		groups = {snappy=3, not_in_creative_inventory=1},
-		node_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5,     -0.5,     -0.5,     -0.375,  0.5,   -0.4375},  --  NodeBox1
-				{0.375,    -0.5,     -0.5,     0.5,     0.5,   -0.4375},  --  NodeBox2
-				{-0.5,     0,        -0.5,     0.5,     0.125,    -0.4375},  --  NodeBox3
-				{-0.5,     -0.375,   -0.5,     0.5,     -0.125,   -0.4375},  --  NodeBox4
-				{-0.4375,  -0.375,   -0.5,     -0.375,  -0.125,   0.5},      --  NodeBox5
-				{0.375,    -0.375,   -0.5,     0.4375,  -0.125,   0.5},      --  NodeBox6
-				{-0.375,   -0.375,   0.3125,   0.375,   -0.3125,  0.4375},   --  NodeBox7
-				{-0.375,   -0.375,   0.125,    0.375,   -0.3125,  0.25},     --  NodeBox8
-				{-0.375,   -0.375,   -0.0625,  0.375,   -0.3125,  0.0625},   --  NodeBox9
-				{-0.375,   -0.375,   -0.25,    0.375,   -0.3125,  -0.125},   --  NodeBox10
-				{-0.375,   -0.375,   -0.4375,  0.375,   -0.3125,  -0.3125},  --  NodeBox11
-				{-0.375,   -0.3125,  -0.4375,  0.375,   -0.0625,  0.5},      --  NodeBox12
-			}
-		},
-		selection_box = {
-			type = "fixed",
-			fixed = { -0.5, -0.5, -0.5, 0.5, 0.5, 1.5 }
-		},
-		after_dig_node = function(pos, oldnode, oldmetadata, digger)
-			local fdir = oldnode.param2
-			if not fdir or fdir > 3 then return end
-			local pos2 = { x = pos.x + homedecor.fdir_to_fwd[fdir+1][1], y=pos.y, z = pos.z + homedecor.fdir_to_fwd[fdir+1][2] }
-			if minetest.get_node(pos2).name == "homedecor:bed_"..color.."_head" then
-				minetest.remove_node(pos2)
-			end
-			unextend_bed(pos, color)
-		end,
-		drop = "homedecor:bed_"..color.."_foot"
-	})
- 
-end
-
 minetest.register_node("homedecor:wardrobe_top", {
 	tiles = {
-		"homedecor_wardrobe_top.png",
-		"homedecor_wardrobe_bottom.png",
-		"homedecor_wardrobe_sides1.png",
-		"homedecor_wardrobe_sides1.png^[transformFX",
-		"homedecor_wardrobe_back1.png",
+		"forniture_wood.png",
+		"forniture_wood.png",
+		"forniture_wood.png^[transformR90",
+		"forniture_wood.png^[transformR270",
+		"forniture_wood.png^[transformR90",
 		"homedecor_wardrobe_frontt.png"
 	},
 	drawtype = "nodebox",
@@ -526,11 +211,11 @@ minetest.register_node("homedecor:wardrobe_top", {
 
 minetest.register_node("homedecor:wardrobe_bottom", {
 	tiles = {
-		"homedecor_wardrobe_top.png",
-		"homedecor_wardrobe_bottom.png",
-		"homedecor_wardrobe_sides2.png",
-		"homedecor_wardrobe_sides2.png^[transformFX",
-		"homedecor_wardrobe_back2.png",
+		"forniture_wood.png",
+		"forniture_wood.png^[transformR180",
+		"forniture_wood.png^[transformR90",
+		"forniture_wood.png^[transformR270",
+		"forniture_wood.png^[transformR90",
 		"homedecor_wardrobe_frontb.png"
 	},
 	inventory_image = "homedecor_wardrobe_inv.png",
@@ -604,7 +289,7 @@ minetest.register_node("homedecor:simple_bench", {
 		"homedecor_generic_wood.png",
 		"homedecor_generic_wood.png",
 		"homedecor_bench_large_2_left_back.png",
-		"homedecor_bench_large_2_left_front.png"
+		"homedecor_bench_large_2_left_back.png^[transformFX"
 	},
 	description = "Simple Bench",
 	drawtype = "nodebox",
@@ -669,12 +354,12 @@ minetest.register_node("homedecor:bench_large_1_left", {
 
 minetest.register_node("homedecor:bench_large_1_right", {
 	tiles = {
-		"homedecor_bench_large_1_right_top.png",
-		"homedecor_bench_large_1_right_bottom.png",
+		"homedecor_bench_large_1_left_top.png^[transformFX",
+		"homedecor_bench_large_1_left_bottom.png^[transformFX",
 		"homedecor_bench_large_1_ends.png^[transformFX",
 		"homedecor_bench_large_1_ends.png",
-		"homedecor_bench_large_1_right_back.png",
-		"homedecor_bench_large_1_right_front.png"
+		"homedecor_bench_large_1_left_back.png^[transformFX",
+		"homedecor_bench_large_1_left_front.png^[transformFX"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -707,7 +392,7 @@ minetest.register_node("homedecor:bench_large_2_left", {
 		"homedecor_generic_wood.png",
 		"homedecor_generic_wood.png",
 		"homedecor_bench_large_2_left_back.png",
-		"homedecor_bench_large_2_left_front.png"
+		"homedecor_bench_large_2_left_back.png^[transformFX"
 	},
 	inventory_image = "homedecor_bench_large_2_inv.png",
 	drawtype = "nodebox",
@@ -760,7 +445,7 @@ minetest.register_node("homedecor:bench_large_2_right", {
 		"homedecor_generic_wood.png",
 		"homedecor_generic_wood.png",
 		"homedecor_bench_large_2_right_back.png",
-		"homedecor_bench_large_2_right_front.png"
+		"homedecor_bench_large_2_right_back.png^[transformFX"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -796,10 +481,10 @@ minetest.register_node("homedecor:bench_large_2_right", {
 minetest.register_node("homedecor:deckchair_head", {
 	tiles = {
 		"homedecor_deckchair_top_c1.png",
-		"homedecor_deckchair_bottom.png",
+		"homedecor_deckchair_sides.png",
 		"homedecor_deckchair_sides.png",
 		"homedecor_deckchair_sides.png^[transformFX",
-		"homedecor_deckchair_back.png",
+		"homedecor_deckchair_sides.png",
 		"homedecor_deckchair_front.png"
 	},
 	drawtype = "nodebox",
@@ -834,7 +519,7 @@ minetest.register_node("homedecor:deckchair_head", {
 minetest.register_node("homedecor:deckchair_foot", {
 	tiles = {
 		"homedecor_deckchair_top_c2.png",
-		"homedecor_deckchair_bottom.png",
+		"homedecor_deckchair_sides.png",
 		"homedecor_deckchair_sides.png",
 		"homedecor_deckchair_sides.png^[transformFX",
 		"homedecor_deckchair_front.png"

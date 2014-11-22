@@ -273,7 +273,7 @@ minetest.register_node('homedecor:candle', {
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_candle_top.png',
-		'homedecor_candle_bottom.png',
+		'homedecor_candle_top.png',
 		{name="homedecor_candle_sides.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}},
 	},
     node_box = {
@@ -300,34 +300,24 @@ minetest.register_node('homedecor:candle', {
 })
 
 minetest.register_node('homedecor:candle_thin', {
-	description = S("Thin Candle"),
-	drawtype = "nodebox",
+	description = S("Little Candle"),
+	inventory_image = 'homedecor_candle_inv.png',
+	drawtype = "plantlike",
 	tiles = {
-		'homedecor_candle_top.png',
-		'homedecor_candle_bottom.png',
-		{name="homedecor_candle_sides.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}},
+		{name="homedecor_candle.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1.0}},
 	},
-    node_box = {
-            type = "fixed",
-            fixed = { 
-				{ -0.0625, -0.5, -0.0625, 0.0625, 0, 0.0625 },
-				{ -0.125, 0, 0, 0.125, 0.5, 0 },
-				{ 0, 0, -0.125, 0, 0.5, 0.125 }
-			}	
-    },
     selection_box = {
             type = "fixed",
             fixed = { 
-				{ -0.125, -0.5, -0.125, 0.125, 0.35, 0.125 },
+				{ -0.1, -0.5, -0.1, 0.125, 0.05, 0.125 },
 			}	
     },
 	sunlight_propagates = true,
 	paramtype = "light",
 	paramtype2 = "facedir",
-	walkable = true,
+	walkable = false,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX-4,
-	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:oil_lamp', {
@@ -335,6 +325,26 @@ minetest.register_node('homedecor:oil_lamp', {
 	drawtype = "plantlike",
 	tiles = { 'homedecor_oil_lamp.png' },
 	inventory_image = 'homedecor_oil_lamp.png',
+	sunlight_propagates = true,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	walkable = true,
+    selection_box = {
+            type = "fixed",
+            fixed = { 
+				{ -0.3, -0.5, -0.3, 0.3, 0.5, 0.3 },
+			}	
+    },
+	groups = { snappy = 3 },
+	light_source = LIGHT_MAX-4,
+	sounds = default.node_sound_wood_defaults(),
+})
+
+minetest.register_node('homedecor:wall_lantern', {
+	description = S("Wall lantern"),
+	drawtype = "plantlike",
+	tiles = { 'homedecor_wall_lantern.png' },
+	inventory_image = 'homedecor_wall_lantern.png',
 	sunlight_propagates = true,
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -387,3 +397,141 @@ minetest.register_node('homedecor:lattice_lantern_small', {
 	on_place = minetest.rotate_node
 })
 
+local repl = { off="low", low="med", med="hi", hi="max", max="off", }
+local lamp_colors = { "", "blue", "green", "pink", "red", "violet" }
+
+local function reg_lamp(suffix, nxt, tilesuffix, light, color)
+	local lampcolor = "_"..color
+	local standingcolor = "_"..color
+	local colordesc = " ("..color..")"
+	if color == "" then
+		lampcolor = ""
+		standingcolor = "_white"
+		colordesc  = " (white)"
+	end
+	minetest.register_node("homedecor:table_lamp"..lampcolor.."_"..suffix, {
+	description = S("Table Lamp "..colordesc),
+	drawtype = "nodebox",
+	tiles = {
+		"forniture_table_lamp_s"..tilesuffix..".png",
+		"forniture_table_lamp_s"..tilesuffix..".png",
+		"forniture_table_lamp"..lampcolor.."_l"..tilesuffix..".png",
+	},
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{ -0.1500, -0.500, -0.1500,  0.1500, -0.45,  0.1500 },
+			{ -0.0500, -0.450, -0.0500,  0.0500, -0.40,  0.0500 },
+			{ -0.0250, -0.400, -0.0250,  0.0250, -0.10,  0.0250 },
+			{ -0.0125, -0.125, -0.2000,  0.0125, -0.10,  0.2000 },
+			{ -0.2000, -0.125, -0.0125,  0.2000, -0.10,  0.0125 },
+			{ -0.2000, -0.100, -0.2000, -0.1750,  0.30,  0.2000 },
+			{  0.1750, -0.100, -0.2000,  0.2000,  0.30,  0.2000 },
+			{ -0.1750, -0.100, -0.2000,  0.1750,  0.30, -0.1750 },
+			{ -0.1750, -0.100,  0.1750,  0.1750,  0.30,  0.2000 },
+		},
+	},
+	walkable = false,
+	light_source = light,
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.2, -0.5, -0.2, 0.2, 0.30, 0.2 },
+	},
+	groups = {cracky=2,oddly_breakable_by_hand=1,
+		not_in_creative_inventory=((light ~= nil) and 1) or nil,
+	},
+	drop = "homedecor:table_lamp"..lampcolor.."_off",
+	on_punch = function(pos, node, puncher)
+		node.name = "homedecor:table_lamp"..lampcolor.."_"..repl[suffix]
+		minetest.set_node(pos, node)
+		nodeupdate(pos)
+	end,
+	})
+	if lampcolor == "" then 
+		minetest.register_alias("3dforniture:table_lamp_"..suffix, "homedecor:table_lamp_"..suffix)
+	end
+
+	-- standing lamps
+
+	minetest.register_node("homedecor:standing_lamp_bottom"..lampcolor.."_"..suffix, {
+	description = S("Standing Lamp"..colordesc),
+	drawtype = "nodebox",
+	tiles = {
+		"forniture_table_lamp_s"..tilesuffix..".png",
+		"homedecor_standing_lamp_bottom_sides.png",
+	},
+	inventory_image = "homedecor_standing_lamp"..standingcolor.."_inv.png",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+                        { -0.1500, -0.500, -0.1500,  0.1500, -0.45,  0.1500 },
+			{ -0.0500, -0.450, -0.0500,  0.0500, -0.40,  0.0500 },
+			{ -0.0250, -0.400, -0.0250,  0.0250, 0.50,  0.0250 },
+		},
+	},
+	walkable = false,
+	light_source = light,
+	selection_box = {
+		type = "fixed",
+		fixed = { 0, 0, 0, 0, 0, 0}
+	},
+	groups = {cracky=2,oddly_breakable_by_hand=1,
+		not_in_creative_inventory=((light ~= nil) and 1) or nil,
+	},
+		on_place = function(itemstack, placer, pointed_thing)
+		return homedecor.stack_vertically(itemstack, placer, pointed_thing,
+			"homedecor:standing_lamp_bottom"..lampcolor.."_"..suffix, "homedecor:standing_lamp_top"..lampcolor.."_"..suffix)
+	end,
+	})
+	
+	minetest.register_node("homedecor:standing_lamp_top"..lampcolor.."_"..suffix, {
+	drawtype = "nodebox",
+	tiles = {
+		"forniture_table_lamp_s"..tilesuffix..".png",
+		"forniture_table_lamp_s"..tilesuffix..".png",
+		"forniture_standing_lamp"..lampcolor.."_l"..tilesuffix..".png"
+	},
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{ -0.0250, -0.500, -0.0250,  0.0250, 0.10,  0.0250 },
+			{ -0.0125, 0.0625, -0.2000,  0.0125, 0.10,  0.2000 },
+			{ -0.2000, 0.0625, -0.0125,  0.2000, 0.10,  0.0125 },
+			{ -0.2000, 0.100, -0.2000, -0.1750,  0.50,  0.2000 },
+			{  0.1750, 0.100, -0.2000,  0.2000,  0.50,  0.2000 },
+			{ -0.1750, 0.100, -0.2000,  0.1750,  0.50, -0.1750 },
+			{ -0.1750, 0.100,  0.1750,  0.1750,  0.50,  0.2000 },
+		},
+	},
+	walkable = false,
+	light_source = light,
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.2, -1.5, -0.2, 0.2, 0.5, 0.2 },
+	},
+	groups = {snappy=3, not_in_creative_inventory=1},
+	on_punch = function(pos, node, puncher)
+		node.name = "homedecor:standing_lamp_top"..lampcolor.."_"..repl[suffix]
+		minetest.set_node(pos, node)
+		nodeupdate(pos)
+	end,
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local pos2 = { x = pos.x, y=pos.y - 1, z = pos.z }
+		if minetest.get_node(pos2).name == "homedecor:standing_lamp_bottom"..lampcolor.."_off" then
+			minetest.remove_node(pos2)
+		end
+	end,
+	drop = "homedecor:standing_lamp_bottom"..lampcolor.."_off"
+	})
+end
+
+for _, color in ipairs(lamp_colors) do
+	reg_lamp("off",  "low",  "",   nil,  color )
+	reg_lamp("low",  "med",  "l",    3,  color )
+	reg_lamp("med",  "hi",   "m",    7,  color )
+	reg_lamp("hi",   "max",  "h",   11,  color )
+	reg_lamp("max",  "off",  "x",   14,  color )
+end
