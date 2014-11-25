@@ -247,27 +247,6 @@ minetest.register_node('homedecor:glowlight_small_cube_white', {
 	on_place = minetest.rotate_node
 })
 
-minetest.register_node("homedecor:plasma_lamp", {
-	description = "Plasma Lamp",
-	drawtype = "glasslike_framed",
-	tiles = {"homedecor_gold_block.png","homedecor_glass_face_clean.png"},
-	special_tiles = {
-		{
-			name="homedecor_plasma_storm.png",
-			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=2.0},
-		}
-	},
---	use_texture_alpha = true,
-	paramtype = "light",
-	light_source = LIGHT_MAX - 1,
-	sunlight_propagates = true,
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_glass_defaults(),
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		minetest.swap_node(pos, {name = "homedecor:plasma_lamp", param2 = 255})
-	end
-})
-
 minetest.register_node('homedecor:candle', {
 	description = S("Thick Candle"),
 	drawtype = "nodebox",
