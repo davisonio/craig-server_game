@@ -24,6 +24,8 @@ Thanks for a nice mod, Semmett9. ;)
 
 ]]--
 
+local cp = nil
+
 minetest.register_node("fake_fire:fake_fire", {
     description = "Smokey, Fake Fire",
 	tiles = {
