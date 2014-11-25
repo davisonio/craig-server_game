@@ -1,3 +1,0 @@
-name = "wheat farmer",
-author = "addi",
-comment = "CC BY 3.0",

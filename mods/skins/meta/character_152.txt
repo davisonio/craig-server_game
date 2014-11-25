@@ -1,3 +1,0 @@
-name = "gta",
-author = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
-comment = "CC BY 3.0",

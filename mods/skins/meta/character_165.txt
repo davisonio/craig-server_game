@@ -1,3 +1,0 @@
-name = "one of my favourite skins",
-author = "w_laenger",
-comment = "CC BY-SA 3.0",

@@ -1,3 +1,0 @@
-name = "Jovens",
-author = "Ailton Junior",
-comment = "CC BY-SA 3.0",

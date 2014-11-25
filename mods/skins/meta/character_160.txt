@@ -1,3 +1,0 @@
-name = "EnderMan",
-author = "Eu",
-comment = "CC BY-SA 3.0",

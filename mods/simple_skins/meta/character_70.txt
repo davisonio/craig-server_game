@@ -1,0 +1,2 @@
+name = "Thomas Bangalter (Daft Punk)",
+author = "kvSketch",
