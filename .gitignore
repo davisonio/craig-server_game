@@ -21,5 +21,4 @@ $RECYCLE.BIN/
 
 # Minetest stuff
 debug.txt
-mods/irc/irc/*
-mods/irc/config.lua
+mods/irc/*
