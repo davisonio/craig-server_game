@@ -36,7 +36,7 @@ earn_income = function(player)
 		players_income[name] = 0
 	end
 	if players_income[name] > 0 then
-		count = players_income[name]
+		local count = players_income[name]
 		local inv = player:get_inventory()
 		inv:add_item("main", {name="bitchange:bitcoin", count=count})
 		players_income[name] = 0

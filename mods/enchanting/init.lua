@@ -145,6 +145,7 @@ minetest.register_node("enchanting:enchanting_set", {
 				inv:set_stack("dst", 1, nil)
 			end
 		end
+		local post
 		return post
 	end,
 

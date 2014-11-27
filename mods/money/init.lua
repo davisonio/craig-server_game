@@ -56,7 +56,7 @@ local exist = money.exist
 
 --Creates player's account, if the player doesn't have it.
 minetest.register_on_joinplayer(function(player)
-	name = player:get_player_name()
+	local name = player:get_player_name()
 	if not exist(name) then
 		local input = io.open(minetest.get_worldpath() .. "/money_" .. name .. ".txt") --For compatible with old versions.
 		if input then

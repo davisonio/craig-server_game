@@ -60,7 +60,7 @@ local function get_page_path(name, player) --> path, is_file, allow_save
 			return wikilib.internal_pages[".BadPageName"], false, false
 		end
 	else
-		path = name_to_filename(name)
+		local path = name_to_filename(name)
 	end
 
 	return WP.."/"..path, true, allow_save

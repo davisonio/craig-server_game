@@ -81,6 +81,7 @@ minetest.register_tool( "replacer:replacer",
           return nil;
        end
 
+       local under
        local pos  = minetest.get_pointed_thing_position( pointed_thing, under );
        local node = minetest.env:get_node_or_nil( pos );
        
@@ -104,7 +105,7 @@ minetest.register_tool( "replacer:replacer",
 --    on_drop = func(itemstack, dropper, pos),
 
     on_use = function(itemstack, user, pointed_thing)
-
+    local above
        return replacer.replace( itemstack, user, pointed_thing, above );
     end,
 })

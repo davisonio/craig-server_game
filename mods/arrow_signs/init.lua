@@ -114,11 +114,11 @@ end
 		print((sender:get_player_name() or "").." wrote \""..fields.text..
 				"\" to sign at "..minetest.pos_to_string(pos))
 		meta:set_string("text", fields.text)
-		text = arrow_signs:create_lines(fields.text)
+		local text = arrow_signs:create_lines(fields.text)
 		meta:set_string("infotext", '"'..text..'"')
-		i=0
+		local i=0
 		for wort in text:gfind("\n") do
-		i=i+1
+		local i=i+1
         end
 		if i > 4 then
 		minetest.chat_send_player(sender:get_player_name(),"\tInformation: \nYou've written more than 5 lines. \n it may be that not all lines are displayed. \n Please remove the last entry")
