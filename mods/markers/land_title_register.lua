@@ -2,7 +2,7 @@
 
 minetest.register_tool( "markers:land_title_register",
 {
-    description = "Area Edit Book (Used for editing protected areas)",
+    description = "Area Edit Book (for editing protected areas)",
     groups = {}, 
     inventory_image = "default_book.png", -- TODO
     wield_image = "",
