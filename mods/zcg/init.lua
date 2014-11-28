@@ -25,7 +25,7 @@ zcg.items_in_group = function(group)
 end
 
 local table_copy = function(table)
-	local out
+	local out = {}
 	for k,v in pairs(table) do
 		out[k] = v
 	end
@@ -37,7 +37,7 @@ zcg.add_craft = function(input, output, groups)
 		return
 	end
 	if not groups then groups = {} end
-	local c
+	local c = {}
 	c.width = input.width
 	c.type = input.type
 	c.items = input.items
