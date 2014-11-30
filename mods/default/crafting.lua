@@ -800,3 +800,10 @@ minetest.register_craft({
 	burntime = 10,
 })
 
+minetest.register_craft({
+	output = 'default:wood',
+	recipe = {
+		{'default:stick', 'default:stick'},
+		{'default:stick', 'default:stick'},
+	}
+})
