@@ -52,9 +52,9 @@ local forms = {
 		"list[context;streets:signworkshop_output;6,3;1,1]",
 		"list[current_player;main;2,6;8,1]",
 		"list[current_player;main;2,7.25;8,3;8]",
-		gui_bg,
-		gui_bg_img,
-		gui_slots,
+		default.gui_bg,
+		default.gui_bg_img,
+		default.gui_slots,
 		default.get_hotbar_bg(2, 6)
 	},
 	active = {
@@ -72,9 +72,9 @@ local forms = {
 		"list[context;streets:signworkshop_output;6,3;1,1]",
 		"list[current_player;main;2,6;8,1]",
 		"list[current_player;main;2,7.25;8,3;8]",
-		gui_bg,
-		gui_bg_img,
-		gui_slots,
+		default.gui_bg,
+		default.gui_bg_img,
+		default.gui_slots,
 		default.get_hotbar_bg(2, 6),
 	}
 }
