@@ -26,7 +26,6 @@ default             | Most stuff is here. | Quite a few unmerged pulls from mine
 doors               | Adds doors. |
 dusts               | Dusts can be used to get more for your money when ingot crafting. | Might remove/replace this sometime
 dye                 | Adds dye which is mostly used for other mods. |
-enchanting          | Enchant your tools on the enchanting table. | Might remove/replace this sometime
 fake_fire           | Fake fire and stuff like that. |
 farming             | A basic farming mod with hoes, wheat and cotton. | It's a bit basic, maybe a new farming mod?
 fences              | Various fence types. |
@@ -37,7 +36,6 @@ homedecor           | Makes a house a home. | **Many crafts don't work** - feel 
 industry_pack       | Rubber trees ect. | **Extremely Experiemental** If the whole server ends up crashing whenever you join - this is the reason. Needs to be replaced with another similar mod sometime.
 inventory_plus      | Tool used by other mods to add buttons to the inventory. |
 itemframes          | Showcase your items on a frame or pedestal. |
-irc                 | Connects the server to an IRC channel |
 locked_sign         | A locked sign which only the placer can edit. | Old signs might need replacing
 lrfurn              | Living room furniture.
 markers             | Helpful way to protect areas using the areas mod. | Occasional crashes

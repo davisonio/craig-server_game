@@ -64,3 +64,27 @@ minetest.register_alias("amt:pick_admin", "_misc:pick_admin")
 minetest.register_alias("amt:sapple", "_misc:super_apple")
 
 minetest.register_alias("enderchest:enderchest", "default:diamondblock")
+
+-- Aliases for old enchanting mod
+
+minetest.register_alias("enchanting:enchanting_set", "default:diamondblock")
+
+minetest.register_alias("enchanting:enchanted_shovel_diamond_durability", "default:shovel_diamond")
+minetest.register_alias("enchanting:enchanted_sword_diamond_durability", "default:sword_diamond")
+minetest.register_alias("enchanting:enchanted_axe_diamond_durability", "default:axe_diamond")
+minetest.register_alias("enchanting:enchanted_pick_diamond_durability", "default:pick_diamond")
+
+minetest.register_alias("enchanting:enchanted_shovel_diamond_strength", "default:shovel_diamond")
+minetest.register_alias("enchanting:enchanted_sword_diamond_strength", "default:sword_diamond")
+minetest.register_alias("enchanting:enchanted_axe_diamond_strength", "default:axe_diamond")
+minetest.register_alias("enchanting:enchanted_pick_diamond_strength", "default:pick_diamond")
+
+minetest.register_alias("enchanting:enchanted_shovel_diamond_strength", "default:shovel_diamond")
+minetest.register_alias("enchanting:enchanted_sword_diamond_strength", "default:sword_diamond")
+minetest.register_alias("enchanting:enchanted_axe_diamond_strength", "default:axe_diamond")
+minetest.register_alias("enchanting:enchanted_pick_diamond_strength", "default:pick_diamond")
+
+minetest.register_alias("enchanting:enchanted_shovel_diamond_uses", "default:shovel_diamond")
+minetest.register_alias("enchanting:enchanted_sword_diamond_uses", "default:sword_diamond")
+minetest.register_alias("enchanting:enchanted_axe_diamond_uses", "default:axe_diamond")
+minetest.register_alias("enchanting:enchanted_pick_diamond_uses", "default:pick_diamond")
