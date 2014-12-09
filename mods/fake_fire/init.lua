@@ -38,7 +38,7 @@ minetest.register_node("fake_fire:fake_fire", {
 		{name="fake_fire_animated.png", animation={type="vertical_frames",
 		aspect_w=16, aspect_h=16, length=1.5}},
 		},
-	drawtype = "plantlike",
+	drawtype = "firelike",
 	 -- Waving wasn't an option when this mod was written. ~ LazyJ, 2014_03_13
 	waving = 1,
 	light_source = 14,
@@ -81,7 +81,7 @@ minetest.register_node("fake_fire:smokeless_fire", {
 		{name="fake_fire_animated.png", animation={type="vertical_frames",
 		aspect_w=16, aspect_h=16, length=1.5}},
 		},
-	drawtype = "plantlike",
+	drawtype = "firelike",
 	 -- Waving wasn't an option when this mod was written. ~ LazyJ, 2014_03_13
 	waving = 1,
 	light_source = 14,
@@ -124,7 +124,7 @@ minetest.register_node("fake_fire:ice_fire", {
 		{name="ice_fire_animated.png", animation={type="vertical_frames",
 		aspect_w=16, aspect_h=16, length=1.5}},
 		},
-	drawtype = "plantlike",
+	drawtype = "firelike",
 	 -- Waving wasn't an option when this mod was written. ~ LazyJ, 2014_03_13
 	waving = 1,
 	light_source = 14,
@@ -167,7 +167,7 @@ minetest.register_node("fake_fire:smokeless_ice_fire", {
 		{name="ice_fire_animated.png", animation={type="vertical_frames",
 		aspect_w=16, aspect_h=16, length=1.5}},
 		},
-	drawtype = "plantlike",
+	drawtype = "firelike",
 	 -- Waving wasn't an option when this mod was written. ~ LazyJ, 2014_03_13
 	waving = 1,
 	light_source = 14,
