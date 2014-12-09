@@ -5,7 +5,7 @@
 
 minetest.register_node("locked_sign:sign_wall_locked", {
 	description = "Locked Sign",
-	drawtype = "signlike",
+	drawtype = "nodebox",
 	tiles = {"locked_sign_sign_wall_lock.png"},
 	inventory_image = "locked_sign_sign_wall_lock.png",
 	wield_image = "locked_sign_sign_wall_lock.png",
@@ -13,8 +13,11 @@ minetest.register_node("locked_sign:sign_wall_locked", {
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
 	walkable = false,
-	selection_box = {
+	node_box = {
 		type = "wallmounted",
+		wall_top    = {-0.4375, 0.4375, -0.3125, 0.4375, 0.5, 0.3125},
+		wall_bottom = {-0.4375, -0.5, -0.3125, 0.4375, -0.4375, 0.3125},
+		wall_side   = {-0.5, -0.3125, -0.4375, -0.4375, 0.3125, 0.4375},
 	},
 	groups = {choppy=2,dig_immediate=2},
 	legacy_wallmounted = true,
