@@ -18,7 +18,7 @@ minetest.override_item("default:dirt_with_grass", {
 
 minetest.register_node("farming:soil", {
 	description = "Soil",
-	tiles = {"farming_soil.png", "default_dirt.png"},
+	tiles = {"default_dirt.png^farming_soil.png", "default_dirt.png"},
 	drop = "default:dirt",
 	is_ground_content = true,
 	groups = {crumbly=3, not_in_creative_inventory=1, soil=2, grassland = 1, field = 1},
@@ -32,7 +32,7 @@ minetest.register_node("farming:soil", {
 
 minetest.register_node("farming:soil_wet", {
 	description = "Wet Soil",
-	tiles = {"farming_soil_wet.png", "farming_soil_wet_side.png"},
+	tiles = {"default_dirt.png^farming_soil_wet.png", "default_dirt.png^farming_soil_wet_side.png"},
 	drop = "default:dirt",
 	is_ground_content = true,
 	groups = {crumbly=3, not_in_creative_inventory=1, soil=3, wet = 1, grassland = 1, field = 1},
@@ -113,16 +113,20 @@ minetest.register_abm({
 				minetest.set_node(pos, {name = wet})
 			end
 		else
-			-- turn it back into base if it is already dry
-			if wet_lvl == 0 then
-				-- only turn it back if there is no plant/seed on top of it
-				if minetest.get_item_group(nn.name, "plant") == 0 and minetest.get_item_group(nn.name, "seed") == 0 then
-					minetest.set_node(pos, {name = base})
+			-- only turn back if there are no unloaded blocks (and therefore
+			-- possible water sources) nearby
+			if not minetest.find_node_near(pos, 3, {"ignore"}) then
+				-- turn it back into base if it is already dry
+				if wet_lvl == 0 then
+					-- only turn it back if there is no plant/seed on top of it
+					if minetest.get_item_group(nn.name, "plant") == 0 and minetest.get_item_group(nn.name, "seed") == 0 then
+						minetest.set_node(pos, {name = base})
+					end
+					
+				-- if its wet turn it back into dry soil
+				elseif wet_lvl == 1 then
+					minetest.set_node(pos, {name = dry})
 				end
-				
-			-- if its wet turn it back into dry soil
-			elseif wet_lvl == 1 then
-				minetest.set_node(pos, {name = dry})
 			end
 		end
 	end,
