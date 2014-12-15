@@ -213,88 +213,54 @@ minetest.register_tool("fake_fire:flint_and_steel", {
 	-- This next section took me a lot of keyboard bashing to figure out.
 	-- The lua documentation and examples for Minetest are terrible.
 	-- ~ LazyJ, 2014_06_23
-	
-		local snow_ice_list = {"snow", "ice",}
-	
-			for _, which_one_is_it in pairs(snow_ice_list) do
-				local snow_ice = which_one_is_it
-	
-				if
-					-- A *node*, not a player or sprite. ~ LazyJ
-					pointed_thing.type == "node"
-					
-					--[[
-						These next two "and nots" tell Minetest not to put the
-						red	flame on snow and ice stuff. This "string" bit was
-						the workable solution that took many hours, over
-						several days, to finally come around to. It's a search
-						for any node name that contains	whatever is between the
-						double-quotes, ie. "snow" or "ice". I had been trying
-						to identify the nodes by their group properties	and I
-						couldn't figure out how to do it. The clue for the
-						"string"came from Blockmen's "Landscape" mod.
-				
-						Another quirk is that the "string" doesn't work well
-						with variable lists (see "snow_ice_list") when using
-						"and not". Ice-fire would light on snow but when I
-						clicked on ice, the regular	flame appeared. I couldn't
-						understand what was happening until	I mentally changed
-						the wording "and not" to "is not" and spoke	out-loud
-						each thing that line of code was to accomplish:
-				
-						"Is not snow, then make fake-fire."
-						"Is not ice, then make fake-fire."
-				
-						That's when I caught the problem.
-				
-						Ice *is not* snow, so Minetest was correctly following
-						the	instruction, "Is not snow, then make fake-fire."
-						and that is	why	fake-fire appeared instead of ice-fire
-						when I clicked on ice.   
-			 
-						~ LazyJ
-					--]]
-									
-				and not
-				string.find(minetest.get_node(pointed_thing.under).name, "snow")
-				and not
-				string.find(minetest.get_node(pointed_thing.under).name, "ice")
-				and
-				minetest.get_node(pointed_thing.above).name == "air"
-				then
-					if not minetest.is_protected(pointed_thing.above, user:get_player_name()) then
-						minetest.set_node(pointed_thing.above, {name="fake_fire:smokeless_fire"})						
-					else
-						minetest.chat_send_player(user:get_player_name(), "You can't set a fire in someone else's area!")
-					end
-			elseif
-
-				pointed_thing.type == "node"
-				and
-				-- Split this "string" across several lines because I ran out
-				-- of room while trying to adhere to the 80-column wide rule
-				-- of coding style.
-				string.find(
-						minetest.get_node(pointed_thing.under).name,
-						snow_ice
-						)
-				and 
-				minetest.get_node(pointed_thing.above).name == "air"
-				then
-					if not minetest.is_protected(pointed_thing.above, user:get_player_name()) then
-						minetest.set_node(pointed_thing.above, {name="fake_fire:smokeless_ice_fire"})						
-					else
-						minetest.chat_send_player(user:get_player_name(), "You can't set a fire in someone else's area!")
-					end
-			end -- Line 210, if
-		end -- Line 207, for/do	
-		
+		if
+			-- A *node*, not a player or sprite. ~ LazyJ
+			pointed_thing.type == "node"
+		and
+			minetest.get_node(pointed_thing.above).name == "air"
+		then
+			if not minetest.is_protected(pointed_thing.above, user:get_player_name()) then
+				minetest.set_node(pointed_thing.above, {name="fake_fire:smokeless_fire"})						
+			else
+				minetest.chat_send_player(user:get_player_name(), "You can't set a fire in someone else's area!")
+			end
+		end
 			minetest.sound_play("",
 			{gain = 1.0, max_hear_distance = 2,})
 			itemstack:add_wear(65535/65)
 			return itemstack
 	end
-}) -- Closes the flint and steel tool registration
+})  -- Closes the flint and steel tool registration
+
+minetest.register_tool("fake_fire:diamond_and_steel", {
+	description = "Diamond and steel",
+	inventory_image = "diamond_and_steel.png",
+	liquids_pointable = false,
+	stack_max = 1,
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=0,
+		groupcaps={flamable = {uses=65, maxlevel=1},
+		}
+	},
+	on_use = function(itemstack, user, pointed_thing)
+		if
+			pointed_thing.type == "node"
+		and
+			minetest.get_node(pointed_thing.above).name == "air"
+		then
+			if not minetest.is_protected(pointed_thing.above, user:get_player_name()) then
+				minetest.set_node(pointed_thing.above, {name="fake_fire:smokeless_ice_fire"})						
+			else
+				minetest.chat_send_player(user:get_player_name(), "You can't set a fire in someone else's area!")
+			end
+		end
+		minetest.sound_play("",
+		{gain = 1.0, max_hear_distance = 2,})
+		itemstack:add_wear(65535/65)
+		return itemstack
+	end
+})
 
 minetest.register_node("fake_fire:embers", {
     description = "Glowing Embers",
@@ -423,6 +389,15 @@ minetest.register_craft({
 	recipe = {
 		"fake_fire:flint",
 		"default:steel_ingot",
+	}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = 'fake_fire:diamond_and_steel',
+	recipe = {
+		"fake_fire:flint",
+		"default:diamond",
 	}
 })
 
