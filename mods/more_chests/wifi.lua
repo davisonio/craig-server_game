@@ -33,9 +33,9 @@ minetest.register_node("more_chests:wifi", {
 minetest.register_craft({
 	output = 'more_chests:wifi',
 	recipe = {
-		{'default:wood','default:mese','default:wood'},
-		{'default:wood','default:steel_ingot','default:wood'},
-		{'default:wood','default:wood','default:wood'}
+		{'group:wood','default:mese','group:wood'},
+		{'group:wood','default:steel_ingot','group:wood'},
+		{'group:wood','group:wood','group:wood'}
 	}
 })
 

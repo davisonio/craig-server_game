@@ -85,9 +85,9 @@ minetest.register_node("more_chests:cobble", {
 minetest.register_craft({
 	output = 'more_chests:cobble',
 	recipe = {
-		{'default:wood','default:cobble','default:wood'},
+		{'group:wood','default:cobble','group:wood'},
 		{'default:cobble','default:steel_ingot','default:cobble'},
-		{'default:wood','default:cobble','default:wood'}
+		{'group:wood','default:cobble','group:wood'}
 	}
 })
 
