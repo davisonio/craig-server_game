@@ -200,7 +200,7 @@ function homedecor.find_ceiling(itemstack, placer, pointed_thing)
 end
 
 -- load various other components
-
+dofile(homedecor.modpath.."/aliases.lua")
 dofile(homedecor.modpath.."/misc-nodes.lua")					-- the catch-all for all misc nodes
 dofile(homedecor.modpath.."/tables.lua")
 dofile(homedecor.modpath.."/electronics.lua")

@@ -201,15 +201,6 @@ for i in ipairs(longsofas_list) do
 		}
 	})
 
-	minetest.register_craft({
-		output = "lrfurn:longsofa_"..colour,
-		recipe = {
-			{"wool:"..colour, "wool:"..colour, "wool:"..colour, },
-			{"group:wood_slab", "group:wood_slab", "group:wood_slab", },
-			{"default:stick", "default:stick", "default:stick", }
-		}
-	})
-
 end
 
 if minetest.setting_get("log_mods") then
