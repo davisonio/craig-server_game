@@ -396,8 +396,8 @@ minetest.register_craft({
 	type = "shapeless",
 	output = 'fake_fire:diamond_and_steel',
 	recipe = {
-		"fake_fire:flint",
 		"default:diamond",
+		"default:steel_ingot",
 	}
 })
 
