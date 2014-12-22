@@ -26,15 +26,6 @@ for _,entity_name in ipairs(old_entities) do
     })
 end
 
--- Cloud redefinition
-
-minetest.register_node(":default:cloud", {
-	description = "Cloud",
-	tiles = {"default_cloud.png"},
-	is_ground_content = true,
-	groups = {unbreakable=1},
-	sounds = default.node_sound_defaults(),
-})
 
 -- Aliases for industry_pack fail
 
@@ -53,17 +44,6 @@ minetest.register_alias("rubber_industry:conveyor_belt", "conveyor:conveyor")
 minetest.register_alias("rubber_industry:transactor_sideways", "transactor:transactor")
 minetest.register_alias("rubber_industry:transactor_down", "hopper:hopper")
 minetest.register_alias("rubber_industry:transactor_up", "dumbwaiter:dumbwaiter")
-
--- Other aliases
-
-minetest.register_alias("maptools:fake_fire", "fake_fire:fake_fire")
-minetest.register_alias("amt:fake_fire", "fake_fire:fake_fire")
-
-minetest.register_alias("amt:remove_stick", "_misc:remove_stick")
-minetest.register_alias("amt:pick_admin", "_misc:pick_admin")
-minetest.register_alias("amt:sapple", "_misc:super_apple")
-
-minetest.register_alias("enderchest:enderchest", "default:diamondblock")
 
 -- Aliases for old enchanting mod
 
@@ -88,3 +68,29 @@ minetest.register_alias("enchanting:enchanted_shovel_diamond_uses", "default:sho
 minetest.register_alias("enchanting:enchanted_sword_diamond_uses", "default:sword_diamond")
 minetest.register_alias("enchanting:enchanted_axe_diamond_uses", "default:axe_diamond")
 minetest.register_alias("enchanting:enchanted_pick_diamond_uses", "default:pick_diamond")
+
+-- Aliases for old money mod
+
+minetest.register_alias("money:shop", "bitchange:shop")
+minetest.register_alias("money:barter_shop", "bitchange:shop")
+minetest.register_alias("money:admin_shop", "bitchange:shop")
+minetest.register_alias("money:admin_barter_shop", "bitchange:shop")
+
+-- Other aliases
+
+minetest.register_alias("maptools:fake_fire", "fake_fire:fake_fire")
+minetest.register_alias("amt:fake_fire", "fake_fire:fake_fire")
+
+minetest.register_alias("amt:remove_stick", "_misc:remove_stick")
+minetest.register_alias("amt:pick_admin", "_misc:pick_admin")
+minetest.register_alias("amt:sapple", "_misc:super_apple")
+
+minetest.register_alias("enderchest:enderchest", "default:diamondblock")
+
+minetest.register_alias("halloween:jackolantern", "air")
+minetest.register_alias("homedecor:refrigerator", "air")
+minetest.register_alias("welcomeinfo:entity", "air")
+minetest.register_alias("bitchange:bitcoin 5", "bitchange:bitcoin")
+minetest.register_alias("car:car_red", "air")
+minetest.register_alias("signs:sign_yard", "default:sign_wall")
+minetest.register_alias("default:pinesapling", "default:pine_sapling")
