@@ -13,14 +13,14 @@ end
 function stairsplus:register_all(modname, subname, recipeitem, fields)
 	fields = fields or {}
 	fields.groups = fields.groups or {}
-	if not moreblocks.config.show_stairsplus_creative_inv then
+	if not moreblocks.config.stairsplus_in_creative_inventory then
 		fields.groups.not_in_creative_inventory = 1
 	end
 	self:register_stair(modname, subname, recipeitem, fields)
 	self:register_slab (modname, subname, recipeitem, fields)
 	self:register_panel(modname, subname, recipeitem, fields)
 	self:register_micro(modname, subname, recipeitem, fields)
-	self:register_6dfacedir_conversion(modname, subname)
+	-- self:register_6dfacedir_conversion(modname, subname) -- Not needed as of Q3 2013, uncomment to fix old maps.
 	circular_saw.known_nodes[recipeitem] = {modname, subname}
 end
 
@@ -34,8 +34,8 @@ function register_stair_slab_panel_micro(modname, subname, recipeitem, groups, i
 	})
 end
 
-dofile(modpath.. "/aliases.lua")
-dofile(modpath.. "/conversion.lua")
+-- dofile(modpath.. "/aliases.lua") -- Not needed as of Q2 2013, uncomment to fix old maps.
+-- dofile(modpath.. "/conversion.lua") -- Not needed as of Q2 2013, uncomment to fix old maps.
 dofile(modpath.. "/stairs.lua")
 dofile(modpath.. "/slabs.lua")
 dofile(modpath.. "/panels.lua")
