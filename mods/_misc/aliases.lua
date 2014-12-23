@@ -87,10 +87,6 @@ minetest.register_alias("amt:sapple", "_misc:super_apple")
 
 minetest.register_alias("enderchest:enderchest", "default:diamondblock")
 
-minetest.register_alias("halloween:jackolantern", "air")
-minetest.register_alias("homedecor:refrigerator", "air")
-minetest.register_alias("welcomeinfo:entity", "air")
 minetest.register_alias("bitchange:bitcoin 5", "bitchange:bitcoin")
-minetest.register_alias("car:car_red", "air")
 minetest.register_alias("signs:sign_yard", "default:sign_wall")
 minetest.register_alias("default:pinesapling", "default:pine_sapling")
