@@ -4,14 +4,13 @@
 dofile(minetest.get_modpath("bitchange").."/coins.lua")
 dofile(minetest.get_modpath("bitchange").."/shop.lua")
 dofile(minetest.get_modpath("bitchange").."/donationbox.lua")
-dofile(minetest.get_modpath("bitchange").."/old.lua")
 
--- Access
+-- Check if the player has access
 function bitchange_has_access(owner, player_name)
 	return (player_name == owner or owner == "" or minetest.get_player_privs(player_name).access)
 end
 
--- Income
+-- Players will get money every day by digging or placing blocks
 players_income = {}
 
 local timer = 0
@@ -50,5 +49,3 @@ end)
 minetest.register_on_placenode(function(pos, node, placer)
 	earn_income(placer)
 end)
-
-print("BitChange [bitchange] has loaded!")

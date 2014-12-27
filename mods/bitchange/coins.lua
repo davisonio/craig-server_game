@@ -2,7 +2,7 @@
 minetest.register_craftitem("bitchange:bitcoin", {
 	description = "Bitcoin",
 	inventory_image = "bitchange_bitcoin.png",
-    stack_max = 499,
+	stack_max = 499,
 })
 
 minetest.register_craft({
