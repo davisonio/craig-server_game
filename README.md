@@ -1,7 +1,7 @@
 # Craig's Server
 This is the game used by Craig's Server
 
-It is a tweaked version of [minetest_game](https://github.com/minetest/minetest_game) with other mods and features added added.
+It is a tweaked version of [minetest_game](https://github.com/minetest/minetest_game) with other mods and features added.
 
 Most tweaks and interesting things are in the _misc mod.
 
