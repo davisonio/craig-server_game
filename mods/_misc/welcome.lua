@@ -106,7 +106,7 @@ end
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local plname = player:get_player_name()
 	if fields.help_wiki then
-		wikilib.show_wiki_page(plname, "Starting guide")
+		wikilib.show_wiki_page(plname, "Guides")
 	end
 	if fields.rules_page then
 		minetest.show_formspec(name,"rules",rules.formspec(plname))
