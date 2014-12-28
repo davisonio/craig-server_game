@@ -43,3 +43,6 @@ dofile(minetest.get_modpath("_misc").."/privs.lua")
 
 -- Item
 dofile(minetest.get_modpath("_misc").."/item.lua")
+
+-- Welcome Interface
+dofile(minetest.get_modpath("_misc").."/welcome.lua")
