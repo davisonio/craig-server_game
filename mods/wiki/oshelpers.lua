@@ -1,4 +1,3 @@
-
 local WIN32, DIR_SEP
 
 if os.getenv("WINDIR") then

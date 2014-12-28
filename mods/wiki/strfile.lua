@@ -1,5 +1,4 @@
-
-strfile = { }
+strfile = {}
 
 function strfile.open(s)
 	return {

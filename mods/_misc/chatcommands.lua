@@ -133,3 +133,41 @@ minetest.register_chatcommand("home", {
 		minetest.chat_send_player(name, "Home sweet home.")
 	end
 })
+
+-- Wiki command
+minetest.register_chatcommand("wiki",{
+	params = "",
+	description = "Shows the wiki main page",
+	func = function(name, param)
+		minetest.chat_send_player(name, "Showing wiki main page... if this doesn't work please try again.")
+		if minetest.get_player_privs(name).wiki then
+			wikilib.show_wiki_page(name, "#Main")
+		else
+			wikilib.show_wiki_page(name, "Main")
+		end
+	end,
+})
+
+-- Rules command
+minetest.register_chatcommand("rules",{
+	params = "accept",
+	description = "Shows the server rules",
+	privs = {shout=true},
+	func = function(name, params)
+		minetest.chat_send_player(name, "Showing server rules... if this doesn't work please try again.")
+		if params == "" then
+			wikilib.show_wiki_page(name, "Rules")
+		elseif params == "accept" then
+			if minetest.check_player_privs(name, {interact=true}) then
+				minetest.chat_send_player(name, "You have already accepted the rules!")
+			else
+				minetest.chat_send_player(name, "Thanks for accepting the rules, you now are able to interact with things.")
+				minetest.chat_send_player(name, "Happy building!")
+				minetest.chat_send_player(name, "If you need any help feel free to ask :)")
+				local privs = minetest.get_player_privs(name)
+				privs.interact = true
+				minetest.set_player_privs(name, privs)
+			end
+		end
+	end,
+})

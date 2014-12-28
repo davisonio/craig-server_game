@@ -1,13 +1,9 @@
+-- Make the directories needed for the mod
+os.mkdir(minetest.get_worldpath().."/wiki")
+os.mkdir(minetest.get_worldpath().."/wiki".."/pages")
+os.mkdir(minetest.get_worldpath().."/wiki".."/plugins")
 
-local WP = minetest.get_worldpath().."/wiki"
-
-wikilib.path = WP
-
-local WIKI_FORMNAME = "wiki:wiki"
-
-os.mkdir(WP)
-os.mkdir(WP.."/users")
-
+-- Converts the article name to the filename in the worldpath where it is stored
 local function name_to_filename(name)
 
 	name = name:gsub("[^A-Za-z0-9-]", function(c)
@@ -25,50 +21,30 @@ wikilib.name_to_filename = name_to_filename
 local function get_page_path(name, player) --> path, is_file, allow_save
 
 	local allow_save = minetest.check_player_privs(player, {wiki=true})
+	local path
 
 	if name:sub(1, 1) == "." then
-		local text = wikilib.internal_pages[name] or wikilib.internal_pages[".NotFound_Internal"]
-		return text, false, false
-	elseif name:sub(1, 1) == ":" then
-		if name:match("^:[0-9]?$") then
-			local n = tonumber(name:sub(2,2)) or 0
-			path = "users/"..player.."/page"..n
-			os.mkdir(WP.."/users/"..player)
-		elseif name == ":profile" then
-			path = "users/"..player.."/profile"
-			os.mkdir(WP.."/users/"..player)
-		elseif name:match("^:.-:[0-9]$") then
-			local user, n = name:match("^:(.-):([0-9])$")
-			if user:find("..[/\\]") then
-				return wikilib.internal_pages[".BadPageName"], false, false
-			end
-			if (n == "0") and (not minetest.check_player_privs(player, {wiki_admin=true})) then
-				return wikilib.internal_pages[".Forbidden"], false, false
-			end
-			path = "users/"..user.."/page"..n
-			os.mkdir(WP.."/users/"..user)
-			allow_save = false
-		elseif name:match("^:.-:profile$") then
-			local user = name:match("^:(.-):.*$")
-			if user:find("..[/\\]") then
-				return wikilib.internal_pages[".BadPageName"], false, false
-			end
-			path = "users/"..user.."/profile"
-			os.mkdir(WP.."/users/"..user)
-			allow_save = false
-		else
-			return wikilib.internal_pages[".BadPageName"], false, false
+		local text = wikilib.internal_pages[name] or wikilib.internal_pages[".Index"]
+		if type(text) == "function" then
+			text = text(player)
 		end
+		return text, false, false
+	elseif (name:sub(1, 1) == "#") and (not minetest.check_player_privs(player, {wiki=true})) then
+		local text = wikilib.internal_pages[name] or wikilib.internal_pages[".404"]
+		if type(text) == "function" then
+			text = text(player)
+		end
+		return text, false, false
 	else
-		path = name_to_filename(name)
+		path = "pages/"..name_to_filename(name)
 	end
 
-	return WP.."/"..path, true, allow_save
+	return minetest.get_worldpath().."/wiki".."/"..path, true, allow_save
 
 end
 
 local function find_links(lines) --> links
-	local links = { }
+	local links = {}
 	local links_n = 0
 	for _,line in ipairs(lines) do
 		for link in line:gmatch("%[(.-)%]") do
@@ -89,12 +65,12 @@ local function load_page(name, player) --> text, links, allow_save
 	if is_file then
 		f = io.open(path)
 		if not f then
-			f = strfile.open(wikilib.internal_pages[".NotFound"])
+			f = strfile.open(wikilib.internal_pages[".404"])
 		end
 	else
 		f = strfile.open(path)
 	end
-	local lines = { }
+	local lines = {}
 	local lines_n = 0
 	for line in f:lines() do
 		lines_n = lines_n + 1
@@ -126,48 +102,57 @@ end
 
 local esc = minetest.formspec_escape
 
-function wikilib.show_wiki_page(player, name)
+function wikilib.get_wiki_page_formspec(player, name, w, h)
 
 	if name == "" then name = "Main" end
+
+	w = w or 12
+	h = h or 10
 
 	local text, links, allow_save = load_page(name, player)
 
 	local buttons = ""
 	local bx = 0
-	local by = 7.5
+	local by = 6.3
 
 	for i, link in ipairs(links) do
 		if ((i - 1) % 5) == 0 then
 			bx = 0
-			by = by + 0.5
+			by = by + 0.75
 		end
 		link = esc(link)
-		buttons = buttons..(("button[%f,%f;2.4,0.3;page_%s;%s]"):format(bx, by, link, link))
+		buttons = buttons..(("button[%f,%f;2.4,1;page_%s;%s]"):format(bx, by, link, link))
 		bx = bx + 2.4
 	end
 
 	local toolbar
 
 	if allow_save then
-		toolbar = "button[0,9;2.4,1;save;Save]"
+		toolbar = "button[0,9.4;2.4,1;save;Save]"
 	else
-		toolbar = "label[0,9;You are not authorized to edit this page.]"
+		toolbar = "label[0,9.4;You are not authorized to edit this page.]"
 	end
 
-	minetest.show_formspec(player, WIKI_FORMNAME, ("size[12,10]"
-		.. "field[0,1;11,1;page;Page;"..esc(name).."]"
-		.. "button[11,1;1,0.5;go;Go]"
-		.. "textarea[0,2;12,6;text;"..esc(name)..";"..esc(text).."]"
+	return ("size["..w..","..h.."]"
+		.. "field[0.1,0.5;11.2,1;page;Go to page;"..esc(name).."]"
+		.. "button[11,0.2;1,1;go;Go]"
+		.. "textarea[0.1,1.5;12.4,6.4;text;"..esc(name)..";"..esc(text).."]"
 		.. buttons
 		.. toolbar
-	))
+		.."button_exit[9.6,9.4;2.4,1;close;Close]"
+	)
 
+end
+
+function wikilib.show_wiki_page(player, name)
+	local fs = wikilib.get_wiki_page_formspec(player, name)
+	minetest.show_formspec(player, "wiki:wiki", fs)
 end
 
 minetest.register_node("wiki:wiki", {
 	description = "Wiki",
-	tiles = { "default_wood.png", "default_wood.png", "default_bookshelf.png" },
-	groups = { choppy=3, oddly_breakable_by_hand=2, flammable=3 },
+	tiles = {"default_wood.png", "default_wood.png", "default_bookshelf.png"},
+	groups = {choppy=3, oddly_breakable_by_hand=2, flammable=3},
 	sounds = default.node_sound_wood_defaults(),
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -175,30 +160,32 @@ minetest.register_node("wiki:wiki", {
 	end,
 	on_rightclick = function(pos, node, clicker, itemstack)
 		if clicker then
-			wikilib.show_wiki_page(clicker:get_player_name(), "Main")
+			local name = clicker:get_player_name()
+			if minetest.get_player_privs(name).wiki then
+				wikilib.show_wiki_page(name, "#Main")
+			else
+				wikilib.show_wiki_page(name, "Main")
+			end
 		end
 	end,
 })
 
 minetest.register_privilege("wiki", {
-	description = "Allow editing wiki pages in the global space",
+	description = "Allows editing of wiki pages",
 	give_to_singleplayer = false,
 })
 
-minetest.register_privilege("wiki_admin", {
-	description = "Allow editing wiki pages in any space",
-	give_to_singleplayer = false,
-})
-
-local BS = "default:bookshelf"
-local BSL = { BS, BS, BS }
 minetest.register_craft({
 	output = "wiki:wiki",
-	recipe = { BSL, BSL, BSL },
+	recipe = { 
+		{"default:bookshelf", "default:bookshelf", "default:bookshelf"},
+		{"default:bookshelf", "default:bookshelf", "default:bookshelf"},
+		{"default:bookshelf", "default:bookshelf", "default:bookshelf"} 
+	},
 })
 
-minetest.register_on_player_receive_fields(function(player, formname, fields)
-	if (not formname) or (formname ~= WIKI_FORMNAME) then return end
+function wikilib.handle_formspec(player, formname, fields)
+	if (not formname) or (formname ~= "wiki:wiki") then return end
 	local plname = player:get_player_name()
 	if fields.save then
 		local r = save_page(fields.page, plname, fields.text)
@@ -207,16 +194,23 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		else
 			wikilib.show_wiki_page(plname, fields.page)
 		end
+		return true
 	elseif fields.go then
 		wikilib.show_wiki_page(plname, fields.page)
+		return true
 	else
 		for k in pairs(fields) do
 			if type(k) == "string" then
 				local name = k:match("^page_(.*)")
 				if name then
 					wikilib.show_wiki_page(plname, name)
+					return true
 				end
 			end
 		end
 	end
+end
+
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+	wikilib.handle_formspec(player, formname, fields)
 end)

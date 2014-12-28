@@ -14,12 +14,6 @@ dofile(minetest.get_modpath("_misc").."/give_initial_stuff.lua")
 -- Chat Commands
 dofile(minetest.get_modpath("_misc").."/chatcommands.lua")
 
--- News
-dofile(minetest.get_modpath("_misc").."/news.lua")
-
--- Rules
-dofile(minetest.get_modpath("_misc").."/rules.lua")
-
 -- Aliases
 dofile(minetest.get_modpath("_misc").."/aliases.lua")
 

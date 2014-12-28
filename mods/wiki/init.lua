@@ -1,12 +1,16 @@
+wikilib = {}
 
-local MODPATH = minetest.get_modpath("wiki")
+dofile(minetest.get_modpath("wiki").."/strfile.lua")
+dofile(minetest.get_modpath("wiki").."/oshelpers.lua")
+dofile(minetest.get_modpath("wiki").."/wikilib.lua")
+dofile(minetest.get_modpath("wiki").."/internal.lua")
+dofile(minetest.get_modpath("wiki").."/plugins.lua")
 
-wikilib = { }
-
-dofile(MODPATH.."/strfile.lua")
-dofile(MODPATH.."/oshelpers.lua")
-dofile(MODPATH.."/wikilib.lua")
-dofile(MODPATH.."/internal.lua")
-dofile(MODPATH.."/plugins.lua")
-
-dofile(MODPATH.."/plugin_forum.lua")
+minetest.register_on_joinplayer(function(player)
+	local name = player:get_player_name()
+	if minetest.get_player_privs(name).wiki then
+		wikilib.show_wiki_page(name, "#Main")
+	else
+		wikilib.show_wiki_page(name, "Main")
+	end
+end)
