@@ -86,17 +86,17 @@ function welcome.formspec(player,article)
 		article = "welcome.txt"
 	end
 	local thefile = io.open(minetest.get_modpath("_misc").."/texts/"..article,"r")
-	local formspec = "size[12,10]"
+	local formspec = "size[10,8]"
 	if thefile ~= nil then
 		local content = thefile:read("*a")
-		formspec = formspec.."textarea[3,.25;9,8.5;welcome;;"..content.."]"
+		formspec = formspec.."textarea[2.5,0;8,9;welcome;;"..content.."]"
 	else		
 		formspec = formspec.."label[.25,.25;Article does not exist]"
 	end
-	formspec = formspec.."item_image_button[0.10,1;2,1;_misc:help;help_wiki;Guides]"
-	formspec = formspec.."item_image_button[0.10,2;2,1;_misc:rules;rules_page;Rules]"
-	formspec = formspec.."item_image_button[0.10,3;2,1;_misc:news;news_wiki;News]"
-	formspec = formspec.."button_exit[.25,9;2,1;exit;Close]"
+	formspec = formspec.."item_image_button[0,4;2,1;_misc:help;help_wiki;Guides]"
+	formspec = formspec.."item_image_button[0,5;2,1;_misc:rules;rules_page;Rules]"
+	formspec = formspec.."item_image_button[0,6;2,1;_misc:news;news_wiki;News]"
+	formspec = formspec.."button_exit[0,7.5;2,1;exit;Close]"
 	if (thefile ~= nil) then
 		thefile:close()
 	end
@@ -106,10 +106,12 @@ end
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local plname = player:get_player_name()
 	if fields.help_wiki then
-		wikilib.show_wiki_page(plname, "Guides")
+		wikilib.show_wiki_page(plname, "Starting guide")
 	end
 	if fields.rules_page then
-		minetest.show_formspec(name,"rules",rules.formspec(plname))
+		minetest.after(1, function()
+			minetest.show_formspec(name,"rules",rules.formspec(plname))
+		end)
 	end
 	if fields.news_wiki then
 		wikilib.show_wiki_page(plname, "News")
