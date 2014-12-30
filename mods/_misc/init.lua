@@ -17,9 +17,6 @@ dofile(minetest.get_modpath("_misc").."/chatcommands.lua")
 -- Aliases
 dofile(minetest.get_modpath("_misc").."/aliases.lua")
 
--- Chatlog
-dofile(minetest.get_modpath("_misc").."/chatlog.lua")
-
 -- Username filter
 dofile(minetest.get_modpath("_misc").."/username_filter.lua")
 
