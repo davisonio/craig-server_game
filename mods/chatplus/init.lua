@@ -106,7 +106,7 @@ function chatplus.send(from,msg)
 	if chatplus.log_handle ~= nil then
 		chatplus.log_handle:write(
 			"\r\n"..
-			os.date("%d/%m/%Y %H:%M")..
+			os.date("(%d/%m/%Y %H:%M)")..
 			" ["..from.."]: "..
 			msg
 		)
@@ -139,7 +139,7 @@ minetest.register_on_joinplayer(function(player)
 	local _player = chatplus.poke(player:get_player_name(),player)
 
 	if _player.inbox and #_player.inbox>0 then
-		minetest.after(10,minetest.chat_send_player,player:get_player_name(),"("..#_player.inbox..") You have mail! Type /inbox to view them")	
+		minetest.after(10,minetest.chat_send_player,player:get_player_name(),"("..#_player.inbox..") You have mail! Type /inbox to view.")	
 	end
 end)
 minetest.register_on_leaveplayer(function(player)
@@ -206,12 +206,12 @@ minetest.register_chatcommand("mail", {
 		end
 
 		if chatplus.log_handle ~= nil then
-			chatplus.log_handle:write("\r\n"..os.date("%d/%m/%Y %H:%M").." [Mail] To: "..to..", From: "..name..", Message: "..msg)
+			chatplus.log_handle:write("\r\n"..os.date("(%d/%m/%Y %H:%M)").." [Mail] To: "..to..", From: "..name..", Message: "..msg)
 			chatplus.log_handle:flush()
 		end
 
 		if chatplus.players[to] then
-			table.insert(chatplus.players[to].inbox,os.date("%d/%m/%Y").." ["..name.."]: "..msg)
+			table.insert(chatplus.players[to].inbox,os.date("(%d/%m/%Y)").." ["..name.."]: "..msg)
 			minetest.chat_send_player(name,"Message sent.")
 			chatplus.save()
 		else
