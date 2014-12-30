@@ -1,3 +1,8 @@
+--Created by Krock for the BitChange mod
+--Parts of codes, images and ideas from Dan Duncombe's exchange shop
+--  https://forum.minetest.net/viewtopic.php?id=7002
+--License: WTFPL
+
 local exchange_shop = {}
 
 local function get_exchange_shop_formspec(number,pos,title)
@@ -38,10 +43,47 @@ local function get_exchange_shop_formspec(number,pos,title)
 				"list["..name..";stock;6,1;5,4;]")
 		end
 		formspec = (formspec..
-				"label[1,5;What does the customer see? Right-click on this shop whilst holding (E).]"..
+				"label[1,5;What does the customer see? Right-click on this shop whilst holding (E)]"..
 				"list[current_player;main;1,6;8,4;]")
 	end
 	return formspec
+end
+
+local function get_exchange_shop_tube_config(mode)
+	if minetest.get_modpath("pipeworks") then
+		if mode == 1 then
+			return {choppy=2, oddly_breakable_by_hand=2, tubedevice=1, tubedevice_receiver=1}
+		else
+			return {
+				insert_object = function(pos, node, stack, direction)
+					local meta = minetest.get_meta(pos)
+					local inv = meta:get_inventory()
+					return inv:add_item("stock",stack)
+				end,
+				can_insert = function(pos, node, stack, direction)
+					local meta = minetest.get_meta(pos)
+					local inv = meta:get_inventory()
+					return inv:room_for_item("stock",stack)
+				end,
+				input_inventory="custm",
+				connect_sides = {left=1, right=1, back=1, top=1, bottom=1}
+			}
+		end
+	else
+		if mode == 1 then
+			return {choppy=2,oddly_breakable_by_hand=2}
+		else
+			return {
+				insert_object = function(pos, node, stack, direction)
+					return false
+				end,
+				can_insert = function(pos, node, stack, direction)
+					return false
+				end,
+				connect_sides = {}
+			}
+		end
+	end
 end
 
 minetest.register_on_player_receive_fields(function(sender, formname, fields)
@@ -63,7 +105,7 @@ minetest.register_on_player_receive_fields(function(sender, formname, fields)
 			if fields.title ~= "" then
 				meta:set_string("infotext", "'"..fields.title.."' (owned by "..shop_owner..")")
 			else
-				meta:set_string("infotext", "Shop (owned by "..shop_owner..")")
+				meta:set_string("infotext", "Exchange shop (owned by "..shop_owner..")")
 			end
 			meta:set_string("title", fields.title)
 		end
@@ -75,7 +117,7 @@ minetest.register_on_player_receive_fields(function(sender, formname, fields)
 			return
 		end
 		if not shop_inv:is_empty("cust_ej") or not shop_inv:is_empty("custm_ej") then
-			minetest.chat_send_player(player_name, "Shop: Error, ejected items detected!")
+			minetest.chat_send_player(player_name, "Exchange shop: Error, ejected items detected!")
 		end
 		local player_inv = sender:get_inventory()
 		local err_msg = ""
@@ -187,7 +229,7 @@ minetest.register_on_player_receive_fields(function(sender, formname, fields)
 			end
 		end
 		if err_msg ~= "" then
-			minetest.chat_send_player(player_name, "Shop: "..err_msg)
+			minetest.chat_send_player(player_name, "Exchange shop: "..err_msg)
 		end
 	elseif bitchange_has_access(shop_owner, player_name) then
 		local num = 0
@@ -208,17 +250,18 @@ minetest.register_node("bitchange:shop", {
 			 "bitchange_shop_side.png", "bitchange_shop_side.png",
 			 "bitchange_shop_side.png", "bitchange_shop_front.png"},
 	paramtype2 = "facedir",
-	groups = {choppy=2,oddly_breakable_by_hand=2},
+	groups = get_exchange_shop_tube_config(1),
+	tube = get_exchange_shop_tube_config(2),
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("owner", placer:get_player_name())
-		meta:set_string("infotext", "Shop (owned by "..
+		meta:set_string("infotext", "Exchange shop (owned by "..
 				meta:get_string("owner")..")")
 	end,
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
-		meta:set_string("infotext", "Shop (constructing)")
+		meta:set_string("infotext", "Exchange shop (constructing)")
 		meta:set_string("formspec", "")
 		meta:set_string("owner", "")
 		local inv = meta:get_inventory()
@@ -264,8 +307,11 @@ minetest.register_node("bitchange:shop", {
 		return 0
 	end,
     allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		if player:get_player_name() == ":pipeworks" then
+			return stack:get_count()
+		end
 		if listname == "custm" then
-			minetest.chat_send_player(player:get_player_name(), "Shop: Please press 'Customers stock' and insert your items there.")
+			minetest.chat_send_player(player:get_player_name(), "Exchange shop: Please press 'Customers stock' and insert your items there.")
 			return 0
 		end
 		local meta = minetest.get_meta(pos)
@@ -276,6 +322,9 @@ minetest.register_node("bitchange:shop", {
 		return 0
 	end,
     allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		if player:get_player_name() == ":pipeworks" then
+			return stack:get_count()
+		end
 		local meta = minetest.get_meta(pos)
 		if bitchange_has_access(meta:get_string("owner"), player:get_player_name()) or listname == "cust_ej" then
 			return stack:get_count()
