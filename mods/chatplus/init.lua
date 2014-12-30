@@ -162,7 +162,7 @@ function chatplus.showInbox(name)
 		return false
 	end
 	minetest.chat_send_player(name,"Showing your inbox...")
-	local fs = "size[10,8]textarea[0.25,0.25;10.15,8;inbox;You have " .. #player.inbox .. " messages in your inbox:;"
+	local fs = "size[10,8]textarea[0.25,0.25;10.15,8;inbox;You have " .. #player.inbox .. " messages in your inbox. (You can send messages using the /mail command.);"
 	
 	for i=1,#player.inbox do
 		fs = fs .. minetest.formspec_escape(player.inbox[i])
