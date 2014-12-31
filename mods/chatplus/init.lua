@@ -21,6 +21,7 @@ end
 function chatplus.load()
 	-- Initialize the log
 	chatplus.log_handle = io.open(chatplus.log_file,"a+")
+	chatplus.staff_inbox = io.open(minetest.get_worldpath().."/wiki".."/pages".."/%23inbox","a+")
 
 	-- Load player data
 	local file = io.open(minetest.get_worldpath().."/chatplus.db", "r")
@@ -162,7 +163,7 @@ function chatplus.showInbox(name)
 		return false
 	end
 	minetest.chat_send_player(name,"Showing your inbox...")
-	local fs = "size[10,8]textarea[0.25,0.25;10.15,8;inbox;You have " .. #player.inbox .. " messages in your inbox. (You can send messages using the /mail command.);"
+	local fs = "size[10,8]textarea[0.25,0.25;10.15,8;inbox;You have " .. #player.inbox .. " messages in your inbox:;"
 	
 	for i=1,#player.inbox do
 		fs = fs .. minetest.formspec_escape(player.inbox[i])
@@ -170,8 +171,10 @@ function chatplus.showInbox(name)
 	end
 
 	fs = fs .. "]"
+	fs = fs .. "button[0,7.25;2,1;clear;Clear Inbox]"
+	fs = fs .. "label[2,7.25;Send mail a player, type: /mail PlayerName Hi!]"
+	fs = fs .. "label[2,7.75;Send mail to the staff, type: /mail staff Hi!]"
 	fs = fs .. "button_exit[8.1,7.25;2,1;close;Close]"
-	fs = fs .. "button[0,7.25;3,1;clear;Clear Inbox]"
 	minetest.show_formspec(name, "chatplus:inbox", fs)
 end
 
@@ -201,7 +204,7 @@ minetest.register_chatcommand("mail", {
 		local to, msg = string.match(param, "([%a%d_]+) (.+)")
 		
 		if not to or not msg then
-			minetest.chat_send_player(name,"/mail <playername> <msg>",false)
+			minetest.chat_send_player(name,"Usage: /mail PlayerName message",false)
 			return
 		end
 
@@ -210,7 +213,12 @@ minetest.register_chatcommand("mail", {
 			chatplus.log_handle:flush()
 		end
 
-		if chatplus.players[to] then
+		if to == "staff" then
+			chatplus.staff_inbox:write("\r\n"..os.date("(%d/%m/%Y)").." <"..name..">: "..msg)
+			chatplus.staff_inbox:flush()
+			minetest.chat_send_player(name,"Message sent to staff. You might get a reply in your inbox soon from a staff member.")
+			return
+		elseif chatplus.players[to] then
 			table.insert(chatplus.players[to].inbox,os.date("(%d/%m/%Y)").." ["..name.."]: "..msg)
 			minetest.chat_send_player(name,"Message sent.")
 			chatplus.save()
