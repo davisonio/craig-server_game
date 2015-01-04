@@ -1713,6 +1713,7 @@ minetest.register_node("homedecor:beer_mug", {
 		"homedecor_beer_front.png^[transformFX",
 		"homedecor_beer_front.png"
 	},
+	stack_max = 1,
 	inventory_image = "homedecor_beer_inv.png",
 	use_texture_alpha = true,
 	drawtype = "nodebox",
@@ -1720,6 +1721,7 @@ minetest.register_node("homedecor:beer_mug", {
 	paramtype2 = "facedir",
 	groups = { snappy=3, oddly_breakable_by_hand=3 },
 	sounds = default.node_sound_glass_defaults(),
+	on_use = minetest.item_eat(2, "vessels:drinking_glass"),
 	node_box = {
 		type = "fixed",
 		fixed = {
