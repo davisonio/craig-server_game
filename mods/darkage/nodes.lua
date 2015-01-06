@@ -129,7 +129,7 @@ minetest.register_node("darkage:basalt_cobble", {
 
 -- Brick
 minetest.register_node("darkage:stone_brick", {
-	description = "Stone Brick",
+	description = "Darkage Stone Brick",
 	tiles = {"darkage_stone_brick.png"},
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults()
