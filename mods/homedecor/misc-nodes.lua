@@ -875,6 +875,12 @@ minetest.register_node("homedecor:well_base", {
 		return homedecor.stack_vertically(itemstack, placer, pointed_thing,
 			"homedecor:well_base", "homedecor:well_top")
 	end,
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+		local wieldname = itemstack:get_name()
+		if wieldname == "bucket:bucket_empty" then
+			itemstack:replace("bucket:bucket_water")
+		end
+	end,
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		local pos2 = { x = pos.x, y=pos.y + 1, z = pos.z }
 		if minetest.get_node(pos2).name == "homedecor:well_top" then
