@@ -126,16 +126,15 @@ function chatplus.send(from,msg)
 				end
 			end
 		end
-		if (res == nil or res == true) and key~=from then
-			minetest.chat_send_player(key,"<"..from.."> "..msg,false)
-		end
 	end
 
 	return true
 end
 
 -- Minetest callbacks
-minetest.register_on_chat_message(chatplus.send)
+minetest.register_on_chat_message(function(name, message)
+	chatplus.send(name,message)
+end)
 minetest.register_on_joinplayer(function(player)
 	local _player = chatplus.poke(player:get_player_name(),player)
 
