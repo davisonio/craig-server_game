@@ -1,2 +1,0 @@
-name = "Stitch (HD)",
-author = "unknown",

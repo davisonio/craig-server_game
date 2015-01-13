@@ -1,2 +1,0 @@
-name = "Sympathy (HD)",
-author = "unknown",
