@@ -21,7 +21,7 @@ minetest.register_craft({
 
 -- Bitcoin Block
 minetest.register_node("bitchange:bitcoin_block", {
-	description = "Bitcoin Block",
+	description = "BitBlock",
 	tile_images = {"bitchange_bitcoin_block.png"},
 	groups = {cracky=2},
 	sounds = default.node_sound_stone_defaults(),
