@@ -15,3 +15,7 @@ minetest.register_alias("streets:asphalt_solid_line_stair","streets:stair_asphal
 
 minetest.register_alias("streets:asphalt_dashed_line_slab","streets:slab_asphalt_dashed_line")
 minetest.register_alias("streets:asphalt_solid_line_slab","streets:slab_asphalt_solid_line")
+
+-- Merge two concretes.
+
+minetest.register_alias("concrete:concrete","streets:concrete")
