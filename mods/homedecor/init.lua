@@ -6,11 +6,6 @@
 --
 -- The code for ovens, nightstands, refrigerators are basically modified 
 -- copies of the code for chests and furnaces.
---
--- Changes to make the mod more lightweight:
--- Don't use https://github.com/VanessaE/homedecor_modpack/commit/b586285
--- Remove beds + textures
---
 
 homedecor = {}
 
@@ -200,7 +195,7 @@ function homedecor.find_ceiling(itemstack, placer, pointed_thing)
 end
 
 -- load various other components
-dofile(homedecor.modpath.."/aliases.lua")
+
 dofile(homedecor.modpath.."/misc-nodes.lua")					-- the catch-all for all misc nodes
 dofile(homedecor.modpath.."/tables.lua")
 dofile(homedecor.modpath.."/electronics.lua")

@@ -1,7 +1,6 @@
 -- Crafting for homedecor mod (includes folding) by Vanessa Ezekowitz
 --
 -- Mostly my own code; overall template borrowed from game default
---
 
 local S = homedecor.gettext
 
