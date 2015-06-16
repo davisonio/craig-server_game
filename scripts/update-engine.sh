@@ -14,7 +14,7 @@ git clone https://github.com/minetest/minetest
 echo -e "\n Building with cmake..."
 
 cd minetest
-cmake . -DENABLE_GETTEXT=1 -DENABLE_FREETYPE=1 -DENABLE_LEVELDB=1 -DBUILD_SERVER=1 -DBUILD_CLIENT=1
+cmake . -DENABLE_GETTEXT=1 -DENABLE_FREETYPE=1 -DENABLE_LEVELDB=1 -DBUILD_SERVER=1 -DBUILD_CLIENT=0
 make -j$(grep -c processor /proc/cpuinfo)
 sudo make install
 
@@ -25,9 +25,6 @@ mv /home/craig/minetest/minetest-tmp/minetest/bin/minetestserver /home/craig/min
 # builtin
 rm -r /home/craig/minetest/minetest/builtin
 mv /home/craig/minetest/minetest-tmp/minetest/builtin /home/craig/minetest/minetest/builtin
-# fonts
-rm -r /home/craig/minetest/minetest/fonts
-mv /home/craig/minetest/minetest-tmp/minetest/fonts /home/craig/minetest/minetest/fonts
 # games, mods and textures (usually not used, but hey, why not?)
 rm -r /home/craig/minetest/minetest/games
 mv /home/craig/minetest/minetest-tmp/minetest/games /home/craig/minetest/minetest/games
