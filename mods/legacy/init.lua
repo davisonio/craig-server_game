@@ -1,23 +1,39 @@
--- Remove trees from old mod.
+-- Legacy stuff
+-- To maintain backwards-compatibility and prevent errors/unknown blocks
 
-local old_nodes = {"trees:leaves_yellow", "trees:leaves_red", "trees:leaves_green", "trees:leaves_palm", "trees:leaves_mangrove", "trees:leaves_conifer", "trees:tree_palm", "trees:tree_mangrove", "trees:tree_conifer", "trees:wood_conifer", "trees:wood_palm", "trees:wood_mangrove"}
-local old_entities = {}
 
+-- 1. Remove trees from old mod `Tiny Trees` which generated in the world
+local old_nodes = {
+	"trees:leaves_yellow", 
+	"trees:leaves_red",
+	"trees:leaves_green",
+	"trees:leaves_palm",
+	"trees:leaves_mangrove",
+	"trees:leaves_conifer",
+	"trees:tree_palm",
+	"trees:tree_mangrove",
+	"trees:tree_conifer",
+	"trees:wood_conifer",
+	"trees:wood_palm",
+	"trees:wood_mangrove"
+}
 for _,node_name in ipairs(old_nodes) do
     minetest.register_node(":"..node_name, {
         groups = {old=1},
     })
 end
-
 minetest.register_abm({
     nodenames = {"group:old"},
     interval = 1,
     chance = 1,
     action = function(pos, node)
-        minetest.env:remove_node(pos)
+        minetest.remove_node(pos)
     end,
 })
 
+local old_entities = {
+	""
+}
 for _,entity_name in ipairs(old_entities) do
     minetest.register_entity(":"..entity_name, {
         on_activate = function(self, staticdata)
@@ -26,9 +42,7 @@ for _,entity_name in ipairs(old_entities) do
     })
 end
 
-
 -- Aliases for industry_pack fail
-
 minetest.register_alias("rubber_industry:rubber_tree_full", "rubber:rubber_tree_full")
 minetest.register_alias("rubber_industry:rubber_tree_empty", "rubber:rubber_tree_empty")
 minetest.register_alias("rubber_industry:rubber_sheet", "rubber_sheet:rubber_sheet")
@@ -45,8 +59,7 @@ minetest.register_alias("rubber_industry:transactor_sideways", "transactor:trans
 minetest.register_alias("rubber_industry:transactor_down", "hopper:hopper")
 minetest.register_alias("rubber_industry:transactor_up", "dumbwaiter:dumbwaiter")
 
--- Aliases for old enchanting mod
-
+-- Remove old enchanting mod and convert to standard diamond things
 minetest.register_alias("enchanting:enchanting_set", "default:diamondblock")
 
 minetest.register_alias("enchanting:enchanted_shovel_diamond_durability", "default:shovel_diamond")
@@ -69,23 +82,22 @@ minetest.register_alias("enchanting:enchanted_sword_diamond_uses", "default:swor
 minetest.register_alias("enchanting:enchanted_axe_diamond_uses", "default:axe_diamond")
 minetest.register_alias("enchanting:enchanted_pick_diamond_uses", "default:pick_diamond")
 
--- Aliases for old money mod
-
+-- Old money mod -> New BitChange mod
 minetest.register_alias("money:shop", "bitchange:shop")
 minetest.register_alias("money:barter_shop", "bitchange:shop")
 minetest.register_alias("money:admin_shop", "bitchange:shop")
 minetest.register_alias("money:admin_barter_shop", "bitchange:shop")
 
--- Other aliases
+-- Remove ender chest and convert to a diamond block.
+minetest.register_alias("enderchest:enderchest", "default:diamondblock")
 
+-- Other aliases
 minetest.register_alias("maptools:fake_fire", "fake_fire:fake_fire")
 minetest.register_alias("amt:fake_fire", "fake_fire:fake_fire")
 
 minetest.register_alias("amt:remove_stick", "_misc:remove_stick")
 minetest.register_alias("amt:pick_admin", "_misc:pick_admin")
 minetest.register_alias("amt:sapple", "_misc:super_apple")
-
-minetest.register_alias("enderchest:enderchest", "default:diamondblock")
 
 minetest.register_alias("bitchange:bitcoin 5", "bitchange:bitcoin")
 minetest.register_alias("signs:sign_yard", "default:sign_wall")
