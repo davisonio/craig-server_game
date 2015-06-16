@@ -13,13 +13,31 @@ git clone https://github.com/minetest/minetest
 
 echo -e "\n Building with cmake..."
 
-cmake . -DENABLE_GETTEXT=1 -DENABLE_FREETYPE=1 -DENABLE_LEVELDB=1
+cd minetest
+cmake . -DENABLE_GETTEXT=1 -DENABLE_FREETYPE=1 -DENABLE_LEVELDB=1 -DBUILD_SERVER=1 -DBUILD_CLIENT=1
 make -j$(grep -c processor /proc/cpuinfo)
 sudo make install
 
-echo -e "\n Cleaning up and moving minetest-tmp to minetest..."
+echo -e "\n Moving minetest-tmp to minetest..."
+# minetestserver
+rm /home/craig/minetest/minetest/bin/minetestserver-server
+mv /home/craig/minetest/minetest-tmp/minetest/bin/minetestserver /home/craig/minetest/minetest/bin/minetestserver-server
+# builtin
+rm -r /home/craig/minetest/minetest/builtin
+mv /home/craig/minetest/minetest-tmp/minetest/builtin /home/craig/minetest/minetest/builtin
+# fonts
+rm -r /home/craig/minetest/minetest/fonts
+mv /home/craig/minetest/minetest-tmp/minetest/fonts /home/craig/minetest/minetest/fonts
+# games, mods and textures (usually not used, but hey, why not?)
+rm -r /home/craig/minetest/minetest/games
+mv /home/craig/minetest/minetest-tmp/minetest/games /home/craig/minetest/minetest/games
+rm -r /home/craig/minetest/minetest/mods
+mv /home/craig/minetest/minetest-tmp/minetest/mods /home/craig/minetest/minetest/mods
+rm -r /home/craig/minetest/minetest/textures
+mv /home/craig/minetest/minetest-tmp/minetest/textures /home/craig/minetest/minetest/textures
 
-# todo
+echo -e "\n Cleaning up..."
+rm -rf /home/craig/minetest/minetest-tmp
 
 echo -e "\n Sorting out private stuff..."
-# You can add/remove features from the minetest engine or add private stuff like passwords here.
+# You can edit things from builtin or add games, mods or textures here if you like.
