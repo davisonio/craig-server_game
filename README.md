@@ -42,7 +42,6 @@ Coming soon
 |Locked Sign (locked_sign)                  |||
 |Living Room Furniture (lrfun)              |||
 |Area Protection Markers (markers)          |||
-|Memorandum (memorandum)                    |||
 |More Chests (more_chests)                  |||
 |More Blocks (moreblocks)                   |||
 |More Ores (moreores)                       |||
