@@ -11,7 +11,7 @@ end
 
 local function save_data(sett, data)
 	if sett ~= nil then
-		data_ser = minetest.serialize(data)
+		local data_ser = minetest.serialize(data)
 		sett:set("data", data_ser)
 		sett:write()
 	else
