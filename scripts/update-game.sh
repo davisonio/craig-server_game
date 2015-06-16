@@ -13,4 +13,8 @@ mv /home/craig/minetest/minetest/worlds/server/Craig-Server_game /home/craig/min
 echo -e "\n Sorting out private stuff..."
 # You can add/remove mods from the game or add private stuff like passwords here
 
+# IRC Config
+rm /home/craig/minetest/minetest/worlds/server/game/mods/irc/config.lua
+cp /home/craig/minetest/secure/irc-config.lua /home/craig/minetest/minetest/worlds/server/game/mods/irc/config.lua
+
 echo -e "\n Done!"
