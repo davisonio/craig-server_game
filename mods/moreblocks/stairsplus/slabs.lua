@@ -1,9 +1,11 @@
-local S -- Load translation library if intllib is installed:
-if intllib then
-	S = intllib.Getter(minetest.get_current_modname())
-else
-	S = function(s) return s end
-end
+--[[
+More Blocks: slab definitions
+
+Copyright (c) 2011-2015 Calinou and contributors.
+Licensed under the zlib license. See LICENSE.md for more information.
+--]]
+
+local S = moreblocks.intllib
 
 -- Node will be called <modname>:slab_<subname>
 
@@ -20,51 +22,22 @@ end
 
 function stairsplus:register_slab(modname, subname, recipeitem, fields)
 	local defs = {
-		[""] = {
-			node_box = {
-				type = "fixed",
-				fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-			},
-		},
-		["_quarter"] = {
-			node_box = {
-				type = "fixed",
-				fixed = {-0.5, -0.5, -0.5, 0.5, -0.25, 0.5},
-			},
-		},
-		["_three_quarter"] = {
-			node_box = {
-				type = "fixed",
-				fixed = {-0.5, -0.5, -0.5, 0.5, 0.25, 0.5},
-			},
-		},
-		["_1"] = {
-			node_box = {
-				type = "fixed",
-				fixed = {-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5},
-			},
-		},
-		["_2"] = {
-			node_box = {
-				type = "fixed",
-				fixed = {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-			},
-		},
-		["_14"] = {
-			node_box = {
-				type = "fixed",
-				fixed = {-0.5, -0.5, -0.5, 0.5, 0.375, 0.5},
-			},
-		},
-		["_15"] = {
-			node_box = {
-				type = "fixed",
-				fixed = {-0.5, -0.5, -0.5, 0.5, 0.4375, 0.5},
-			},
-		},
+		[""] = 8,
+		["_quarter"] = 4,
+		["_three_quarter"] = 12,
+		["_1"] = 1,
+		["_2"] = 2,
+		["_14"] = 14,
+		["_15"] = 15,
 	}
-	local desc = S("%s Slab"):format(fields.description)
-	for alternate, def in pairs(defs) do
+	local desc_base = S("%s Slab"):format(fields.description)
+	for alternate, num in pairs(defs) do
+		local def = {
+			node_box = {
+				type = "fixed",
+				fixed = {-0.5, -0.5, -0.5, 0.5, (num/16)-0.5, 0.5},
+			}
+		}
 		def.drawtype = "nodebox"
 		def.paramtype = "light"
 		def.paramtype2 = "facedir"
@@ -72,7 +45,7 @@ function stairsplus:register_slab(modname, subname, recipeitem, fields)
 		for k, v in pairs(fields) do
 			def[k] = v
 		end
-		def.description = desc
+		def.description = ("%s (%d/16)"):format(desc_base, num)
 		if fields.drop then
 			def.drop = modname.. ":slab_" .. fields.drop .. alternate
 		end

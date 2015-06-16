@@ -1,4 +1,9 @@
--- Crafting
+--[[
+More Blocks: crafting recipes
+
+Copyright (c) 2011-2015 Calinou and contributors.
+Licensed under the zlib license. See LICENSE.md for more information.
+--]]
 
 minetest.register_craft({
 	output = "default:stick",
@@ -436,7 +441,7 @@ minetest.register_craft({
 	output = "moreblocks:cobble_compressed",
 	recipe = {
 		{"default:cobble", "default:cobble", "default:cobble"},
-		{"default:cobble", "default:gravel", "default:cobble"},
+		{"default:cobble", "default:cobble", "default:cobble"},
 		{"default:cobble", "default:cobble", "default:cobble"},
 	}
 })
@@ -448,16 +453,17 @@ minetest.register_craft({
 	}
 })
 
-
 minetest.register_craft({
 	type = "cooking", output = "moreblocks:tar", recipe = "default:gravel",
 })
 
-minetest.register_craft({
-	output = "moreblocks:circular_saw", 
-	recipe = {
-		{ "",  "default:steel_ingot",  "" },
-		{ "group:wood",  "group:wood",  "group:wood"},
-		{ "group:wood",  "",  "group:wood"},
-	}
-})
+if minetest.setting_getbool("moreblocks.circular_saw_crafting") ~= false then -- “If nil or true then”
+	minetest.register_craft({
+		output = "moreblocks:circular_saw", 
+		recipe = {
+			{ "",  "default:steel_ingot",  "" },
+			{ "group:wood",  "group:wood",  "group:wood"},
+			{ "group:wood",  "",  "group:wood"},
+		}
+	})
+end
