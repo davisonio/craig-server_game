@@ -97,7 +97,7 @@ minetest.register_chatcommand("sethome", {
         description = "Set your home location.",
         privs = {shout=true},
         func = function(name, param)
-                player = minetest.env:get_player_by_name(name)
+                local player = minetest.env:get_player_by_name(name)
                 test = player:getpos()
                 local file = io.open(minetest.get_worldpath().."/home/"..player:get_player_name().."_home", "w")
                 if not file then
@@ -116,7 +116,7 @@ minetest.register_chatcommand("home", {
 	description = "Teleport to your home location.",
 	privs = {shout=true},
 	func = function(name, param)
-		player = minetest.env:get_player_by_name(name)
+		local player = minetest.env:get_player_by_name(name)
 		local file = io.open(minetest.get_worldpath().."/home/"..player:get_player_name().."_home", "r")
 		if not file then
 			minetest.chat_send_player(name, "You haven't set your home! Set one using /sethome.")
