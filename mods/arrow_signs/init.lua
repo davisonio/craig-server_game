@@ -1,4 +1,5 @@
---more_signs by addi
+--arrow_signs by addi
+--thanks to Jat15 for the new place and rotate-system.
 --Code and Textures are under the CC by-sa 3.0 licence 	
 --see: http://creativecommons.org/licenses/by-sa/3.0/	
 	
@@ -8,7 +9,7 @@ arrow_signs={}
 
 arrow_signs.formspec = "field[text;Sign text:;${text}]";
 
-arrow_signs_on_place = function(itemstack, placer, pointed_thing)
+arrow_signs.on_place = function(itemstack, placer, pointed_thing)
 	
 	local posabove = pointed_thing.above
 	local posunder = pointed_thing.under
@@ -103,33 +104,35 @@ arrow_signs_on_place = function(itemstack, placer, pointed_thing)
 	
 end
 
- function arrow_signs:savetext(pos, formname, fields, sender)
-		
+arrow_signs.savetext = function(pos, formname, fields, sender)
+	if fields.text then
 		if not minetest.get_player_privs(sender:get_player_name())["interact"] then
 			minetest.chat_send_player(sender:get_player_name(), "error: you don't have permission to edit the sign. you need the interact priv")
 		return
 		end
+		--if minetest.is_protected(pos, sender:get_player_name()) then
+		--	minetest.record_protection_violation(pos, sender:get_player_name())
+		--	return
+		--end
 		local meta = minetest.get_meta(pos)
 		fields.text = fields.text or ""
-		print((sender:get_player_name() or "").." wrote \""..fields.text..
-				"\" to sign at "..minetest.pos_to_string(pos))
+		minetest.log("action", (sender:get_player_name() or "").." wrote \""..fields.text..
+				"\" to sign at "..minetest.pos_to_string(pos));
 		meta:set_string("text", fields.text)
-		local text = arrow_signs:create_lines(fields.text)
+		local text,lines = arrow_signs.create_lines(fields.text)
 		meta:set_string("infotext", '"'..text..'"')
-		local i=0
-		for wort in text:gfind("\n") do
-		local i=i+1
-        end
-		if i > 4 then
-		minetest.chat_send_player(sender:get_player_name(),"\tInformation: \nYou've written more than 5 lines. \n it may be that not all lines are displayed. \n Please remove the last entry")
+		if lines > 4 then
+			minetest.chat_send_player(sender:get_player_name(),"Information: \nYou've written more than 5 lines. \nIt may be that not all lines are displayed. \nPlease remove the last entry")
 		end
 	return true
 	end
+end
 
-function arrow_signs:create_lines(text)
-	text = text:gsub("/", "\"\n\"")
-	text = text:gsub("|", "\"\n\"")
-	return text
+--this function creates the linebreaks
+arrow_signs.create_lines = function(text)
+	local text, n = text:gsub("[ ]*(%|)[ ]*", '"\n"')--search for |
+	local text, m = text:gsub("[ ]*(%/)[ ]*", '"\n"')--search for /
+	return text, n+m
 end
 
 minetest.override_item("default:sign_wall", {
@@ -149,15 +152,12 @@ minetest.register_node("arrow_signs:wall", {
 			{ 0.0625, -0.375, 0.5, -0.0625, -0.437, 0.47}
 		}
 	},
-	selection_box = {
-		type = "fixed", 
-		fixed = {
-			{ 0.25, -0.25, 0.5, -0.25, 0.5, 0.47},
-			{ 0.1875, -0.3125, 0.5, -0.1875, -0.25, 0.47},
-			{ 0.125, -0.3125, 0.5, -0.125, -0.375, 0.47},
-			{ 0.0625, -0.375, 0.5, -0.0625, -0.437, 0.47}
-		}
-	},
+    selection_box = {
+        type = "fixed", 
+        fixed = {
+            { 0.30, -0.5, 0.5, -0.30, 0.5, 0.47}
+        }
+    },
 	tiles = {"arrow_sign_border_left.png","arrow_sign_border_right.png","arrow_sign_border_up.png","arrow_sign_border_down.png","arrow_sign.png","arrow_sign.png"},
 	inventory_image = "arrow_sign.png",
 	paramtype = "light",
@@ -166,16 +166,14 @@ minetest.register_node("arrow_signs:wall", {
 	walkable = false,
 	groups = {choppy=2,dig_immediate=2,sign=1},
 	sounds = default.node_sound_defaults(),
-	on_place = arrow_signs_on_place,	
+	on_place = arrow_signs.on_place,	
 	on_construct = function(pos)
 		--local n = minetest.get_node(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", arrow_signs.formspec)
-		meta:set_string("infotext", "\"\"")
+		meta:set_string("infotext", [[""]])
 	end,
-	on_receive_fields = function(pos, formname, fields, sender)
-		arrow_signs:savetext(pos, formname, fields, sender)
-	end,
+	on_receive_fields = arrow_signs.savetext,
 })
 
 --Recipes
@@ -213,3 +211,10 @@ minetest.register_abm({
 		minetest.swap_node(pos, {name="arrow_signs:wall",param2=convert_facedir[node.name][node.param2+1]})
 	end,
 })
+
+
+--Locked sign
+if locks then
+	local MODPATH = minetest.get_modpath("arrow_signs");
+	dofile(MODPATH.."/shared_locked.lua")
+end
