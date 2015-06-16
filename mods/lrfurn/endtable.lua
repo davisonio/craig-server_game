@@ -14,9 +14,9 @@ minetest.register_node("lrfurn:endtable", {
 					{0.3125, -0.5, -0.375, 0.375, -0.0625, -0.3125},
 					{-0.375, -0.5, 0.3125, -0.3125, -0.0625, 0.375},
 					{0.3125, -0.5, 0.3125, 0.375, -0.0625, 0.375},
-					
+
 					--tabletop
-					{-0.4375, -0.0625, -0.4375, 0.4375, 0, 0.4375},	
+					{-0.4375, -0.0625, -0.4375, 0.4375, 0, 0.4375},
 				}
 	},
 	selection_box = {
@@ -32,7 +32,7 @@ minetest.register_craft({
 	recipe = {
 		{"", "", "", },
 		{"stairs:slab_wood", "stairs:slab_wood", "", },
-		{"default:stick", "default:stick", "", }
+		{"group:stick", "group:stick", "", }
 	}
 })
 
@@ -41,7 +41,16 @@ minetest.register_craft({
 	recipe = {
 		{"", "", "", },
 		{"moreblocks:slab_wood", "moreblocks:slab_wood", "", },
-		{"default:stick", "default:stick", "", }
+		{"group:stick", "group:stick", "", }
+	}
+})
+
+minetest.register_craft({
+	output = "lrfurn:endtable",
+	recipe = {
+		{"", "", "", },
+		{"group:wood_slab", "group:wood_slab", "", },
+		{"group:stick", "group:stick", "", }
 	}
 })
 

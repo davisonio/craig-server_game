@@ -12,9 +12,9 @@ minetest.register_node("lrfurn:coffeetable_back", {
 					--legs
 					{-0.375, -0.5, -0.375, -0.3125, -0.0625, -0.3125},
 					{0.3125, -0.5, -0.375, 0.375, -0.0625, -0.3125},
-					
+
 					--tabletop
-					{-0.4375, -0.0625, -0.4375, 0.4375, 0, 0.5},	
+					{-0.4375, -0.0625, -0.4375, 0.4375, 0, 0.5},
 				}
 	},
 	selection_box = {
@@ -25,7 +25,7 @@ minetest.register_node("lrfurn:coffeetable_back", {
 	},
 
 	on_construct = function(pos)
-		local node = minetest.env:get_node(pos)
+		local node = minetest.get_node(pos)
 		local param2 = node.param2
 		node.name = "lrfurn:coffeetable_front"
 		if param2 == 0 then
@@ -37,13 +37,13 @@ minetest.register_node("lrfurn:coffeetable_back", {
 		elseif param2 == 3 then
 			pos.x = pos.x-1
 		end
-		if( minetest.env:get_node({x=pos.x, y=pos.y, z=pos.z}).name == "air" ) then
-			minetest.env:set_node(pos, node)
+		if( minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).name == "air" ) then
+			minetest.set_node(pos, node)
 		end
 	end,
-		
+
 	on_destruct = function(pos)
-		local node = minetest.env:get_node(pos)
+		local node = minetest.get_node(pos)
 		local param2 = node.param2
 		if param2 == 0 then
 			pos.z = pos.z+1
@@ -54,10 +54,10 @@ minetest.register_node("lrfurn:coffeetable_back", {
 		elseif param2 == 3 then
 			pos.x = pos.x-1
 		end
-		if( minetest.env:get_node({x=pos.x, y=pos.y, z=pos.z}).name == "lrfurn:coffeetable_front" ) then
-			if( minetest.env:get_node({x=pos.x, y=pos.y, z=pos.z}).param2 == param2 ) then
-				minetest.env:remove_node(pos)
-			end	
+		if( minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).name == "lrfurn:coffeetable_front" ) then
+			if( minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).param2 == param2 ) then
+				minetest.remove_node(pos)
+			end
 		end
 	end,
 })
@@ -75,7 +75,7 @@ minetest.register_node("lrfurn:coffeetable_front", {
 					--legs
 					{-0.375, -0.5, 0.3125, -0.3125, -0.0625, 0.375},
 					{0.3125, -0.5, 0.3125, 0.375, -0.0625, 0.375},
-					
+
 					--tabletop
 					{-0.4375, -0.0625, -0.5, 0.4375, 0, 0.4375},
 				}
@@ -95,7 +95,7 @@ minetest.register_craft({
 	recipe = {
 		{"", "", "", },
 		{"stairs:slab_wood", "stairs:slab_wood", "stairs:slab_wood", },
-		{"default:stick", "", "default:stick", }
+		{"group:stick", "", "group:stick", }
 	}
 })
 
@@ -104,7 +104,16 @@ minetest.register_craft({
 	recipe = {
 		{"", "", "", },
 		{"moreblocks:slab_wood", "moreblocks:slab_wood", "moreblocks:slab_wood", },
-		{"default:stick", "", "default:stick", }
+		{"group:stick", "", "group:stick", }
+	}
+})
+
+minetest.register_craft({
+	output = "lrfurn:coffeetable",
+	recipe = {
+		{"", "", "", },
+		{"group:wood_slab", "group:wood_slab", "group:wood_slab", },
+		{"group:stick", "", "group:stick", }
 	}
 })
 
