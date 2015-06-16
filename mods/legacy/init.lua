@@ -32,7 +32,7 @@ minetest.register_abm({
 })
 
 local old_entities = {
-	""
+	"homedecor:mesh_desk_fan"
 }
 for _,entity_name in ipairs(old_entities) do
     minetest.register_entity(":"..entity_name, {

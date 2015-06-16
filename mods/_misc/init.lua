@@ -2,9 +2,6 @@
 -- Server Misc Mod --
 ---------------------
 
--- Seen
-dofile(minetest.get_modpath("_misc").."/seen.lua")
-
 -- Nodename HUD
 dofile(minetest.get_modpath("_misc").."/nodename_hud.lua")
 
