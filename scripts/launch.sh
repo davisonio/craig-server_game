@@ -9,7 +9,7 @@ while true
 	# Launch it
 	cd /home/craig/minetest/minetest/bin/
 	./minetestserver-server \
-		--worldname server \
+		--world /home/craig/minetest/minetest/worlds/server \
 		--config /home/craig/minetest/minetest/worlds/server/game/minetest.conf \
 		--port 30000 \
 		--logfile /home/craig/minetest/logs/debug-server.txt
