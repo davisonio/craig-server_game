@@ -6,6 +6,7 @@ rm -rfd /home/craig/minetest/minetest/worlds/server/game/
 
 echo -e "\n Downloading game from GitHub via git..."
 
+cd /home/craig/minetest/minetest/worlds/server/
 git clone https://github.com/CraigyDavi/Craig-Server_game
 mv /home/craig/minetest/minetest/worlds/server/Craig-Server_game /home/craig/minetest/minetest/worlds/server/game
 
