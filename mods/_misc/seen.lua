@@ -139,34 +139,34 @@ data = config:get("data")
 if data ~= nil then
 	seens = minetest.deserialize(data)
 	for _, player in pairs( minetest.get_connected_players() ) do
-		name = player:get_player_name()
+		local name = player:get_player_name()
 		seens[name] = os.time()
 	end
 else
 	seens = {}
 	for _, player in pairs( minetest.get_connected_players() ) do
-		name = player:get_player_name()
+		local name = player:get_player_name()
 		seens[name] = os.time()
 	end
 end
 save_data(config, seens)
 
 minetest.register_on_newplayer(function(player)
-	name = player:get_player_name()
+	local name = player:get_player_name()
 	seens[name] = os.time()
 	save_data(config, seens)
 	return true
 end)
 
 minetest.register_on_joinplayer(function(player)
-	name = player:get_player_name()
+	local name = player:get_player_name()
 	seens[name] = os.time()
 	save_data(config, seens)
 	return true
 end)
 
 minetest.register_on_leaveplayer(function(player)
-	name = player:get_player_name()
+	local name = player:get_player_name()
 	seens[name] = os.time()
 	save_data(config, seens)
 	return true
@@ -174,7 +174,7 @@ end)
 
 minetest.register_on_shutdown(function()
 	for _, player in pairs( minetest.get_connected_players() ) do
-		name = player:get_player_name()
+		local name = player:get_player_name()
 		seens[name] = os.time()
 	end
 	save_data(config, seens)
@@ -185,7 +185,7 @@ minetest.register_globalstep(function ( dtime )
 	if os.time() >= last_time then
 		last_time = os.time() + save_interval
 		for _, player in pairs( minetest.get_connected_players() ) do
-			name = player:get_player_name()
+			local name = player:get_player_name()
 			seens[name] = os.time()
 		end
 		save_data(config, seens)
