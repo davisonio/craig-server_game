@@ -6,7 +6,7 @@ minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local name = player:get_player_name()
 		if not minetest.check_player_privs(name, {interact=true}) then
-			minetest.chat_send_player(name, "Hi there " .. name .. "! To build on this server you need to first read the rules (type: /rules) and accept them (then type: /rules accept).")
+			minetest.chat_send_player(name, "Hi " .. name .. "! To build on this server you need to accept the rules. Type /rules")
 		end
 	end
 end)

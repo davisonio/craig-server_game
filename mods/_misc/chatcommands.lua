@@ -12,6 +12,7 @@
 -- /auth_reload
 -- /teleport
 -- /set
+-- /deleteblocks
 -- /mods
 -- /give
 -- /giveme
@@ -20,34 +21,8 @@
 -- /rollback_check
 -- /rollback
 -- /status
-
-minetest.register_chatcommand("time", {
-	params = "<0...24000>",
-	description = "set time of day",
-	privs = {settime=true},
-	func = function(name, param)
-		if param == "" then
-			return false, "Missing time."
-		end
-		local newtime = tonumber(param)
-		if newtime == nil then
-			return false, "Invalid time."
-		end
-		minetest.set_timeofday((newtime % 24000) / 24000)
-		minetest.log("action", name .. " sets time " .. newtime)
-		minetest.chat_send_all(name .. " changed the time of day.")
-	end,
-})
-
-minetest.register_chatcommand("shutdown", {
-	description = "shutdown server",
-	privs = {server=true},
-	func = function(name, param)
-		minetest.log("action", name .. " shuts down server")
-		minetest.request_shutdown()
-		minetest.chat_send_all(name .. " just shut down the server.")
-	end,
-})
+-- /time
+-- /shutdown
 
 minetest.register_chatcommand("ban", {
 	params = "<name>",
@@ -73,6 +48,7 @@ minetest.register_chatcommand("ban", {
 -- /kick
 -- /clearobjects
 -- /msg
+-- /lastlogin
 
 --
 -- Other chat commands
@@ -84,7 +60,7 @@ minetest.register_chatcommand("spawn", {
     description = "Teleport to the spawn location.",
     privs = {shout=true},
     func = function(name, param)
-            local player = minetest.env:get_player_by_name(name)
+            local player = minetest.get_player_by_name(name)
             minetest.chat_send_player(name, "Teleported to spawn!")
             player:setpos({x=0.0, y=5.0, z=0.0})
             return true
@@ -97,7 +73,7 @@ minetest.register_chatcommand("sethome", {
         description = "Set your home location.",
         privs = {shout=true},
         func = function(name, param)
-                local player = minetest.env:get_player_by_name(name)
+                local player = minetest.get_player_by_name(name)
                 test = player:getpos()
                 local file = io.open(minetest.get_worldpath().."/home/"..player:get_player_name().."_home", "w")
                 if not file then
@@ -116,7 +92,7 @@ minetest.register_chatcommand("home", {
 	description = "Teleport to your home location.",
 	privs = {shout=true},
 	func = function(name, param)
-		local player = minetest.env:get_player_by_name(name)
+		local player = minetest.get_player_by_name(name)
 		local file = io.open(minetest.get_worldpath().."/home/"..player:get_player_name().."_home", "r")
 		if not file then
 			minetest.chat_send_player(name, "You haven't set your home! Set one using /sethome.")
@@ -129,45 +105,7 @@ minetest.register_chatcommand("home", {
 			minetest.chat_send_player(name, "There was an error, please contact the server owner.")
 			return
 		end
-		minetest.env:get_player_by_name(name):setpos(pos)
+		minetest.get_player_by_name(name):setpos(pos)
 		minetest.chat_send_player(name, "Home sweet home.")
 	end
-})
-
--- Wiki command
-minetest.register_chatcommand("wiki",{
-	params = "",
-	description = "Shows the wiki main page",
-	func = function(name, param)
-		minetest.chat_send_player(name, "Showing wiki main page... if this doesn't work please try again.")
-		if minetest.get_player_privs(name).wiki then
-			wikilib.show_wiki_page(name, "#Main")
-		else
-			wikilib.show_wiki_page(name, "Main")
-		end
-	end,
-})
-
--- Rules command
-minetest.register_chatcommand("rules",{
-	params = "accept",
-	description = "Shows the server rules",
-	privs = {shout=true},
-	func = function(name, params)
-		minetest.chat_send_player(name, "Showing server rules... if this doesn't work please try again.")
-		if params == "" then
-			wikilib.show_wiki_page(name, "Rules")
-		elseif params == "accept" then
-			if minetest.check_player_privs(name, {interact=true}) then
-				minetest.chat_send_player(name, "You have already accepted the rules!")
-			else
-				minetest.chat_send_player(name, "Thanks for accepting the rules, you now are able to interact with things.")
-				minetest.chat_send_player(name, "Happy building!")
-				minetest.chat_send_player(name, "If you need any help feel free to ask :)")
-				local privs = minetest.get_player_privs(name)
-				privs.interact = true
-				minetest.set_player_privs(name, privs)
-			end
-		end
-	end,
 })
