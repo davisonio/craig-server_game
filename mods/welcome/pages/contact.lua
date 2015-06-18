@@ -1,6 +1,6 @@
-function welcome.welcome_formspec(player)
+function welcome.contact_formspec(player)
 	local name = player:get_player_name()
-	minetest.show_formspec(name, "welcome:welcome",
+	minetest.show_formspec(name, "welcome:contact",
 		welcome.size..
 		welcome.close_button..
 		welcome.image_button_welcome..
@@ -19,7 +19,7 @@ function welcome.welcome_formspec(player)
 		",railways\\, amazing buildings\\, boundless terrain\\, interesting mods and kind,"..
 		",players who will help you if you need anything.,"..
 		",To start building you need to accept the rules. Go to the Rules on the left.,"..
-		",Happy building!,"..
+		",contactHappy building!,"..
 		",,"..
 		"#FFFF00," .. "Links" .. "," ..
 		",Forum Topic: https://forum.minetest.net/viewtopic.php?t=7010," ..
@@ -31,7 +31,7 @@ end
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local plname = player:get_player_name()
-	if formname ~= "welcome:welcome" then
+	if formname ~= "welcome:contact" then
 		return false
 	end
 	if fields.welcome_welcome then
@@ -68,28 +68,5 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		minetest.after(1, function()
 			welcome.staff_formspec(player)
 		end)
-	end
-end)
-
-minetest.register_chatcommand("welcome",{
-	params = "",
-	description = "Shows the welcome page",
-	privs = {shout=true},
-	func = function (name)
-		local player = minetest.get_player_by_name(name)
-		minetest.chat_send_player(name, "Showing page... if this doesn't work please try again.")
-		minetest.after(1, function()
-			welcome.welcome_formspec(player)
-		end)
-	end,
-})
-
-minetest.register_on_joinplayer(function(player)
-	minetest.after(5, function()
-		welcome.welcome_formspec(player)
-	end)
-	-- Fix for the "dead man" bug
-	if player:get_hp() < 1 then
-		player:set_hp(20)
 	end
 end)

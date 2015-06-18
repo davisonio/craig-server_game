@@ -1,4 +1,4 @@
-function welcome.welcome_formspec(player)
+function welcome.staff_formspec(player)
 	local name = player:get_player_name()
 	minetest.show_formspec(name, "welcome:welcome",
 		welcome.size..
@@ -19,7 +19,7 @@ function welcome.welcome_formspec(player)
 		",railways\\, amazing buildings\\, boundless terrain\\, interesting mods and kind,"..
 		",players who will help you if you need anything.,"..
 		",To start building you need to accept the rules. Go to the Rules on the left.,"..
-		",Happy building!,"..
+		",staffHappy building!,"..
 		",,"..
 		"#FFFF00," .. "Links" .. "," ..
 		",Forum Topic: https://forum.minetest.net/viewtopic.php?t=7010," ..
@@ -31,7 +31,7 @@ end
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local plname = player:get_player_name()
-	if formname ~= "welcome:welcome" then
+	if formname ~= "welcome:staff" then
 		return false
 	end
 	if fields.welcome_welcome then
@@ -71,25 +71,20 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 	end
 end)
 
-minetest.register_chatcommand("welcome",{
+minetest.register_chatcommand("staff",{
 	params = "",
 	description = "Shows the welcome page",
 	privs = {shout=true},
 	func = function (name)
 		local player = minetest.get_player_by_name(name)
+		local name = player:get_player_name()
 		minetest.chat_send_player(name, "Showing page... if this doesn't work please try again.")
-		minetest.after(1, function()
-			welcome.welcome_formspec(player)
-		end)
+		if minetest.get_player_privs(name).rank_sysadmin or minetest.get_player_privs(name).rank_admin or minetest.get_player_privs(name).rank_moderator then
+			minetest.after(1, function()
+				welcome.staff_formspec(player)
+			end)
+		else
+			minetest.chat_send_player(name, "You are not a staff member!")
+		end
 	end,
 })
-
-minetest.register_on_joinplayer(function(player)
-	minetest.after(5, function()
-		welcome.welcome_formspec(player)
-	end)
-	-- Fix for the "dead man" bug
-	if player:get_hp() < 1 then
-		player:set_hp(20)
-	end
-end)
