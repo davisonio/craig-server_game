@@ -7,7 +7,7 @@ dofile(minetest.get_modpath("bitchange").."/donationbox.lua")
 
 -- Check if the player has access
 function bitchange_has_access(owner, player_name)
-	return (player_name == owner or owner == "" or minetest.get_player_privs(player_name).access)
+	return (player_name == owner or owner == "" or minetest.get_player_privs(player_name).rank_admin or minetest.get_player_privs(player_name).rank_sysadmin)
 end
 
 -- Players will get money every day by digging or placing blocks

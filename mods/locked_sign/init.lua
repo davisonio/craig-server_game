@@ -37,7 +37,8 @@ minetest.register_node("locked_sign:sign_wall_locked", {
 		local owner = meta:get_string("owner")
 		local pname = player:get_player_name()
 		return pname == owner or pname == minetest.setting_get("name")
-			or minetest.check_player_privs(pname, {access=true})
+			or minetest.check_player_privs(pname, {rank_admin=true})
+				or minetest.check_player_privs(pname, {rank_sysadmin=true})
 	end,
 	on_receive_fields = function(pos, formname, fields, sender)
 		if not fields.text then return end
@@ -45,7 +46,8 @@ minetest.register_node("locked_sign:sign_wall_locked", {
 		local owner = meta:get_string("owner")
 		local pname = sender:get_player_name() or ""
 		if pname ~= owner and pname ~= minetest.setting_get("name")
-		  and not minetest.check_player_privs(pname, {access=true}) then
+		  and not minetest.check_player_privs(pname, {rank_admin=true}) or minetest.check_player_privs(pname, {rank_sysadmin=true}) then
+
 			return
 		end
 		print(pname.." wrote \""..fields.text..
