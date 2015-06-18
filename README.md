@@ -23,7 +23,6 @@ Coming soon
 |Bucket (bucket)                            |||
 |Chatplus (chatplus)                        |||
 |Coloured Stone Bricks (colouredstonebricks)|||
-|Concrete (concrete)                        |||
 |Darkage (darkage)                          |||
 |Default (default)                          |||
 |Doors (doors)                              |||
@@ -54,9 +53,9 @@ Coming soon
 |TravelNet (travelnet)                      |||
 |Unified Dyes (unifieddyes)                 |||
 |Vessels (vessels)                          |||
+|Welcome (welcome)                          |||
 |Wieldview (wieldview)                      |||
-|Wiki (wiki)                                |||
-|Wool(wool)                                 |||
+|Wool (wool)                                |||
 |Zeg's Craft Guide (zcg)                    |||
 
 ## License
