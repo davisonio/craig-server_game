@@ -56,6 +56,7 @@ Coming soon
 |Welcome (welcome)                          |||
 |Wieldview (wieldview)                      |||
 |Wool (wool)                                |||
+|Extended Ban v2 (xban2)                    |||
 |Zeg's Craft Guide (zcg)                    |||
 
 ## License
