@@ -25,14 +25,13 @@ function welcome.welcome_formspec(player)
 		",Forum Topic: https://forum.minetest.net/viewtopic.php?t=7010," ..
 		",Source Code: https://github.com/CraigyDavi/Craig-Server_game," ..
 		",Join IRC Chat: https://kiwiirc.com/client/irc.inchra.net/#minetest-craig," ..
-		",," ..
 		";1]")
 end
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local plname = player:get_player_name()
 	if formname ~= "welcome:welcome" then
-		return false
+		return
 	end
 	if fields.welcome_welcome then
 		minetest.after(1, function()

@@ -1,6 +1,6 @@
 function welcome.staff_formspec(player)
 	local name = player:get_player_name()
-	minetest.show_formspec(name, "welcome:welcome",
+	minetest.show_formspec(name, "welcome:staff",
 		welcome.size..
 		welcome.close_button..
 		welcome.image_button_welcome..
@@ -12,27 +12,17 @@ function welcome.staff_formspec(player)
 		welcome.image_button_staff..
 		"tablecolumns[color;text]" ..
 		"tableoptions[background=#00000000;highlight=#00000000;border=false]" ..
-		"table[2,0;10,9;welcome_welcome;" ..
-		"#FFFF00," .. "Welcome to " .. minetest.setting_get("server_name") .. "," ..
-		",Hello "..name.."\\, thanks for joining!,"..
-		",You have arrived at one of the most popular minetest servers\\, featuring,"..
-		",railways\\, amazing buildings\\, boundless terrain\\, interesting mods and kind,"..
-		",players who will help you if you need anything.,"..
-		",To start building you need to accept the rules. Go to the Rules on the left.,"..
-		",staffHappy building!,"..
-		",,"..
-		"#FFFF00," .. "Links" .. "," ..
-		",Forum Topic: https://forum.minetest.net/viewtopic.php?t=7010," ..
-		",Source Code: https://github.com/CraigyDavi/Craig-Server_game," ..
-		",Join IRC Chat: https://kiwiirc.com/client/irc.inchra.net/#minetest-craig," ..
-		",," ..
-		";1]")
+		"table[2,0;10,2;welcome_staff;" ..
+		"#FFFF00," .. "Welcome to the super-secret staff panel," ..
+		";1]"..
+		--"button[2,0.5;2,1;welcome_staff_howto;Howto Guide]"..
+		--"button[4,0.5;2,1;welcome_staff_xban;xban GUI]")
 end
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local plname = player:get_player_name()
 	if formname ~= "welcome:staff" then
-		return false
+		return
 	end
 	if fields.welcome_welcome then
 		minetest.after(1, function()

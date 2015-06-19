@@ -12,27 +12,26 @@ function welcome.contact_formspec(player)
 		welcome.image_button_staff..
 		"tablecolumns[color;text]" ..
 		"tableoptions[background=#00000000;highlight=#00000000;border=false]" ..
-		"table[2,0;10,9;welcome_welcome;" ..
-		"#FFFF00," .. "Welcome to " .. minetest.setting_get("server_name") .. "," ..
-		",Hello "..name.."\\, thanks for joining!,"..
-		",You have arrived at one of the most popular minetest servers\\, featuring,"..
-		",railways\\, amazing buildings\\, boundless terrain\\, interesting mods and kind,"..
-		",players who will help you if you need anything.,"..
-		",To start building you need to accept the rules. Go to the Rules on the left.,"..
-		",contactHappy building!,"..
+		"table[2,0;10,9;welcome_contact;" ..
+		"#FFFF00," .. "Get in Contact," ..
+		",Sending a message in the chat can often be the easiest way speak to,"..
+		",someone\\, alternatively you can join our IRC channel or forum topic.,"..
+		",Something private? Send me an email: craig@davison.io,"..
 		",,"..
-		"#FFFF00," .. "Links" .. "," ..
-		",Forum Topic: https://forum.minetest.net/viewtopic.php?t=7010," ..
-		",Source Code: https://github.com/CraigyDavi/Craig-Server_game," ..
-		",Join IRC Chat: https://kiwiirc.com/client/irc.inchra.net/#minetest-craig," ..
-		",," ..
+		"#FFFF00," .. "Staff who are happy to help" .. "," ..
+		",Sysadmins:," ..
+		",CraigyDavi," ..
+		",Admins:," ..
+		",Rhys\\, WhoCares\\, FMK\\, Gabo," ..
+		",Moderators:," ..
+		",fishyWET\\, foot_on_teh_hill\\, liascvuk\\, the_raven_262\\, RHR," ..
 		";1]")
 end
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local plname = player:get_player_name()
 	if formname ~= "welcome:contact" then
-		return false
+		return
 	end
 	if fields.welcome_welcome then
 		minetest.after(1, function()

@@ -12,7 +12,7 @@ minetest.register_on_joinplayer(function(player)
 		-- privs.shout =
 		-- privs.interact =
 		-- privs.fast =
-		minetest.set_player_privs(playername, privs)
+		minetest.set_player_privs(name, privs)
 	end
 	if minetest.get_player_privs(name).rank_moderator then
 		-- Person is a moderator
@@ -27,7 +27,7 @@ minetest.register_on_joinplayer(function(player)
 		privs.fly = true
 		privs.basic_privs = true
 
-		minetest.set_player_privs(playername, privs)
+		minetest.set_player_privs(name, privs)
 	end
 	if minetest.get_player_privs(name).rank_admin then
 		-- Person is a admin
@@ -47,7 +47,7 @@ minetest.register_on_joinplayer(function(player)
 		privs.travelnet = true
 		privs.irc_admin = true
 
-		minetest.set_player_privs(playername, privs)
+		minetest.set_player_privs(name, privs)
 	end
 	if minetest.get_player_privs(name).rank_sysadmin then
 		-- Person is a sysadmin
@@ -73,7 +73,7 @@ minetest.register_on_joinplayer(function(player)
 		privs.rollback = true
 		privs.password = true
 
-		minetest.set_player_privs(playername, privs)
+		minetest.set_player_privs(name, privs)
 	end
 	if minetest.get_player_privs(name).rank_staff then
 		-- Person is a staff
@@ -83,7 +83,7 @@ minetest.register_on_joinplayer(function(player)
 
 			privs.rank_staff = false
 
-			minetest.set_player_privs(playername, privs)
+			minetest.set_player_privs(name, privs)
 		end
 	end
 end)

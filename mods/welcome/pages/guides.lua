@@ -12,27 +12,16 @@ function welcome.guides_formspec(player)
 		welcome.image_button_staff..
 		"tablecolumns[color;text]" ..
 		"tableoptions[background=#00000000;highlight=#00000000;border=false]" ..
-		"table[2,0;10,9;welcome_welcome;" ..
-		"#FFFF00," .. "Welcome to " .. minetest.setting_get("server_name") .. "," ..
-		",Hello "..name.."\\, thanks for joining!,"..
-		",You have arrived at one of the most popular minetest servers\\, featuring,"..
-		",railways\\, amazing buildings\\, boundless terrain\\, interesting mods and kind,"..
-		",players who will help you if you need anything.,"..
-		",To start building you need to accept the rules. Go to the Rules on the left.,"..
-		",guidesHappy building!,"..
-		",,"..
-		"#FFFF00," .. "Links" .. "," ..
-		",Forum Topic: https://forum.minetest.net/viewtopic.php?t=7010," ..
-		",Source Code: https://github.com/CraigyDavi/Craig-Server_game," ..
-		",Join IRC Chat: https://kiwiirc.com/client/irc.inchra.net/#minetest-craig," ..
-		",," ..
+		"table[2,0;10,2;welcome_guides;" ..
+		"#FFFF00," .. "Here are some useful guides and help articles," ..
 		";1]")
+		--"button[2,0.5;2,1;welcome_guides_commands;Commands]"
 end
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local plname = player:get_player_name()
 	if formname ~= "welcome:guides" then
-		return false
+		return
 	end
 	if fields.welcome_welcome then
 		minetest.after(1, function()

@@ -1,6 +1,6 @@
 function welcome.rules_formspec(player)
 	local name = player:get_player_name()
-	minetest.show_formspec(name, "welcome:welcome",
+	minetest.show_formspec(name, "welcome:rules",
 		welcome.size..
 		welcome.close_button..
 		welcome.image_button_welcome..
@@ -12,27 +12,27 @@ function welcome.rules_formspec(player)
 		welcome.image_button_staff..
 		"tablecolumns[color;text]" ..
 		"tableoptions[background=#00000000;highlight=#00000000;border=false]" ..
-		"table[2,0;10,9;welcome_welcome;" ..
-		"#FFFF00," .. "Welcome to " .. minetest.setting_get("server_name") .. "," ..
-		",Hello "..name.."\\, thanks for joining!,"..
-		",You have arrived at one of the most popular minetest servers\\, featuring,"..
-		",railways\\, amazing buildings\\, boundless terrain\\, interesting mods and kind,"..
-		",players who will help you if you need anything.,"..
-		",To start building you need to accept the rules. Go to the Rules on the left.,"..
-		",rulesHappy building!,"..
-		",,"..
-		"#FFFF00," .. "Links" .. "," ..
-		",Forum Topic: https://forum.minetest.net/viewtopic.php?t=7010," ..
-		",Source Code: https://github.com/CraigyDavi/Craig-Server_game," ..
-		",Join IRC Chat: https://kiwiirc.com/client/irc.inchra.net/#minetest-craig," ..
-		",," ..
-		";1]")
+		"table[2,0;10,9;welcome_rules;" ..
+		"#FFFF00," .. "Here are the server rules...do you accept them?," ..
+		",1. Don't attempt to crash\\, lag\\, damage\\, disable or exploit the server or game.,"..
+		",2. Don't damage creations owned by others (greifing).,"..
+		",3. Don't harass other people. (e.g. asking them for stuff constantly),"..
+		",4. Don't take items from other's chests unless otherwise stated.,"..
+		",5. Don't partake in PVP (punching others) unless players taking part agree.,"..
+		",6. Don't use multiple accounts or impersonate another account.,"..
+		",7. No play dating or family role-play. Seriously\\, not cool.,"..
+		",8. Feel free to walk around anywhere unless the area is clearly private.,"..
+		",9. To make this world look as nice as possible\\, please avoid making a mess,"..
+		",of the landscape. Nice buildings are always welcome :),"..
+		";1]"..
+		"button[8,7;2,1;welcome_rules_disagree;I Disagree :(]"..
+		"button[10,7;2,1;welcome_rules_agree;I Agree :)]")
 end
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local plname = player:get_player_name()
 	if formname ~= "welcome:rules" then
-		return false
+		return
 	end
 	if fields.welcome_welcome then
 		minetest.after(1, function()
@@ -68,6 +68,20 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		minetest.after(1, function()
 			welcome.staff_formspec(player)
 		end)
+	end
+	if fields.welcome_rules_disagree then
+		minetest.kick_player(name, "Bye then! You have to agree to the rules to play on the server (please rejoin if you have a change of mind).")
+		return
+	end
+	if fields.welcome_rules_agree then
+		if minetest.check_player_privs(name, {shout=true}) then
+			minetest.chat_send_player(name, "Thanks for accepting the rules, you now are able to build.")
+			minetest.chat_send_player(name, "Happy building!")
+			local privs = minetest.get_player_privs(name)
+			privs.interact = true
+			minetest.set_player_privs(name, privs)
+		end
+		return
 	end
 end)
 
