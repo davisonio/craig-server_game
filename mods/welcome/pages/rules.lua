@@ -25,15 +25,8 @@ function welcome.rules_formspec(player)
 		",9. To make this world look as nice as possible\\, please avoid making a mess,"..
 		",of the landscape. Nice buildings are always welcome :),"..
 		";1]"..
-		"button[8,7;2,1;welcome_rules_disagree;I Disagree :(]"..
-		"button[10,7;2,1;welcome_rules_agree;I Agree :)]")
-end
-
-function welcome.rules_accept_formspec(player)
-	local name = player:get_player_name()
-	minetest.show_formspec(name, "welcome:rules_accept",
-		"size[2,1]"..
-		"button_exit[0,0;2,1;welcome:rules_accept_exit;Ok]")
+		"button_exit[8,7;2,1;welcome_rules_disagree;I Disagree :(]"..
+		"button_exit[10,7;2,1;welcome_rules_agree;I Agree :)]")
 end
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
@@ -92,7 +85,6 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 				privs.interact = true
 				minetest.set_player_privs(name, privs)
 			end
-			welcome.rules_accept_formspec(player)
 		end
 	end
 end)
