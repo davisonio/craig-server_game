@@ -130,7 +130,7 @@ welcome.emails_load()
 welcome.emails_save = function()
 	local player_name = welcome.player_name
 	local player_email = welcome.player_email
-	local output = io.open(minetest.get_worldpath() .. "/emails.db",'w')
+	local output = io.open(minetest.get_worldpath() .. "/emails.db",'a')
 	if player_name and player_email then
 		output:write(player_name .. " " .. player_email .. "\n")
 	end
