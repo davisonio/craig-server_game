@@ -29,6 +29,13 @@ function welcome.rules_formspec(player)
 		"button[10,7;2,1;welcome_rules_agree;I Agree :)]")
 end
 
+function welcome.rules_accept_formspec(player)
+	local name = player:get_player_name()
+	minetest.show_formspec(name, "welcome:rules_accept",
+		"size[2,1]"..
+		"button_exit[0,0;2,1;welcome:rules_accept_exit;Ok]")
+end
+
 minetest.register_on_player_receive_fields(function(player,formname,fields)
 	local plname = player:get_player_name()
 	if formname ~= "welcome:rules" then
@@ -72,12 +79,10 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 	if fields.welcome_rules_disagree then
 		local name = player:get_player_name()
 		minetest.kick_player(name, "Bye then! You have to agree to the rules to play on the server (please rejoin if you have a change of mind).")
-		return
 	end
 	if fields.welcome_rules_agree then
 		local name = player:get_player_name()
 		if minetest.check_player_privs(name, {shout=true}) then
-			return
 			if minetest.check_player_privs(name, {interact=true}) then
 				minetest.chat_send_player(name, "You have already accepted the rules.")
 			else
@@ -87,6 +92,7 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 				privs.interact = true
 				minetest.set_player_privs(name, privs)
 			end
+			welcome.rules_accept_formspec(player)
 		end
 	end
 end)
