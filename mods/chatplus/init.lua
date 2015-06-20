@@ -21,7 +21,6 @@ end
 function chatplus.load()
 	-- Initialize the log
 	chatplus.log_handle = io.open(chatplus.log_file,"a+")
-	chatplus.staff_inbox = io.open(minetest.get_worldpath().."/wiki".."/pages".."/%23inbox","a+")
 
 	-- Load player data
 	local file = io.open(minetest.get_worldpath().."/chatplus.db", "r")
@@ -172,7 +171,6 @@ function chatplus.showInbox(name)
 	fs = fs .. "]"
 	fs = fs .. "button[0,7.25;2,1;clear;Clear Inbox]"
 	fs = fs .. "label[2,7.25;Send mail a player, type: /mail PlayerName Hi!]"
-	fs = fs .. "label[2,7.75;Send mail to the staff, type: /mail staff Hi!]"
 	fs = fs .. "button_exit[8.1,7.25;2,1;close;Close]"
 	minetest.show_formspec(name, "chatplus:inbox", fs)
 end
@@ -212,12 +210,7 @@ minetest.register_chatcommand("mail", {
 			chatplus.log_handle:flush()
 		end
 
-		if to == "staff" then
-			chatplus.staff_inbox:write("\r\n"..os.date("(%d/%m/%Y)").." <"..name..">: "..msg)
-			chatplus.staff_inbox:flush()
-			minetest.chat_send_player(name,"Message sent to staff. You might get a reply in your inbox soon from a staff member.")
-			return
-		elseif chatplus.players[to] then
+		if chatplus.players[to] then
 			table.insert(chatplus.players[to].inbox,os.date("(%d/%m/%Y)").." ["..name.."]: "..msg)
 			minetest.chat_send_player(name,"Message sent.")
 			chatplus.save()
