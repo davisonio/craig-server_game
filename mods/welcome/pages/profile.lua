@@ -18,7 +18,7 @@ function welcome.profile_formspec(player)
 		"#FFFF00," .. "The profile of "..name.."," ..
 		",IP Address: "..minetest.get_player_ip(name)..","..
 		",Privs: "..minetest.privs_to_string(minetest.get_player_privs(name), ' ')..","..
-		",Email: ".."bleh"..","..
+		",Email: "..welcome.emails[name]..","..
 		",,"..
 		"#FFFF00," .. "Set your email," ..
 		",Setting your email means that if you forget your password - we will be,"..
