@@ -186,7 +186,7 @@ minetest.register_on_joinplayer(function(player)
 	e.last_seen = os.time()
 end)
 
-minetest.register_chatcommand("ban", {
+minetest.register_chatcommand("xban", {
 	description = "XBan a player",
 	params = "<player> <reason>",
 	privs = { ban=true },
@@ -200,7 +200,7 @@ minetest.register_chatcommand("ban", {
 	end,
 })
 
-minetest.register_chatcommand("tempban", {
+minetest.register_chatcommand("xtempban", {
 	description = "XBan a player temporarily",
 	params = "<player> <time> <reason>",
 	privs = { ban=true },
@@ -219,7 +219,7 @@ minetest.register_chatcommand("tempban", {
 	end,
 })
 
-minetest.register_chatcommand("unban", {
+minetest.register_chatcommand("xunban", {
 	description = "XUnBan a player",
 	params = "<player_or_ip>",
 	privs = { ban=true },
@@ -235,7 +235,7 @@ minetest.register_chatcommand("unban", {
 	end,
 })
 
-minetest.register_chatcommand("ban_record", {
+minetest.register_chatcommand("xban_record", {
 	description = "Show the ban records of a player",
 	params = "<player_or_ip>",
 	privs = { ban=true },
