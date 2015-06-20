@@ -19,6 +19,6 @@ cp /home/craig/minetest/secure/irc-config.lua /home/craig/minetest/minetest/worl
 
 # Email Config
 rm /home/craig/minetest/minetest/worlds/server/game/mods/email/init.lua
-cp /home/craig/minetest/secure/irc-init.lua /home/craig/minetest/minetest/worlds/server/game/mods/email/init.lua
+cp /home/craig/minetest/secure/email-init.lua /home/craig/minetest/minetest/worlds/server/game/mods/email/init.lua
 
 echo -e "\n Done!"
