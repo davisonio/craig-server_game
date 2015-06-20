@@ -17,4 +17,8 @@ echo -e "\n Sorting out private stuff..."
 rm /home/craig/minetest/minetest/worlds/server/game/mods/irc/config.lua
 cp /home/craig/minetest/secure/irc-config.lua /home/craig/minetest/minetest/worlds/server/game/mods/irc/config.lua
 
+# Email Config
+rm /home/craig/minetest/minetest/worlds/server/game/mods/email/init.lua
+cp /home/craig/minetest/secure/irc-init.lua /home/craig/minetest/minetest/worlds/server/game/mods/email/init.lua
+
 echo -e "\n Done!"
