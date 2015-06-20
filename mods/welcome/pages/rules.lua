@@ -70,18 +70,24 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		end)
 	end
 	if fields.welcome_rules_disagree then
-		minetest.kick_player(plname, "Bye then! You have to agree to the rules to play on the server (please rejoin if you have a change of mind).")
+		local name = player:get_player_name()
+		minetest.kick_player(name, "Bye then! You have to agree to the rules to play on the server (please rejoin if you have a change of mind).")
 		return
 	end
 	if fields.welcome_rules_agree then
-		if minetest.check_player_privs(plname, {shout=true}) then
-			minetest.chat_send_player(plname, "Thanks for accepting the rules, you now are able to build.")
-			minetest.chat_send_player(plname, "Happy building!")
-			local privs = minetest.get_player_privs(plname)
-			privs.interact = true
-			minetest.set_player_privs(plname, privs)
+		local name = player:get_player_name()
+		if minetest.check_player_privs(name, {shout=true}) then
+			return
+			if minetest.check_player_privs(name, {interact=true}) then
+				minetest.chat_send_player(name, "You have already accepted the rules.")
+			else
+				minetest.chat_send_player(name, "Thanks for accepting the rules, you now are able to build.")
+				minetest.chat_send_player(name, "Happy building!")
+				local privs = minetest.get_player_privs(name)
+				privs.interact = true
+				minetest.set_player_privs(name, privs)
+			end
 		end
-		return
 	end
 end)
 
