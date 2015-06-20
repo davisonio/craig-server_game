@@ -19,7 +19,7 @@ minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local name = player:get_player_name()
 		if not welcome.emails[name] then
-			minetest.chat_send_player(name, .. name .. ", you have not set your email. Setting your email is important if you forget your password. Type /profile. To stop these messages type /profile nomail.")
+			minetest.chat_send_player(name, name .. ", you have not set your email. Setting your email is important if you forget your password we can reset your password if you forget it. Type /profile. To stop these messages type /profile nomail.")
 		end
 	end
 end)
