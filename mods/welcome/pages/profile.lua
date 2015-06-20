@@ -2,6 +2,12 @@ welcome.emails = {}
 
 function welcome.profile_formspec(player)
 	local name = player:get_player_name()
+	welcome.myemail = nil
+	if welcome.emails[name] then
+		welcome.myemail = welcome.emails[name]
+	else
+		welcome.myemail = "Not set"
+	end
 	minetest.show_formspec(name, "welcome:profile",
 		welcome.size..
 		welcome.close_button..
@@ -18,7 +24,7 @@ function welcome.profile_formspec(player)
 		"#FFFF00," .. "The profile of "..name.."," ..
 		",IP Address: "..minetest.get_player_ip(name)..","..
 		",Privs: "..minetest.privs_to_string(minetest.get_player_privs(name), ' ')..","..
-		",Email: "..welcome.emails[name]..","..
+		",Email: "..welcome.myemail..","..
 		",,"..
 		"#FFFF00," .. "Set your email," ..
 		",Setting your email means that if you forget your password - we will be,"..
