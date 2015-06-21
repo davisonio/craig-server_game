@@ -1,4 +1,3 @@
--- Item pick-up
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		if player:get_hp() > 0 or not minetest.setting_getbool("enable_damage") then

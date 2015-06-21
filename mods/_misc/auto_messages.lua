@@ -1,8 +1,8 @@
-local TIMER = 0
+local interacttimer = 0
 minetest.register_globalstep(function(dtime)
-	TIMER = TIMER + dtime
-	if TIMER < 60 then return end -- 1 minute
-	TIMER = 0
+	interacttimer = interacttimer + dtime
+	if interacttimer < 60 then return end -- 1 minute
+	interacttimer = 0
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local name = player:get_player_name()
 		if not minetest.check_player_privs(name, {interact=true}) then
@@ -11,11 +11,11 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
-local TIMEFORACTION = 0
+local emailtimer = 0
 minetest.register_globalstep(function(dtime)
-	TIMEFORACTION = TIMEFORACTION + dtime
-	if TIMEFORACTION < 900 then return end -- 15 minutes
-	TIMEFORACTION = 0
+	emailtimer = emailtimer + dtime
+	if emailtimer < 900 then return end -- 15 minutes
+	emailtimer = 0
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local name = player:get_player_name()
 		if welcome.emails[name] == nil then

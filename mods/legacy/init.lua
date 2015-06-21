@@ -107,6 +107,7 @@ minetest.register_alias("default:pinesapling", "default:pine_sapling")
 minetest.register_alias("wiki:wiki", "default:bookshelf")
 
 -- memorandum -> paper
+minetest.register_alias("memorandum:memorandum", "default:paper")
 minetest.register_alias("memorandum:letter_empty", "default:paper")
 minetest.register_alias("memorandum:letter_written", "default:paper")
 minetest.register_alias("memorandum:letter_empty_2", "default:paper")

@@ -2,7 +2,7 @@
 -- Server Misc Mod --
 ---------------------
 
--- Nodename HUD
+-- Nodename on the HUD
 dofile(minetest.get_modpath("_misc").."/nodename_hud.lua")
 
 -- Give initial stuff
@@ -14,8 +14,8 @@ dofile(minetest.get_modpath("_misc").."/chatcommands.lua")
 -- Username filter
 dofile(minetest.get_modpath("_misc").."/username_filter.lua")
 
--- No Interact Messages
-dofile(minetest.get_modpath("_misc").."/nointeract_messages.lua")
+-- Automatic Messages
+dofile(minetest.get_modpath("_misc").."/auto_messages.lua")
 
 -- Craft Obsidian
 dofile(minetest.get_modpath("_misc").."/craft_obsidian.lua")
@@ -26,8 +26,11 @@ dofile(minetest.get_modpath("_misc").."/admin_tools.lua")
 -- Death Messages
 dofile(minetest.get_modpath("_misc").."/death_messages.lua")
 
--- Privs
+-- Privileges and Ranks
 dofile(minetest.get_modpath("_misc").."/privs.lua")
 
--- Item
-dofile(minetest.get_modpath("_misc").."/item.lua")
+-- Item Pickup
+dofile(minetest.get_modpath("_misc").."/item_pickup.lua")
+
+-- World Edge
+dofile(minetest.get_modpath("_misc").."/worldedge.lua")
