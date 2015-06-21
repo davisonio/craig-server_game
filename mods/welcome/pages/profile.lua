@@ -152,6 +152,8 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 			-- Now send the email!
 			email.email_email_confirmation()
 			minetest.chat_send_player(welcome.player_name, "Thank you! You should receive a email shortly at: "..welcome.player_email)
+			-- Load the emails again
+			welcome.emails_load()
 		else
 			local name = player:get_player_name()
 			minetest.chat_send_player(name, "The email addresses you entered do not match, please try again.")

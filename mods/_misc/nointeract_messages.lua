@@ -18,9 +18,8 @@ minetest.register_globalstep(function(dtime)
 	TIMEFORACTION = 0
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local name = player:get_player_name()
-		welcome.emails_load()
 		if welcome.emails[name] == nil then
-			minetest.chat_send_player(name, name .. ", you have not set your email. Setting your email is important if you forget your password. Type /profile. To stop these messages type /profile nomail.")
+			minetest.chat_send_player(name, name .. ", you have not set your email. Setting your email is important if you forget your password. Type /profile")
 		end
 	end
 end)
