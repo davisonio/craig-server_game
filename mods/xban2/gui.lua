@@ -70,7 +70,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 end)
 
-minetest.register_chatcommand("ban_gui", {
+minetest.register_chatcommand("xban_gui", {
 	description = "Show XBan GUI",
 	params = "",
 	func = function(name, params)
