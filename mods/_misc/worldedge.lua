@@ -11,7 +11,7 @@ minetest.register_globalstep(function(dtime)
    	-- Where am I?
    	local pos = player:getpos()
 
-   	if pos.x < -30000 or pos.x > 30000 or pos.y < -30000 or pos.y > 30000 or pos.z < -30000 or pos.z > 30000 then
+   	if pos.x < -30002 or pos.x > 30002 or pos.y < -30002 or pos.y > 30002 or pos.z < -30002 or pos.z > 30002 then
       		local statspawn = (minetest.setting_get_pos("static_spawnpoint") or {x = 0, y = 5, z = 0})
       		player:setpos(statspawn)
       		minetest.chat_send_player(player:get_player_name(), "You Passed the map limits, returning to Spawn")
