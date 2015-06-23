@@ -14,9 +14,9 @@ function welcome.staff_formspec(player)
 		"tableoptions[background=#00000000;highlight=#00000000;border=false]" ..
 		"table[2,0;10,2;welcome_staff;" ..
 		"#FFFF00," .. "Welcome to the super-secret staff panel," ..
-		";1]"..
+		";1]")
 		--"button[2,0.5;2,1;welcome_staff_howto;Howto Guide]"..
-		--"button[4,0.5;2,1;welcome_staff_xban;xban GUI]")
+		--"button[4,0.5;2,1;welcome_staff_xban;xban GUI]"
 end
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
