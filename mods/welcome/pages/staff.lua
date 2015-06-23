@@ -16,7 +16,7 @@ function welcome.staff_formspec(player)
 		"#FFFF00," .. "Welcome to the super-secret staff panel," ..
 		";1]"..
 		--"button[2,0.5;2,1;welcome_staff_howto;Howto Guide]"..
-		"button[4,0.5;2,1;welcome_staff_xban;xban GUI]")
+		--"button[4,0.5;2,1;welcome_staff_xban;xban GUI]")
 end
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
@@ -57,25 +57,6 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 	if fields.welcome_staff then
 		minetest.after(1, function()
 			welcome.staff_formspec(player)
-		end)
-	end
-	if fields.welcome_staff_xban then
-		minetest.after(1, function()
-			local name = player:get_player_name()
-			local table_insert, table_concat =
-      table.insert, table.concat
-			local state = xban.states[name]
-			if not state then
-				state = { index=1, filter="" }
-				xban.states[name] = state
-				local list = { }
-				state.list = list
-				for k in pairs(minetest.auth_table) do
-					table_insert(list, k)
-				end
-			table.sort(list)
-			end
-			minetest.show_formspec(name, "xban2:main", xban.make_fs(name))
 		end)
 	end
 end)

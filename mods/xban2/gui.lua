@@ -1,15 +1,15 @@
 
 local FORMNAME = "xban2:main"
 
-xban.states = { }
+local states = { }
 
 local table_insert, table_concat =
       table.insert, table.concat
 
 local ESC = minetest.formspec_escape
 
-function xban.make_fs(name)
-	local state = xban.states[name]
+local function make_fs(name)
+	local state = states[name]
 	if not state then return end
 	local list, index, filter = state.list, state.index, state.filter
 	if index > #list then
@@ -46,12 +46,12 @@ end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= FORMNAME then return end
 	local name = player:get_player_name()
-	local state = xban.states[name]
+	local state = states[name]
 	if fields.player then
 		local t = minetest.explode_textlist_event(fields.player)
 		if (t.type == "CHG") or (t.type == "DCL") then
 			state.index = t.index
-			minetest.show_formspec(name, FORMNAME, xban.make_fs(name))
+			minetest.show_formspec(name, FORMNAME, make_fs(name))
 		end
 		return
 	end
@@ -66,7 +66,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			end
 		end
 		table.sort(list)
-		minetest.show_formspec(name, FORMNAME, xban.make_fs(name))
+		minetest.show_formspec(name, FORMNAME, make_fs(name))
 	end
 end)
 
@@ -74,10 +74,10 @@ minetest.register_chatcommand("xban_gui", {
 	description = "Show XBan GUI",
 	params = "",
 	func = function(name, params)
-		local state = xban.states[name]
+		local state = states[name]
 		if not state then
 			state = { index=1, filter="" }
-			xban.states[name] = state
+			states[name] = state
 			local list = { }
 			state.list = list
 			for k in pairs(minetest.auth_table) do
@@ -85,6 +85,6 @@ minetest.register_chatcommand("xban_gui", {
 			end
 			table.sort(list)
 		end
-		minetest.show_formspec(name, FORMNAME, xban.make_fs(name))
+		minetest.show_formspec(name, FORMNAME, make_fs(name))
 	end,
 })

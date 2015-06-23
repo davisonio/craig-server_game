@@ -193,7 +193,7 @@ minetest.register_chatcommand("xban", {
 	func = function(name, params)
 		local plname, reason = params:match("(%S+)%s+(.+)")
 		if not (plname and reason) then
-			return false, "Usage: /ban <player> <reason>"
+			return false, "Usage: /xban <player> <reason>"
 		end
 		xban.ban_player(plname, name, nil, reason)
 		return true, ("Banned %s."):format(plname)
@@ -207,7 +207,7 @@ minetest.register_chatcommand("xtempban", {
 	func = function(name, params)
 		local plname, time, reason = params:match("(%S+)%s+(%S+)%s+(.+)")
 		if not (plname and time and reason) then
-			return false, "Usage: /tempban <player> <time> <reason>"
+			return false, "Usage: /xtempban <player> <time> <reason>"
 		end
 		time = parse_time(time)
 		if time < 60 then
@@ -321,4 +321,5 @@ minetest.after(SAVE_INTERVAL, save_db)
 load_db()
 xban.db = db
 
+dofile(xban.MP.."/dbimport.lua")
 dofile(xban.MP.."/gui.lua")
