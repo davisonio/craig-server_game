@@ -1,9 +1,8 @@
 -- Legacy stuff
 -- To maintain backwards-compatibility and prevent errors/unknown blocks
 
-
--- 1. Remove trees from old mod `Tiny Trees` which generated in the world
 local old_nodes = {
+    -- Remove trees from old mod `Tiny Trees` which generated in the world
 	"trees:leaves_yellow", 
 	"trees:leaves_red",
 	"trees:leaves_green",
@@ -15,7 +14,11 @@ local old_nodes = {
 	"trees:tree_conifer",
 	"trees:wood_conifer",
 	"trees:wood_palm",
-	"trees:wood_mangrove"
+	"trees:wood_mangrove",
+    -- Remove memorandum stuff
+    "memorandum:letter_written",
+    "memorandum:letter_empty",
+    "memorandum:message"
 }
 for _,node_name in ipairs(old_nodes) do
     minetest.register_node(":"..node_name, {
@@ -107,11 +110,8 @@ minetest.register_alias("default:pinesapling", "default:pine_sapling")
 minetest.register_alias("wiki:wiki", "default:bookshelf")
 
 -- memorandum -> paper
-minetest.register_alias("memorandum:memorandum", "default:paper")
 minetest.register_alias("memorandum:letter_empty", "default:paper")
 minetest.register_alias("memorandum:letter_written", "default:paper")
-minetest.register_alias("memorandum:letter_empty_2", "default:paper")
-minetest.register_alias("memorandum:letter_written_2", "default:paper")
 minetest.register_alias("memorandum:letter", "default:paper")
 minetest.register_alias("memorandum:message", "default:paper")
 minetest.register_alias("memorandum:eraser", "default:paper")
