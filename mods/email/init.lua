@@ -1,14 +1,8 @@
 -- The email mod. Big thanks to Amaz for the code!
--- Run this to make sure the mod works:
--- sudo apt-get install luarocks
--- sudo luarocks install luasocket
--- sudo apt-get install openssl
--- sudo luarocks install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu
-
 email = {}
 
 local smtp = require("socket.smtp")
-local https = require 'ssl.https'
+--local https = require 'ssl.https'
 local ltn12 = require 'ltn12'
 
 function sslCreate()

@@ -12,5 +12,5 @@ while true
 		--world /home/craig/minetest/minetest/worlds/server \
 		--config /home/craig/minetest/minetest/worlds/server/game/minetest.conf \
 		--port 30000 \
-		--logfile /home/craig/minetest/logs/debug-server.txt &
-done &
+		--logfile /home/craig/minetest/logs/debug-server.txt
+done

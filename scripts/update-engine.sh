@@ -4,8 +4,6 @@ echo -e "\n Check if required dependencies are installed, if not, install them."
 
 sudo apt-get install git build-essential libirrlicht-dev libgettextpo0 libfreetype6-dev cmake libbz2-dev libpng12-dev libjpeg8-dev libxxf86vm-dev libgl1-mesa-dev libsqlite3-dev libogg-dev libvorbis-dev libopenal-dev libcurl4-openssl-dev libluajit-5.1-dev liblua5.1-0-dev libleveldb-dev
 sudo apt-get install lua-socket
-sudo apt-get install openssl
-sudo luarocks install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu
 
 echo -e "\n Downloading Minetest from GitHub via git..."
 
