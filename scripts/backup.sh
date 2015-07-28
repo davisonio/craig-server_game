@@ -16,7 +16,8 @@ sleep 2
 bash ~/minetest/minetest/worlds/server/game/scripts/shutdown.sh
 
 # Sync world with duplicate world
-rsync -azPu ~/minetest/minetest/worlds/server ~/worlds-server.bak
+rm -rf ~/worlds-server.bak
+cp -r ~/minetest/minetest/worlds/server ~/worlds-server.bak
 
 # Relaunch world after completion
 bash ~/minetest/minetest/worlds/server/game/scripts/launch.sh
