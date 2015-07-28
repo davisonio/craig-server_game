@@ -20,9 +20,9 @@ rm -rf ~/worlds-server.bak
 cp -r ~/minetest/minetest/worlds/server ~/worlds-server.bak
 
 # Relaunch world after completion
-bash ~/minetest/minetest/worlds/server/game/scripts/launch.sh
+echo "Relaunching world"
+nohup bash ~/minetest/minetest/worlds/server/game/scripts/launch.sh &
 
 # Move world to off-site backup
-DATE="date +%Y-%m-%d"
-TARGET="craig@craig.zzzz.io:~/davisonio-minetest-srv1/$DATE"
-rsync -azPu ~/worlds-server.bak $TARGET
+echo "Move world to off-site backup"
+rsync -azP ~/worlds-server.bak craig@craig.zzzz.io:~/davisonio-minetest-srv1/`date +%Y-%m-%d` &
