@@ -24,6 +24,7 @@ sudo make install
 echo -e "\n Moving minetest-tmp to minetest..."
 # minetestserver
 rm /home/craig/minetest/minetest/bin/minetestserver-server
+mkdir ~/minetest/minetest/bin
 mv /home/craig/minetest/minetest-tmp/minetest/bin/minetestserver /home/craig/minetest/minetest/bin/minetestserver-server
 # builtin
 rm -r /home/craig/minetest/minetest/builtin
