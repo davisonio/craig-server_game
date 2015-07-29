@@ -224,7 +224,7 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "shapeless",
 	output = 'fake_fire:fancy_fire',
-	recipe = {"default:torch", "building_blocks:sticks", "default:torch" }
+	recipe = {"default:torch", "default:coalblock", "default:torch" }
 })
 
 -- ALIASES
