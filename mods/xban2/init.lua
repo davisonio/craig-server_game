@@ -199,7 +199,7 @@ minetest.register_chatcommand("xban", {
 		return true, ("Banned %s."):format(plname)
 	end,
 })
-
+--[[
 minetest.register_chatcommand("xtempban", {
 	description = "XBan a player temporarily",
 	params = "<player> <time> <reason>",
@@ -218,7 +218,7 @@ minetest.register_chatcommand("xtempban", {
 		return true, ("Banned %s until %s."):format(plname, os.date("%c", expires))
 	end,
 })
-
+--]]
 minetest.register_chatcommand("xunban", {
 	description = "XUnBan a player",
 	params = "<player_or_ip>",
@@ -322,4 +322,3 @@ load_db()
 xban.db = db
 
 dofile(xban.MP.."/dbimport.lua")
-dofile(xban.MP.."/gui.lua")
