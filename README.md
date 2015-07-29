@@ -32,6 +32,7 @@ This game can be configured for use on any Linux Minetest server.
 |Farming (farming)                          |||
 |Fences (fences)                            |||
 |Flowers (flowers)                          |||
+|Give initial stuff (give_initial_stuff)    |||
 |Gloopblocks (gloopblocks)                  |||
 |Home GUI (home_gui)                        |||
 |Homedecor (homedecor)                      |||
