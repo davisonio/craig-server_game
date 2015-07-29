@@ -15,6 +15,32 @@ minetest.register_craft( {
 	},
 })
 
+--[[
+minetest.register_craft({
+	type = "shapeless",
+	output = "default:nyancat_rainbow",
+	recipe = {
+		"gloopblocks:rainbow_block", 
+		"default:diamondblock",
+		"default:steelblock",
+		"default:copperblock",
+		"default:bronzeblock",
+		"default:goldblock",
+		"default:mese",
+		"moreores:silver_block",
+		"moreores:mithril_block"
+	}
+})
+
+minetest.register_craft({
+	output = "default:nyancat",
+	recipe = {
+		{"gloopblocks:rainbow_block", "gloopblocks:rainbow_block", "gloopblocks:rainbow_block"},
+		{"gloopblocks:rainbow_block", "gloopblocks:rainbow_block", "gloopblocks:rainbow_block"},
+		{"gloopblocks:rainbow_block", "gloopblocks:rainbow_block", "gloopblocks:rainbow_block"},
+	}
+})
+--]]
 minetest.register_craft({
 	type = "shapeless",
 	output = "gloopblocks:wet_cement",
@@ -49,7 +75,7 @@ if minetest.get_modpath("glooptest") then
 			"glooptest:kalite_lump",
 			"default:gold_ingot",
 			"default:coal_lump",
-			"default:stick"
+			"group:stick"
 		}
 	})
 
@@ -62,7 +88,7 @@ elseif minetest.get_modpath("gloopores") then
 			"gloopores:kalite_lump",
 			"default:gold_ingot",
 			"default:coal_lump",
-			"default:stick"
+			"group:stick"
 		}
 	})
 else
@@ -73,7 +99,7 @@ else
 			"default:gold_ingot",
 			"default:gold_ingot",
 			"default:coal_lump",
-			"default:stick"
+			"group:stick"
 		}
 	})
 end
@@ -89,9 +115,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "gloopblocks:scaffolding 12",
 		recipe = {
-		{"default:stick", "group:wood", "default:stick"},
-		{"", "default:stick", ""},
-		{"default:stick", "group:wood", "default:stick"},
+		{"group:stick", "group:wood", "group:stick"},
+		{"", "group:stick", ""},
+		{"group:stick", "group:wood", "group:stick"},
 	}
 })
 
@@ -106,8 +132,8 @@ minetest.register_craft({
 	output = "gloopblocks:pick_cement",
 	recipe = {
 		{"gloopblocks:cement", "gloopblocks:cement", "gloopblocks:cement"},
-		{"", "default:stick", ""},
-		{"", "default:stick", ""},
+		{"", "group:stick", ""},
+		{"", "group:stick", ""},
 	}
 })
 
@@ -115,8 +141,8 @@ minetest.register_craft({
 	output = "gloopblocks:axe_cement",
 	recipe = {
 		{"gloopblocks:cement", "gloopblocks:cement"},
-		{"gloopblocks:cement", "default:stick"},
-		{"", "default:stick"},
+		{"gloopblocks:cement", "group:stick"},
+		{"", "group:stick"},
 	}
 })
 
@@ -124,8 +150,8 @@ minetest.register_craft({
 	output = "gloopblocks:axe_cement",
 	recipe = {
 		{"gloopblocks:cement", "gloopblocks:cement"},
-		{"default:stick", "gloopblocks:cement"},
-		{"default:stick", ""},
+		{"group:stick", "gloopblocks:cement"},
+		{"group:stick", ""},
 	}
 })
 
@@ -133,8 +159,8 @@ minetest.register_craft({
 	output = "gloopblocks:shovel_cement",
 	recipe = {
 		{"gloopblocks:cement"},
-		{"default:stick"},
-		{"default:stick"},
+		{"group:stick"},
+		{"group:stick"},
 	}
 })
 
@@ -143,7 +169,7 @@ minetest.register_craft({
 	recipe = {
 		{"gloopblocks:cement"},
 		{"gloopblocks:cement"},
-		{"default:stick"},
+		{"group:stick"},
 	}
 })
 
@@ -211,11 +237,20 @@ else
 end
 
 minetest.register_craft({
-	output = "gloopblocks:pavement 10",
+	output = "gloopblocks:pavement 5",
 	recipe = {
-		{"default:gravel",    "gloopblocks:wet_cement","default:gravel"},
-		{"gloopblocks:wet_cement","default:gravel",    "gloopblocks:wet_cement"},
-		{"default:gravel",    "gloopblocks:wet_cement","default:gravel"},
+		{"gloopblocks:basalt",    "gloopblocks:wet_cement","gloopblocks:basalt"},
+		{"gloopblocks:wet_cement","gloopblocks:basalt",    "gloopblocks:wet_cement"},
+		{"gloopblocks:basalt",    "gloopblocks:wet_cement","gloopblocks:basalt"},
+	}
+})
+
+minetest.register_craft({
+	output = "gloopblocks:pavement 5",
+	recipe = {
+		{"gloopblocks:wet_cement","gloopblocks:basalt",    "gloopblocks:wet_cement"},
+		{"gloopblocks:basalt",    "gloopblocks:wet_cement","gloopblocks:basalt"},
+		{"gloopblocks:wet_cement","gloopblocks:basalt",    "gloopblocks:wet_cement"},
 	}
 })
 
@@ -347,4 +382,3 @@ minetest.register_craft({
 		"gloopblocks:shrubbery_large"
 	}
 })
-
