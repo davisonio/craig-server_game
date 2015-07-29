@@ -9,6 +9,8 @@ local vessels_shelf_formspec =
 	"list[context;vessels;0,0.3;8,2;]"..
 	"list[current_player;main;0,2.85;8,1;]"..
 	"list[current_player;main;0,4.08;8,3;8]"..
+	"listring[context;vessels]"..
+	"listring[current_player;main]"..
 	default.get_hotbar_bg(0,2.85)
 
 minetest.register_node("vessels:shelf", {
@@ -89,6 +91,7 @@ minetest.register_node("vessels:glass_bottle", {
 	inventory_image = "vessels_glass_bottle_inv.png",
 	wield_image = "vessels_glass_bottle.png",
 	paramtype = "light",
+	is_ground_content = false,
 	walkable = false,
 	selection_box = {
 		type = "fixed",
@@ -114,6 +117,7 @@ minetest.register_node("vessels:drinking_glass", {
 	inventory_image = "vessels_drinking_glass_inv.png",
 	wield_image = "vessels_drinking_glass.png",
 	paramtype = "light",
+	is_ground_content = false,
 	walkable = false,
 	selection_box = {
 		type = "fixed",
@@ -139,6 +143,7 @@ minetest.register_node("vessels:steel_bottle", {
 	inventory_image = "vessels_steel_bottle_inv.png",
 	wield_image = "vessels_steel_bottle.png",
 	paramtype = "light",
+	is_ground_content = false,
 	walkable = false,
 	selection_box = {
 		type = "fixed",
