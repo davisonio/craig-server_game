@@ -18,7 +18,9 @@ local old_nodes = {
     -- Remove memorandum stuff
     "memorandum:letter_written",
     "memorandum:letter_empty",
-    "memorandum:message"
+    "memorandum:message",
+    -- homedecor
+    "homedecor:plasma_lamp"
 }
 for _,node_name in ipairs(old_nodes) do
     minetest.register_node(":"..node_name, {
@@ -35,6 +37,7 @@ minetest.register_abm({
 })
 
 local old_entities = {
+    -- homedecor
 	"homedecor:mesh_desk_fan"
 }
 for _,entity_name in ipairs(old_entities) do
