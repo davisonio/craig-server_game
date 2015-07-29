@@ -99,7 +99,7 @@ inventory_plus.get_formspec = function(player,page)
 				.. get_buttons(6,0,2)
 		else
 			return inventory_plus.inventory[player:get_player_name()]
-				.. get_buttons(0,0,3)
+				.. get_buttons(0,0,2)
 		end
 	end
 end
