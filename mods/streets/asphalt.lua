@@ -322,15 +322,3 @@ minetest.register_craft({
 		{"","",""}
 	}
 })
-
-minetest.register_craft({
-	type = "shapeless",
-	output = "streets:asphalt_side_r",
-	recipe = {"streets:asphalt_side_l"}
-})
-
-minetest.register_craft({
-	type = "shapeless",
-	output = "streets:asphalt_side_l",
-	recipe = {"streets:asphalt_side_r"}
-})
