@@ -47,6 +47,7 @@ This game can be configured for use on any Linux Minetest server.
 |More Blocks (moreblocks)                   |||
 |More Ores (moreores)                       |||
 |Names per IP (names_per_ip)                |||
+|Name restrictions (name_restrictions)      |||
 |Replacer (replacer)                        |||
 |Screwdriver (screwdriver)                  |||
 |Shields (shields)                          |||

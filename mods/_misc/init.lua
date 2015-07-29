@@ -11,9 +11,6 @@ dofile(minetest.get_modpath("_misc").."/give_initial_stuff.lua")
 -- Chat Commands
 dofile(minetest.get_modpath("_misc").."/chatcommands.lua")
 
--- Username filter
-dofile(minetest.get_modpath("_misc").."/username_filter.lua")
-
 -- Automatic Messages
 dofile(minetest.get_modpath("_misc").."/auto_messages.lua")
 
