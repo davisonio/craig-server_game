@@ -18,9 +18,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
--- Version 2.1
+-- Version 3.0
 
 -- Changelog: 
+-- 02.10.2014 * Some more improvements for inspect-tool. Added craft-guide.
+-- 01.10.2014 * Added inspect-tool.
 -- 12.01.2013 * If digging the node was unsuccessful, then the replacement will now fail
 --              (instead of destroying the old node with its metadata; i.e. chests with content)
 -- 20.11.2013 * if the server version is new enough, minetest.is_protected is used
@@ -36,6 +38,8 @@ dofile(minetest.get_modpath("replacer").."/check_owner.lua");
 
 replacer = {};
 
+-- adds a tool for inspecting nodes and entities
+dofile(minetest.get_modpath("replacer").."/inspect.lua");
 
 minetest.register_tool( "replacer:replacer",
 {
@@ -81,7 +85,6 @@ minetest.register_tool( "replacer:replacer",
           return nil;
        end
 
-       local under
        local pos  = minetest.get_pointed_thing_position( pointed_thing, under );
        local node = minetest.env:get_node_or_nil( pos );
        
@@ -105,7 +108,7 @@ minetest.register_tool( "replacer:replacer",
 --    on_drop = func(itemstack, dropper, pos),
 
     on_use = function(itemstack, user, pointed_thing)
-    local above
+
        return replacer.replace( itemstack, user, pointed_thing, above );
     end,
 })
@@ -231,3 +234,5 @@ minetest.register_craft({
                 { '',              '',              'default:chest' },
         }
 })
+
+

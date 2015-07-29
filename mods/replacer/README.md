@@ -1,18 +1,17 @@
-TODO: A distinct image is still missing. Right now, it looks like a steel axe!
-
    Replacement tool for creative building (Mod for MineTest)
 
 This tool is helpful for creative purposes (i.e. build a wall and "paint" windows into it).
 It replaces nodes with a previously selected other type of node (i.e. places said windows
 into a brick wall).
 
-Crafting:   (nothing) stick (nothing)
-            (nothing) stick (nothing)
-            (nothing) empty_bucket (nothing)
+Crafting:   chest  -      -
+            -      stick  -
+            -      -      chest
 Or just use /giveme replacer:replacer
 
 Usage: Right-click on a node of that type you want to replace other nodes with.
        Left-click (normal usage) on any nodes you want to replace with the type you previously right-clicked on.
+       SHIFT-Right-click in order to store a new pattern.
 
 When in creative mode, the node will just be replaced. Your inventory will not be changed.
 
@@ -20,8 +19,16 @@ When not in creative mode, digging will be simulated and you will get what was t
 will be taken from your inventory.
 
 
+The second tool included in this mod is the inspector.
 
-    Copyright (C) 2013 Sokomine
+Crafting:    torch
+             stick
+
+Just wield it and click on any node or entity you want to know more about. A limited craft-guide is included.
+
+
+
+    Copyright (C) 2013,2014,2015 Sokomine
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
