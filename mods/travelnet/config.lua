@@ -1,4 +1,5 @@
-travelnet.MAX_STATIONS_PER_NETWORK = 24;
+
+travelnet.MAX_STATIONS_PER_NETWORK = 27;
 
 -- set this to true if you want a simulated beam effect
 travelnet.travelnet_effect_enabled = false;
@@ -14,6 +15,8 @@ travelnet.elevator_enabled         = true;
 -- if you set this to false, doors will be disabled
 travelnet.doors_enabled            = true;
 
+-- starts an abm which re-adds travelnet stations to networks in case the savefile got lost
+travelnet.abm_enabled              = false;
 
 -- change these if you want other receipes for travelnet or elevator
 travelnet.travelnet_recipe = {
@@ -22,9 +25,9 @@ travelnet.travelnet_recipe = {
                 {"default:glass", "default:steel_ingot", "default:glass", }
 }
 travelnet.elevator_recipe = {
-				{"default:steel_ingot", "default:glass", "default:steel_ingot", },
-				{"default:steel_ingot", "",              "default:steel_ingot", },
-				{"default:steel_ingot", "default:glass", "default:steel_ingot", }
+	        {"default:steel_ingot", "default:glass", "default:steel_ingot", },
+		{"default:steel_ingot", "",              "default:steel_ingot", },
+		{"default:steel_ingot", "default:glass", "default:steel_ingot", }
 }
 
 -- if this function returns true, the player with the name player_name is

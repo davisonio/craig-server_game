@@ -1,3 +1,62 @@
+
+          
+--[[
+    Teleporter networks that allow players to choose a destination out of a list
+    Copyright (C) 2013 Sokomine
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ Version: 2.2 (with optional abm for self-healing)
+    
+ Please configure this mod in config.lua
+
+ Changelog:
+ 05.10.14 - Added an optional abm so that the travelnet network can heal itshelf in case of loss of the savefile.
+            If you want to use this, set
+                  travelnet.enable_abm = true
+            in config.lua and edit the interval in the abm to suit your needs.
+ 19.11.13 - moved doors and travelnet definition into an extra file
+          - moved configuration to config.lua
+ 05.08.13 - fixed possible crash when the node in front of the travelnet is unknown
+ 26.06.13 - added inventory image for elevator (created by VanessaE)
+ 21.06.13 - bugfix: wielding an elevator while digging a door caused the elevator_top to be placed
+          - leftover floating elevator_top nodes can be removed by placing a new travelnet:elevator underneath them and removing that afterwards
+          - homedecor-doors are now opened and closed correctly as well
+          - removed nodes that are not intended for manual use from creative inventory
+          - improved naming of station levels for the elevator
+ 21.06.13 - elevator stations are sorted by height instead of date of creation as is the case with travelnet boxes
+          - elevator stations are named automaticly
+ 20.06.13 - doors can be opened and closed from inside the travelnet box/elevator
+          - the elevator can only move vertically; the network name is defined by its x and z coordinate
+ 13.06.13 - bugfix
+          - elevator added (written by kpoppel) and placed into extra file
+          - elevator doors added
+          - groups changed to avoid accidental dig/drop on dig of node beneath
+          - added new priv travelnet_remove for digging of boxes owned by other players
+          - only the owner of a box or players with the travelnet_remove priv can now dig it
+          - entering your own name as owner_name does no longer abort setup
+ 22.03.13 - added automatic detection if yaw can be set
+          - beam effect is disabled by default
+ 20.03.13 - added inventory image provided by VanessaE
+          - fixed bug that made it impossible to remove stations from the net
+          - if the station a player beamed to no longer exists, the station will be removed automaticly
+          - with the travelnet_attach priv, you can now attach your box to the nets of other players
+          - in newer versions of Minetest, the players yaw is set so that he/she looks out of the receiving box
+          - target list is now centered if there are less than 9 targets
+--]]
+
+
 minetest.register_privilege("travelnet", "Travelnet admin.")
 
 travelnet = {};
@@ -46,9 +105,9 @@ end
 
 travelnet.update_formspec = function( pos, puncher_name )
 
-   local meta = minetest.env:get_meta(pos);
+   local meta = minetest.get_meta(pos);
 
-   local this_node   = minetest.env:get_node( pos );
+   local this_node   = minetest.get_node( pos );
    local is_elevator = false;
 
    if( this_node ~= nil and this_node.name == 'travelnet:elevator' ) then
@@ -227,7 +286,7 @@ end
 travelnet.add_target = function( station_name, network_name, pos, player_name, meta, owner_name )
 
    -- if it is an elevator, determine the network name through x and z coordinates
-   local this_node   = minetest.env:get_node( pos );
+   local this_node   = minetest.get_node( pos );
    local is_elevator = false;
 
    if( this_node.name == 'travelnet:elevator' ) then
@@ -329,7 +388,7 @@ end
 -- allow doors to open
 travelnet.open_close_door = function( pos, player, mode )
 
-   local this_node = minetest.env:get_node( pos );
+   local this_node = minetest.get_node( pos );
    local pos2 = {x=pos.x,y=pos.y,z=pos.z};
 
    if(     this_node.param2 == 0 ) then pos2 = {x=pos.x,y=pos.y,z=(pos.z-1)};
@@ -338,7 +397,7 @@ travelnet.open_close_door = function( pos, player, mode )
    elseif( this_node.param2 == 3 ) then pos2 = {x=(pos.x+1),y=pos.y,z=pos.z};
    end
 
-   local door_node = minetest.env:get_node( pos2 );
+   local door_node = minetest.get_node( pos2 );
    if( door_node ~= nil and door_node.name ~= 'ignore' and door_node.name ~= 'air' and minetest.registered_nodes[ door_node.name ] ~= nil and minetest.registered_nodes[ door_node.name ].on_rightclick ~= nil) then
 
       -- at least for homedecor, same facedir would mean "door closed"
@@ -372,7 +431,7 @@ end
 
 
 travelnet.on_receive_fields = function(pos, formname, fields, player)
-   local meta = minetest.env:get_meta(pos);
+   local meta = minetest.get_meta(pos);
 
    local name = player:get_player_name();
 
@@ -407,14 +466,20 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
      or not( travelnet.targets[ owner_name ][ station_network ] )) then
 
 
-      minetest.chat_send_player(name, "Error: There is something wrong with the configuration of this station. "..
+      if(     owner_name
+          and station_name
+          and station_network ) then
+            travelnet.add_target( station_name, station_network, pos, owner_name, meta, owner_name );
+      else
+         minetest.chat_send_player(name, "Error: There is something wrong with the configuration of this station. "..
                                       " DEBUG DATA: owner: "..(  owner_name or "?")..
                                       " station_name: "..(station_name or "?")..
                                       " station_network: "..(station_network or "?")..".");
-      return
+         return
+      end
    end
 
-   local this_node = minetest.env:get_node( pos );
+   local this_node = minetest.get_node( pos );
    if( this_node ~= nil and this_node.name == 'travelnet:elevator' ) then 
       for k,v in pairs( travelnet.targets[ owner_name ][ station_network ] ) do
          if( travelnet.targets[ owner_name ][ station_network ][ k ].nr  --..' ('..tostring( travelnet.targets[ owner_name ][ station_network ][ k ].pos.y )..'m)'
@@ -445,7 +510,7 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
       minetest.sound_play("128590_7037-lq.mp3", {pos = pos, gain = 1.0, max_hear_distance = 10,})
    end
    if( travelnet.travelnet_effect_enabled ) then 
-      minetest.env:add_entity( {x=pos.x,y=pos.y+0.5,z=pos.z}, "travelnet:effect"); -- it self-destructs after 20 turns
+      minetest.add_entity( {x=pos.x,y=pos.y+0.5,z=pos.z}, "travelnet:effect"); -- it self-destructs after 20 turns
    end
 
    -- close the doors at the sending station
@@ -459,12 +524,12 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
       minetest.sound_play("travelnet_travel.wav", {pos = target_pos, gain = 1.0, max_hear_distance = 10,})
    end
    if( travelnet.travelnet_effect_enabled ) then 
-      minetest.env:add_entity( {x=target_pos.x,y=target_pos.y+0.5,z=target_pos.z}, "travelnet:effect"); -- it self-destructs after 20 turns
+      minetest.add_entity( {x=target_pos.x,y=target_pos.y+0.5,z=target_pos.z}, "travelnet:effect"); -- it self-destructs after 20 turns
    end
 
 
    -- check if the box has at the other end has been removed.
-   local node2 = minetest.env:get_node(  target_pos );
+   local node2 = minetest.get_node(  target_pos );
    if( node2 ~= nil and node2.name ~= 'ignore' and node2.name ~= 'travelnet:travelnet' and node2.name ~= 'travelnet:elevator') then
 
       -- provide information necessary to identify the removed box
@@ -547,7 +612,7 @@ travelnet.can_dig = function( pos, player, description )
       return true;
    end
 
-   local meta          = minetest.env:get_meta( pos );
+   local meta          = minetest.get_meta( pos );
    local owner         = meta:get_string('owner');
 
    if( not( meta ) or not( owner) or owner=='') then
@@ -608,6 +673,10 @@ if( travelnet.doors_enabled ) then
    dofile(minetest.get_modpath("travelnet").."/doors.lua");     -- doors that open and close automaticly when the travelnet or elevator is used
 end
 
+if( travelnet.abm_enabled ) then
+   dofile(minetest.get_modpath("travelnet").."/restore_network_via_abm.lua"); -- restore travelnet data when players pass by broken networks
+end
 
 -- upon server start, read the savefile
 travelnet.restore_data();
+
