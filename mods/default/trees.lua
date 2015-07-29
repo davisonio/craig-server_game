@@ -29,8 +29,12 @@ minetest.register_abm({
 		end
 
 		minetest.log("action", "A sapling grows into a tree at "..
-				minetest.pos_to_string(pos))
-		default.grow_tree(pos, random(1, 4) == 1)
+			minetest.pos_to_string(pos))
+		if minetest.get_mapgen_params().mgname == "v6" then
+			default.grow_tree(pos, random(1, 4) == 1)
+		else
+			default.grow_new_apple_tree(pos)
+		end
 	end
 })
 
@@ -44,8 +48,12 @@ minetest.register_abm({
 		end
 
 		minetest.log("action", "A jungle sapling grows into a tree at "..
-				minetest.pos_to_string(pos))
-		default.grow_jungle_tree(pos)
+			minetest.pos_to_string(pos))
+		if minetest.get_mapgen_params().mgname == "v6" then
+			default.grow_jungle_tree(pos)
+		else
+			default.grow_new_jungle_tree(pos)
+		end
 	end
 })
 
@@ -59,8 +67,27 @@ minetest.register_abm({
 		end
 
 		minetest.log("action", "A pine sapling grows into a tree at "..
-				minetest.pos_to_string(pos))
-		default.grow_pine_tree(pos)
+			minetest.pos_to_string(pos))
+		if minetest.get_mapgen_params().mgname == "v6" then
+			default.grow_pine_tree(pos)
+		else
+			default.grow_new_pine_tree(pos)
+		end
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"default:acacia_sapling"},
+	interval = 13,
+	chance = 50,
+	action = function(pos, node)
+		if not can_grow(pos) then
+			return
+		end
+
+		minetest.log("action", "An acacia sapling grows into a tree at "..
+			minetest.pos_to_string(pos))
+		default.grow_new_acacia_tree(pos)
 	end
 })
 
@@ -74,11 +101,11 @@ local function add_trunk_and_leaves(data, a, pos, tree_cid, leaves_cid,
 	local c_apple = minetest.get_content_id("default:apple")
 
 	-- Trunk
-	for y_dist = 0, height - 1 do
-		local vi = a:index(x, y + y_dist, z)
+	data[a:index(x, y, z)] = tree_cid -- Force-place lowest trunk node to replace sapling
+	for yy = y + 1, y + height - 1 do
+		local vi = a:index(x, yy, z)
 		local node_id = data[vi]
-		if y_dist == 0 or node_id == c_air or node_id == c_ignore
-		or node_id == leaves_cid then
+		if node_id == c_air or node_id == c_ignore or node_id == leaves_cid then
 			data[vi] = tree_cid
 		end
 	end
@@ -209,13 +236,15 @@ end
 -- Pinetree from mg mapgen mod, design by sfan5, pointy top added by paramat
 
 local function add_pine_needles(data, vi, c_air, c_ignore, c_snow, c_pine_needles)
-	if data[vi] == c_air or data[vi] == c_ignore or data[vi] == c_snow then
+	local node_id = data[vi]
+	if node_id == c_air or node_id == c_ignore or node_id == c_snow then
 		data[vi] = c_pine_needles
 	end
 end
 
 local function add_snow(data, vi, c_air, c_ignore, c_snow)
-	if data[vi] == c_air or data[vi] == c_ignore then
+	local node_id = data[vi]
+	if node_id == c_air or node_id == c_ignore then
 		data[vi] = c_snow
 	end
 end
@@ -240,16 +269,14 @@ function default.grow_pine_tree(pos)
 	local a = VoxelArea:new({MinEdge = minp, MaxEdge = maxp})
 	local data = vm:get_data()
 
-	-- Scan for snow nodes near sapling
+	-- Scan for snow nodes near sapling to enable snow on branches
 	local snow = false
 	for yy = y - 1, y + 1 do
 	for zz = z - 1, z + 1 do
 		local vi  = a:index(x - 1, yy, zz)
 		for xx = x - 1, x + 1 do
 			local nodid = data[vi]
-			if nodid == c_snow
-			or nodid == c_snowblock
-			or nodid == c_dirtsnow then
+			if nodid == c_snow or nodid == c_snowblock or nodid == c_dirtsnow then
 				snow = true
 			end
 			vi  = vi + 1
@@ -266,7 +293,7 @@ function default.grow_pine_tree(pos)
 			for xx = x - dev, x + dev do
 				if random() < 0.95 - dev * 0.05 then
 					add_pine_needles(data, vi, c_air, c_ignore, c_snow,
-							c_pine_needles)
+						c_pine_needles)
 					if snow then
 						add_snow(data, via, c_air, c_ignore, c_snow)
 					end
@@ -280,9 +307,9 @@ function default.grow_pine_tree(pos)
 
 	-- Centre top nodes
 	add_pine_needles(data, a:index(x, maxy + 1, z), c_air, c_ignore, c_snow,
-			c_pine_needles)
+		c_pine_needles)
 	add_pine_needles(data, a:index(x, maxy + 2, z), c_air, c_ignore, c_snow,
-			c_pine_needles) -- Paramat added a pointy top node
+		c_pine_needles) -- Paramat added a pointy top node
 	if snow then
 		add_snow(data, a:index(x, maxy + 3, z), c_air, c_ignore, c_snow)
 	end
@@ -301,7 +328,7 @@ function default.grow_pine_tree(pos)
 			local via = a:index(xi, yy + 1, zz)
 			for xx = xi, xi + 1 do
 				add_pine_needles(data, vi, c_air, c_ignore, c_snow,
-						c_pine_needles)
+					c_pine_needles)
 				if snow then
 					add_snow(data, via, c_air, c_ignore, c_snow)
 				end
@@ -319,7 +346,7 @@ function default.grow_pine_tree(pos)
 			for xx = x - dev, x + dev do
 				if random() < 0.95 - dev * 0.05 then
 					add_pine_needles(data, vi, c_air, c_ignore, c_snow,
-							c_pine_needles)
+						c_pine_needles)
 					if snow then
 						add_snow(data, via, c_air, c_ignore, c_snow)
 					end
@@ -332,9 +359,13 @@ function default.grow_pine_tree(pos)
 	end
 
 	-- Trunk
-	for yy = y, maxy do
+	data[a:index(x, y, z)] = c_pinetree -- Force-place lowest trunk node to replace sapling
+	for yy = y + 1, maxy do
 		local vi = a:index(x, yy, z)
-		data[vi] = c_pinetree
+		local node_id = data[vi]
+		if node_id == c_air or node_id == c_ignore or node_id == c_pine_needles then
+			data[vi] = c_pinetree
+		end
 	end
 
 	vm:set_data(data)
@@ -342,3 +373,34 @@ function default.grow_pine_tree(pos)
 	vm:update_map()
 end
 
+-- New tree
+
+function default.grow_new_apple_tree(pos)
+	local path = minetest.get_modpath("default") .. "/schematics/apple_tree.mts"
+	minetest.place_schematic({x = pos.x - 2, y = pos.y - 1, z = pos.z - 2},
+		path, 0, nil, false)
+end
+
+-- New jungle tree
+
+function default.grow_new_jungle_tree(pos)
+	local path = minetest.get_modpath("default") .. "/schematics/jungle_tree.mts"
+	minetest.place_schematic({x = pos.x - 2, y = pos.y - 1, z = pos.z - 2},
+		path, 0, nil, false)
+end
+
+-- New pine tree
+
+function default.grow_new_pine_tree(pos)
+	local path = minetest.get_modpath("default") .. "/schematics/pine_tree.mts"
+	minetest.place_schematic({x = pos.x - 2, y = pos.y - 1, z = pos.z - 2},
+		path, 0, nil, false)
+end
+
+-- New acacia tree
+
+function default.grow_new_acacia_tree(pos)
+	local path = minetest.get_modpath("default") .. "/schematics/acacia_tree.mts"
+	minetest.place_schematic({x = pos.x - 4, y = pos.y - 1, z = pos.z - 4},
+		path, random, nil, false)
+end
