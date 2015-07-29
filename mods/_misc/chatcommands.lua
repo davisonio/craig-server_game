@@ -29,26 +29,44 @@ minetest.register_chatcommand("ban", {
 	description = "Ban IP of player",
 	privs = {ban=true},
 	func = function(name, param)
-		if param == "" then
-			return true, "Ban list: " .. minetest.get_ban_list()
-		end
-		if not minetest.get_player_by_name(param) then
-			return false, "This player is not online at the moment. Use a /future_ban instead."
-		end
-		if not minetest.ban_player(param) then
-			return false, "Failed to ban player."
-		end
-		local desc = minetest.get_ban_description(param)
-		minetest.log("action", name .. " bans " .. desc .. ".")
-		return true, "Banned " .. desc .. "."
+		return false, "/ban is not in use. Please use /xban instead."
 	end,
 })
 
--- /unban
+minetest.register_chatcommand("unban", {
+	params = "<name/ip>",
+	description = "remove IP ban",
+	privs = {ban=true},
+	func = function(name, param)
+		return false, "/unban is not in use. Please use /xunban instead."
+	end,
+})
+
 -- /kick
 -- /clearobjects
--- /msg
--- /lastlogin
+
+minetest.register_chatcommand("msg", {
+	params = "<name> <message>",
+	description = "Send a private message",
+	privs = {shout=true},
+	func = function(name, param)
+		local sendto, message = param:match("^(%S+)%s(.+)$")
+		if not sendto then
+			return false, "Invalid usage, see /help msg."
+		end
+		if not core.get_player_by_name(sendto) then
+			return false, "The player " .. sendto
+					.. " is not online."
+		end
+		core.log("action", "PM from " .. name .. " to " .. sendto
+				.. ": " .. message)
+		core.chat_send_player(sendto, "PM from " .. name .. ": "
+				.. message)
+		return true, "Message sent."
+	end,
+})
+
+-- /last-login
 
 --
 -- Other chat commands
