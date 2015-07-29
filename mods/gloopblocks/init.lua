@@ -84,7 +84,7 @@ minetest.register_node("gloopblocks:evil_block", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-
+--[[
 minetest.register_node("gloopblocks:basalt", {
 	description = S("Basalt"),
 	tiles = {"gloopblocks_basalt.png"},
@@ -98,7 +98,7 @@ minetest.register_node("gloopblocks:pumice", {
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
+--]]
 
 minetest.register_node("gloopblocks:pavement", {
 	description = S("Pavement"),
@@ -312,7 +312,7 @@ if minetest.get_modpath("moreblocks") then
 		light_source = 5,
 		sunlight_propagates = true,
 	})
-	
+	--[[
 	stairsplus:register_all("gloopblocks", "basalt", "gloopblocks:basalt", {
 		description = "Basalt",
 		tiles = {"gloopblocks_basalt.png"},
@@ -328,7 +328,7 @@ if minetest.get_modpath("moreblocks") then
 		sounds = default.node_sound_stone_defaults(),
 		sunlight_propagates = true,
 	})
-
+	--]]
 	local colorlist = {
 		{"white",      "White"},
 		{"grey",       "Grey"},
@@ -643,7 +643,7 @@ minetest.register_craftitem("gloopblocks:evil_stick", {
 
 -- define lava-cooling-based nodes and hook into the default lavacooling
 -- functions to generate basalt, pumice, and obsidian
-
+--[[
 if minetest.setting_getbool("gloopblocks_lavacooling") ~= false then
 
 	minetest.register_node("gloopblocks:obsidian_cooled", {
@@ -705,7 +705,7 @@ if minetest.setting_getbool("gloopblocks_lavacooling") ~= false then
 		end
 	end
 end
-
+--]]
 dofile(minetest.get_modpath("gloopblocks").."/crafts.lua")
 
 print(S("Gloopblocks Loaded!"))

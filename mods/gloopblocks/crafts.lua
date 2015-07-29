@@ -239,18 +239,9 @@ end
 minetest.register_craft({
 	output = "gloopblocks:pavement 5",
 	recipe = {
-		{"gloopblocks:basalt",    "gloopblocks:wet_cement","gloopblocks:basalt"},
-		{"gloopblocks:wet_cement","gloopblocks:basalt",    "gloopblocks:wet_cement"},
-		{"gloopblocks:basalt",    "gloopblocks:wet_cement","gloopblocks:basalt"},
-	}
-})
-
-minetest.register_craft({
-	output = "gloopblocks:pavement 5",
-	recipe = {
-		{"gloopblocks:wet_cement","gloopblocks:basalt",    "gloopblocks:wet_cement"},
-		{"gloopblocks:basalt",    "gloopblocks:wet_cement","gloopblocks:basalt"},
-		{"gloopblocks:wet_cement","gloopblocks:basalt",    "gloopblocks:wet_cement"},
+		{"default:gravel",    "gloopblocks:wet_cement","default:gravel"},
+		{"gloopblocks:wet_cement","default:gravel",    "gloopblocks:wet_cement"},
+		{"default:gravel",    "gloopblocks:wet_cement","default:gravel"},
 	}
 })
 
