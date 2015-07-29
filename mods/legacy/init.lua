@@ -115,3 +115,6 @@ minetest.register_alias("memorandum:letter_written", "default:paper")
 minetest.register_alias("memorandum:letter", "default:paper")
 minetest.register_alias("memorandum:message", "default:paper")
 minetest.register_alias("memorandum:eraser", "default:paper")
+
+-- super apple -> normal apple
+minetest.register_alias("_misc:super_apple", "default:apple")

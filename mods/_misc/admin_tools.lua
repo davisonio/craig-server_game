@@ -1,18 +1,3 @@
--- Super apple!
-minetest.register_node("_misc:super_apple", {
-	description = "Super Apple",
-	drawtype = "plantlike",
-	visual_scale = 1.0,
-	tile_images = {"misc_super_apple.png"},
-	inventory_image = "misc_super_apple.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	groups = {fleshy=3,dig_immediate=3},
-	on_use = minetest.item_eat(20),
-	sounds = default.node_sound_defaults(),
-})
-
 -- Admin pick
 minetest.register_tool("_misc:pick_admin", {
 	description = "Admin Pickaxe [Digs blocks instantly - returns in inv]",
