@@ -26,8 +26,8 @@ dofile(minetest.get_modpath("_misc").."/admin_tools.lua")
 -- Death Messages
 dofile(minetest.get_modpath("_misc").."/death_messages.lua")
 
--- Privileges and Ranks
-dofile(minetest.get_modpath("_misc").."/privs.lua")
+-- Users with the "access" privilege can access certain things
+dofile(minetest.get_modpath("_misc").."/access.lua")
 
 -- Item Pickup
 dofile(minetest.get_modpath("_misc").."/item_pickup.lua")
