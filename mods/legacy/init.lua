@@ -118,3 +118,8 @@ minetest.register_alias("memorandum:eraser", "default:paper")
 
 -- super apple -> normal apple
 minetest.register_alias("_misc:super_apple", "default:apple")
+
+-- dusts -> ingots
+minetest.register_alias("dusts:iron", "default:steel_ingot")
+minetest.register_alias("dusts:copper", "default:copper_ingot")
+minetest.register_alias("dusts:gold", "default:gold_ingot")

@@ -24,7 +24,6 @@ This game can be configured for use on any Linux Minetest server.
 |Darkage (darkage)                          |||
 |Default (default)                          |||
 |Doors (doors)                              |||
-|Dusts (dusts)                              |||
 |Dye (dye)                                  |||
 |Email (email)           					|||
 |External commands (external_cmd)           |||
