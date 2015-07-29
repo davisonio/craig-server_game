@@ -6,9 +6,7 @@ It is a tweaked version of [Minetest Game](https://github.com/minetest/minetest_
 * [Forum topic](https://forum.minetest.net/viewtopic.php?f=10&t=7010)
 
 ## Installation & Usage
-This game can be configured and used for any Minetest server. Currently, instructions are only provided for Linux operating systems.
-##### 1. Run the Installation Script
-Coming soon
+This game can be configured for use on any Linux Minetest server.
 
 ## List of mods
 
@@ -28,6 +26,8 @@ Coming soon
 |Doors (doors)                              |||
 |Dusts (dusts)                              |||
 |Dye (dye)                                  |||
+|Email (email)           					|||
+|External commands (external_cmd)           |||
 |Fake Fire (fake_fire)                      |||
 |Farming (farming)                          |||
 |Fences (fences)                            |||
@@ -37,13 +37,16 @@ Coming soon
 |Homedecor (homedecor)                      |||
 |Industry Pack Reloaded! (industry_pack)    |||
 |Inventory++ (inventory_plus)               |||
+|IRC (irc)             						|||
 |Item Frames (itemframes)                   |||
+|Legacy (legacy)                            |||
 |Locked Sign (locked_sign)                  |||
 |Living Room Furniture (lrfun)              |||
 |Area Protection Markers (markers)          |||
 |More Chests (more_chests)                  |||
 |More Blocks (moreblocks)                   |||
 |More Ores (moreores)                       |||
+|Names per IP (names_per_ip)                |||
 |Replacer (replacer)                        |||
 |Screwdriver (screwdriver)                  |||
 |Shields (shields)                          |||
