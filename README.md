@@ -35,7 +35,6 @@ This game can be configured for use on any Linux Minetest server.
 |Gloopblocks (gloopblocks)                  |||
 |Home GUI (home_gui)                        |||
 |Homedecor (homedecor)                      |||
-|Industry Pack Reloaded! (industry_pack)    |||
 |Inventory++ (inventory_plus)               |||
 |IRC (irc)             						|||
 |Item Frames (itemframes)                   |||
