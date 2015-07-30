@@ -31,6 +31,7 @@ This game can be configured for use on any Linux Minetest server.
 |Farming (farming)                          |||
 |Fences (fences)                            |||
 |Flowers (flowers)                          |||
+|Forbidden usernames (forbidden_usernames)  |||
 |Give initial stuff (give_initial_stuff)    |||
 |Gloopblocks (gloopblocks)                  |||
 |Home GUI (home_gui)                        |||
@@ -46,7 +47,6 @@ This game can be configured for use on any Linux Minetest server.
 |More Blocks (moreblocks)                   |||
 |More Ores (moreores)                       |||
 |Names per IP (names_per_ip)                |||
-|Name restrictions (name_restrictions)      |||
 |Replacer (replacer)                        |||
 |Screwdriver (screwdriver)                  |||
 |Shields (shields)                          |||
