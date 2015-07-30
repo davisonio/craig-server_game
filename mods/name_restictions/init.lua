@@ -46,7 +46,7 @@ end)
 ------------------------
 -- Case-insensitivity --
 ------------------------
-
+--[[
 minetest.register_on_prejoinplayer(function(name, ip)
 	local lname = name:lower()
 	for iname, data in pairs(minetest.auth_table) do
@@ -77,7 +77,7 @@ minetest.register_chatcommand("choosecase", {
 		return true, "Done."
 	end,
 })
-
+--]]
 
 ------------------------
 -- Anti-impersonation --
