@@ -39,6 +39,7 @@ This game can be configured for use on any Linux Minetest server.
 |Homedecor (homedecor)                      ||[GitHub/VanessaE](https://github.com/VanessaE/homedecor_modpack/tree/master/homedecor)|
 |Inventory++ (inventory_plus)               ||[GitHub/Zeg9](https://github.com/Zeg9/minetest-inventory_plus)|
 |IRC (irc)             						||[GitHub/kaeza](https://github.com/kaeza/minetest-irc)|
+|IRC commands (irc_commands)             	||[GitHub/ShadowNinja](https://github.com/ShadowNinja/minetest-irc_commands)|
 |Item Frames (itemframes)                   ||[GitHub/VanessaE](https://github.com/VanessaE/homedecor_modpack/tree/master/itemframes)|
 |Legacy (legacy)                            |||
 |Locked Sign (locked_sign)                  ||[GitHub/Kotolegokot](https://github.com/Kotolegokot/minetest-mod-locked_sign)|
