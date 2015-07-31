@@ -36,10 +36,7 @@ minetest.register_abm({
     end,
 })
 
-local old_entities = {
-    -- homedecor
-	"homedecor:mesh_desk_fan"
-}
+local old_entities = {}
 for _,entity_name in ipairs(old_entities) do
     minetest.register_entity(":"..entity_name, {
         on_activate = function(self, staticdata)

@@ -348,28 +348,3 @@ minetest.register_craft({
 		"default:grass_1"
 	}
 })
-
-minetest.register_craft({
-	output = "gloopblocks:shrubbery 3",
-	recipe = {
-		{ "group:leaves", "group:leaves", "group:leaves" },
-		{ "group:leaves", "group:leaves", "group:leaves" },
-		{ "group:stick", "group:stick", "group:stick" }
-	}
-})
-
-minetest.register_craft({
-	type = "shapeless",
-	output = "gloopblocks:shrubbery_large",
-	recipe = {
-		"gloopblocks:shrubbery"
-	}
-})
-
-minetest.register_craft({
-	type = "shapeless",
-	output = "gloopblocks:shrubbery",
-	recipe = {
-		"gloopblocks:shrubbery_large"
-	}
-})

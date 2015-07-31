@@ -2,19 +2,22 @@ minetest.register_node("homedecor:cobweb_corner", {
 	description = "Cobweb",
 	drawtype = "torchlike",
 	tiles = { "homedecor_cobweb_torchlike.png" },
-	inventory_image = "homedecor_cobweb_inv.png",
-	wield_image = "homedecor_cobweb_inv.png",
+	inventory_image = "homedecor_cobweb.png",
+	wield_image = "homedecor_cobweb.png",
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
+	liquid_viscosity = 8,
+	liquidtype = "source",
+	liquid_alternative_flowing = "homedecor:cobweb_corner",
+	liquid_alternative_source = "homedecor:cobweb_corner",
+	liquid_renewable = false,
+	liquid_range = 0,
 	walkable = false,
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}
-	},
+	selection_box = { type = "regular" },
 	visual_scale = 1.4,
-	groups = { snappy = 3 },
-    after_place_node = function(pos, placer, itemstack, pointed_thing)
+	groups = { snappy = 3, liquid=3 },
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		homedecor.rotate_cobweb(pos)
 	end
 })
@@ -23,10 +26,16 @@ minetest.register_node("homedecor:cobweb_centered", {
 	description = "Cobweb",
 	drawtype = "nodebox",
 	tiles = { "homedecor_cobweb.png" },
-	inventory_image = "homedecor_cobweb_inv.png",
+	inventory_image = "homedecor_cobweb.png",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	liquid_viscosity = 8,
+	liquidtype = "source",
+	liquid_alternative_flowing = "homedecor:cobweb_centered",
+	liquid_alternative_source = "homedecor:cobweb_centered",
+	liquid_renewable = false,
+	liquid_range = 0,
 	walkable = false,
 	selection_box = {
 		type = "fixed",
@@ -36,7 +45,7 @@ minetest.register_node("homedecor:cobweb_centered", {
 		type = "fixed",
 		fixed = { -0.5, -0.5, 0, 0.5, 0.5, 0 }
 	},
-	groups = { snappy = 3, not_in_creative_inventory = 1 },
+	groups = { snappy = 3, liquid=3, not_in_creative_inventory = 1 },
 	drop = "homedecor:cobweb_corner"
 })
 
@@ -44,10 +53,16 @@ minetest.register_node("homedecor:cobweb_flat", {
 	description = "Cobweb",
 	drawtype = "nodebox",
 	tiles = { "homedecor_cobweb.png" },
-	inventory_image = "homedecor_cobweb_inv.png",
+	inventory_image = "homedecor_cobweb.png",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	liquid_viscosity = 8,
+	liquidtype = "source",
+	liquid_alternative_flowing = "homedecor:cobweb_flat",
+	liquid_alternative_source = "homedecor:cobweb_flat",
+	liquid_renewable = false,
+	liquid_range = 0,
 	walkable = false,
 	selection_box = {
 		type = "fixed",
@@ -57,7 +72,7 @@ minetest.register_node("homedecor:cobweb_flat", {
 		type = "fixed",
 		fixed = { -0.5, -0.5, 0.495, 0.5, 0.5, 0.495 }
 	},
-	groups = { snappy = 3, not_in_creative_inventory = 1 },
+	groups = { snappy = 3, liquid=3, not_in_creative_inventory = 1 },
 	drop = "homedecor:cobweb_corner"
 })
 
@@ -65,17 +80,20 @@ minetest.register_node("homedecor:cobweb_plantlike", {
 	description = "Cobweb",
 	drawtype = "plantlike",
 	tiles = { "homedecor_cobweb_plantlike.png" },
-	inventory_image = "homedecor_cobweb_inv.png",
+	inventory_image = "homedecor_cobweb.png",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	liquid_viscosity = 8,
+	liquidtype = "source",
+	liquid_alternative_flowing = "homedecor:cobweb_plantlike",
+	liquid_alternative_source = "homedecor:cobweb_plantlike",
+	liquid_renewable = false,
+	liquid_range = 0,
 	walkable = false,
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}
-	},
+	selection_box = { type = "regular" },
 	visual_scale = 1.189,
-	groups = { snappy = 3, not_in_creative_inventory = 1 },
+	groups = { snappy = 3, liquid=3, not_in_creative_inventory = 1 },
 	drop = "homedecor:cobweb_corner"
 })
 
@@ -95,23 +113,23 @@ function homedecor.rotate_cobweb(pos)
 	-- only xm+zp, or only xp+zm means on-floor torchlike
 
 	if (iswall_xm and iswall_zp and not iswall_xp and not iswall_zm)
-	or (iswall_xp and iswall_zm and not iswall_xm and not iswall_zp) then 
+	or (iswall_xp and iswall_zm and not iswall_xm and not iswall_zp) then
 		minetest.set_node(pos, {name = "homedecor:cobweb_corner", param2 = 1})
-	
+
 	-- only xm+zm, or only xp+zp means on-ceiling torchlike
 
-	elseif (iswall_xm and iswall_zm and not iswall_xp and not iswall_zp) 
-	or (iswall_xp and iswall_zp and not iswall_xm and not iswall_zm) then 
+	elseif (iswall_xm and iswall_zm and not iswall_xp and not iswall_zp)
+	or (iswall_xp and iswall_zp and not iswall_xm and not iswall_zm) then
 		minetest.set_node(pos, {name = "homedecor:cobweb_corner", param2 = 0})
-	
+
 	-- only xm+xp means nodebox (not rotated, 0 degrees)
 
-	elseif iswall_xm and iswall_xp and not iswall_zm and not iswall_zp then 
+	elseif iswall_xm and iswall_xp and not iswall_zm and not iswall_zp then
 		minetest.set_node(pos, {name = "homedecor:cobweb_centered", param2 = 0})
-	
+
 	-- only zm+zp means nodebox rotated to 90 degrees
 
-	elseif iswall_zm and iswall_zp and not iswall_xm and not iswall_xp then 
+	elseif iswall_zm and iswall_zp and not iswall_xm and not iswall_xp then
 		minetest.set_node(pos, {name = "homedecor:cobweb_centered", param2 = 1})
 
 	-- ok, there aren't any simple two-wall corners or opposing walls.
@@ -128,7 +146,7 @@ function homedecor.rotate_cobweb(pos)
 
 	elseif iswall_zp and not iswall_xm and not iswall_xp and not iswall_zm then
 		minetest.set_node(pos, {name = "homedecor:cobweb_flat", param2 = 0})
-	
+
 	-- if all else fails, place the plantlike version as a fallback.
 
 	else

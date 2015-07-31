@@ -15,103 +15,53 @@ if signs_modpath then
 end
 
 local S = homedecor.gettext
+local materials = {"brass", "wrought_iron"}
 
-minetest.register_node("homedecor:fence_brass", {
-	description = S("Brass Fence/railing"),
+for _, m in ipairs(materials) do
+
+homedecor.register("fence_"..m, {
+	description = S("Fence/railing ("..m..")"),
 	drawtype = "fencelike",
-	tiles = {"homedecor_tile_brass.png"},
-	inventory_image = "homedecor_fence_brass.png",
-	wield_image = "homedecor_pole_brass.png",
-	paramtype = "light",
-	selection_box = {
-	        type = "fixed",
-	        fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
-	},
+	tiles = {"homedecor_generic_metal_"..m..".png"},
+	inventory_image = "homedecor_fence_"..m..".png",
+	selection_box = homedecor.nodebox.bar_y(1/7),
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-})
-
-minetest.register_node("homedecor:fence_wrought_iron", {
-	description = S("Wrought Iron Fence/railing"),
-	drawtype = "fencelike",
-	tiles = {"homedecor_tile_wrought_iron.png"},
-	inventory_image = "homedecor_fence_wrought_iron.png",
-	wield_image = "homedecor_pole_wrought_iron.png",
-	paramtype = "light",
-	selection_box = {
-	        type = "fixed",
-	        fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
-	},
-	groups = {snappy=3},
-	sounds = default.node_sound_wood_defaults(),
-	walkable = true,
 })
 
 -- brass/wrought iron with signs:
 
-minetest.register_node("homedecor:fence_brass_with_sign", {
-	description = S("Brass Fence/railing with sign"),
-	drawtype = "nodebox",
+homedecor.register("fence_"..m.."_with_sign", {
+	description = S("Fence/railing with sign ("..m..")"),
 	tiles = {
-		"homedecor_sign_brass_post_top.png",
-		"homedecor_sign_brass_post_bottom.png",
-		"homedecor_sign_brass_post_side.png",
-		"homedecor_sign_brass_post_side.png",
-		"homedecor_sign_brass_post_back.png",
-		"homedecor_sign_brass_post_front.png",
+		"homedecor_sign_"..m.."_post_top.png",
+		"homedecor_sign_"..m.."_post_bottom.png",
+		"homedecor_sign_"..m.."_post_side.png",
+		"homedecor_sign_"..m.."_post_side.png",
+		"homedecor_sign_"..m.."_post_back.png",
+		"homedecor_sign_"..m.."_post_front.png",
 	},
-	wield_image = "homedecor_sign_brass_post.png",
-	paramtype = "light",
-	paramtype2 = "facedir",
+	wield_image = "homedecor_sign_"..m.."_post.png",
 	node_box = sign_post_model,
 	groups = {snappy=3,not_in_creative_inventory=1},
 	sounds = default.node_sound_wood_defaults(),
-	walkable = true,
 	sunlight_propagates = true,
 	drop = {
 		max_items = 2,
 		items = {
 			{ items = { "default:sign_wall" }},
-			{ items = { "homedecor:fence_brass" }},
+			{ items = { "homedecor:fence_"..m }},
 		},
 	},
 })
 
-minetest.register_node("homedecor:fence_wrought_iron_with_sign", {
-	description = S("Wrought Iron Fence/railing with sign"),
-	drawtype = "nodebox",
-		tiles = {
-		"homedecor_sign_wrought_iron_post_top.png",
-		"homedecor_sign_wrought_iron_post_bottom.png",
-		"homedecor_sign_wrought_iron_post_side.png",
-		"homedecor_sign_wrought_iron_post_side.png",
-		"homedecor_sign_wrought_iron_post_back.png",
-		"homedecor_sign_wrought_iron_post_front.png",
-	},
-	wield_image = "homedecor_sign_wrought_iron_post.png",
-	paramtype = "light",
-	paramtype2 = "facedir",
-	node_box = sign_post_model,
-	groups = {snappy=3,not_in_creative_inventory=1},
-	sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	sunlight_propagates = true,
-	drop = {
-		max_items = 2,
-		items = {
-			{ items = { "default:sign_wall" }},
-			{ items = { "homedecor:fence_wrought_iron" }},
-		},
-	},
-})
+end
 
 -- other types of fences
 
-minetest.register_node("homedecor:fence_picket", {
-	drawtype = "nodebox",
-        description = S("Unpainted Picket Fence"),
-        tiles = {
+homedecor.register("fence_picket", {
+	description = S("Unpainted Picket Fence"),
+	tiles = {
 		"homedecor_blanktile.png",
 		"homedecor_blanktile.png",
 		"homedecor_fence_picket.png",
@@ -119,24 +69,19 @@ minetest.register_node("homedecor:fence_picket", {
 		"homedecor_fence_picket_backside.png",
 		"homedecor_fence_picket.png"
 	},
-        paramtype = "light",
-        is_ground_content = true,
-        groups = {snappy=3},
-        sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
-        selection_box = {
-                type = "fixed",
-                fixed = { -0.5, -0.5, 0.4, 0.5, 0.5, 0.5 }
-        },
-        node_box = {
-                type = "fixed",
-                fixed = { -0.5, -0.5, 0.498, 0.5, 0.5, 0.498 }
-        },
+	groups = {snappy=3},
+	sounds = default.node_sound_wood_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, 0.4, 0.5, 0.5, 0.5 }
+	},
+	node_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, 0.498, 0.5, 0.5, 0.498 }
+	},
 })
 
-minetest.register_node("homedecor:fence_picket_corner", {
-	drawtype = "nodebox",
+homedecor.register("fence_picket_corner", {
 	description = S("Unpainted Picket Fence Corner"),
 	tiles = {
 		"homedecor_blanktile.png",
@@ -146,12 +91,8 @@ minetest.register_node("homedecor:fence_picket_corner", {
 		"homedecor_fence_picket_backside.png",
 		"homedecor_fence_picket.png",
 	},
-	paramtype = "light",
-	is_ground_content = true,
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
 	selection_box = {
 	type = "fixed",
 		fixed = {
@@ -168,10 +109,9 @@ minetest.register_node("homedecor:fence_picket_corner", {
 	},
 })
 
-minetest.register_node("homedecor:fence_picket_white", {
-	drawtype = "nodebox",
-        description = S("White Picket Fence"),
-        tiles = {
+homedecor.register("fence_picket_white", {
+	description = S("White Picket Fence"),
+	tiles = {
 		"homedecor_blanktile.png",
 		"homedecor_blanktile.png",
 		"homedecor_fence_picket_white.png",
@@ -179,24 +119,19 @@ minetest.register_node("homedecor:fence_picket_white", {
 		"homedecor_fence_picket_white_backside.png",
 		"homedecor_fence_picket_white.png"
 	},
-        paramtype = "light",
-        is_ground_content = true,
-        groups = {snappy=3},
-        sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
-        selection_box = {
-                type = "fixed",
-                fixed = { -0.5, -0.5, 0.4, 0.5, 0.5, 0.5 }
-        },
-        node_box = {
-                type = "fixed",
-                fixed = { -0.5, -0.5, 0.498, 0.5, 0.5, 0.498 }
-        },
+	groups = {snappy=3},
+	sounds = default.node_sound_wood_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, 0.4, 0.5, 0.5, 0.5 }
+	},
+	node_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, 0.498, 0.5, 0.5, 0.498 }
+	},
 })
 
-minetest.register_node("homedecor:fence_picket_corner_white", {
-	drawtype = "nodebox",
+homedecor.register("fence_picket_corner_white", {
 	description = S("White Picket Fence Corner"),
 	tiles = {
 		"homedecor_blanktile.png",
@@ -206,12 +141,8 @@ minetest.register_node("homedecor:fence_picket_corner_white", {
 		"homedecor_fence_picket_white_backside.png",
 		"homedecor_fence_picket_white.png",
 	},
-	paramtype = "light",
-	is_ground_content = true,
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
 	selection_box = {
 	type = "fixed",
 		fixed = {
@@ -228,10 +159,9 @@ minetest.register_node("homedecor:fence_picket_corner_white", {
 	},
 })
 
-minetest.register_node("homedecor:fence_privacy", {
-	drawtype = "nodebox",
-        description = S("Wooden Privacy Fence"),
-        tiles = {
+homedecor.register("fence_privacy", {
+	description = S("Wooden Privacy Fence"),
+	tiles = {
 		"homedecor_fence_privacy_tb.png",
 		"homedecor_fence_privacy_tb.png",
 		"homedecor_fence_privacy_sides.png",
@@ -239,53 +169,44 @@ minetest.register_node("homedecor:fence_privacy", {
 		"homedecor_fence_privacy_backside.png",
 		"homedecor_fence_privacy_front.png"
 	},
-        paramtype = "light",
-        is_ground_content = true,
-        groups = {snappy=3},
-        sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
-        selection_box = {
-                type = "fixed",
-                fixed = { -0.5, -0.5, 5/16, 0.5, 0.5, 8/16 }
-        },
-        node_box = {
-                type = "fixed",
+	groups = {snappy=3},
+	sounds = default.node_sound_wood_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, 5/16, 0.5, 0.5, 8/16 }
+	},
+	node_box = {
+		type = "fixed",
 		fixed = {
 			{ -8/16, -8/16, 5/16, -5/16,  8/16, 7/16 },	-- left part
 			{ -4/16, -8/16, 5/16,  3/16,  8/16, 7/16 },	-- middle part
 			{  4/16, -8/16, 5/16,  8/16,  8/16, 7/16 },	-- right part
 			{ -8/16, -2/16, 7/16,  8/16,  2/16, 8/16 },	-- connecting rung
 		}
-        },
+	},
 })
 
-minetest.register_node("homedecor:fence_privacy_corner", {
-	drawtype = "nodebox",
-        description = S("Wooden Privacy Fence Corner"),
-        tiles = {
-		"homedecor_fence_privacy_corner_top.png",
-		"homedecor_fence_privacy_corner_bottom.png",
+homedecor.register("fence_privacy_corner", {
+	description = S("Wooden Privacy Fence Corner"),
+	tiles = {
+		"homedecor_fence_privacy_corner_tb.png",
+		"homedecor_fence_privacy_corner_tb.png^[transformFY",
 		"homedecor_fence_privacy_corner_right.png",
 		"homedecor_fence_privacy_backside2.png",
 		"homedecor_fence_privacy_backside.png",
 		"homedecor_fence_privacy_corner_front.png"
 	},
-        paramtype = "light",
-        is_ground_content = true,
-        groups = {snappy=3},
-        sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
-        selection_box = {
-                type = "fixed",
-                fixed = {
+	groups = {snappy=3},
+	sounds = default.node_sound_wood_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {
 			{ -0.5, -0.5, 5/16,   0.5, 0.5,  0.5 },
 			{ -0.5, -0.5, -0.5, -5/16, 0.5, 5/16 },
-		}			
-        },
-        node_box = {
-                type = "fixed",
+		}
+	},
+	node_box = {
+		type = "fixed",
 		fixed = {
 			{ -7/16, -8/16, 5/16, -5/16, 8/16, 7/16 },	-- left part
 			{ -4/16, -8/16, 5/16,  3/16, 8/16, 7/16 },	-- middle part
@@ -297,54 +218,44 @@ minetest.register_node("homedecor:fence_privacy_corner", {
 			{ -7/16, -8/16, -8/16, -5/16, 8/16, -5/16 },	-- front-most part
 			{ -8/16, -2/16, -8/16, -7/16, 2/16,  7/16 },	-- left-side connecting rung
 		}
-        },
+	},
 })
 
-minetest.register_node("homedecor:fence_barbed_wire", {
-	drawtype = "nodebox",
-        description = S("Barbed Wire Fence"),
-        tiles = {"homedecor_fence_barbed_wire.png"},
-        paramtype = "light",
-        is_ground_content = true,
-        groups = {snappy=3},
-        sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
-        selection_box = {
-                type = "fixed",
-                fixed = { -0.5, -0.5, 0.375, 0.5, 0.5, 0.5 }
-        },
-        node_box = {
-                type = "fixed",
+homedecor.register("fence_barbed_wire", {
+	description = S("Barbed Wire Fence"),
+	tiles = {"homedecor_fence_barbed_wire.png"},
+	groups = {snappy=3},
+	sounds = default.node_sound_wood_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, 0.375, 0.5, 0.5, 0.5 }
+	},
+	node_box = {
+		type = "fixed",
 		fixed = {
 			{ -8/16, -8/16, 6/16, -6/16, 8/16, 8/16 },	-- left post
 			{  6/16, -8/16, 6/16,  8/16, 8/16, 8/16 }, 	-- right post
 			{ -6/16, -8/16, 7/16,  6/16, 8/16, 7/16 }	-- the wire
-		}		
-        },
+		}
+	},
 })
 
-minetest.register_node("homedecor:fence_barbed_wire_corner", {
-	drawtype = "nodebox",
-        description = S("Barbed Wire Fence Corner"),
-        tiles = {
+homedecor.register("fence_barbed_wire_corner", {
+	description = S("Barbed Wire Fence Corner"),
+	tiles = {
 		"homedecor_fence_barbed_wire.png"
 	},
-        paramtype = "light",
-        is_ground_content = true,
-        groups = {snappy=3},
-        sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
-        selection_box = {
-                type = "fixed",
-                fixed = {
+	groups = {snappy=3},
+	sounds = default.node_sound_wood_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {
 			{ -0.5, -0.5, 0.375, 0.5, 0.5, 0.5 },
-                	{ -0.5, -0.5, -0.5, -0.375, 0.5, 0.375 }
+			{ -0.5, -0.5, -0.5, -0.375, 0.5, 0.375 }
 		}
-        },
-        node_box = {
-                type = "fixed",
+	},
+	node_box = {
+		type = "fixed",
 		fixed = {
 			{ -8/16, -8/16,  6/16, -6/16, 8/16,  8/16 },	-- left post
 			{  6/16, -8/16,  6/16,  8/16, 8/16,  8/16 }, 	-- right post
@@ -352,14 +263,13 @@ minetest.register_node("homedecor:fence_barbed_wire_corner", {
 
 			{  -8/16, -8/16, -8/16, -6/16, 8/16, -6/16 },	-- front post
 			{  -7/16, -8/16, -6/16, -7/16, 8/16,  6/16 }	-- more wire
-		}		
-        },
+		}
+	},
 })
 
-minetest.register_node("homedecor:fence_chainlink", {
-	drawtype = "nodebox",
-        description = S("Chainlink Fence"),
-        tiles = {
+homedecor.register("fence_chainlink", {
+	description = S("Chainlink Fence"),
+	tiles = {
 		"homedecor_fence_chainlink_tb.png",
 		"homedecor_fence_chainlink_tb.png",
 		"homedecor_fence_chainlink_sides.png",
@@ -367,30 +277,25 @@ minetest.register_node("homedecor:fence_chainlink", {
 		"homedecor_fence_chainlink_fb.png",
 		"homedecor_fence_chainlink_fb.png",
 	},
-        paramtype = "light",
-        is_ground_content = true,
-        groups = {snappy=3},
-        sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
-        selection_box = {
-                type = "fixed",
-                fixed = { -0.5, -0.5, 0.375, 0.5, 0.5, 0.5 }
-        },
-        node_box = {
-                type = "fixed",
+	groups = {snappy=3},
+	sounds = default.node_sound_wood_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, 0.375, 0.5, 0.5, 0.5 }
+	},
+	node_box = {
+		type = "fixed",
 		fixed = {
 			{ -8/16, -8/16,  6/16, -7/16,  8/16,  8/16 },	-- left post
 			{  7/16, -8/16,  6/16,  8/16,  8/16,  8/16 }, 	-- right post
 			{ -8/16,  7/16, 13/32,  8/16,  8/16, 15/32 },	-- top piece
 			{ -8/16, -8/16, 13/32,  8/16, -7/16, 15/32 },	-- bottom piece
 			{ -8/16, -8/16,  7/16,  8/16,  8/16,  7/16 }	-- the chainlink itself
-		}		
-        },
+		}
+	},
 })
 
-minetest.register_node("homedecor:fence_chainlink_corner", {
-	drawtype = "nodebox",
+homedecor.register("fence_chainlink_corner", {
 	description = S("Chainlink Fence Corner"),
 	tiles = {
 		"homedecor_fence_chainlink_corner_top.png",
@@ -400,12 +305,8 @@ minetest.register_node("homedecor:fence_chainlink_corner", {
 		"homedecor_fence_chainlink_corner_front.png",
 		"homedecor_fence_chainlink_corner_front.png",
 	},
-	paramtype = "light",
-	is_ground_content = true,
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
 	selection_box = {
 		type = "fixed",
 		fixed = {
@@ -429,10 +330,9 @@ minetest.register_node("homedecor:fence_chainlink_corner", {
 	},
 })
 
-minetest.register_node("homedecor:fence_wrought_iron_2", {
-	drawtype = "nodebox",
-        description = S("Wrought Iron fence (type 2)"),
-        tiles = {
+homedecor.register("fence_wrought_iron_2", {
+	description = S("Wrought Iron fence (type 2)"),
+	tiles = {
 		"homedecor_fence_wrought_iron_2_tb.png",
 		"homedecor_fence_wrought_iron_2_tb.png",
 		"homedecor_fence_wrought_iron_2_sides.png",
@@ -440,18 +340,14 @@ minetest.register_node("homedecor:fence_wrought_iron_2", {
 		"homedecor_fence_wrought_iron_2_fb.png",
 		"homedecor_fence_wrought_iron_2_fb.png"
 	},
-        paramtype = "light",
-        is_ground_content = true,
-        groups = {snappy=3},
-        sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
-        selection_box = {
-                type = "fixed",
-                fixed = { -0.5, -0.5, 0.42, 0.5, 0.5, 0.5 }
-        },
-        node_box = {
-                type = "fixed",
+	groups = {snappy=3},
+	sounds = default.node_sound_wood_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, 0.42, 0.5, 0.5, 0.5 }
+	},
+	node_box = {
+		type = "fixed",
 		fixed = {
 			{ -8/16, -8/16,  14/32, -7.75/16,  8/16,  16/32 }, -- left post
 			{  7.75/16, -8/16,  14/32,  8/16,  8/16,  16/32 }, -- right post
@@ -460,27 +356,22 @@ minetest.register_node("homedecor:fence_wrought_iron_2", {
 			{ -0.015625, -8/16,  14.75/32,  0.015625,  8/16,  15.25/32 }, -- cross piece
 			{ -8/16, -8/16, 14/32,  8/16, -7.75/16, 16/32 }, -- bottom piece
 			{ -8/16, -8/16,  15/32,  8/16,  8/16,  15/32 }	-- the grid itself
-		}		
-        },
+		}
+	},
 })
 
-minetest.register_node("homedecor:fence_wrought_iron_2_corner", {
-	drawtype = "nodebox",
+homedecor.register("fence_wrought_iron_2_corner", {
 	description = S("Wrought Iron fence (type 2) Corner"),
 	tiles = {
 		"homedecor_fence_corner_wrought_iron_2_tb.png",
 		"homedecor_fence_corner_wrought_iron_2_tb.png",
-		"homedecor_fence_corner_wrought_iron_2_lr.png",
-		"homedecor_fence_corner_wrought_iron_2_lr.png^[transformFX",
-		"homedecor_fence_corner_wrought_iron_2_fb.png^[transformFX",
-		"homedecor_fence_corner_wrought_iron_2_fb.png"
+		"homedecor_fence_corner_wrought_iron_2_sides.png^[transformFX",
+		"homedecor_fence_corner_wrought_iron_2_sides.png",
+		"homedecor_fence_corner_wrought_iron_2_sides.png^[transformFX",
+		"homedecor_fence_corner_wrought_iron_2_sides.png"
 	},
-	paramtype = "light",
-	is_ground_content = true,
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	walkable = true,
-	paramtype2 = "facedir",
 	selection_box = {
 		type = "fixed",
 		fixed = {

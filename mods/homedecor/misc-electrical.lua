@@ -1,7 +1,4 @@
-minetest.register_node("homedecor:power_outlet", {
-	drawtype = "nodebox",
-	paramtype = "light",
-	paramtype2 = "facedir",
+homedecor.register("power_outlet", {
 	description = "Power Outlet",
 	tiles = {
 		"homedecor_outlet_edges.png",
@@ -25,13 +22,10 @@ minetest.register_node("homedecor:power_outlet", {
 		}
 	},
 	groups = {cracky=3,dig_immediate=2},
-	sounds = default.node_sound_stone_defaults()
+	walkable = false
 })
 
-minetest.register_node("homedecor:light_switch", {
-	drawtype = "nodebox",
-	paramtype = "light",
-	paramtype2 = "facedir",
+homedecor.register("light_switch", {
 	description = "Light switch",
 	tiles = {
 		"homedecor_light_switch_edges.png",
@@ -57,6 +51,28 @@ minetest.register_node("homedecor:light_switch", {
 		}
 	},
 	groups = {cracky=3,dig_immediate=2},
-	sounds = default.node_sound_stone_defaults()
+	walkable = false
 })
 
+
+homedecor.register("doorbell", {
+	tiles = { "homedecor_doorbell.png" },
+	inventory_image = "homedecor_doorbell_inv.png",
+	description = "Doorbell",
+    groups = {snappy=3},
+    walkable = false,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, 0, 0.46875, 0.0625, 0.1875, 0.5}, -- NodeBox1
+			{-0.03125, 0.0625, 0.45, 0.03125, 0.125, 0.4675}, -- NodeBox2
+		}
+	},
+	on_punch = function(pos, node, puncher, pointed_thing)
+		minetest.sound_play("homedecor_doorbell", {
+			pos = pos,
+			gain = 1.0,
+			max_hear_distance = 15
+		})
+	end
+})
