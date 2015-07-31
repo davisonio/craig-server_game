@@ -128,11 +128,11 @@ welcome.emails_load()
 
 -- Save email database - Based on https://github.com/tenplus1/simple_skins/blob/master/init.lua
 welcome.emails_save = function()
-	local player_name = welcome.player_name
-	local player_email = welcome.player_email
-	local output = io.open(minetest.get_worldpath() .. "/emails.db",'a')
-	if player_name and player_email then
-		output:write(player_name .. " " .. player_email .. "\n")
+	local output = io.open(minetest.get_worldpath() .. "/emails.db",'w')
+	for player_name, player_email in pairs(welcome.emails) do
+		if player_name and player_email then
+			output:write(player_name .. " " .. player_email .. "\n")
+		end
 	end
 	io.close(output)
 end
@@ -148,6 +148,7 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		if welcome.fields_welcome_profile_setemailone == welcome.fields_welcome_profile_setemailtwo then
 			welcome.player_name = player:get_player_name()
 			welcome.player_email = welcome.fields_welcome_profile_setemailone
+			welcome.emails[welcome.player_name] = welcome.player_email
 			welcome.emails_save()
 			-- Now send the email!
 			email.email_email_confirmation()
