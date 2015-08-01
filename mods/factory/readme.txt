@@ -1,1 +1,0 @@
-Change this folder name from 'LemonLake-factory-xxxxxx' to 'factory' or else it won't work!
