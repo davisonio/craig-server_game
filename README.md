@@ -5,8 +5,9 @@ It is a tweaked version of [Minetest Game](https://github.com/minetest/minetest_
 
 * [Forum topic](https://forum.minetest.net/viewtopic.php?f=10&t=7010)
 
-## Installation & Usage
-This game can be configured for use on any Linux Minetest server.
+## Getting started
+This game can be used on any Linux Minetest server.
+- More info coming soon
 
 ## List of mods
 
