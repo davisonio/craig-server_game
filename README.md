@@ -28,7 +28,6 @@ This game can be used on any Linux Minetest server.
 |Dye (dye)                                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/dye)|
 |Email (email)           					|||
 |External commands (external_cmd)           ||[GitHub/Menche](https://github.com/Menche/external_cmd)|
-|Factory (factory)                          ||[GitHub/LemonLake](https://bitbucket.org/LemonLake/factory/)|
 |Fake Fire (fake_fire)                      ||[GitHub/VanessaE](https://github.com/VanessaE/homedecor_modpack/tree/master/fake_fire)|
 |Farming (farming)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/farming)|
 |Fences (fences)                            ||[GitHub/sfan5](https://github.com/sfan5/minetest_game/tree/fences/mods/fences)|
@@ -38,6 +37,7 @@ This game can be used on any Linux Minetest server.
 |Gloopblocks (gloopblocks)                  ||[GitHub/VanessaE](https://github.com/VanessaE/gloopblocks)|
 |Home GUI (home_gui)                        ||[GitHub/cornernote](https://github.com/cornernote/minetest-home_gui)|
 |Homedecor (homedecor)                      ||[GitHub/VanessaE](https://github.com/VanessaE/homedecor_modpack/tree/master/homedecor)|
+|Industry Pack Reloaded! (industry_pack) |||
 |Inventory++ (inventory_plus)               ||[GitHub/Zeg9](https://github.com/Zeg9/minetest-inventory_plus)|
 |IRC (irc)             						||[GitHub/kaeza](https://github.com/kaeza/minetest-irc)|
 |IRC commands (irc_commands)             	||[GitHub/ShadowNinja](https://github.com/ShadowNinja/minetest-irc_commands)|
