@@ -66,7 +66,8 @@ welcome.image_button_inbox = "item_image_button[0,6.25;2,1;welcome:inbox;welcome
 -- Staff Button
 minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
-	if minetest.get_player_privs(name).rank_staff then
+	-- All staff have the ban privilege
+	if minetest.get_player_privs(name).ban then
 		welcome.image_button_staff = "item_image_button[0,7.5;2,1;welcome:staff;welcome_staff;Staff Panel]"
 	else
 		welcome.image_button_staff = ""
