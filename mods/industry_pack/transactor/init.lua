@@ -91,13 +91,15 @@ minetest.register_abm( {
 			if wl == nil and transactor_transactions[tonode].get_wishlist ~= nil then
 				wl = transactor_transactions[tonode].get_wishlist( topos )
 			end
-            transactor_transactions[tonode].add(
-                topos,
-                transactor_transactions[fromnode].get( frompos, wl ),
-                function ( thing )
-                    transactor_transactions[fromnode].add( frompos, thing )
-                end
-            )
+            if transactor_transactions[tonode].add then
+                transactor_transactions[tonode].add(
+                    topos,
+                    transactor_transactions[fromnode].get( frompos, wl ),
+                    function ( thing )
+                        transactor_transactions[fromnode].add( frompos, thing )
+                    end
+                )
+            end
         end 
     end
 } )
