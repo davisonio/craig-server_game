@@ -25,6 +25,8 @@ function welcome.contact_formspec(player)
 		",Rhys\\, WhoCares\\, FMK\\, Gabo," ..
 		",Moderators:," ..
 		",fishyWET\\, foot_on_teh_hill\\, lisacvuk\\, the_raven_262\\, RHR," ..
+		",," ..
+		",You can message the staff by using `/msg staff Hi!`," ..
 		";1]")
 end
 

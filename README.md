@@ -15,6 +15,7 @@ This game can be used on any Linux Minetest server.
 |-------------------------------------------|-------|--------|
 |3D Armour (3d_armor)                       ||[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/3d_armor)|
 |Miscellaneous (_misc)                      |||
+|Memo (_memo)                               |||
 |Advanced Area Protection (areas)           ||[GitHub/ShadowNinja](https://github.com/ShadowNinja/areas)|
 |Arrow Signs (arrow_signs)                  ||[Bitbucket/adrido](https://bitbucket.org/adrido/arrow_signs)|
 |BitChange (bitchange)                      ||[GitHub/SmallJoker](https://github.com/SmallJoker/bitchange)|
@@ -37,7 +38,7 @@ This game can be used on any Linux Minetest server.
 |Gloopblocks (gloopblocks)                  ||[GitHub/VanessaE](https://github.com/VanessaE/gloopblocks)|
 |Home GUI (home_gui)                        ||[GitHub/cornernote](https://github.com/cornernote/minetest-home_gui)|
 |Homedecor (homedecor)                      ||[GitHub/VanessaE](https://github.com/VanessaE/homedecor_modpack/tree/master/homedecor)|
-|Industry Pack Reloaded! (industry_pack) |||
+|Industry Pack Reloaded! (industry_pack)    |||
 |Inventory++ (inventory_plus)               ||[GitHub/Zeg9](https://github.com/Zeg9/minetest-inventory_plus)|
 |IRC (irc)             						||[GitHub/kaeza](https://github.com/kaeza/minetest-irc)|
 |IRC commands (irc_commands)             	||[GitHub/ShadowNinja](https://github.com/ShadowNinja/minetest-irc_commands)|

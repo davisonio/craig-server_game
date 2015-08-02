@@ -131,9 +131,11 @@ function chatplus.send(from,msg)
 end
 
 -- Minetest callbacks
+
 minetest.register_on_chat_message(function(name, message)
 	chatplus.send(name,message)
 end)
+--[[
 minetest.register_on_joinplayer(function(player)
 	local _player = chatplus.poke(player:get_player_name(),player)
 
@@ -144,7 +146,7 @@ end)
 minetest.register_on_leaveplayer(function(player)
 	chatplus.poke(player:get_player_name(),"end")
 end)
-
+--]]
 -- Init
 chatplus.init()
 
@@ -184,7 +186,7 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		chatplus.showInbox(name)
 	end
 end)
-
+--[[
 minetest.register_chatcommand("inbox", {
 	params = "",
 	description = "Show the items in your inbox",
@@ -192,34 +194,15 @@ minetest.register_chatcommand("inbox", {
 		chatplus.showInbox(name)
 	end,
 })
-
+--]]
 minetest.register_chatcommand("mail", {
-	params = "name msg",
-	description = "Add a message to a player's inbox",
+	params = "",
+	description = "",
 	func = function(name, param)
-		chatplus.poke(name)
-		local to, msg = string.match(param, "([%a%d_]+) (.+)")
-		
-		if not to or not msg then
-			minetest.chat_send_player(name,"Usage: /mail PlayerName message",false)
-			return
-		end
-
-		if chatplus.log_handle ~= nil then
-			chatplus.log_handle:write("\r\n"..os.date("(%d/%m/%Y %H:%M)").." [Mail] To: "..to..", From: "..name..", Message: "..msg)
-			chatplus.log_handle:flush()
-		end
-
-		if chatplus.players[to] then
-			table.insert(chatplus.players[to].inbox,os.date("(%d/%m/%Y)").." ["..name.."]: "..msg)
-			minetest.chat_send_player(name,"Message sent.")
-			chatplus.save()
-		else
-			minetest.chat_send_player(name,"Player "..to.." does not exist")
-		end
+		minetest.chat_send_player(name,"/mail has been replaced by /msg")
 	end,
 })
-
+--[[
 minetest.register_globalstep(function(dtime)
 	chatplus.count = chatplus.count + dtime
 	if chatplus.count > 5 then
@@ -266,3 +249,4 @@ minetest.register_globalstep(function(dtime)
 		end
 	end
 end)
+--]]
