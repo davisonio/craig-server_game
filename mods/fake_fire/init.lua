@@ -71,7 +71,7 @@ for _, f in ipairs(flame_types) do
 	minetest.register_node("fake_fire:"..f.."_fire", {
 		inventory_image = f.."_fire_inv.png",
 		description = f.." fire",
-		drawtype = "plantlike",
+		drawtype = "firelike",
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {dig_immediate=3, not_in_creative_inventory=1},
@@ -123,10 +123,10 @@ minetest.register_node("fake_fire:fancy_fire", {
 			})
 		end,
 		drop = {
-			max_items = 3,
+			max_items = 2,
 			items = {
 				{
-					items = { "default:torch", "default:torch", "building_blocks:sticks" },
+					items = { "default:torch", "default:torch"},
 					rarity = 1,
 				}
 			}
@@ -191,11 +191,33 @@ minetest.register_tool("fake_fire:flint_and_steel", {
 	on_use = function(itemstack, user, pointed_thing)
 		if pointed_thing.type == "node" and minetest.get_node(pointed_thing.above).name == "air" then
 			if not minetest.is_protected(pointed_thing.above, user:get_player_name()) then
-				if string.find(minetest.get_node(pointed_thing.under).name, "ice") then
-					minetest.set_node(pointed_thing.above, {name="fake_fire:ice_fire"})
-				else
-					minetest.set_node(pointed_thing.above, {name="fake_fire:fake_fire"})
-				end
+				minetest.set_node(pointed_thing.above, {name="fake_fire:fake_fire"})
+			else
+				minetest.chat_send_player(user:get_player_name(), "This area is protected!")
+			end
+		else
+			return
+		end
+
+		itemstack:add_wear(65535/65)
+		return itemstack
+	end
+})
+
+minetest.register_tool("fake_fire:diamond_and_steel", {
+	description = "Diamond and steel",
+	inventory_image = "diamond_and_steel.png",
+	liquids_pointable = false,
+	stack_max = 1,
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=0,
+		groupcaps={flamable = {uses=65, maxlevel=1}}
+	},
+	on_use = function(itemstack, user, pointed_thing)
+		if pointed_thing.type == "node" and minetest.get_node(pointed_thing.above).name == "air" then
+			if not minetest.is_protected(pointed_thing.above, user:get_player_name()) then
+				minetest.set_node(pointed_thing.above, {name="fake_fire:ice_fire"})
 			else
 				minetest.chat_send_player(user:get_player_name(), "This area is protected!")
 			end
@@ -213,6 +235,15 @@ minetest.register_craft({
 	type = "shapeless",
 	output = 'fake_fire:flint_and_steel',
 	recipe = {"default:obsidian_shard", "default:steel_ingot"}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = 'fake_fire:diamond_and_steel',
+	recipe = {
+		"fake_fire:flint",
+		"default:diamond",
+	}
 })
 
 minetest.register_craft({
