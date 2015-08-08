@@ -1,11 +1,13 @@
 # Craig's Server Game
 
+![Screenshot](https://raw.githubusercontent.com/CraigyDavi/Craig-Server_game/master/media/screenshot.jpg)
+
 This is the game used by Craig's Minetest Server
 
 It is a tweaked version of [Minetest Game](https://github.com/minetest/minetest_game) with other mods and features added.
 
-* **[Minetest Forum topic](https://forum.minetest.net/viewtopic.php?f=10&t=7010)**
-* **[GitHub repository](https://github.com/CraigyDavi/Craig-Server_game)**
+* **[Minetest Forum Topic](https://forum.minetest.net/viewtopic.php?f=10&t=7010)**
+* **[GitHub Repository](https://github.com/CraigyDavi/Craig-Server_game)**
 
 ## Installation
 
@@ -74,7 +76,7 @@ It is a tweaked version of [Minetest Game](https://github.com/minetest/minetest_
 ## License
 
 ```
-Copyright (c) 2013-2015 Craig Davison <craig.davison3@gmail.com>
+Copyright (c) 2013-2015 Craig Davison <craig@davison.io>
 
 This work is free. You can redistribute it and/or modify it under the
 terms of the Do What The Fuck You Want To Public License, Version 2,
