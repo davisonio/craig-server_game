@@ -167,6 +167,8 @@ zcg.formspec = function(pn)
     if filter == "" then
         items = list
     else
+		filter = filter:lower()
+		filter = filter:gsub(" ", "_")
         items = {}
         for _, item in ipairs(list) do
             if item:find(filter, 1, true) then
