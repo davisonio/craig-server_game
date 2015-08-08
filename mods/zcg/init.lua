@@ -152,9 +152,9 @@ zcg.formspec = function(pn)
     if zcg.users[pn].settings then
         formspec = formspec .. "field[0.5,1.5;4,1;filter;Filter;"..filter.."]"
         local selone = "false"
-        local selone = "true"
-        selone =  zcg.users[pn].allitems and "true" or "false"
-        formspec = formspec .. "checkbox[0,2.5;zcg_allitems;Search hidden items (not recommended);"..selone.."]"
+        local seltwo = "true"
+        --selone =  zcg.users[pn].allitems and "true" or "false"
+        --formspec = formspec .. "checkbox[0,2.5;zcg_allitems;Search hidden items (not recommended);"..selone.."]"
         seltwo =  zcg.users[pn].itemstrings and "true" or "false"
         formspec = formspec .. "checkbox[0,3.5;zcg_itemstrings;Search item strings (recommended);"..seltwo.."]"
         formspec = formspec .. "button[6,7.85;2,1;zcg_update_settings;Go!]"
