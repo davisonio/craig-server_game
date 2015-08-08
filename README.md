@@ -1,13 +1,15 @@
 # Craig's Server Game
+
 This is the game used by Craig's Minetest Server
 
 It is a tweaked version of [Minetest Game](https://github.com/minetest/minetest_game) with other mods and features added.
 
-* [Forum topic](https://forum.minetest.net/viewtopic.php?f=10&t=7010)
+* **[Minetest Forum topic](https://forum.minetest.net/viewtopic.php?f=10&t=7010)**
+* **[GitHub repository](https://github.com/CraigyDavi/Craig-Server_game)**
 
-## Getting started
-This game can be used on any Linux Minetest server.
-- More info coming soon
+## Installation
+
+[Download](https://github.com/CraigyDavi/Craig-Server_game/archive/master.zip) & unzip the game, then move the the folder into your minetest/games folder.
 
 ## List of mods
 
@@ -63,10 +65,14 @@ This game can be used on any Linux Minetest server.
 |Welcome (welcome)                          |||
 |Wieldview (wieldview)                      ||[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/wieldview)|
 |Wool (wool)                                ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/wool)|
+|WorldEdit (worldedit)                      ||[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit)|
+|WorldEdit commands (worldedit_commands)    ||[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit_commands)|
+|WorldEdit GUI (worldedit_gui)              ||[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit_gui)|
 |Extended Ban v2 (xban2)                    ||[GitHub/kaeza](https://github.com/kaeza/minetest-xban2)|
 |Zeg's Craft Guide (zcg)                    ||[GitHub/CiaranG](https://github.com/CiaranG/minetest-zcg)|
 
 ## License
+
 ```
 Copyright (c) 2013-2015 Craig Davison <craig.davison3@gmail.com>
 
@@ -74,4 +80,4 @@ This work is free. You can redistribute it and/or modify it under the
 terms of the Do What The Fuck You Want To Public License, Version 2,
 as published by Sam Hocevar. See http://www.wtfpl.net/ for more details.
 ```
-See the files within each mod directory for information about other authors.
+See README.md in each mod directory for information about other authors.
