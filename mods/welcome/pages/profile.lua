@@ -148,16 +148,19 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		if welcome.fields_welcome_profile_setemailone == welcome.fields_welcome_profile_setemailtwo then
 			welcome.player_name = player:get_player_name()
 			welcome.player_email = welcome.fields_welcome_profile_setemailone
-			welcome.emails[welcome.player_name] = welcome.player_email
-			welcome.emails_save()
-			-- Now send the email!
-			email.email_email_confirmation()
-			minetest.chat_send_player(welcome.player_name, "Thank you! You should receive a email shortly at: "..welcome.player_email)
-			-- Load the emails again
-			welcome.emails_load()
+			if welcome.player_email:find("@") ~= nil then
+				welcome.emails[welcome.player_name] = welcome.player_email
+				welcome.emails_save()
+				-- Now send the email!
+				email.email_email_confirmation()
+				minetest.chat_send_player(welcome.player_name, "Thank you! You should receive a email shortly at: "..welcome.player_email)
+				-- Load the emails again
+				welcome.emails_load()
+			else
+				minetest.chat_send_player(plname, "You did not enter a valid email address, please try again.")
+			end
 		else
-			local name = player:get_player_name()
-			minetest.chat_send_player(name, "The email addresses you entered do not match, please try again.")
+			minetest.chat_send_player(plname, "The email addresses you entered do not match, please try again.")
 		end
 	end
 end)
