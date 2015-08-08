@@ -1,23 +1,41 @@
-#-------------------------------------------------------------------------------
+#--------------------------------------------------------
 # Ignore these files when committing to a git repository.
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-#-------------------------------------------------------------------------------
-
-# Linux
-*~
-.directory
+# See https://git-scm.com/docs/gitignore
+#--------------------------------------------------------
 
 # Windows
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
 
-# OSX
+# OS X
 .DS_Store
 .AppleDouble
 .LSOverride
+Icon
 ._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
-# Minetest stuff
+# Linux
+*~
+.directory
+.Trash-*
+
+# Minetest
 debug.txt
