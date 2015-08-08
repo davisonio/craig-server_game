@@ -96,7 +96,7 @@ function welcome.staff_readthis_formspec(player)
 		",each command does. `/help all` provides a list (use F10).," ..
 		",To view the descriptions of the privileges use `/help privs`.," ..
 		",Privs for sysadmins:," ..
-		",server\\, password\\, noclip\\, rollback\\, give\\, privs\\, irc_admin (+ admin privs)," ..
+		",server\\, password\\, noclip\\, rollback\\, give\\, privs\\, irc_admin\\, worldedit (+ admin privs)," ..
 		",Privs for admins:," ..
 		",areas\\, access\\, travelnet (+ moderator privs)," ..
 		",Privs for moderators:," ..
