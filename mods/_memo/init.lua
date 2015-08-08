@@ -122,6 +122,8 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		local deletedmessages = #memo.memos[name]
 		memo.memos[name] = {}
 		memo:save()
+		player:hud_remove(memo.mail)
+		player:hud_remove(memo.mail_text)
 		minetest.chat_send_player(name, deletedmessages.." messages have been deleted.")
 	end
 	if fields.memo_inbox_staff_clear then
@@ -189,3 +191,32 @@ minetest.register_chatcommand("inbox", {
 		end
 	end,
 })
+
+local count = 0
+minetest.register_globalstep(function(dtime)
+    count = count + dtime
+    if count > 5 then
+        count = 0
+        for _,player in pairs(minetest.get_connected_players()) do
+            local name = player:get_player_name()
+            if memo.memos[name] and #memo.memos[name] ~= 0 then
+                memo.mail = player:hud_add({
+                    hud_elem_type = "image",
+                    name = "MailIcon",
+                    position = {x=0.52, y=0.52},
+                    text="chatplus_mail.png",
+                    scale = {x=1,y=1},
+                    alignment = {x=0.5, y=0.5},
+                })
+                memo.mail_text = player:hud_add({
+                    hud_elem_type = "text",
+                    name = "MailText",
+                    position = {x=0.55, y=0.52},
+                    text=#memo.memos[name],
+                    scale = {x=1,y=1},
+                    alignment = {x=0.5, y=0.5},
+                })
+            end
+        end
+    end
+end)
