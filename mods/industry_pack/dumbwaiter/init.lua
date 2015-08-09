@@ -87,13 +87,15 @@ minetest.register_abm( {
 			if wl == nil and dumbwaiter_transactions[tonode].get_wishlist ~= nil then
 				wl = dumbwaiter_transactions[tonode].get_wishlist( topos )
 			end
-            dumbwaiter_transactions[tonode].add(
-                topos,
-                dumbwaiter_transactions[fromnode].get( frompos, wl ),
-                function ( thing )
-                    dumbwaiter_transactions[fromnode].add( frompos, thing )
-                end
-            )
+            if dumbwaiter_transactions[tonode].add then
+                dumbwaiter_transactions[tonode].add(
+                    topos,
+                    dumbwaiter_transactions[fromnode].get( frompos, wl ),
+                    function ( thing )
+                        dumbwaiter_transactions[fromnode].add( frompos, thing )
+                    end
+                )
+            end
         end 
     end
 } )
