@@ -11,7 +11,12 @@ It is a tweaked version of [Minetest Game](https://github.com/minetest/minetest_
 
 ## Installation
 
+**Requirements:** Minetest 0.4.12-dev or later
+
 [Download](https://github.com/CraigyDavi/Craig-Server_game/archive/master.zip) & unzip the game, then move the the folder into your minetest/games folder.
+
+- **Unless you know what you're doing, remove the legacy, welcome & email mod.**
+- The scripts require modififications if your files are located in different places to mine.
 
 ## List of mods
 
