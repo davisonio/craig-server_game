@@ -12,7 +12,7 @@ ipnames.save_interval = 120
 ipnames.save_time = 0
 ipnames.file = minetest.get_worldpath().."/ipnames.txt"
 
-ipnames.name_per_ip_limit = tonumber(minetest.setting_get("max_names_per_ip")) or 4
+ipnames.name_per_ip_limit = tonumber(minetest.setting_get("max_names_per_ip")) or 3
 
 -- Get accounts self:
 minetest.register_chatcommand("whois", {
