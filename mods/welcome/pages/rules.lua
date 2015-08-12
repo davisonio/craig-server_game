@@ -71,7 +71,7 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 	end
 	if fields.welcome_rules_disagree then
 		local name = player:get_player_name()
-		minetest.kick_player(name, "Bye then! You have to agree to the rules to play on the server (please rejoin if you have a change of mind).")
+		minetest.kick_player(name, "Rejoin and try again if you agree.")
 	end
 	if fields.welcome_rules_agree then
 		local name = player:get_player_name()
