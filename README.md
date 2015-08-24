@@ -1,6 +1,6 @@
 # Craig's Server Game
 
-![Screenshot](https://raw.githubusercontent.com/CraigyDavi/Craig-Server_game/master/media/screenshot.jpg)
+![Screenshot](https://raw.githubusercontent.com/CraigyDavi/Craig-Server_game/master/screenshot.jpg)
 
 This is the game used by Craig's Minetest Server
 
@@ -16,7 +16,7 @@ It is a tweaked version of [Minetest Game](https://github.com/minetest/minetest_
 [Download](https://github.com/CraigyDavi/Craig-Server_game/archive/master.zip) & unzip the game, then move the the folder into your minetest/games folder.
 
 - **Unless you know what you're doing, remove the legacy, welcome & email mod.**
-- The scripts require modififications if your files are located in different places to mine.
+- The scripts require modifications if your files are located in different places to mine.
 
 ## List of mods
 
