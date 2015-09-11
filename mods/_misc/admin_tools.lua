@@ -15,6 +15,9 @@ minetest.register_tool("_misc:pick_admin", {
 			snappy={times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 		}
 	},
+	on_drop = function(itemstack, dropper, pos)
+		return
+	end,
 })
 
 -- Remove stick
@@ -36,6 +39,9 @@ minetest.register_craftitem("_misc:remove_stick", {
 				end
 			end
 		end
+	end,
+	on_drop = function(itemstack, dropper, pos)
+		return
 	end,
 	stack_max = 1,
 	liquids_pointable = true,
