@@ -122,8 +122,6 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		local deletedmessages = #memo.memos[name]
 		memo.memos[name] = {}
 		memo:save()
-		player:hud_remove(memo.mail)
-		player:hud_remove(memo.mail_text)
 		minetest.chat_send_player(name, deletedmessages.." messages have been deleted.")
 	end
 	if fields.memo_inbox_staff_clear then
@@ -199,6 +197,12 @@ minetest.register_globalstep(function(dtime)
         count = 0
         for _,player in pairs(minetest.get_connected_players()) do
             local name = player:get_player_name()
+			if memo.mail then
+				player:hud_remove(memo.mail)
+			end
+			if memo.mail_text then
+				player:hud_remove(memo.mail_text)
+			end
             if memo.memos[name] and #memo.memos[name] ~= 0 then
                 memo.mail = player:hud_add({
                     hud_elem_type = "image",
