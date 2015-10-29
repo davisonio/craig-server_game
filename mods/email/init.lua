@@ -28,13 +28,13 @@ end
 --
 function email.send(id, to, message)
   local ok, err = smtp.send {
-    from = "",
+    from = minetest.setting_get("email.from"),
     rcpt = to,
     source = smtp.message(message),
-    user = '',
-    password = '',
-    server = '',
-    port = 0,
+    user = minetest.setting_get("email.user"),
+    password = minetest.setting_get("email.password"),
+    server = minetest.setting_get("email.server"),
+    port = tonumber(minetest.setting_get("email.port")),
     -- create = sslCreate
   }
   minetest.log("action", "Sending an email to "..to.." ("..id..")")
