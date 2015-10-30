@@ -36,7 +36,9 @@ minetest.register_abm({
     end,
 })
 
-local old_entities = {}
+local old_entities = {
+    "itemframes:item"
+}
 for _,entity_name in ipairs(old_entities) do
     minetest.register_entity(":"..entity_name, {
         on_activate = function(self, staticdata)
