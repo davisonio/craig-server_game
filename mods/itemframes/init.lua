@@ -202,12 +202,11 @@ minetest.register_node("itemframes:pedestal",{
 
 -- automatically restore entities lost from frames/pedestals
 -- due to /clearobjects or similar
-
+--[[
 minetest.register_abm({
 	nodenames = { "itemframes:frame", "itemframes:pedestal" },
 	interval = 15,
 	chance = 1,
-	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local num
 
@@ -223,7 +222,7 @@ minetest.register_abm({
 		update_item(pos, node)
 	end
 })
-
+--]]
 -- crafts
 
 minetest.register_craft({
