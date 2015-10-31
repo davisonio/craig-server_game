@@ -1,4 +1,0 @@
-default
-rubber
-bucket
-
