@@ -90,19 +90,21 @@ end
 --[[
 default.cool_lava_source = function(pos)
 	minetest.set_node(pos, {name = "default:obsidian"})
-	minetest.sound_play("default_cool_lava", {pos = pos, gain = 0.25})
+	minetest.sound_play("default_cool_lava",
+		{pos = pos, max_hear_distance = 16, gain = 0.25})
 end
 
 default.cool_lava_flowing = function(pos)
 	minetest.set_node(pos, {name = "default:stone"})
-	minetest.sound_play("default_cool_lava", {pos = pos, gain = 0.25})
+	minetest.sound_play("default_cool_lava",
+		{pos = pos, max_hear_distance = 16, gain = 0.25})
 end
 
 minetest.register_abm({
 	nodenames = {"default:lava_flowing"},
 	neighbors = {"group:water"},
 	interval = 1,
-	chance = 1,
+	chance = 2,
 	action = function(...)
 		default.cool_lava_flowing(...)
 	end,
@@ -112,7 +114,7 @@ minetest.register_abm({
 	nodenames = {"default:lava_source"},
 	neighbors = {"group:water"},
 	interval = 1,
-	chance = 1,
+	chance = 2,
 	action = function(...)
 		default.cool_lava_source(...)
 	end,
@@ -182,7 +184,7 @@ minetest.register_abm({
 
 minetest.register_abm({
 	nodenames = {"default:papyrus"},
-	neighbors = {"default:dirt", "default:dirt_with_grass"},
+	neighbors = {"default:dirt", "default:dirt_with_grass", "default:sand"},
 	interval = 50,
 	chance = 20,
 	action = function(...)
@@ -304,7 +306,7 @@ minetest.register_abm({
 
 
 --
--- Grass growing
+-- Grass growing on well-lit dirt
 --
 
 minetest.register_abm({
@@ -327,6 +329,11 @@ minetest.register_abm({
 	end
 })
 
+
+--
+-- Grass and dry grass removed in darkness
+--
+
 minetest.register_abm({
 	nodenames = {"default:dirt_with_grass", "default:dirt_with_dry_grass"},
 	interval = 2,
@@ -343,3 +350,18 @@ minetest.register_abm({
 	end
 })
 
+
+--
+-- Moss growth on cobble near water
+--
+
+minetest.register_abm({
+	nodenames = {"default:cobble"},
+	neighbors = {"group:water"},
+	interval = 17,
+	chance = 200,
+	catch_up = false,
+	action = function(pos, node)
+		minetest.set_node(pos, {name = "default:mossycobble"})
+	end
+})
