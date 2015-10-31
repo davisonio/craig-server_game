@@ -47,7 +47,6 @@ It is a tweaked version of [Minetest Game](https://github.com/minetest/minetest_
 |Gloopblocks (gloopblocks)                  |[4019](https://forum.minetest.net/viewtopic.php?id=4019)|[GitHub/VanessaE](https://github.com/VanessaE/gloopblocks)|
 |Home GUI (home_gui)                        |[3101](https://forum.minetest.net/viewtopic.php?id=3101)|[GitHub/cornernote](https://github.com/cornernote/minetest-home_gui)|
 |Homedecor (homedecor)                      |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/VanessaE](https://github.com/VanessaE/homedecor_modpack/tree/master/homedecor)|
-|Industry Pack Reloaded! (industry_pack)    |[7126](https://forum.minetest.net/viewtopic.php?id=7126)||
 |Inventory++ (inventory_plus)               |[6204](https://forum.minetest.net/viewtopic.php?id=6204)|[GitHub/Zeg9](https://github.com/Zeg9/minetest-inventory_plus)|
 |IRC (irc)             						|[3905](https://forum.minetest.net/viewtopic.php?id=3905)|[GitHub/kaeza](https://github.com/kaeza/minetest-irc)|
 |IRC commands (irc_commands)             	|[5275](https://forum.minetest.net/viewtopic.php?id=5275)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/minetest-irc_commands)|
