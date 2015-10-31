@@ -208,7 +208,7 @@ minetest.register_globalstep(function(dtime)
                     hud_elem_type = "image",
                     name = "MailIcon",
                     position = {x=0.52, y=0.52},
-                    text="chatplus_mail.png",
+                    text="_memo_mail.png",
                     scale = {x=1,y=1},
                     alignment = {x=0.5, y=0.5},
                 })
