@@ -1,6 +1,6 @@
 local tmp = {}
 screwdriver = screwdriver or {}
---[[
+
 minetest.register_entity("itemframes:item",{
 	hp_max = 1,
 	visual="wielditem",
@@ -37,7 +37,7 @@ minetest.register_entity("itemframes:item",{
 		return ""
 	end,
 })
---]]
+
 
 local facedir = {}
 facedir[0] = {x=0,y=0,z=1}
