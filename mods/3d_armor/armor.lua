@@ -65,8 +65,7 @@ armor = {
 	player_hp = {},
 	elements = {"head", "torso", "legs", "feet"},
 	physics = {"jump","speed","gravity"},
-	formspec = "size[8,8.5]list[detached:player_name_armor;armor;0,1;2,3;]"
-		.."image[2,0.75;2,4;armor_preview]"
+	formspec = "size[8,8.5]image[2,0.75;2,4;armor_preview]"
 		.."list[current_player;main;0,4.5;8,4;]"
 		.."list[current_player;craft;4,1;3,3;]"
 		.."list[current_player;craftpreview;7,2;1,1;]",
@@ -78,12 +77,15 @@ armor = {
 if minetest.get_modpath("inventory_plus") then
 	inv_mod = "inventory_plus"
 	armor.formspec = "size[8,8.5]button[0,0;2,0.5;main;Back]"
-		.."list[detached:player_name_armor;armor;0,1;2,3;]"
 		.."image[2.5,0.75;2,4;armor_preview]"
 		.."label[5,1;Level: armor_level]"
 		.."label[5,1.5;Heal:  armor_heal]"
 		.."label[5,2;Fire:  armor_fire]"
 		.."list[current_player;main;0,4.5;8,4;]"
+	if minetest.get_modpath("crafting") then
+		inventory_plus.get_formspec = function(player, page)
+		end
+	end
 elseif minetest.get_modpath("unified_inventory") then
 	inv_mod = "unified_inventory"
 	unified_inventory.register_button("armor", {
@@ -234,13 +236,13 @@ armor.set_player_armor = function(self, player)
 	self:update_player_visuals(player)
 end
 
-armor.update_armor = function(self, player, dtime)
+armor.update_armor = function(self, player)
 	local name, player_inv, armor_inv, pos = armor:get_valid_player(player, "[update_armor]")
 	if not name then
 		return
 	end
 	local hp = player:get_hp() or 0
-	if ARMOR_FIRE_PROTECT == true and dtime then
+	if ARMOR_FIRE_PROTECT == true then
 		pos.y = pos.y + 1.4 -- head level
 		local node_head = minetest.get_node(pos).name
 		pos.y = pos.y - 1.2 -- feet level
@@ -250,7 +252,7 @@ armor.update_armor = function(self, player, dtime)
 			-- check for fire protection, if not enough then get hurt
 			if row[1] == node_head or row[1] == node_feet then
 				if hp > 0 and armor.def[name].fire < row[2] then
-					hp = hp - row[3] * dtime
+					hp = hp - row[3] * ARMOR_UPDATE_TIME
 					player:set_hp(hp)
 					break
 				end
@@ -324,7 +326,7 @@ armor.get_armor_formspec = function(self, name)
 		minetest.log("error", "3d_armor: Armor def["..name.."] is nil [get_armor_formspec]")
 		return ""
 	end
-	local formspec = armor.formspec:gsub("player_name", name)
+	local formspec = armor.formspec.."list[detached:"..name.."_armor;armor;0,1;2,3;]"
 	formspec = formspec:gsub("armor_preview", armor.textures[name].preview)
 	formspec = formspec:gsub("armor_level", armor.def[name].level)
 	formspec = formspec:gsub("armor_heal", armor.def[name].heal)
@@ -590,7 +592,7 @@ minetest.register_globalstep(function(dtime)
 	time = time + dtime
 	if time > ARMOR_UPDATE_TIME then
 		for _,player in ipairs(minetest.get_connected_players()) do
-			armor:update_armor(player, time)
+			armor:update_armor(player)
 		end
 		time = 0
 	end

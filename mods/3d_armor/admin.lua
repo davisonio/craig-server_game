@@ -42,3 +42,4 @@ minetest.register_tool("3d_armor:boots_admin", {
 		return
 	end,
 })
+
