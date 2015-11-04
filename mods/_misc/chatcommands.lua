@@ -80,7 +80,7 @@ minetest.register_chatcommand("spawn", {
     func = function(name, param)
             local player = minetest.get_player_by_name(name)
             minetest.chat_send_player(name, "Teleported to spawn!")
-            player:setpos({x=0.0, y=5.0, z=0.0})
+            player:setpos(minetest.string_to_pos(minetest.setting_get("static_spawnpoint")))
             return true
     end,
 })
