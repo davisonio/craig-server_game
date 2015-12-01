@@ -26,7 +26,7 @@ This is the game used by Craig's Minetest Server.
 
 **Requirements:** Minetest 0.4.13-dev or later
 
-[Download](https://github.com/CraigyDavi/Craig-Server_game/archive/master.zip) & unzip the game, then move the the folder into your minetest/games folder.
+[Download](https://github.com/davisonio/craig-server_game/archive/master.zip) & unzip the game, then move the the folder into your minetest/games folder.
 
 - **Unless you know what you're doing, remove the legacy, welcome & email mod.**
 
@@ -43,8 +43,8 @@ This is the game used by Craig's Minetest Server.
 |Boost Cart (boost_cart)                    |[10172](https://forum.minetest.net/viewtopic.php?id=10172)|[GitHub/SmallJoker](https://github.com/SmallJoker/boost_cart)|
 |Bucket (bucket)                            ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/bucket)|
 |Carbone torches (carbone_torches)|[12824](https://forum.minetest.net/viewtopic.php?id=12824)|[GitHub/Calinou](https://github.com/Calinou/carbone-ng/tree/master/mods/carbone_torches)|
-|Coloured Stone Bricks (colouredstonebricks)|[8784](https://forum.minetest.net/viewtopic.php?id=8784)|[GitHub/CraigyDavi](https://github.com/CraigyDavi/colouredstonebricks)|
-|Darkage (darkage)                          |[10063](https://forum.minetest.net/viewtopic.php?id=10063)|[GitHub/darkage](https://github.com/CraigyDavi/darkage)|
+|Coloured Stone Bricks (colouredstonebricks)|[8784](https://forum.minetest.net/viewtopic.php?id=8784)|[GitHub/davisonio](https://github.com/davisonio/colouredstonebricks)|
+|Darkage (darkage)                          |[10063](https://forum.minetest.net/viewtopic.php?id=10063)|[GitHub/davisonio](https://github.com/davisonio/darkage)|
 |Default (default)                          ||[GitHub/default](https://github.com/minetest/minetest_game/tree/master/mods/default)|
 |Doors (doors)                              ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/doors)|
 |Dye (dye)                                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/dye)|
