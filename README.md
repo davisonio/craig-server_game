@@ -1,24 +1,36 @@
 # Craig's Server Game
 
-![Screenshot](https://raw.githubusercontent.com/CraigyDavi/Craig-Server_game/master/screenshot.jpg)
+> Game used by Craig's [Minetest](http://www.minetest.net) Server
 
-This is the game used by Craig's Minetest Server
+<p align="center">
+<b><a href="#installation">Installation</a></b>
+·
+<b><a href="#mod-list">Mod list</a></b>
+·
+<b><a href="#todo">Todo</a></b>
+·
+<b><a href="#authors">Authors</a></b>
+·
+<b><a href="#credits">Credits</a></b>
+</p>
 
-It is a tweaked version of [Minetest Game](https://github.com/minetest/minetest_game) with other mods and features added.
+<p align="center">
+<a href="https://travis-ci.org/davisonio/craig-server_game"><img src="https://img.shields.io/travis/davisonio/craig-server_game.svg?style=flat-square"/></a>
+</p>
 
-* **[Minetest Forum Topic](https://forum.minetest.net/viewtopic.php?f=10&t=7010)**
-* **[GitHub Repository](https://github.com/CraigyDavi/Craig-Server_game)**
+This is the game used by Craig's Minetest Server.
+
+- [Minetest Forum Topic](https://forum.minetest.net/viewtopic.php?id=7010)
 
 ## Installation
 
-**Requirements:** Minetest 0.4.12-dev or later
+**Requirements:** Minetest 0.4.13-dev or later
 
 [Download](https://github.com/CraigyDavi/Craig-Server_game/archive/master.zip) & unzip the game, then move the the folder into your minetest/games folder.
 
 - **Unless you know what you're doing, remove the legacy, welcome & email mod.**
-- The scripts require modifications if your files are located in different places to mine.
 
-## List of mods
+## Mod list
 
 | Name                                      | Forum | Source |
 |-------------------------------------------|-------|--------|
@@ -77,13 +89,26 @@ It is a tweaked version of [Minetest Game](https://github.com/minetest/minetest_
 |Extended Ban v2 (xban2)                    |[9315](https://forum.minetest.net/viewtopic.php?id=9315)|[GitHub/kaeza](https://github.com/kaeza/minetest-xban2)|
 |Zeg's Craft Guide (zcg)                    |[5564](https://forum.minetest.net/viewtopic.php?id=5564)|[GitHub/CiaranG](https://github.com/CiaranG/minetest-zcg)|
 
-## License
+## Todo
+- [ ] add luacheck tests
+- [ ] add contributing.md
 
-```
-Copyright (c) 2013-2015 Craig Davison <craig@davison.io>
+## Authors
 
-This work is free. You can redistribute it and/or modify it under the
-terms of the Do What The Fuck You Want To Public License, Version 2,
-as published by Sam Hocevar. See http://www.wtfpl.net/ for more details.
-```
-See README.md in each mod directory for information about other authors.
+**[Craig Davison](http://davison.io)**
+
+[![](https://img.shields.io/github/followers/davisonio.svg?style=social&label=Follow)](https://github.com/davisonio)
+
+With many thanks to the [contributors](https://github.com/davisonio/craig-server_game/graphs/contributors) :clap:
+
+For details on how to help, see the [Contributing Guidelines](https://github.com/davisonio/craig-server_game/blob/master/CONTRIBUTING.md).
+
+## Credits
+
+Unless otherwise stated:
+
+- Copyright © 2014+ [Craig Davison](http://davison.io). Released under the [WTFPL](http://www.wtfpl.net/txt/copying/).
+
+Based on [Minetest Game](https://github.com/minetest/minetest_game):
+
+- [License](https://github.com/minetest/minetest_game/blob/master/README.txt).
