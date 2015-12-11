@@ -1,0 +1,13 @@
+before_install:
+  - rvm get stable
+  - rvm install ruby 2.2.3
+
+install:
+  - gem install awesome_bot
+
+script:
+  # Check for link problems
+  - awesome_bot README.md --allow-dupe
+
+notifications:
+  email: false
