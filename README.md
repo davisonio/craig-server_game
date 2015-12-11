@@ -7,8 +7,6 @@
 ·
 <b><a href="#mod-list">Mod list</a></b>
 ·
-<b><a href="#todo">Todo</a></b>
-·
 <b><a href="#authors">Authors</a></b>
 ·
 <b><a href="#credits">Credits</a></b>
@@ -89,15 +87,11 @@ This is the game used by Craig's Minetest Server.
 |Extended Ban v2 (xban2)                    |[9315](https://forum.minetest.net/viewtopic.php?id=9315)|[GitHub/kaeza](https://github.com/kaeza/minetest-xban2)|
 |Zeg's Craft Guide (zcg)                    |[5564](https://forum.minetest.net/viewtopic.php?id=5564)|[GitHub/CiaranG](https://github.com/CiaranG/minetest-zcg)|
 
-## Todo
-- [ ] add luacheck tests
-- [ ] add contributing.md
-
 ## Authors
 
 **[Craig Davison](http://davison.io)**
 
-[![](https://img.shields.io/github/followers/davisonio.svg?style=social&label=Follow)](https://github.com/davisonio)
+[![GitHub followers](https://img.shields.io/github/followers/davisonio.svg?style=social&label=Follow%20davisonio)](https://github.com/davisonio) [![Twitter followers](https://img.shields.io/twitter/follow/davisonio.svg?style=social)](https://twitter.com/davisonio)
 
 With many thanks to the [contributors](https://github.com/davisonio/craig-server_game/graphs/contributors) :clap:
 
