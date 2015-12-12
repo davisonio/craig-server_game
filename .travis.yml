@@ -1,13 +1,26 @@
 before_install:
-  - rvm get stable
-  - rvm install ruby 2.2.3
+  # Unfortunately there's no other way to install a recent luarocks release
+  - cd ../
+  - wget https://keplerproject.github.io/luarocks/releases/luarocks-2.2.2.tar.gz -O luarocks-2.2.2.tar.gz
+  - tar -xvf luarocks-2.2.2.tar.gz
+  - cd luarocks-2.2.2
+  - ./configure
+  - make build
+  - sudo make install
+  - cd ../darkage
 
 install:
-  - gem install awesome_bot
+  - sudo luarocks install luacheck
 
 script:
-  # Check for link problems
-  - awesome_bot README.md --allow-dupe
+  # Run luacheck and always return 0 for warnings
+  - luacheck . || true
+
+addons:
+  apt:
+    packages:
+      - lua5.2
+      - liblua5.2-dev
 
 notifications:
   email: false
