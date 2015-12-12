@@ -1,13 +1,13 @@
 before_install:
   # Unfortunately there's no other way to install a recent luarocks release
   - cd ../
-  - wget https://keplerproject.github.io/luarocks/releases/luarocks-2.2.2.tar.gz -O luarocks-2.2.2.tar.gz
-  - tar -xvf luarocks-2.2.2.tar.gz
-  - cd luarocks-2.2.2
+  - wget https://keplerproject.github.io/luarocks/releases/luarocks-2.2.2.tar.gz -O build-luarocks-2.2.2.tar.gz
+  - tar -xvf build-luarocks-2.2.2.tar.gz
+  - cd build-luarocks-2.2.2
   - ./configure
   - make build
   - sudo make install
-  - cd ../darkage
+  - cd ../craig-server_game
 
 install:
   - sudo luarocks install luacheck
