@@ -1,5 +1,5 @@
--- Legacy stuff
--- To maintain backwards-compatibility and prevent errors/unknown blocks
+-- Legacy mod for Craig's Server Game
+-- You probably don't need this mod if you don't have an old map
 
 local old_nodes = {
     -- Remove trees from old mod `Tiny Trees` which generated in the world
