@@ -19,7 +19,7 @@ minetest.register_node(":default:torch", {
 	sunlight_propagates = true,
 	is_ground_content = false,
 	walkable = false,
-	light_source = LIGHT_MAX - 1,
+	light_source = default.LIGHT_MAX - 1,
 	node_box = {
 		type = "wallmounted",
 		wall_top    = {-0.0625, -0.0625, -0.0625, 0.0625, 0.5   , 0.0625},
