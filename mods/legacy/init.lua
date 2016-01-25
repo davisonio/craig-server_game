@@ -144,3 +144,23 @@ minetest.register_alias("homedecor:armchair_dark_green", "lrfurn:armchair_green"
 
 -- homedecor plasma lamp ->
 --minetest.register_alias("homedecor:plasma_lamp", "")
+
+-- Aliases for the removal of Industry Pack
+--minetest.register_alias("conveyor:conveyor", "")
+--minetest.register_alias("dumbwaiter:dumbwaiter", "")
+--minetest.register_alias("factory:factory", "")
+--minetest.register_alias("factory:craft_performer", "")
+--minetest.register_alias("gears:gear", "")
+--minetest.register_alias("handtools:screwdriver", "")
+--minetest.register_alias("handtools:hammer", "")
+--minetest.register_alias("handtools:saw", "")
+--minetest.register_alias("hopper:hopper", "")
+--minetest.register_alias("mecharm:mechanical_arm", "")
+minetest.register_alias("rubber:rubber_tree_full", "default:tree")
+minetest.register_alias("rubber:rubber_tree_empty", "default:tree")
+minetest.register_alias("rubber:bucket_rubber", "bucket:bucket_empty")
+minetest.register_alias("rubber_collector:rubber_collector", "default:tree")
+minetest.register_alias("rubber_sheet:rubber_sheet", "default:paper")
+minetest.register_alias("rubber_sheet:rubber_base", "default:steel_ingot")
+--minetest.register_alias("toolbox:toolbox", "")
+--minetest.register_alias("transactor:transactor", "")
