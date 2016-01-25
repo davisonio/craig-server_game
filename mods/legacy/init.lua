@@ -1,27 +1,8 @@
 -- Legacy mod for Craig's Server Game
 -- You probably don't need this mod if you don't have an old map
 
-local old_nodes = {
-    -- Remove trees from old mod `Tiny Trees` which generated in the world
-	"trees:leaves_yellow", 
-	"trees:leaves_red",
-	"trees:leaves_green",
-	"trees:leaves_palm",
-	"trees:leaves_mangrove",
-	"trees:leaves_conifer",
-	"trees:tree_palm",
-	"trees:tree_mangrove",
-	"trees:tree_conifer",
-	"trees:wood_conifer",
-	"trees:wood_palm",
-	"trees:wood_mangrove",
-    -- Remove memorandum stuff
-    "memorandum:letter_written",
-    "memorandum:letter_empty",
-    "memorandum:message",
-    -- homedecor
-    "homedecor:plasma_lamp"
-}
+--[[
+local old_nodes = {}
 for _,node_name in ipairs(old_nodes) do
     minetest.register_node(":"..node_name, {
         groups = {old=1},
@@ -44,6 +25,21 @@ for _,entity_name in ipairs(old_entities) do
         end,
     })
 end
+]]--
+
+-- Remove trees from old mod `Tiny Trees` which generated in the world
+--minetest.register_alias("trees:leaves_yellow", "")
+--minetest.register_alias("trees:leaves_red", "")
+--minetest.register_alias("trees:leaves_green", "")
+--minetest.register_alias("trees:leaves_palm", "")
+--minetest.register_alias("trees:leaves_mangrove", "")
+--minetest.register_alias("trees:leaves_conifer", "")
+--minetest.register_alias("trees:tree_palm", "")
+--minetest.register_alias("trees:tree_mangrove", "")
+--minetest.register_alias("trees:tree_conifer", "")
+--minetest.register_alias("trees:wood_conifer", "")
+--minetest.register_alias("trees:wood_palm", "")
+--minetest.register_alias("trees:wood_mangrove", "")
 
 -- Aliases for industry_pack fail
 minetest.register_alias("rubber_industry:rubber_tree_full", "rubber:rubber_tree_full")
@@ -145,3 +141,6 @@ minetest.register_alias("homedecor:armchair_pink", "lrfurn:armchair_violet")
 minetest.register_alias("homedecor:armchair_violet", "lrfurn:armchair_violet")
 minetest.register_alias("homedecor:armchair_blue", "lrfurn:armchair_blue")
 minetest.register_alias("homedecor:armchair_dark_green", "lrfurn:armchair_green")
+
+-- homedecor plasma lamp ->
+--minetest.register_alias("homedecor:plasma_lamp", "")
