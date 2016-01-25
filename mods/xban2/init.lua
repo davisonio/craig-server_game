@@ -140,12 +140,12 @@ function xban.get_record(player)
 	end
 	local record = { }
 	for _, rec in ipairs(e.record) do
-		local msg
+		local msg = rec.reason or "No reason given."
 		if rec.expires then
-			msg = ("%s, Expires: %s"):format(
-			  rec.reason, os.date("%c", e.expires))
-		else
-			msg = rec.reason
+			msg = msg..(", Expires: %s"):format(os.date("%c", e.expires))
+		end
+		if rec.source then
+			msg = msg..", Source: "..rec.source
 		end
 		table.insert(record, ("[%s]: %s"):format(os.date("%c", e.time), msg))
 	end
@@ -199,7 +199,7 @@ minetest.register_chatcommand("xban", {
 		return true, ("Banned %s."):format(plname)
 	end,
 })
---[[
+
 minetest.register_chatcommand("xtempban", {
 	description = "XBan a player temporarily",
 	params = "<player> <time> <reason>",
@@ -218,7 +218,7 @@ minetest.register_chatcommand("xtempban", {
 		return true, ("Banned %s until %s."):format(plname, os.date("%c", expires))
 	end,
 })
---]]
+
 minetest.register_chatcommand("xunban", {
 	description = "XUnBan a player",
 	params = "<player_or_ip>",
@@ -283,8 +283,12 @@ local function save_db()
 	local f, e = io.open(DB_FILENAME, "wt")
 	db.timestamp = os.time()
 	if f then
-		local ok = f:write(xban.serialize(db))
-		WARNING("Unable to save database: %s", "Write failed")
+		local ok, err = f:write(xban.serialize(db))
+		if not ok then
+			WARNING("Unable to save database: %s", err)
+		end
+	else
+		WARNING("Unable to save database: %s", e)
 	end
 	if f then f:close() end
 	return
@@ -321,4 +325,4 @@ minetest.after(SAVE_INTERVAL, save_db)
 load_db()
 xban.db = db
 
-dofile(xban.MP.."/dbimport.lua")
+minetest.after(1, check_temp_bans)
