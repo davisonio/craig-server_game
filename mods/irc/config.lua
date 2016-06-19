@@ -44,8 +44,10 @@ setting("bool",   "send_join_part", true) -- Whether to send player join and par
 setting("string", "password") -- Server password
 setting("bool",   "secure", false) -- Enable a TLS connection, requires LuaSEC
 setting("number", "timeout", 60) -- Underlying socket timeout in seconds.
+setting("number", "reconnect", 600) -- Time between reconnection attempts, in seconds.
 setting("string", "command_prefix") -- Prefix to use for bot commands
 setting("bool",   "debug", false) -- Enable debug output
 setting("bool",   "enable_player_part", true) -- Whether to enable players joining and parting the channel
 setting("bool",   "auto_join", true) -- Whether to automatically show players in the channel when they join
 setting("bool",   "auto_connect", true) -- Whether to automatically connect to the server on mod load
+
