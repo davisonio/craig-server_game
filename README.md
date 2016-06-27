@@ -1,38 +1,36 @@
-# Craig's Server Game
+# [Craig's Server Game](https://davison.io/minetest/craig-server_game) :video_game: [![](https://img.shields.io/travis/davisonio/craig-server_game.svg?style=flat-square)](https://travis-ci.org/davisonio/craig-server_game)
 
 > Game used by Craig's [Minetest](http://www.minetest.net) Server
 
 <p align="center">
-<b><a href="#installation">Installation</a></b>
+<b><a href="#install">Install</a></b>
 ·
-<b><a href="#mod-list">Mod list</a></b>
+<b><a href="#mod-list">Mod List</a></b>
 ·
 <b><a href="#authors">Authors</a></b>
 ·
-<b><a href="#credits">Credits</a></b>
-</p>
-
-<p align="center">
-<a href="https://travis-ci.org/davisonio/craig-server_game"><img src="https://img.shields.io/travis/davisonio/craig-server_game.svg?style=flat-square"/></a>
+<b><a href="#license--credits">License & Credits</a></b>
 </p>
 
 This is the game used by Craig's Minetest Server.
 
 - [Minetest Forum Topic](https://forum.minetest.net/viewtopic.php?id=7010)
 
-## Installation
+![](https://davison.io/assets/img/minetest-craig-server_game-screenshot.jpg)
 
-**Requirements:** Minetest 0.4.13-dev or later
+## Install
 
-[Download](https://github.com/davisonio/craig-server_game/archive/master.zip) & unzip the game, then move the the folder into your minetest/games folder.
+*Requirements:* Minetest 0.4.13-dev or later
 
-- **Unless you know what you're doing, remove the legacy, welcome & email mod.**
+[Download](https://github.com/davisonio/craig-server_game/archive/master.zip) & unzip the game, rename it to "craig-server_game" and move it into your `minetest/games` folder.
 
-## Mod list
+**Unless you know what you're doing, remove the legacy, welcome & email mod.**
+
+## Mod List
 
 | Name                                      | Forum | Source |
 |-------------------------------------------|-------|--------|
-|3D Armour (3d_armor)                       |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/3d_armor)|
+|3D Armor (3d_armor)                       |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/3d_armor)|
 |Memo (_memo)                               ||[GitHub/ShadowNinja](https://github.com/ShadowNinja/memo)|
 |Miscellaneous (_misc)                      |||
 |Advanced Area Protection (areas)           |[7239](https://forum.minetest.net/viewtopic.php?id=7239)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/areas)|
@@ -88,19 +86,19 @@ This is the game used by Craig's Minetest Server.
 
 ## Authors
 
-**[Craig Davison](http://davison.io)**
+**[Craig Davison](https://davison.io)**
 
-[![GitHub followers](https://img.shields.io/github/followers/davisonio.svg?style=social&label=Follow%20davisonio)](https://github.com/davisonio) [![Twitter followers](https://img.shields.io/twitter/follow/davisonio.svg?style=social)](https://twitter.com/davisonio)
+[![](https://img.shields.io/github/followers/davisonio.svg?style=social&label=Follow%20davisonio)](https://github.com/davisonio) [![](https://img.shields.io/twitter/follow/davisonio.svg?style=social)](https://twitter.com/davisonio)
 
-With many thanks to the [contributors](https://github.com/davisonio/craig-server_game/graphs/contributors) :clap:
+With many thanks to the [contributors](https://github.com/davisonio/craig-server_game/graphs/contributors). :clap:
 
-For details on how to help, see the [Contributing Guidelines](https://github.com/davisonio/craig-server_game/blob/master/CONTRIBUTING.md).
+**Contributions are welcome!** Check out the [Contributing Guidelines](https://github.com/davisonio/craig-server_game/blob/master/CONTRIBUTING.md). :raised_hands:
 
-## Credits
+## License & Credits
 
 Unless otherwise stated:
 
-- Copyright © 2014+ [Craig Davison](http://davison.io). Released under the [WTFPL](http://www.wtfpl.net/txt/copying/).
+- Copyright © 2014+ [Craig Davison](https://davison.io). Released under the [WTFPL](http://www.wtfpl.net/txt/copying/).
 
 Based on [Minetest Game](https://github.com/minetest/minetest_game):
 
