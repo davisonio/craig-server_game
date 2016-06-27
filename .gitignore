@@ -34,8 +34,6 @@ Temporary Items
 
 # Linux
 *~
+.fuse_hidden*
 .directory
 .Trash-*
-
-# Minetest
-debug.txt
