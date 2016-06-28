@@ -14,8 +14,6 @@
 
 This is the game used by Craig's Minetest Server.
 
-- [Minetest Forum Topic](https://forum.minetest.net/viewtopic.php?id=7010)
-
 ![](https://davison.io/assets/img/minetest-craig-server_game-screenshot.jpg)
 
 ## Install
