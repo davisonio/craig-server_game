@@ -1,4 +1,4 @@
-# [Craig's Server Game](https://davison.io/minetest/craig-server_game) :video_game: [![](https://img.shields.io/travis/davisonio/craig-server_game.svg?style=flat-square)](https://travis-ci.org/davisonio/craig-server_game)
+# [Craig's Server Game](https://davison.io/minetest/craig-server_game) :video_game: [![](https://img.shields.io/travis/davisonio/craig-server_game.svg?style=flat-square)](https://travis-ci.org/davisonio/craig-server_game) [![](https://img.shields.io/gitter/room/davisonio/bacon.svg)](https://gitter.im/davisonio/bacon)
 
 > Game used by Craig's [Minetest](http://www.minetest.net) Server
 
@@ -18,7 +18,9 @@ This is the game used by Craig's Minetest Server.
 
 ## Install
 
-*Requirements:* Minetest 0.4.13-dev or later
+###### Requirements 
+
+- [Minetest](http://www.minetest.net) >= 0.4.13
 
 [Download](https://github.com/davisonio/craig-server_game/archive/master.zip) & unzip the game, rename it to "craig-server_game" and move it into your `minetest/games` folder.
 
