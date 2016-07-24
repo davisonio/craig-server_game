@@ -40,10 +40,9 @@ This is the game used by Craig's Minetest Server.
 |Carbone torches (carbone_torches)|[12824](https://forum.minetest.net/viewtopic.php?id=12824)|[GitHub/Calinou](https://github.com/Calinou/carbone-ng/tree/master/mods/carbone_torches)|
 |Coloured Stone Bricks (colouredstonebricks)|[8784](https://forum.minetest.net/viewtopic.php?id=8784)|[GitHub/davisonio](https://github.com/davisonio/colouredstonebricks)|
 |Darkage (darkage)                          |[10063](https://forum.minetest.net/viewtopic.php?id=10063)|[GitHub/davisonio](https://github.com/davisonio/darkage)|
-|Default (default)                          ||[GitHub/default](https://github.com/minetest/minetest_game/tree/master/mods/default)|
+|Default (default)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/default)|
 |Doors (doors)                              ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/doors)|
 |Dye (dye)                                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/dye)|
-|Email (email)           					|||
 |Fake Fire (fake_fire)                      |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/fake_fire)|
 |Farming (farming)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/farming)|
 |Fences (fences)                            ||[GitHub/sfan5](https://github.com/sfan5/minetest_game/tree/fences/mods/fences)|
