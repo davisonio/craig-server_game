@@ -1,0 +1,2 @@
+Adds decorative and functional blocks, including cement, rainbow blocks, "evil" blocks and sticks, 
+and the usual collection of tools of various strengths and speeds made from either cement or "evil" components.

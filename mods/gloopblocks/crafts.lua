@@ -20,7 +20,7 @@ minetest.register_craft({
 	type = "shapeless",
 	output = "default:nyancat_rainbow",
 	recipe = {
-		"gloopblocks:rainbow_block", 
+		"gloopblocks:rainbow_block",
 		"default:diamondblock",
 		"default:steelblock",
 		"default:copperblock",
@@ -222,8 +222,8 @@ if minetest.get_modpath("building_blocks") then
 	minetest.register_craft({
 		output = "default:wood 4",
 		recipe = {
-			 {"building_blocks:faggot", "building_blocks:faggot"},
-			 {"building_blocks:faggot", "building_blocks:faggot"},
+			 {"building_blocks:sticks", "building_blocks:sticks"},
+			 {"building_blocks:sticks", "building_blocks:sticks"},
 		}
 	})
 else
@@ -239,9 +239,18 @@ end
 minetest.register_craft({
 	output = "gloopblocks:pavement 5",
 	recipe = {
-		{"default:gravel",    "gloopblocks:wet_cement","default:gravel"},
-		{"gloopblocks:wet_cement","default:gravel",    "gloopblocks:wet_cement"},
-		{"default:gravel",    "gloopblocks:wet_cement","default:gravel"},
+		{"gloopblocks:basalt",    "gloopblocks:wet_cement","gloopblocks:basalt"},
+		{"gloopblocks:wet_cement","gloopblocks:basalt",    "gloopblocks:wet_cement"},
+		{"gloopblocks:basalt",    "gloopblocks:wet_cement","gloopblocks:basalt"},
+	}
+})
+
+minetest.register_craft({
+	output = "gloopblocks:pavement 5",
+	recipe = {
+		{"gloopblocks:wet_cement","gloopblocks:basalt",    "gloopblocks:wet_cement"},
+		{"gloopblocks:basalt",    "gloopblocks:wet_cement","gloopblocks:basalt"},
+		{"gloopblocks:wet_cement","gloopblocks:basalt",    "gloopblocks:wet_cement"},
 	}
 })
 
@@ -347,4 +356,12 @@ minetest.register_craft({
 		"default:grass_1",
 		"default:grass_1"
 	}
+})
+
+minetest.register_craft({
+	output = "gloopblocks:fence_steel 1",
+	recipe = {
+		{"xpanes:bar", "xpanes:bar", "xpanes:bar"},
+		{"xpanes:bar", "xpanes:bar", "xpanes:bar"},
+	},
 })
