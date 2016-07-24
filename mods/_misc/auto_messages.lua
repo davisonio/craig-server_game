@@ -10,17 +10,3 @@ minetest.register_globalstep(function(dtime)
 		end
 	end
 end)
---[[
-local emailtimer = 0
-minetest.register_globalstep(function(dtime)
-	emailtimer = emailtimer + dtime
-	if emailtimer < 900 then return end -- ever 15 minutes
-	emailtimer = 0
-	for _,player in ipairs(minetest.get_connected_players()) do
-		local name = player:get_player_name()
-		if welcome.emails[name] == nil then
-			minetest.chat_send_player(name, name .. ", you have not set your email. Setting your email is important if you forget your password. Type /profile")
-		end
-	end
-end)
---]]
