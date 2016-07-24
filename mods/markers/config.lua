@@ -9,10 +9,10 @@ markers.MAX_MARKERS  = 50;
 markers.EXPIRE_AFTER = 60*60*24;
 
 -- self-protected areas can not get higher than 100 blocks
-markers.MAX_HEIGHT   = 100;
+markers.MAX_HEIGHT   = 200;
 
 -- only areas up to this size (in square meters) can be protected
-markers.MAX_SIZE     = 1024; -- 32m * 32m = 1024 m^2
+markers.MAX_SIZE     = 40000; -- 200m * 200m = 40000 m^2
 
 -- show only areas withhin this range when showing the list of ALL areas
 -- (else it does get too crowded on multiplayer servers)
