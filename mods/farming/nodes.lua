@@ -1,5 +1,5 @@
 minetest.override_item("default:dirt", {
-	groups = {crumbly=3,soil=1},
+	groups = {crumbly=3, soil=1},
 	soil = {
 		base = "default:dirt",
 		dry = "farming:soil",
@@ -8,9 +8,18 @@ minetest.override_item("default:dirt", {
 })
 
 minetest.override_item("default:dirt_with_grass", {
-	groups = {crumbly=3,soil=1},
+	groups = {crumbly=3, soil=1},
 	soil = {
 		base = "default:dirt_with_grass",
+		dry = "farming:soil",
+		wet = "farming:soil_wet"
+	}
+})
+
+minetest.override_item("default:dirt_with_dry_grass", {
+	groups = {crumbly=3, soil=1},
+	soil = {
+		base = "default:dirt_with_dry_grass",
 		dry = "farming:soil",
 		wet = "farming:soil_wet"
 	}
@@ -80,7 +89,7 @@ minetest.register_node("farming:straw", {
 	description = "Straw",
 	tiles = {"farming_straw.png"},
 	is_ground_content = false,
-	groups = {snappy=3, flammable=4},
+	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30},
 	sounds = default.node_sound_leaves_defaults(),
 })
 

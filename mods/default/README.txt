@@ -27,7 +27,6 @@ Cisoun's WTFPL texture pack:
   default_lava.png
   default_leaves.png
   default_sapling.png
-  default_sign_wall.png
   default_stone.png
   default_tree.png
   default_tree_top.png
@@ -52,14 +51,11 @@ RealBadAngel's animated water (WTFPL):
   default_water_flowing_animated.png
 
 VanessaE (WTFPL):
-  default_nc_back.png
-  default_nc_front.png
-  default_nc_rb.png
-  default_nc_side.png
   default_desert_sand.png
   default_desert_stone.png
   default_sand.png
-  default_jungletree_top.png
+  default_mese_crystal.png
+  default_mese_crystal_fragment.png
 
 Calinou (CC BY-SA):
   default_brick.png
@@ -89,7 +85,6 @@ InfinityProject (WTFPL):
 
 Splizard (CC BY-SA 3.0):
   default_snow.png
-  default_snow_side.png
   default_pine_sapling.png
 
 Zeg9 (CC BY-SA 3.0):
@@ -100,28 +95,35 @@ Zeg9 (CC BY-SA 3.0):
   default_gold_block.png
 
 paramat (CC BY-SA 3.0):
-  wieldhand.png, derived from character.png by Jordach (CC BY-SA 3.0)
+  wieldhand.png -- Copied from character.png by Jordach (CC BY-SA 3.0)
   default_pinetree.png
   default_pinetree_top.png
   default_pinewood.png
-  default_sandstone_brick.png
-  default_obsidian_brick.png
-  default_river_water.png
-  default_river_water_source_animated.png
-  default_river_water_flowing_animated.png
   default_acacia_leaves.png
   default_acacia_sapling.png
   default_acacia_tree.png
   default_acacia_tree_top.png
   default_acacia_wood.png
+  default_junglewood.png
+  default_jungletree_top.png
+  default_sandstone_brick.png
+  default_obsidian_brick.png
+  default_stone_brick.png
+  default_desert_stone_brick.png
+  default_sandstone_block.png
+  default_obsidian_block.png
+  default_stone_block.png
+  default_desert_stone_block.png
+  default_river_water.png
+  default_river_water_source_animated.png
+  default_river_water_flowing_animated.png
   default_dry_grass.png
   default_dry_grass_side.png
   default_dry_grass_*.png
-  default_junglewood.png, derived from a texture by BlockMen (CC BY-SA 3.0)
-  default_grass.png, derived from a texture by Philipbenr (CC BY-SA 3.0)
-  default_grass_side.png, derived from a texture by Philipbenr (CC BY-SA 3.0)
-  default_stone_brick.png, derived from a texture by Cisoun (WTFPL)
-  default_desert_stone_brick.png, derived from a texture by VanessaE (WTFPL)
+  default_grass.png
+  default_grass_side.png
+  default_snow_side.png
+  default_mese_block.png
 
 brunob.santos (CC BY-SA 4.0):
   default_desert_cobble.png
@@ -145,7 +147,6 @@ BlockMen (CC BY-SA 3.0):
   default_mineral_mese.png
   default_meselamp.png
   bubble.png
-  heart.png
   gui_*.png
 
 sofar (CC BY-SA 3.0):
@@ -155,6 +156,9 @@ sofar (CC BY-SA 3.0):
   default_aspen_tree
   default_aspen_tree_top, derived from default_pine_tree_top (by paramat)
   default_aspen_wood, derived from default_pine_wood (by paramat)
+
+sofar (WTFPL):
+  default_gravel.png -- Derived from Gambit's PixelBOX texture pack light gravel
 
 Neuromancer (CC BY-SA 2.0):
   default_cobble.png, based on texture by Brane praefect
@@ -174,9 +178,15 @@ Gambit (WTFPL):
   default_grass_*.png
   default_paper.png
   default_diamond_block.png
+  default_ladder_steel.png
+  default_sign_wall_wood.png
+  default_flint.png
 
 asl97 (WTFPL):
   default_ice.png
+
+KevDoy (CC BY-SA 3.0)
+  heart.png
 
 Glass breaking sounds (CC BY 3.0):
   1: http://www.freesound.org/people/cmusounddesign/sounds/71947/

@@ -65,6 +65,7 @@ This is the game used by Craig's Minetest Server.
 |More Blocks (moreblocks)                   |[509](https://forum.minetest.net/viewtopic.php?id=509)|[GitHub/minetest-mods](https://github.com/minetest-mods/moreblocks)|
 |More Ores (moreores)                       |[549](https://forum.minetest.net/viewtopic.php?id=549)|[GitHub/minetest-mods](https://github.com/minetest-mods/moreores)|
 |Names per IP (names_per_ip)                |[9768](https://forum.minetest.net/viewtopic.php?id=9768)|[GitHub/Calinou](https://github.com/Calinou/carbone/tree/master/mods/names_per_ip)|
+|Nyan Cat (nyancat)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/nyancat)|
 |Replacer (replacer)                        |[4676](https://forum.minetest.net/viewtopic.php?id=4676)|[GitHub/Sokomine](https://github.com/Sokomine/replacer)|
 |Screwdriver (screwdriver)                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/screwdriver)|
 |Shields (shields)                          |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/shields)|

@@ -40,9 +40,21 @@ end
 function default.node_sound_sand_defaults(table)
 	table = table or {}
 	table.footstep = table.footstep or
-			{name = "default_sand_footstep", gain = 0.2}
+			{name = "default_sand_footstep", gain = 0.12}
 	table.dug = table.dug or
-			{name = "default_sand_footstep", gain = 0.4}
+			{name = "default_sand_footstep", gain = 0.24}
+	table.place = table.place or
+			{name = "default_place_node", gain = 1.0}
+	default.node_sound_defaults(table)
+	return table
+end
+
+function default.node_sound_gravel_defaults(table)
+	table = table or {}
+	table.footstep = table.footstep or
+			{name = "default_gravel_footstep", gain = 0.5}
+	table.dug = table.dug or
+			{name = "default_gravel_footstep", gain = 1.0}
 	table.place = table.place or
 			{name = "default_place_node", gain = 1.0}
 	default.node_sound_defaults(table)
@@ -88,40 +100,42 @@ end
 -- Lavacooling
 --
 --[[
-default.cool_lava_source = function(pos)
-	minetest.set_node(pos, {name = "default:obsidian"})
-	minetest.sound_play("default_cool_lava",
-		{pos = pos, max_hear_distance = 16, gain = 0.25})
-end
-
-default.cool_lava_flowing = function(pos)
-	minetest.set_node(pos, {name = "default:stone"})
+default.cool_lava = function(pos, node)
+	if node.name == "default:lava_source" then
+		minetest.set_node(pos, {name = "default:obsidian"})
+	else -- Lava flowing
+		minetest.set_node(pos, {name = "default:stone"})
+	end
 	minetest.sound_play("default_cool_lava",
 		{pos = pos, max_hear_distance = 16, gain = 0.25})
 end
 
 minetest.register_abm({
-	nodenames = {"default:lava_flowing"},
+	nodenames = {"default:lava_source", "default:lava_flowing"},
 	neighbors = {"group:water"},
 	interval = 1,
-	chance = 2,
+	chance = 1,
 	catch_up = false,
 	action = function(...)
-		default.cool_lava_flowing(...)
-	end,
-})
-
-minetest.register_abm({
-	nodenames = {"default:lava_source"},
-	neighbors = {"group:water"},
-	interval = 1,
-	chance = 2,
-	catch_up = false,
-	action = function(...)
-		default.cool_lava_source(...)
+		default.cool_lava(...)
 	end,
 })
 --]]
+
+--
+-- optimized helper to put all items in an inventory into a drops list
+--
+function default.get_inventory_drops(pos, inventory, drops)
+	local inv = minetest.get_meta(pos):get_inventory()
+	local n = #drops
+	for i = 1, inv:get_size(inventory) do
+		local stack = inv:get_stack(inventory, i)
+		if stack:get_count() > 0 then
+			drops[n+1] = stack:to_table()
+			n = n + 1
+		end
+	end
+end
 
 --
 -- Papyrus and cactus growing
@@ -177,8 +191,8 @@ end
 minetest.register_abm({
 	nodenames = {"default:cactus"},
 	neighbors = {"group:sand"},
-	interval = 50,
-	chance = 20,
+	interval = 12,
+	chance = 83,
 	action = function(...)
 		default.grow_cactus(...)
 	end
@@ -186,9 +200,9 @@ minetest.register_abm({
 
 minetest.register_abm({
 	nodenames = {"default:papyrus"},
-	neighbors = {"default:dirt", "default:dirt_with_grass", "default:sand"},
-	interval = 50,
-	chance = 20,
+	neighbors = {"default:dirt", "default:dirt_with_grass"},
+	interval = 14,
+	chance = 71,
 	action = function(...)
 		default.grow_papyrus(...)
 	end
@@ -210,6 +224,63 @@ end
 
 
 --
+-- Fence registration helper
+--
+--[[
+function default.register_fence(name, def)
+	minetest.register_craft({
+		output = name .. " 4",
+		recipe = {
+			{ def.material, 'group:stick', def.material },
+			{ def.material, 'group:stick', def.material },
+		}
+	})
+
+	local fence_texture = "default_fence_overlay.png^" .. def.texture ..
+			"^default_fence_overlay.png^[makealpha:255,126,126"
+	-- Allow almost everything to be overridden
+	local default_fields = {
+		paramtype = "light",
+		drawtype = "nodebox",
+		node_box = {
+			type = "connected",
+			fixed = {{-1/8, -1/2, -1/8, 1/8, 1/2, 1/8}},
+			-- connect_top =
+			-- connect_bottom =
+			connect_front = {{-1/16,3/16,-1/2,1/16,5/16,-1/8},
+				{-1/16,-5/16,-1/2,1/16,-3/16,-1/8}},
+			connect_left = {{-1/2,3/16,-1/16,-1/8,5/16,1/16},
+				{-1/2,-5/16,-1/16,-1/8,-3/16,1/16}},
+			connect_back = {{-1/16,3/16,1/8,1/16,5/16,1/2},
+				{-1/16,-5/16,1/8,1/16,-3/16,1/2}},
+			connect_right = {{1/8,3/16,-1/16,1/2,5/16,1/16},
+				{1/8,-5/16,-1/16,1/2,-3/16,1/16}},
+		},
+		connects_to = {"group:fence", "group:wood", "group:tree"},
+		inventory_image = fence_texture,
+		wield_image = fence_texture,
+		tiles = {def.texture},
+		sunlight_propagates = true,
+		is_ground_content = false,
+		groups = {},
+	}
+	for k, v in pairs(default_fields) do
+		if not def[k] then
+			def[k] = v
+		end
+	end
+
+	-- Always add to the fence group, even if no group provided
+	def.groups.fence = 1
+
+	def.texture = nil
+	def.material = nil
+
+	minetest.register_node(name, def)
+end
+--]]
+
+--
 -- Leafdecay
 --
 
@@ -225,9 +296,11 @@ minetest.register_globalstep(function(dtime)
 end)
 
 default.after_place_leaves = function(pos, placer, itemstack, pointed_thing)
-	local node = minetest.get_node(pos)
-	node.param2 = 1
-	minetest.set_node(pos, node)
+	if placer and not placer:get_player_control().sneak then
+		local node = minetest.get_node(pos)
+		node.param2 = 1
+		minetest.set_node(pos, node)
+	end
 end
 
 minetest.register_abm({
@@ -308,39 +381,73 @@ minetest.register_abm({
 
 
 --
--- Grass growing on well-lit dirt
+-- Convert dirt to something that fits the environment
 --
 
 minetest.register_abm({
 	nodenames = {"default:dirt"},
-	interval = 2,
-	chance = 200,
+	neighbors = {
+		"default:dirt_with_grass",
+		"default:dirt_with_dry_grass",
+		"default:dirt_with_snow",
+		"group:grass",
+		"group:dry_grass",
+		"default:snow",
+	},
+	interval = 6,
+	chance = 67,
 	catch_up = false,
 	action = function(pos, node)
+		-- Most likely case, half the time it's too dark for this.
 		local above = {x = pos.x, y = pos.y + 1, z = pos.z}
-		local name = minetest.get_node(above).name
-		local nodedef = minetest.registered_nodes[name]
-		if nodedef and (nodedef.sunlight_propagates or nodedef.paramtype == "light") and
-				nodedef.liquidtype == "none" and
-				(minetest.get_node_light(above) or 0) >= 13 then
-			if name == "default:snow" or name == "default:snowblock" then
-				minetest.set_node(pos, {name = "default:dirt_with_snow"})
-			else
-				minetest.set_node(pos, {name = "default:dirt_with_grass"})
+		if (minetest.get_node_light(above) or 0) < 13 then
+			return
+		end
+
+		-- Look for likely neighbors.
+		local p2 = minetest.find_node_near(pos, 1, {"default:dirt_with_grass",
+				"default:dirt_with_dry_grass", "default:dirt_with_snow"})
+		if p2 then
+			-- But the node needs to be under air in this case.
+			local n2 = minetest.get_node(above)
+			if n2 and n2.name == "air" then
+				local n3 = minetest.get_node(p2)
+				minetest.set_node(pos, {name = n3.name})
+				return
 			end
+		end
+
+		-- Anything on top?
+		local n2 = minetest.get_node(above)
+		if not n2 then
+			return
+		end
+
+		local name = n2.name
+		-- Snow check is cheapest, so comes first.
+		if name == "default:snow" then
+			minetest.set_node(pos, {name = "default:dirt_with_snow"})
+		-- Most likely case first.
+		elseif minetest.get_item_group(name, "grass") ~= 0 then
+			minetest.set_node(pos, {name = "default:dirt_with_grass"})
+		elseif minetest.get_item_group(name, "dry_grass") ~= 0 then
+			minetest.set_node(pos, {name = "default:dirt_with_dry_grass"})
 		end
 	end
 })
-
 
 --
 -- Grass and dry grass removed in darkness
 --
 
 minetest.register_abm({
-	nodenames = {"default:dirt_with_grass", "default:dirt_with_dry_grass"},
-	interval = 2,
-	chance = 20,
+	nodenames = {
+		"default:dirt_with_grass",
+		"default:dirt_with_dry_grass",
+		"default:dirt_with_snow",
+	},
+	interval = 8,
+	chance = 50,
 	catch_up = false,
 	action = function(pos, node)
 		local above = {x = pos.x, y = pos.y + 1, z = pos.z}
@@ -360,12 +467,18 @@ minetest.register_abm({
 --
 
 minetest.register_abm({
-	nodenames = {"default:cobble"},
+	nodenames = {"default:cobble", "stairs:slab_cobble", "stairs:stair_cobble"},
 	neighbors = {"group:water"},
-	interval = 17,
+	interval = 16,
 	chance = 200,
 	catch_up = false,
 	action = function(pos, node)
-		minetest.set_node(pos, {name = "default:mossycobble"})
+		if node.name == "default:cobble" then
+			minetest.set_node(pos, {name = "default:mossycobble"})
+		elseif node.name == "stairs:slab_cobble" then
+			minetest.set_node(pos, {name = "stairs:slab_mossycobble", param2 = node.param2})
+		elseif node.name == "stairs:stair_cobble" then
+			minetest.set_node(pos, {name = "stairs:stair_mossycobble", param2 = node.param2})
+		end
 	end
 })

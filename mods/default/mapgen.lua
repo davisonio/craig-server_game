@@ -42,14 +42,14 @@ minetest.register_alias("mapgen_stair_sandstonebrick", "stairs:stair_sandstonebr
 -- Register ores
 --
 
--- All mapgens except singlenode
--- Blob ore first to avoid other ores inside blobs
-
 function default.register_ores()
+	-- Blob ores
+	-- These first to avoid other ores in blobs
 
 	-- Clay
+	-- This first to avoid clay in sand blobs
 
-	minetest.register_ore({ 
+	minetest.register_ore({
 		ore_type        = "blob",
 		ore             = "default:clay",
 		wherein         = {"default:sand"},
@@ -70,7 +70,7 @@ function default.register_ores()
 
 	-- Sand
 
-	minetest.register_ore({ 
+	minetest.register_ore({
 		ore_type        = "blob",
 		ore             = "default:sand",
 		wherein         = {"default:stone", "default:sandstone",
@@ -78,7 +78,7 @@ function default.register_ores()
 		clust_scarcity  = 16 * 16 * 16,
 		clust_size      = 5,
 		y_min           = -31,
-		y_max           = 4,
+		y_max           = 0,
 		noise_threshold = 0.0,
 		noise_params    = {
 			offset = 0.5,
@@ -95,7 +95,7 @@ function default.register_ores()
 	minetest.register_ore({
 		ore_type        = "blob",
 		ore             = "default:dirt",
-		wherein         = {"default:stone", "default:sandstone"},
+		wherein         = {"default:stone"},
 		clust_scarcity  = 16 * 16 * 16,
 		clust_size      = 5,
 		y_min           = -31,
@@ -132,7 +132,20 @@ function default.register_ores()
 		},
 	})
 
+	-- Scatter ores
+
 	-- Coal
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_coal",
+		wherein        = "default:stone",
+		clust_scarcity = 8 * 8 * 8,
+		clust_num_ores = 9,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
 
 	minetest.register_ore({
 		ore_type       = "scatter",
@@ -162,22 +175,11 @@ function default.register_ores()
 		ore_type       = "scatter",
 		ore            = "default:stone_with_iron",
 		wherein        = "default:stone",
-		clust_scarcity = 12 * 12 * 12,
-		clust_num_ores = 3,
-		clust_size     = 2,
-		y_min          = -15,
-		y_max          = 2,
-	})
-
-	minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "default:stone_with_iron",
-		wherein        = "default:stone",
 		clust_scarcity = 9 * 9 * 9,
-		clust_num_ores = 5,
+		clust_num_ores = 12,
 		clust_size     = 3,
-		y_min          = -63,
-		y_max          = -16,
+		y_min          = 1025,
+		y_max          = 31000,
 	})
 
 	minetest.register_ore({
@@ -188,7 +190,7 @@ function default.register_ores()
 		clust_num_ores = 5,
 		clust_size     = 3,
 		y_min          = -31000,
-		y_max          = -64,
+		y_max          = 0,
 	})
 
 	minetest.register_ore({
@@ -202,42 +204,53 @@ function default.register_ores()
 		y_max          = -64,
 	})
 
-	--Mese
+	-- Copper
 
 	minetest.register_ore({
 		ore_type       = "scatter",
-		ore            = "default:stone_with_mese",
+		ore            = "default:stone_with_copper",
 		wherein        = "default:stone",
-		clust_scarcity = 18 * 18 * 18,
-		clust_num_ores = 3,
-		clust_size     = 2,
-		y_min          = -255,
-		y_max          = -64,
+		clust_scarcity = 9 * 9 * 9,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
 	})
 
 	minetest.register_ore({
 		ore_type       = "scatter",
-		ore            = "default:stone_with_mese",
+		ore            = "default:stone_with_copper",
 		wherein        = "default:stone",
-		clust_scarcity = 14 * 14 * 14,
+		clust_scarcity = 12 * 12 * 12,
+		clust_num_ores = 4,
+		clust_size     = 3,
+		y_min          = -63,
+		y_max          = -16,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_copper",
+		wherein        = "default:stone",
+		clust_scarcity = 9 * 9 * 9,
 		clust_num_ores = 5,
 		clust_size     = 3,
 		y_min          = -31000,
-		y_max          = -256,
-	})
-
-	minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "default:mese",
-		wherein        = "default:stone",
-		clust_scarcity = 36 * 36 * 36,
-		clust_num_ores = 3,
-		clust_size     = 2,
-		y_min          = -31000,
-		y_max          = -1024,
+		y_max          = -64,
 	})
 
 	-- Gold
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_gold",
+		wherein        = "default:stone",
+		clust_scarcity = 13 * 13 * 13,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
 
 	minetest.register_ore({
 		ore_type       = "scatter",
@@ -261,7 +274,53 @@ function default.register_ores()
 		y_max          = -256,
 	})
 
+	-- Mese crystal
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_mese",
+		wherein        = "default:stone",
+		clust_scarcity = 14 * 14 * 14,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_mese",
+		wherein        = "default:stone",
+		clust_scarcity = 18 * 18 * 18,
+		clust_num_ores = 3,
+		clust_size     = 2,
+		y_min          = -255,
+		y_max          = -64,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_mese",
+		wherein        = "default:stone",
+		clust_scarcity = 14 * 14 * 14,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = -31000,
+		y_max          = -256,
+	})
+
 	-- Diamond
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_diamond",
+		wherein        = "default:stone",
+		clust_scarcity = 15 * 15 * 15,
+		clust_num_ores = 4,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
 
 	minetest.register_ore({
 		ore_type       = "scatter",
@@ -285,28 +344,28 @@ function default.register_ores()
 		y_max          = -256,
 	})
 
-	-- Copper
+	-- Mese block
 
 	minetest.register_ore({
 		ore_type       = "scatter",
-		ore            = "default:stone_with_copper",
+		ore            = "default:mese",
 		wherein        = "default:stone",
-		clust_scarcity = 12 * 12 * 12,
-		clust_num_ores = 4,
-		clust_size     = 3,
-		y_min          = -63,
-		y_max          = -16,
+		clust_scarcity = 36 * 36 * 36,
+		clust_num_ores = 3,
+		clust_size     = 2,
+		y_min          = 1025,
+		y_max          = 31000,
 	})
 
 	minetest.register_ore({
 		ore_type       = "scatter",
-		ore            = "default:stone_with_copper",
+		ore            = "default:mese",
 		wherein        = "default:stone",
-		clust_scarcity = 9 * 9 * 9,
-		clust_num_ores = 5,
-		clust_size     = 3,
+		clust_scarcity = 36 * 36 * 36,
+		clust_num_ores = 3,
+		clust_size     = 2,
 		y_min          = -31000,
-		y_max          = -64,
+		y_max          = -1024,
 	})
 end
 
@@ -334,6 +393,8 @@ function default.register_biomes()
 		depth_water_top = 10,
 		--node_water = "",
 		node_river_water = "default:ice",
+		node_riverbed = "default:gravel",
+		depth_riverbed = 2,
 		y_min = -8,
 		y_max = 31000,
 		heat_point = 0,
@@ -372,8 +433,30 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:gravel",
+		depth_riverbed = 2,
 		y_min = 2,
 		y_max = 31000,
+		heat_point = 15,
+		humidity_point = 35,
+	})
+
+	minetest.register_biome({
+		name = "tundra_beach",
+		--node_dust = "",
+		node_top = "default:gravel",
+		depth_top = 1,
+		node_filler = "default:gravel",
+		depth_filler = 2,
+		--node_stone = "",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		node_riverbed = "default:gravel",
+		depth_riverbed = 2,
+		y_min = -3,
+		y_max = 1,
 		heat_point = 15,
 		humidity_point = 35,
 	})
@@ -390,8 +473,10 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:gravel",
+		depth_riverbed = 2,
 		y_min = -112,
-		y_max = 1,
+		y_max = -4,
 		heat_point = 15,
 		humidity_point = 35,
 	})
@@ -409,6 +494,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 2,
 		y_max = 31000,
 		heat_point = 15,
@@ -427,6 +514,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 1,
 		heat_point = 15,
@@ -447,6 +536,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 6,
 		y_max = 31000,
 		heat_point = 40,
@@ -465,6 +556,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 5,
 		y_max = 5,
 		heat_point = 40,
@@ -483,6 +576,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
 		heat_point = 40,
@@ -502,6 +597,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 6,
 		y_max = 31000,
 		heat_point = 40,
@@ -520,6 +617,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 5,
 		y_max = 5,
 		heat_point = 40,
@@ -538,6 +637,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
 		heat_point = 40,
@@ -557,6 +658,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 6,
 		y_max = 31000,
 		heat_point = 60,
@@ -575,6 +678,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 5,
 		y_max = 5,
 		heat_point = 60,
@@ -593,6 +698,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
 		heat_point = 60,
@@ -612,6 +719,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 1,
 		y_max = 31000,
 		heat_point = 60,
@@ -630,6 +739,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -3,
 		y_max = 0,
 		heat_point = 60,
@@ -648,6 +759,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -4,
 		heat_point = 60,
@@ -668,6 +781,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 5,
 		y_max = 31000,
 		heat_point = 85,
@@ -686,6 +801,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
 		heat_point = 85,
@@ -705,6 +822,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 1,
 		y_max = 31000,
 		heat_point = 85,
@@ -723,6 +842,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -3,
 		y_max = 0,
 		heat_point = 85,
@@ -741,6 +862,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -4,
 		heat_point = 85,
@@ -760,6 +883,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = 1,
 		y_max = 31000,
 		heat_point = 85,
@@ -778,6 +903,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -3,
 		y_max = 0,
 		heat_point = 85,
@@ -796,6 +923,8 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
+		node_riverbed = "default:sand",
+		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -4,
 		heat_point = 85,
@@ -973,8 +1102,8 @@ function default.register_decorations()
 		place_on = {"default:dirt_with_grass"},
 		sidelen = 16,
 		noise_params = {
-			offset = 0.04,
-			scale = 0.02,
+			offset = 0.036,
+			scale = 0.022,
 			spread = {x = 250, y = 250, z = 250},
 			seed = 2,
 			octaves = 3,
@@ -992,8 +1121,8 @@ function default.register_decorations()
 		place_on = {"default:dirt_with_grass"},
 		sidelen = 16,
 		noise_params = {
-			offset = 0.002,
-			scale = 0.001,
+			offset = 0.0018,
+			scale = 0.0011,
 			spread = {x = 250, y = 250, z = 250},
 			seed = 2,
 			octaves = 3,
@@ -1003,17 +1132,17 @@ function default.register_decorations()
 		y_min = 1,
 		y_max = 31000,
 		schematic = {
-			size = { x = 3, y = 3, z = 1},
+			size = {x = 3, y = 3, z = 1},
 			data = {
-				{ name = "air", prob = 0 },
-				{ name = "air", prob = 0 },
-				{ name = "air", prob = 0 },
-				{ name = "default:tree", param2 = 12, prob = 191 },
-				{ name = "default:tree", param2 = 12 },
-				{ name = "default:tree", param2 = 12, prob = 127 },
-				{ name = "air", prob = 0 },
-				{ name = "flowers:mushroom_brown", prob = 63 },
-				{ name = "air", prob = 0 },
+				{name = "air", prob = 0},
+				{name = "air", prob = 0},
+				{name = "air", prob = 0},
+				{name = "default:tree", param2 = 12, prob = 191},
+				{name = "default:tree", param2 = 12},
+				{name = "default:tree", param2 = 12, prob = 127},
+				{name = "air", prob = 0},
+				{name = "flowers:mushroom_brown", prob = 63},
+				{name = "air", prob = 0},
 			},
 		},
 		flags = "place_center_x",
@@ -1026,7 +1155,7 @@ function default.register_decorations()
 		deco_type = "schematic",
 		place_on = {"default:dirt_with_grass", "default:dirt"},
 		sidelen = 80,
-		fill_ratio = 0.09,
+		fill_ratio = 0.1,
 		biomes = {"rainforest", "rainforest_swamp"},
 		y_min = 0,
 		y_max = 31000,
@@ -1039,22 +1168,22 @@ function default.register_decorations()
 		deco_type = "schematic",
 		place_on = {"default:dirt_with_grass", "default:dirt"},
 		sidelen = 80,
-		fill_ratio = 0.01,
+		fill_ratio = 0.005,
 		biomes = {"rainforest", "rainforest_swamp"},
 		y_min = 1,
 		y_max = 31000,
 		schematic = {
-			size = { x = 3, y = 3, z = 1},
+			size = {x = 3, y = 3, z = 1},
 			data = {
-				{ name = "air", prob = 0 },
-				{ name = "air", prob = 0 },
-				{ name = "air", prob = 0 },
-				{ name = "default:jungletree", param2 = 12, prob = 191 },
-				{ name = "default:jungletree", param2 = 12 },
-				{ name = "default:jungletree", param2 = 12, prob = 127 },
-				{ name = "air", prob = 0 },
-				{ name = "flowers:mushroom_brown", prob = 127 },
-				{ name = "air", prob = 0 },
+				{name = "air", prob = 0},
+				{name = "air", prob = 0},
+				{name = "air", prob = 0},
+				{name = "default:jungletree", param2 = 12, prob = 191},
+				{name = "default:jungletree", param2 = 12},
+				{name = "default:jungletree", param2 = 12, prob = 127},
+				{name = "air", prob = 0},
+				{name = "flowers:mushroom_brown", prob = 127},
+				{name = "air", prob = 0},
 			},
 		},
 		flags = "place_center_x",
@@ -1068,8 +1197,8 @@ function default.register_decorations()
 		place_on = {"default:dirt_with_snow", "default:dirt_with_grass"},
 		sidelen = 16,
 		noise_params = {
-			offset = 0.04,
-			scale = 0.02,
+			offset = 0.036,
+			scale = 0.022,
 			spread = {x = 250, y = 250, z = 250},
 			seed = 2,
 			octaves = 3,
@@ -1086,22 +1215,29 @@ function default.register_decorations()
 		deco_type = "schematic",
 		place_on = {"default:dirt_with_snow", "default:dirt_with_grass"},
 		sidelen = 80,
-		fill_ratio = 0.003,
+		noise_params = {
+			offset = 0.0018,
+			scale = 0.0011,
+			spread = {x = 250, y = 250, z = 250},
+			seed = 2,
+			octaves = 3,
+			persist = 0.66
+		},
 		biomes = {"taiga", "coniferous_forest"},
 		y_min = 1,
 		y_max = 31000,
 		schematic = {
-			size = { x = 3, y = 3, z = 1},
+			size = {x = 3, y = 3, z = 1},
 			data = {
-				{ name = "air", prob = 0 },
-				{ name = "air", prob = 0 },
-				{ name = "air", prob = 0 },
-				{ name = "default:pine_tree", param2 = 12, prob = 191 },
-				{ name = "default:pine_tree", param2 = 12 },
-				{ name = "default:pine_tree", param2 = 12, prob = 127 },
-				{ name = "air", prob = 0 },
-				{ name = "flowers:mushroom_red", prob = 63 },
-				{ name = "air", prob = 0 },
+				{name = "air", prob = 0},
+				{name = "air", prob = 0},
+				{name = "air", prob = 0},
+				{name = "default:pine_tree", param2 = 12, prob = 191},
+				{name = "default:pine_tree", param2 = 12},
+				{name = "default:pine_tree", param2 = 12, prob = 127},
+				{name = "air", prob = 0},
+				{name = "flowers:mushroom_red", prob = 63},
+				{name = "air", prob = 0},
 			},
 		},
 		flags = "place_center_x",
@@ -1146,14 +1282,14 @@ function default.register_decorations()
 		y_min = 1,
 		y_max = 31000,
 		schematic = {
-			size = { x = 3, y = 2, z = 1},
+			size = {x = 3, y = 2, z = 1},
 			data = {
-				{ name = "air", prob = 0 },
-				{ name = "air", prob = 0 },
-				{ name = "air", prob = 0 },
-				{ name = "default:acacia_tree", param2 = 12, prob = 191 },
-				{ name = "default:acacia_tree", param2 = 12 },
-				{ name = "default:acacia_tree", param2 = 12, prob = 127 },
+				{name = "air", prob = 0},
+				{name = "air", prob = 0},
+				{name = "air", prob = 0},
+				{name = "default:acacia_tree", param2 = 12, prob = 191},
+				{name = "default:acacia_tree", param2 = 12},
+				{name = "default:acacia_tree", param2 = 12, prob = 127},
 			},
 		},
 		flags = "place_center_x",
@@ -1167,8 +1303,8 @@ function default.register_decorations()
 		place_on = {"default:dirt_with_grass"},
 		sidelen = 16,
 		noise_params = {
-			offset = 0.01,
-			scale = -0.02,
+			offset = 0.0,
+			scale = -0.015,
 			spread = {x = 250, y = 250, z = 250},
 			seed = 2,
 			octaves = 3,
@@ -1179,7 +1315,6 @@ function default.register_decorations()
 		y_max = 31000,
 		schematic = minetest.get_modpath("default").."/schematics/aspen_tree.mts",
 		flags = "place_center_x, place_center_z",
-		rotation = "random",
 	})
 
 	minetest.register_decoration({
@@ -1187,8 +1322,8 @@ function default.register_decorations()
 		place_on = {"default:dirt_with_grass"},
 		sidelen = 16,
 		noise_params = {
-			offset = 0.0005,
-			scale = -0.001,
+			offset = 0.0,
+			scale = -0.0008,
 			spread = {x = 250, y = 250, z = 250},
 			seed = 2,
 			octaves = 3,
@@ -1198,17 +1333,17 @@ function default.register_decorations()
 		y_min = 1,
 		y_max = 31000,
 		schematic = {
-			size = { x = 3, y = 3, z = 1},
+			size = {x = 3, y = 3, z = 1},
 			data = {
-				{ name = "air", prob = 0 },
-				{ name = "air", prob = 0 },
-				{ name = "air", prob = 0 },
-				{ name = "default:aspen_tree", param2 = 12 },
-				{ name = "default:aspen_tree", param2 = 12 },
-				{ name = "default:aspen_tree", param2 = 12, prob = 127 },
-				{ name = "flowers:mushroom_red", prob = 63 },
-				{ name = "flowers:mushroom_brown", prob = 63 },
-				{ name = "air", prob = 0 },
+				{name = "air", prob = 0},
+				{name = "air", prob = 0},
+				{name = "air", prob = 0},
+				{name = "default:aspen_tree", param2 = 12},
+				{name = "default:aspen_tree", param2 = 12},
+				{name = "default:aspen_tree", param2 = 12, prob = 127},
+				{name = "flowers:mushroom_red", prob = 63},
+				{name = "flowers:mushroom_brown", prob = 63},
+				{name = "air", prob = 0},
 			},
 		},
 		flags = "place_center_x",
@@ -1330,72 +1465,15 @@ end
 
 
 --
--- Generate nyan cats
---
-
--- All mapgens except singlenode
-
-function default.make_nyancat(pos, facedir, length)
-	local tailvec = {x = 0, y = 0, z = 0}
-	if facedir == 0 then
-		tailvec.z = 1
-	elseif facedir == 1 then
-		tailvec.x = 1
-	elseif facedir == 2 then
-		tailvec.z = -1
-	elseif facedir == 3 then
-		tailvec.x = -1
-	else
-		facedir = 0
-		tailvec.z = 1
-	end
-	local p = {x = pos.x, y = pos.y, z = pos.z}
-	minetest.set_node(p, {name = "default:nyancat", param2 = facedir})
-	for i = 1, length do
-		p.x = p.x + tailvec.x
-		p.z = p.z + tailvec.z
-		minetest.set_node(p, {name = "default:nyancat_rainbow", param2 = facedir})
-	end
-end
-
-function default.generate_nyancats(minp, maxp, seed)
-	local height_min = -31000
-	local height_max = -32
-	if maxp.y < height_min or minp.y > height_max then
-		return
-	end
-	local y_min = math.max(minp.y, height_min)
-	local y_max = math.min(maxp.y, height_max)
-	local volume = (maxp.x - minp.x + 1) * (y_max - y_min + 1) * (maxp.z - minp.z + 1)
-	local pr = PseudoRandom(seed + 9324342)
-	local max_num_nyancats = math.floor(volume / (16 * 16 * 16))
-	for i = 1, max_num_nyancats do
-		if pr:next(0, 1000) == 0 then
-			local x0 = pr:next(minp.x, maxp.x)
-			local y0 = pr:next(minp.y, maxp.y)
-			local z0 = pr:next(minp.z, maxp.z)
-			local p0 = {x = x0, y = y0, z = z0}
-			default.make_nyancat(p0, pr:next(0, 3), pr:next(3, 15))
-		end
-	end
-end
-
-
---
 -- Detect mapgen to select functions
 --
 
--- Mods using singlenode mapgen can call these functions to enable
--- the use of minetest.generate_ores or minetest.generate_decorations
-
-local mg_params = minetest.get_mapgen_params()
-if mg_params.mgname == "v6" then
+local mg_name = minetest.get_mapgen_setting("mg_name")
+if mg_name == "v6" then
 	default.register_ores()
 	default.register_mgv6_decorations()
-	minetest.register_on_generated(default.generate_nyancats)
-elseif mg_params.mgname ~= "singlenode" then
-	default.register_ores()
+else
 	default.register_biomes()
+	default.register_ores()
 	default.register_decorations()
-	minetest.register_on_generated(default.generate_nyancats)
 end
