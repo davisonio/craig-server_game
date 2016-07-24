@@ -10,6 +10,7 @@ if minetest.place_schematic then
 	worldedit.prob_list = {}
 end
 
+dofile(minetest.get_modpath("worldedit_commands") .. "/cuboid.lua")
 dofile(minetest.get_modpath("worldedit_commands") .. "/mark.lua")
 local safe_region, check_region = dofile(minetest.get_modpath("worldedit_commands") .. "/safe.lua")
 
@@ -834,6 +835,30 @@ minetest.register_chatcommand("/fixlight", {
 	privs = {worldedit=true},
 	func = safe_region(function(name, param)
 		local count = worldedit.fixlight(worldedit.pos1[name], worldedit.pos2[name])
+		worldedit.player_notify(name, count .. " nodes updated")
+	end),
+})
+
+minetest.register_chatcommand("/drain", {
+	params = "",
+	description = "Remove any fluid node within the current WorldEdit region",
+	privs = {worldedit=true},
+	func = safe_region(function(name, param)
+		-- TODO: make an API function for this
+		local count = 0
+		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
+		for x = pos1.x, pos2.x do
+		for y = pos1.y, pos2.y do
+		for z = pos1.z, pos2.z do
+			local n = minetest.get_node({x=x, y=y, z=z}).name
+			local d = minetest.registered_nodes[n]
+			if d ~= nil and (d["drawtype"] == "liquid" or d["drawtype"] == "flowingliquid") then
+				minetest.remove_node({x=x, y=y, z=z})
+				count = count + 1
+			end
+		end
+		end
+		end
 		worldedit.player_notify(name, count .. " nodes updated")
 	end),
 })
