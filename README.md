@@ -31,7 +31,6 @@ This is the game used by Craig's Minetest Server.
 | Name                                      | Forum | Source |
 |-------------------------------------------|-------|--------|
 |3D Armor (3d_armor)                       |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/3d_armor)|
-|Memo (_memo)                               ||[GitHub/ShadowNinja](https://github.com/ShadowNinja/memo)|
 |Miscellaneous (_misc)                      |||
 |Advanced Area Protection (areas)           |[7239](https://forum.minetest.net/viewtopic.php?id=7239)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/areas)|
 |Arrow Signs (arrow_signs)                  |[3353](https://forum.minetest.net/viewtopic.php?id=3353)|[Bitbucket/adrido](https://bitbucket.org/adrido/arrow_signs)|
