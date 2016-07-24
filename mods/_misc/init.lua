@@ -17,9 +17,6 @@ dofile(minetest.get_modpath("_misc").."/craft_obsidian.lua")
 -- Admin Tools
 dofile(minetest.get_modpath("_misc").."/admin_tools.lua")
 
--- Users with the "access" privilege can access certain things
-dofile(minetest.get_modpath("_misc").."/access.lua")
-
 -- Item Pickup
 dofile(minetest.get_modpath("_misc").."/item_pickup.lua")
 
