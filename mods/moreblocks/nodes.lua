@@ -239,21 +239,6 @@ local nodes = {
 		sounds = sound_glass,
 		no_stairs = true,
 	},
-	["fence_jungle_wood"] = {
-		description = S("Jungle Wood Fence"),
-		drawtype = "fencelike",
-		tiles = {"default_junglewood.png"},
-		inventory_image = "default_fence_overlay.png^default_junglewood.png^default_fence_overlay.png^[makealpha:255,126,126",
-		wield_image = "default_fence_overlay.png^default_junglewood.png^default_fence_overlay.png^[makealpha:255,126,126",
-		paramtype = "light",
-		selection_box = {
-			type = "fixed",
-			fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
-		},
-		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
-		sounds = sound_wood,
-		no_stairs = true,
-	},
 	["all_faces_tree"] = {
 		description = S("All-faces Tree"),
 		tiles = {"default_tree_top.png"},
@@ -331,6 +316,11 @@ local nodes = {
 		sounds = sound_leaves,
 		no_stairs = true,
 	},
+	["copperpatina"] = {
+		description = S("Copper Patina Block"),
+		groups = {cracky = 1, level = 2},
+		sounds = sound_stone,
+	},
 }
 
 for name, def in pairs(nodes) do
@@ -338,7 +328,7 @@ for name, def in pairs(nodes) do
 	minetest.register_node("moreblocks:" ..name, def)
 	minetest.register_alias(name, "moreblocks:" ..name)
 	if not def.no_stairs then
-		local groups = {not_in_creative_inventory=1, not_in_craft_guide=1}
+		local groups = {}
 		for k, v in pairs(def.groups) do groups[k] = v end
 		stairsplus:register_all("moreblocks", name, "moreblocks:" ..name, {
 			description = def.description,
@@ -357,12 +347,6 @@ end
 minetest.register_craftitem("moreblocks:sweeper", {
 	description = S("Sweeper"),
 	inventory_image = "moreblocks_sweeper.png",
-})
-
-minetest.register_craftitem("moreblocks:jungle_stick", {
-	description = S("Jungle Stick"),
-	inventory_image = "moreblocks_junglestick.png",
-	groups = {stick= 1},
 })
 
 minetest.register_craftitem("moreblocks:nothing", {

@@ -24,8 +24,12 @@ local default_nodes = { -- Default stairs/slabs/panels/microblocks:
 	"wood",
 	"jungletree",
 	"junglewood",
-	"pinetree",
-	"pinewood",
+	"pine_tree",
+	"pine_wood",
+	"acacia_tree",
+	"acacia_wood",
+	"aspen_tree",
+	"aspen_wood",
 	"obsidian",
 	"obsidian_glass",
 	"stonebrick",
@@ -38,26 +42,24 @@ for _, name in pairs(default_nodes) do
 	local nodename = "default:" .. name
 	local ndef = minetest.registered_nodes[nodename]
 	if ndef then
-		local groups = {not_in_creative_inventory=1, not_in_craft_guide=1}
-		for k, v in pairs(ndef.groups)
-			-- Ignore wood and stone groups to not make them usable in crafting:
-			do if k ~= "wood" and k ~= "stone" then
-				groups[k] = v
-			end
-		end
 		local drop
 		if type(ndef.drop) == "string" then
 			drop = ndef.drop:sub(9)
 		end
+
+		local tiles = ndef.tiles
+		if #ndef.tiles > 1 and ndef.drawtype:find("glass") then
+			tiles = { ndef.tiles[1] }
+		end
+
 		stairsplus:register_all("moreblocks", name, nodename, {
 			description = ndef.description,
 			drop = drop,
-			groups = groups,
+			groups = ndef.groups,
 			sounds = ndef.sounds,
-			tiles = ndef.tiles,
+			tiles = tiles,
 			sunlight_propagates = true,
 			light_source = ndef.light_source
 		})
 	end
 end
-

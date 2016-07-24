@@ -102,9 +102,11 @@ function circular_saw:get_output_inv(modname, material, amount, max)
 		local t = circular_saw.names[i]
 		local cost = circular_saw.cost_in_microblocks[i]
 		local balance = math.min(math.floor(amount/cost), max)
-		pos = pos + 1
-		list[pos] = modname .. ":" .. t[1] .. "_" .. material .. t[2]
-				.. " " .. balance
+		local nodename = modname .. ":" .. t[1] .. "_" .. material .. t[2]
+		if  minetest.registered_nodes[nodename] then
+			pos = pos + 1
+			list[pos] = nodename .. " " .. balance
+		end
 	end
 	return list
 end
@@ -281,12 +283,32 @@ function circular_saw.on_metadata_inventory_put(
 	elseif listname == "recycle" then
 		-- Lets look which shape this represents:
 		local cost = circular_saw:get_cost(inv, stackname)
-		circular_saw:update_inventory(pos, cost * count)
+		local input_stack = inv:get_stack("input", 1)
+		-- check if this would not exceed input itemstack max_stacks
+		if input_stack:get_count() + ((cost * count) / 8) <= input_stack:get_stack_max() then
+			circular_saw:update_inventory(pos, cost * count)
+		end
 	end
 end
 
 function circular_saw.on_metadata_inventory_take(
 		pos, listname, index, stack, player)
+
+	-- Prevent (inbuilt) swapping between inventories with different blocks
+	-- corrupting player inventory or Saw with 'unknown' items.
+	local meta          = minetest.get_meta(pos)
+	local inv           = meta:get_inventory()
+	local input_stack = inv:get_stack(listname,  index)
+	if not input_stack:is_empty() and input_stack:get_name()~=stack:get_name() then
+		local player_inv = player:get_inventory()
+		if player_inv:room_for_item("main", input_stack) then
+			player_inv:add_item("main", input_stack)
+		end
+
+		circular_saw:reset(pos)
+		return
+	end
+
 	-- If it is one of the offered stairs: find out how many
 	-- microblocks have to be substracted:
 	if listname == "output" then
