@@ -483,7 +483,7 @@ minetest.register_craft( {
         output = "homedecor:shingles_asphalt 6",
         recipe = {
                 { "building_blocks:gravel_spread", "dye:black", "building_blocks:gravel_spread" },
-                { "default:sand", "dye:black", "default:sand" },
+                { "group:sand", "dye:black", "group:sand" },
                 { "homedecor:plastic_sheeting", "homedecor:plastic_sheeting", "homedecor:plastic_sheeting" },
         },
 })
@@ -1070,7 +1070,7 @@ end
 local mats = {
 	{ "brass", "homedecor:pole_brass" },
 	{ "wrought_iron", "homedecor:pole_wrought_iron" },
-	{ "wood", "default:stick" }
+	{ "wood", "group:stick" }
 }
 
 for i in ipairs(mats) do
@@ -1959,9 +1959,9 @@ minetest.register_craft( {
 minetest.register_craft( {
 	output = "homedecor:door_woodglass_left",
 	recipe = {
-		{ "default:wood", "default:glass", "" },
-		{ "default:wood", "default:glass", "technic:brass_ingot" },
-		{ "default:wood", "default:wood", "" },
+		{ "group:wood", "default:glass", "" },
+		{ "group:wood", "default:glass", "technic:brass_ingot" },
+		{ "group:wood", "group:wood", "" },
 	},
 })
 
@@ -1971,8 +1971,8 @@ minetest.register_craft( {
 	output = "homedecor:door_woodglass2_left",
 	recipe = {
 		{ "default:glass", "default:glass", "" },
-		{ "default:wood", "default:wood", "default:iron_lump" },
-		{ "default:wood", "default:wood", "" },
+		{ "group:wood", "group:wood", "default:iron_lump" },
+		{ "group:wood", "group:wood", "" },
 	},
 })
 
@@ -2223,7 +2223,7 @@ minetest.register_craft({
 minetest.register_craft({
     output = "homedecor:towel_rod",
     recipe = {
-		{ "default:wood", "group:stick", "default:wood" },
+		{ "group:wood", "group:stick", "group:wood" },
 		{ "", "building_blocks:terrycloth_towel", "" },
     },
 })
@@ -2653,7 +2653,7 @@ minetest.register_craft( {
         recipe = {
 			{ "homedecor:shingles_wood", "homedecor:shingles_wood", "homedecor:shingles_wood" },
 			{ "group:wood", "group:stick", "group:wood" },
-			{ "default:cobble", "", "default:cobble" }
+			{ "group:stone", "", "group:stone" }
         },
 })
 
@@ -2782,7 +2782,7 @@ for c in ipairs(bedcolors) do
 	})
 
 end
--]]
+--]]
 minetest.register_craft( {
         output = "homedecor:bottle_green",
         recipe = {
@@ -3414,4 +3414,3 @@ end
 if (minetest.get_modpath("technic") and minetest.get_modpath("dye") and minetest.get_modpath("bees")) then
 	technic.register_separating_recipe({ input = {"bees:wax 1"}, output = {"homedecor:oil_extract 2","dye:yellow 1"} })
 end
-

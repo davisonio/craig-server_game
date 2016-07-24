@@ -400,7 +400,7 @@ for i in ipairs(gates_list) do
 	minetest.register_node("homedecor:gate_"..gate.."_closed", def)
 
     -- this is either a terrible idea or a great one
-    def = homedecor.table_copy(def)
+    def = table.copy(def)
     def.groups.not_in_creative_inventory = 1
     def.selection_box.fixed = { 0.4, -0.5, -0.5, 0.5, 0.5, 0.5 }
     def.node_box.fixed = gate_models_open[i]
@@ -604,21 +604,18 @@ homedecor.register("door_japanese_closed", {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.0625, 0.5, 1.5, 0},
 	},
-	expand = { top = "air" },
+	expand = { top = "placeholder" },
 	on_rightclick = function(pos, node, clicker)
 		minetest.set_node(pos, {name = "homedecor:door_japanese_open", param2 = node.param2})
 	end
 })
 
-minetest.register_node("homedecor:door_japanese_open", {
+homedecor.register("door_japanese_open", {
 	tiles = {
 		"homedecor_generic_wood_luxury.png",
 		"homedecor_japanese_paper.png"
 	},
-	drawtype = "mesh",
 	mesh = "homedecor_door_japanese_open.obj",
-	paramtype = "light",
-	paramtype2 = "facedir",
 	groups = { snappy = 3, not_in_creative_inventory = 1 },
 	sounds = default.node_sound_wood_defaults(),
 	on_rotate = screwdriver.disallow,
@@ -630,6 +627,7 @@ minetest.register_node("homedecor:door_japanese_open", {
 		type = "fixed",
 		fixed = {-1.5, -0.5, -0.0625, -0.5, 1.5, 0},
 	},
+	expand = { top = "placeholder" },
 	on_rightclick = function(pos, node, clicker)
 		minetest.set_node(pos, {name = "homedecor:door_japanese_closed", param2 = node.param2})
 	end,

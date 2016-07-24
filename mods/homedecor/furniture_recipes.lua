@@ -96,13 +96,13 @@ for _, color in ipairs(chaircolors) do
 		burntime = 15,
 	})
 end
---[[
+
 minetest.register_craft({
 	type = "fuel",
 	recipe = "homedecor:armchair",
 	burntime = 30,
 })
---]]
+
 minetest.register_craft({
 	output = "homedecor:table_lamp_white_off",
 	recipe = {

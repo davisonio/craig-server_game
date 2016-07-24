@@ -37,7 +37,7 @@ local function start_smoke(pos, node, clicker, chimney)
 		s_handle = minetest.sound_play("fire_small", {
 			pos = pos,
 			max_hear_distance = 5,
-			loop = true 
+			loop = true
 		})
 		this_spawner_meta:set_int("smoky", id)
 		this_spawner_meta:set_int("sound", s_handle)
@@ -71,7 +71,7 @@ for _, f in ipairs(flame_types) do
 	minetest.register_node("fake_fire:"..f.."_fire", {
 		inventory_image = f.."_fire_inv.png",
 		description = f.." fire",
-		drawtype = "firelike",
+		drawtype = "plantlike",
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {dig_immediate=3, not_in_creative_inventory=1},
@@ -81,7 +81,7 @@ for _, f in ipairs(flame_types) do
 		light_source = 14,
 		waving = 1,
 		tiles = {
-			{name=f.."_fire_animated.png", animation={type="vertical_frames", 
+			{name=f.."_fire_animated.png", animation={type="vertical_frames",
 			aspect_w=16, aspect_h=16, length=1.5}},
 		},
 		on_rightclick = function (pos, node, clicker)
@@ -111,7 +111,7 @@ minetest.register_node("fake_fire:fancy_fire", {
 		damage_per_second = 4,
 		on_rotate = screwdriver.rotate_simple,
 		tiles = {
-		{name="fake_fire_animated.png", 
+		{name="fake_fire_animated.png",
 		animation={type='vertical_frames', aspect_w=16, aspect_h=16, length=1}}, {name='fake_fire_logs.png'}},
 		on_rightclick = function (pos, node, clicker)
 			start_smoke(pos, node, clicker)
@@ -123,10 +123,10 @@ minetest.register_node("fake_fire:fancy_fire", {
 			})
 		end,
 		drop = {
-			max_items = 2,
+			max_items = 3,
 			items = {
 				{
-					items = { "default:torch", "default:torch"},
+					items = { "default:torch", "default:torch", "building_blocks:sticks" },
 					rarity = 1,
 				}
 			}
@@ -169,7 +169,7 @@ for _, m in ipairs(materials) do
 			stop_smoke(pos)
 		end
 	})
-	
+
 	minetest.register_craft({
 		type = "shapeless",
 		output = 'fake_fire:chimney_top_'..m,
@@ -191,7 +191,11 @@ minetest.register_tool("fake_fire:flint_and_steel", {
 	on_use = function(itemstack, user, pointed_thing)
 		if pointed_thing.type == "node" and minetest.get_node(pointed_thing.above).name == "air" then
 			if not minetest.is_protected(pointed_thing.above, user:get_player_name()) then
-				minetest.set_node(pointed_thing.above, {name="fake_fire:fake_fire"})
+				if string.find(minetest.get_node(pointed_thing.under).name, "ice") then
+					minetest.set_node(pointed_thing.above, {name="fake_fire:ice_fire"})
+				else
+					minetest.set_node(pointed_thing.above, {name="fake_fire:fake_fire"})
+				end
 			else
 				minetest.chat_send_player(user:get_player_name(), "This area is protected!")
 			end
@@ -255,7 +259,7 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "shapeless",
 	output = 'fake_fire:fancy_fire',
-	recipe = {"default:torch", "default:coalblock", "default:torch" }
+	recipe = {"default:torch", "building_blocks:sticks", "default:torch" }
 })
 
 -- ALIASES

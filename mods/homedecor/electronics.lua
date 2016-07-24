@@ -94,7 +94,7 @@ homedecor.register("television", {
 			  }
 		   }
 	},
-	light_source = LIGHT_MAX - 1,
+	light_source = default.LIGHT_MAX - 1,
 	groups = { snappy = 3 },
 	sounds = default.node_sound_wood_defaults(),
 })
@@ -144,6 +144,7 @@ homedecor.register("telephone", {
 
 minetest.register_abm({
 	nodenames = "homedecor:telephone",
+	label = "sfx",
 	interval = 30,
 	chance = 15,
 	action = function(pos, node)

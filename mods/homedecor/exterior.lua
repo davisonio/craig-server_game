@@ -25,6 +25,7 @@ homedecor.register("barbecue", {
 	selection_box = bbq_cbox,
 	collision_box = bbq_cbox,
 	sounds = default.node_sound_stone_defaults(),
+	-- no need for placeholder it appears
 	expand = { top="air" },
 })
 
@@ -52,7 +53,7 @@ homedecor.register("bench_large_1", {
 	description = "Garden Bench (style 1)",
 	inventory_image = "homedecor_bench_large_1_inv.png",
 	groups = { snappy = 3 },
-	expand = { right="air" },
+	expand = { right="placeholder" },
 	sounds = default.node_sound_wood_defaults(),
 	selection_box = bl1_sbox,
 	node_box = bl1_cbox,
@@ -83,7 +84,7 @@ homedecor.register("bench_large_2", {
 	groups = {snappy=3},
 	selection_box = bl2_sbox,
 	node_box = bl2_cbox,
-	expand = { right="air" },
+	expand = { right="placeholder" },
 	sounds = default.node_sound_wood_defaults(),
 	on_rotate = screwdriver.disallow
 })
@@ -101,7 +102,7 @@ homedecor.register("deckchair", {
 	tiles = {"homedecor_deckchair.png"},
 	description = "Deck Chair",
 	groups = { snappy = 3 },
-	expand = { forward="air" },
+	expand = { forward="placeholder" },
 	sounds = default.node_sound_wood_defaults(),
 	selection_box = dc_cbox,
 	collision_box = dc_cbox,
@@ -116,7 +117,7 @@ homedecor.register("deckchair_striped_blue", {
 	tiles = {"homedecor_deckchair_striped_blue.png"},
 	description = "Deck Chair",
 	groups = { snappy = 3 },
-	expand = { forward="air" },
+	expand = { forward="placeholder" },
 	sounds = default.node_sound_wood_defaults(),
 	selection_box = dc_cbox,
 	collision_box = dc_cbox,
@@ -135,7 +136,7 @@ homedecor.register("doghouse", {
 	selection_box = homedecor.nodebox.slab_y(1.5),
 	collision_box = homedecor.nodebox.slab_y(1.5),
 	groups = {snappy=3},
-	expand = { top="air" },
+	expand = { top="placeholder" },
 	sounds = default.node_sound_wood_defaults(),
 	on_rotate = screwdriver.rotate_simple
 })
@@ -240,27 +241,31 @@ homedecor.register("swing", {
 		type = "fixed",
 		fixed = { -0.3125, 0.33, -0.125, 0.3125, 0.5, 0.1875 }
 	},
+	hint = {
+		place_on = "bottom"
+	},
 	on_place = function(itemstack, placer, pointed_thing)
-		isceiling, pos = homedecor.find_ceiling(itemstack, placer, pointed_thing)
+		local isceiling, pos = homedecor.find_ceiling(itemstack, placer, pointed_thing)
 		if isceiling then
 			local height = 0
 
 			for i = 0, 4 do	-- search up to 5 spaces downward from the ceiling for the first non-buildable-to node...
 				height = i
 				local testpos = { x=pos.x, y=pos.y-i-1, z=pos.z }
-				local testnode = minetest.get_node(testpos)
-				local testreg = core.registered_nodes[testnode.name]
+				local testnode = minetest.get_node_or_nil(testpos)
+				local testreg = testnode and core.registered_nodes[testnode.name]
 
-				if not testreg.buildable_to then
+				if not testreg or not testreg.buildable_to then
 					if i < 1 then
 						minetest.chat_send_player(placer:get_player_name(), "No room under there to hang a swing.")
-						return
+						return itemstack
 					else
 						break
 					end
 				end
 			end
 
+			local fdir = minetest.dir_to_facedir(placer:get_look_dir())
 			for j = 0, height do -- then fill that space with ropes...
 				local testpos = { x=pos.x, y=pos.y-j, z=pos.z }
 				local testnode = minetest.get_node(testpos)
@@ -272,12 +277,11 @@ homedecor.register("swing", {
 
 			if not homedecor.expect_infinite_stacks then
 				itemstack:take_item()
-				return itemstack
 			end
-
 		else
 			minetest.chat_send_player(placer:get_player_name(), "You have to point at the bottom side of an overhanging object to place a swing.")
 		end
+		return itemstack
 	end,
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		for i = 0, 4 do
@@ -322,7 +326,7 @@ homedecor.register("well", {
 	groups = { snappy = 3 },
 	selection_box = homedecor.nodebox.slab_y(2),
 	collision_box = homedecor.nodebox.slab_y(2),
-	expand = { top="air" },
+	expand = { top="placeholder" },
 	sounds = default.node_sound_stone_defaults(),
 	on_rotate = screwdriver.rotate_simple
 })
@@ -349,36 +353,20 @@ if minetest.get_modpath("bucket") then
 	})
 end
 
-local shrub_model = {
-	type = "fixed",
-	fixed = {
-		{-0.312500,-0.500000,0.250000,-0.187500,-0.437500,0.375000}, --NodeBox 1
-		{0.187500,-0.500000,-0.125000,0.312500,-0.437500,0.000000}, --NodeBox 2
-		{0.000000,-0.500000,-0.312500,0.125000,-0.437500,-0.187500}, --NodeBox 3
-		{-0.375000,-0.500000,-0.062500,-0.250000,-0.437500,0.062500}, --NodeBox 4
-		{0.000000,-0.500000,-0.250000,0.125000,-0.437500,-0.125000}, --NodeBox 5
-		{0.187500,-0.437500,-0.187500,0.375000,-0.375000,0.062500}, --NodeBox 6
-		{-0.062500,-0.437500,0.125000,0.187500,-0.375000,0.375000}, --NodeBox 7
-		{-0.062500,-0.437500,-0.375000,0.187500,-0.375000,-0.062500}, --NodeBox 8
-		{-0.375000,-0.437500,0.187500,-0.125000,-0.375000,0.431179}, --NodeBox 9
-		{-0.437500,-0.437500,-0.125000,-0.187500,-0.375000,0.125000}, --NodeBox 10
-		{-0.437500,-0.375000,-0.437500,0.439966,-0.312500,0.420887}, --NodeBox 11
-		{-0.500000,-0.312500,-0.500000,0.500000,0.500000,0.500000}, --NodeBox 12
-		{0.000000,-0.500000,0.187500,0.125000,-0.437500,0.312500}, --NodeBox 13
-	}
-}
-
 homedecor.shrub_colors = {
 	"green",
 	"red",
 	"yellow"
 }
 
+local shrub_cbox = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
+
 for _, color in ipairs(homedecor.shrub_colors) do
 	minetest.register_node("homedecor:shrubbery_large_"..color, {
 		description = S("Shrubbery ("..color..")"),
-		drawtype = "allfaces_optional",
-		tiles = {"homedecor_shrubbery_"..color.."_top.png"},
+		drawtype = "mesh",
+		mesh = "homedecor_cube.obj",
+		tiles = {"homedecor_shrubbery_"..color..".png"},
 		paramtype = "light",
 		is_ground_content = false,
 		groups = {snappy=3, flammable=2},
@@ -387,17 +375,19 @@ for _, color in ipairs(homedecor.shrub_colors) do
 
 	minetest.register_node("homedecor:shrubbery_"..color, {
 		description = S("Shrubbery ("..color..")"),
-		drawtype = "nodebox",
+		drawtype = "mesh",
+		mesh = "homedecor_shrubbery.obj",
 		tiles = {
-			"homedecor_shrubbery_"..color.."_top.png",
-			"homedecor_shrubbery_bottom.png",
-			"homedecor_shrubbery_"..color.."_sides.png"
+			"homedecor_shrubbery_"..color..".png",
+			"homedecor_shrubbery_"..color.."_bottom.png",
+			"homedecor_shrubbery_roots.png"
 		},
 		paramtype = "light",
 		is_ground_content = false,
 		groups = {snappy=3, flammable=2},
 		sounds = default.node_sound_leaves_defaults(),
-		node_box = shrub_model
+		selection_box = shrub_cbox,
+		collision_box = shrub_cbox,
 	})
 end
 

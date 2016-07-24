@@ -71,14 +71,8 @@ homedecor.register("fence_picket", {
 	},
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, 0.4, 0.5, 0.5, 0.5 }
-	},
-	node_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, 0.498, 0.5, 0.5, 0.498 }
-	},
+	selection_box = homedecor.nodebox.slab_z(-0.1),
+	node_box = homedecor.nodebox.slab_z(-0.002),
 })
 
 homedecor.register("fence_picket_corner", {
@@ -93,20 +87,8 @@ homedecor.register("fence_picket_corner", {
 	},
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-	type = "fixed",
-		fixed = {
-			{ -0.5, -0.5, 0.4, 0.5, 0.5, 0.5 },
-			{ -0.5, -0.5, -0.5, -0.4, 0.5, 0.4 }
-		}
-	},
-	node_box = {
-	type = "fixed",
-		fixed = {
-			{ -0.5, -0.5, 0.498, 0.5, 0.5, 0.5 },
-			{ -0.5, -0.5, -0.5, -0.498, 0.5, 0.5 }
-		}
-	},
+	selection_box = homedecor.nodebox.corner_xz(0.1, -0.1),
+	node_box = homedecor.nodebox.corner_xz(0.002, -0.002),
 })
 
 homedecor.register("fence_picket_white", {
@@ -121,14 +103,8 @@ homedecor.register("fence_picket_white", {
 	},
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, 0.4, 0.5, 0.5, 0.5 }
-	},
-	node_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, 0.498, 0.5, 0.5, 0.498 }
-	},
+	selection_box = homedecor.nodebox.slab_z(-0.1),
+	node_box = homedecor.nodebox.slab_z(-0.002),
 })
 
 homedecor.register("fence_picket_corner_white", {
@@ -143,20 +119,8 @@ homedecor.register("fence_picket_corner_white", {
 	},
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-	type = "fixed",
-		fixed = {
-			{ -0.5, -0.5, 0.4, 0.5, 0.5, 0.5 },
-			{ -0.5, -0.5, -0.5, -0.4, 0.5, 0.4 }
-		}
-	},
-	node_box = {
-	type = "fixed",
-		fixed = {
-			{ -0.5, -0.5, 0.498, 0.5, 0.5, 0.5 },
-			{ -0.5, -0.5, -0.5, -0.498, 0.5, 0.5 }
-		}
-	},
+	selection_box = homedecor.nodebox.corner_xz(0.1, -0.1),
+	node_box = homedecor.nodebox.corner_xz(0.002, -0.002),
 })
 
 homedecor.register("fence_privacy", {
@@ -171,10 +135,7 @@ homedecor.register("fence_privacy", {
 	},
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, 5/16, 0.5, 0.5, 8/16 }
-	},
+	selection_box = homedecor.nodebox.slab_z(-3/16),
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -201,7 +162,7 @@ homedecor.register("fence_privacy_corner", {
 	selection_box = {
 		type = "fixed",
 		fixed = {
-			{ -0.5, -0.5, 5/16,   0.5, 0.5,  0.5 },
+			homedecor.box.slab_z(-3/16),
 			{ -0.5, -0.5, -0.5, -5/16, 0.5, 5/16 },
 		}
 	},
@@ -223,52 +184,27 @@ homedecor.register("fence_privacy_corner", {
 
 homedecor.register("fence_barbed_wire", {
 	description = S("Barbed Wire Fence"),
+	mesh = "homedecor_fence_barbed_wire.obj",
 	tiles = {"homedecor_fence_barbed_wire.png"},
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, 0.375, 0.5, 0.5, 0.5 }
-	},
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{ -8/16, -8/16, 6/16, -6/16, 8/16, 8/16 },	-- left post
-			{  6/16, -8/16, 6/16,  8/16, 8/16, 8/16 }, 	-- right post
-			{ -6/16, -8/16, 7/16,  6/16, 8/16, 7/16 }	-- the wire
-		}
-	},
+	selection_box = homedecor.nodebox.slab_z(-0.125),
+	collision_box = homedecor.nodebox.slab_z(-0.125),
 })
 
 homedecor.register("fence_barbed_wire_corner", {
 	description = S("Barbed Wire Fence Corner"),
-	tiles = {
-		"homedecor_fence_barbed_wire.png"
-	},
+	mesh = "homedecor_fence_barbed_wire_corner.obj",
+	tiles = { "homedecor_fence_barbed_wire.png" },
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{ -0.5, -0.5, 0.375, 0.5, 0.5, 0.5 },
-			{ -0.5, -0.5, -0.5, -0.375, 0.5, 0.375 }
-		}
-	},
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{ -8/16, -8/16,  6/16, -6/16, 8/16,  8/16 },	-- left post
-			{  6/16, -8/16,  6/16,  8/16, 8/16,  8/16 }, 	-- right post
-			{ -6/16, -8/16,  7/16,  6/16, 8/16,  7/16 },	-- the wire
-
-			{  -8/16, -8/16, -8/16, -6/16, 8/16, -6/16 },	-- front post
-			{  -7/16, -8/16, -6/16, -7/16, 8/16,  6/16 }	-- more wire
-		}
-	},
+	selection_box = homedecor.nodebox.corner_xz(0.125, -0.125),
+	collision_box = homedecor.nodebox.corner_xz(0.125, -0.125),
 })
 
 homedecor.register("fence_chainlink", {
 	description = S("Chainlink Fence"),
+	mesh="homedecor_fence_chainlink.obj",
 	tiles = {
 		"homedecor_fence_chainlink_tb.png",
 		"homedecor_fence_chainlink_tb.png",
@@ -279,24 +215,14 @@ homedecor.register("fence_chainlink", {
 	},
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, 0.375, 0.5, 0.5, 0.5 }
-	},
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{ -8/16, -8/16,  6/16, -7/16,  8/16,  8/16 },	-- left post
-			{  7/16, -8/16,  6/16,  8/16,  8/16,  8/16 }, 	-- right post
-			{ -8/16,  7/16, 13/32,  8/16,  8/16, 15/32 },	-- top piece
-			{ -8/16, -8/16, 13/32,  8/16, -7/16, 15/32 },	-- bottom piece
-			{ -8/16, -8/16,  7/16,  8/16,  8/16,  7/16 }	-- the chainlink itself
-		}
-	},
+	selection_box = homedecor.nodebox.slab_z(-0.125),
+	collision_box = homedecor.nodebox.slab_z(-0.125),
 })
+
 
 homedecor.register("fence_chainlink_corner", {
 	description = S("Chainlink Fence Corner"),
+	mesh = "homedecor_fence_chainlink_corner.obj",
 	tiles = {
 		"homedecor_fence_chainlink_corner_top.png",
 		"homedecor_fence_chainlink_corner_top.png",
@@ -307,27 +233,8 @@ homedecor.register("fence_chainlink_corner", {
 	},
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{ -0.5, -0.5, 0.375, 0.5, 0.5, 0.5 },
-			{ -0.5, -0.5, -0.5, -0.375, 0.5, 0.375 }
-		}
-	},
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{  -8/16, -8/16,  6/16,  -6/16,  8/16,  8/16 },	-- left post, rear
-			{  -8/16, -8/16, -8/16,  -6/16,  8/16, -7/16 }, -- left post, front
-			{   7/16, -8/16,  6/16,   8/16,  8/16,  8/16 }, -- right post, rear
-			{  -8/16,  7/16, 13/32,   8/16,  8/16, 15/32 },	-- top piece, rear
-			{  -8/16, -8/16, 13/32,   8/16, -7/16, 15/32 },	-- bottom piece, rear
-			{ -15/32,  7/16, -8/16, -13/32,  8/16,  8/16 },	-- top piece, side
-			{ -15/32, -8/16, -8/16, -13/32, -7/16,  8/16 },	-- bottom piece, side
-			{  -8/16, -8/16,  7/16,   8/16,  8/16,  7/16 },	-- the chainlink itself, rear
-			{  -7/16, -8/16, -8/16,  -7/16,  8/16,  8/16 }	-- the chainlink itself, side
-		}
-	},
+	selection_box = homedecor.nodebox.corner_xz(0.125, -0.125),
+	collision_box = homedecor.nodebox.corner_xz(0.125, -0.125),
 })
 
 homedecor.register("fence_wrought_iron_2", {
@@ -342,10 +249,7 @@ homedecor.register("fence_wrought_iron_2", {
 	},
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, 0.42, 0.5, 0.5, 0.5 }
-	},
+	selection_box = homedecor.nodebox.slab_z(-0.08),
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -372,13 +276,7 @@ homedecor.register("fence_wrought_iron_2_corner", {
 	},
 	groups = {snappy=3},
 	sounds = default.node_sound_wood_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{ -0.5, -0.5, 0.42, 0.5, 0.5, 0.5 },
-			{ -0.5, -0.5, -0.5, -0.42, 0.5, 0.5 }
-		}
-	},
+	selection_box = homedecor.nodebox.corner_xz(0.08, -0.08),
 	node_box = {
 		type = "fixed",
 		fixed = {

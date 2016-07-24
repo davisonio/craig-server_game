@@ -1,14 +1,3 @@
-local longsofas_list = {
-	{ "Red Long Sofa", "red"},
-	{ "Orange Long Sofa", "orange"},
-	{ "Yellow Long Sofa", "yellow"},
-	{ "Green Long Sofa", "green"},
-	{ "Blue Long Sofa", "blue"},
-	{ "Violet Long Sofa", "violet"},
-	{ "Black Long Sofa", "black"},
-	{ "Grey Long Sofa", "grey"},
-	{ "White Long Sofa", "white"},
-}
 
 local longsofa_sbox = {
 	type = "fixed",
@@ -23,16 +12,16 @@ local longsofa_cbox = {
 	}
 }
 
-for i in ipairs(longsofas_list) do
-	local longsofadesc = longsofas_list[i][1]
-	local colour = longsofas_list[i][2]
+for i in ipairs(lrfurn.colors) do
+	local colour = lrfurn.colors[i][1]
+	local hue = lrfurn.colors[i][2]
 
 	minetest.register_node("lrfurn:longsofa_"..colour, {
-		description = longsofadesc,
+		description = "Long Sofa ("..colour..")",
 		drawtype = "mesh",
 		mesh = "lrfurn_sofa_long.obj",
 		tiles = {
-			"lrfurn_sofa_"..colour..".png",
+			"lrfurn_bg_white.png^[colorize:"..hue.."^lrfurn_sofa_overlay.png",
 			"lrfurn_sofa_bottom.png"
 		},
 		paramtype = "light",

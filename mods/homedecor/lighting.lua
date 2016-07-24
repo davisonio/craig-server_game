@@ -81,7 +81,7 @@ homedecor.register("glowlight_half_"..color, {
 	selection_box = glowlight_nodebox.half,
 	node_box = glowlight_nodebox.half,
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX,
+	light_source = default.LIGHT_MAX,
 	sounds = default.node_sound_glass_defaults(),
 	on_place = minetest.rotate_node
 })
@@ -99,7 +99,7 @@ homedecor.register("glowlight_quarter_"..color, {
 	selection_box = glowlight_nodebox.quarter,
 	node_box = glowlight_nodebox.quarter,
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX-1,
+	light_source = default.LIGHT_MAX-1,
 	sounds = default.node_sound_glass_defaults(),
 	on_place = minetest.rotate_node
 })
@@ -119,7 +119,7 @@ homedecor.register("glowlight_small_cube_"..color, {
 	selection_box = glowlight_nodebox.small_cube,
 	node_box = glowlight_nodebox.small_cube,
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX-1,
+	light_source = default.LIGHT_MAX-1,
 	sounds = default.node_sound_glass_defaults(),
 	on_place = minetest.rotate_node
 })
@@ -137,7 +137,7 @@ homedecor.register("plasma_lamp", {
 		}
 	},
 	use_texture_alpha = true,
-	light_source = LIGHT_MAX - 1,
+	light_source = default.LIGHT_MAX - 1,
 	sunlight_propagates = true,
 	groups = {cracky=3,oddly_breakable_by_hand=3},
 	sounds = default.node_sound_glass_defaults(),
@@ -145,7 +145,7 @@ homedecor.register("plasma_lamp", {
 		minetest.swap_node(pos, {name = "homedecor:plasma_lamp", param2 = 255})
 	end
 })
-
+--]]
 homedecor.register("plasma_ball", {
 	description = "Plasma Ball",
 	mesh = "homedecor_plasma_ball.obj",
@@ -158,18 +158,18 @@ homedecor.register("plasma_ball", {
 		"homedecor_plasma_ball_glass.png"
 	},
 	inventory_image = "homedecor_plasma_ball_inv.png",
-	selection_box = {	
+	selection_box = {
 		type = "fixed",
 		fixed = { -0.1875, -0.5, -0.1875, 0.1875, 0, 0.1875 }
 	},
 	walkable = false,
 	use_texture_alpha = true,
-	light_source = LIGHT_MAX - 5,
+	light_source = default.LIGHT_MAX - 5,
 	sunlight_propagates = true,
 	groups = {cracky=3,oddly_breakable_by_hand=3},
 	sounds = default.node_sound_glass_defaults(),
 })
---]]
+
 local tc_cbox = {
 	type = "fixed",
 	fixed = {
@@ -188,7 +188,7 @@ homedecor.register("candle", {
 	selection_box = tc_cbox,
 	walkable = false,
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX-4,
+	light_source = default.LIGHT_MAX-4,
 })
 
 local c_cbox = {
@@ -209,7 +209,7 @@ homedecor.register("candle_thin", {
 	selection_box = c_cbox,
 	walkable = false,
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX-4,
+	light_source = default.LIGHT_MAX-4,
 })
 
 local cs_cbox = {
@@ -231,7 +231,7 @@ homedecor.register("candlestick_wrought_iron", {
 	selection_box = cs_cbox,
 	walkable = false,
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX-4,
+	light_source = default.LIGHT_MAX-4,
 })
 
 homedecor.register("candlestick_brass", {
@@ -246,7 +246,7 @@ homedecor.register("candlestick_brass", {
 	selection_box = cs_cbox,
 	walkable = false,
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX-4,
+	light_source = default.LIGHT_MAX-4,
 })
 
 homedecor.register("wall_sconce", {
@@ -265,7 +265,7 @@ homedecor.register("wall_sconce", {
 	},
 	walkable = false,
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX-4,
+	light_source = default.LIGHT_MAX-4,
 })
 
 local ol_cbox = {
@@ -291,7 +291,7 @@ homedecor.register("oil_lamp", {
 	selection_box = ol_cbox,
 	walkable = false,
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX-3,
+	light_source = default.LIGHT_MAX-3,
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -303,7 +303,7 @@ homedecor.register("oil_lamp_tabletop", {
 	selection_box = ol_cbox,
 	collision_box = ol_cbox,
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX-3,
+	light_source = default.LIGHT_MAX-3,
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -357,7 +357,7 @@ homedecor.register("ceiling_lantern", {
 	use_texture_alpha = true,
 	inventory_image = "homedecor_ceiling_lantern_inv.png",
 	description = "Ceiling Lantern",
-	groups = {snappy=3},	
+	groups = {snappy=3},
 	light_source = 11,
 	selection_box = cl_cbox,
 	walkable = false
@@ -367,7 +367,7 @@ homedecor.register("lattice_lantern_large", {
 	description = S("Lattice lantern (large)"),
 	tiles = { 'homedecor_lattice_lantern_large.png' },
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX,
+	light_source = default.LIGHT_MAX,
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -387,7 +387,7 @@ homedecor.register("lattice_lantern_small", {
 		fixed = { -0.25, -0.5, -0.25, 0.25, 0, 0.25 }
 	},
 	groups = { snappy = 3 },
-	light_source = LIGHT_MAX-1,
+	light_source = default.LIGHT_MAX-1,
 	sounds = default.node_sound_glass_defaults(),
 	on_place = minetest.rotate_node
 })
@@ -477,15 +477,11 @@ local function reg_lamp(suffix, nxt, tilesuffix, light, color)
 			node.name = "homedecor:standing_lamp"..lampcolor.."_"..repl[suffix]
 			minetest.set_node(pos, node)
 		end,
-		expand = { top="air" },
+		expand = { top="placeholder" },
 	})
 
 	minetest.register_alias("homedecor:standing_lamp_bottom"..lampcolor.."_"..suffix, "homedecor:standing_lamp"..lampcolor.."_"..suffix)
 	minetest.register_alias("homedecor:standing_lamp_top"..lampcolor.."_"..suffix, "air")
-	minetest.register_alias("homedecor:standing_lamp_"..suffix, "homedecor:standing_lamp_white_"..suffix)
-	minetest.register_alias("homedecor:standing_lamp_whiteoff", "homedecor:standing_lamp_white_off")
-	minetest.register_alias("homedecor:table_lamp_"..suffix, "homedecor:table_lamp_white_"..suffix)
-	minetest.register_alias("homedecor:table_lamp_whiteoff", "homedecor:table_lamp_white_off")
 
 	-- for old maps that had the original 3dforniture mod
 	if lampcolor == "" then
@@ -508,7 +504,7 @@ local dlamp_cbox = {
 
 local dlamp_colors = { "red","blue","green","violet" }
 
-for _, color in ipairs(dlamp_colors) do 
+for _, color in ipairs(dlamp_colors) do
 	homedecor.register("desk_lamp_"..color, {
 		description = S("Desk Lamp ("..color..")"),
 		mesh = "homedecor_desk_lamp.obj",
@@ -535,7 +531,7 @@ homedecor.register("ceiling_lamp", {
 		"homedecor_generic_plastic_black.png^[colorize:#442d04:200",
 	},
 	inventory_image = "homedecor_ceiling_lamp_inv.png",
-	light_source = LIGHT_MAX,
+	light_source = default.LIGHT_MAX,
 	groups = {snappy=3},
 	walkable = false,
 	on_punch = function(pos, node, puncher)
