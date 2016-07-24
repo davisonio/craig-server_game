@@ -6,6 +6,25 @@ function boost_cart:get_sign(z)
 	end
 end
 
+function boost_cart:manage_attachment(player, status, obj)
+	if not player then
+		return
+	end
+	local player_name = player:get_player_name()
+	if default.player_attached[player_name] == status then
+		return
+	end
+	default.player_attached[player_name] = status
+
+	if status then
+		player:set_attach(obj, "", {x=0, y=6, z=0}, {x=0, y=0, z=0})
+		player:set_eye_offset({x=0, y=-4, z=0},{x=0, y=-4, z=0})
+	else
+		player:set_detach()
+		player:set_eye_offset({x=0, y=0, z=0},{x=0, y=0, z=0})
+	end
+end
+
 function boost_cart:velocity_to_dir(v)
 	if math.abs(v.x) > math.abs(v.z) then
 		return {x=boost_cart:get_sign(v.x), y=boost_cart:get_sign(v.y), z=0}
@@ -36,7 +55,7 @@ function boost_cart:is_rail(pos, railtype)
 	return minetest.get_item_group(node, "connect_to_raillike") == railtype
 end
 
-function boost_cart:check_front_up_down(pos, dir_, check_down, railtype)
+function boost_cart:check_front_up_down(pos, dir_, check_up, railtype)
 	local dir = vector.new(dir_)
 	local cur = nil
 
@@ -47,7 +66,7 @@ function boost_cart:check_front_up_down(pos, dir_, check_down, railtype)
 		return dir
 	end
 	-- Up
-	if check_down then
+	if check_up then
 		dir.y = 1
 		cur = vector.add(pos, dir)
 		if boost_cart:is_rail(cur, railtype) then
@@ -138,6 +157,29 @@ function boost_cart:get_rail_direction(pos_, dir, ctrl, old_switch, railtype)
 	return {x=0, y=0, z=0}
 end
 
+function boost_cart:pathfinder(pos_, expected_pos, old_dir, ctrl, pf_switch, railtype)
+	local pos = vector.round(pos_)
+	local pf_pos = vector.round(expected_pos)
+	local pf_dir = vector.new(old_dir)
+
+	for i = 1, 3 do
+		if vector.equals(pf_pos, pos) then
+			-- Success! Cart moved on correctly
+			return true
+		end
+
+		pf_dir, pf_switch = boost_cart:get_rail_direction(pf_pos, pf_dir, ctrl, pf_switch, railtype)
+		if vector.equals(pf_dir, {x=0, y=0, z=0}) then
+			-- No way forwards
+			return false
+		end
+
+		pf_pos = vector.add(pf_pos, pf_dir)
+	end
+	-- Cart not found
+	return false
+end
+
 function boost_cart:boost_rail(pos, amount)
 	minetest.get_meta(pos):set_string("cart_acceleration", tostring(amount))
 	for _,obj_ in ipairs(minetest.get_objects_inside_radius(pos, 0.5)) do
@@ -170,4 +212,15 @@ function boost_cart:register_rail(name, def)
 	end
 
 	minetest.register_node(name, def)
+end
+
+function boost_cart:get_rail_groups(additional_groups)
+	-- Get the default rail groups and add more when a table is given
+	local groups = {dig_immediate = 2, attached_node = 1, rail = 1, connect_to_raillike = 1}
+	if type(additional_groups) == "table" then
+		for k, v in pairs(additional_groups) do
+			groups[k] = v
+		end
+	end
+	return groups
 end
