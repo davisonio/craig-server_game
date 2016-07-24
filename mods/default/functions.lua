@@ -226,7 +226,7 @@ end
 --
 -- Fence registration helper
 --
---[[
+
 function default.register_fence(name, def)
 	minetest.register_craft({
 		output = name .. " 4",
@@ -278,7 +278,7 @@ function default.register_fence(name, def)
 
 	minetest.register_node(name, def)
 end
---]]
+
 
 --
 -- Leafdecay

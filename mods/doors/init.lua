@@ -673,7 +673,7 @@ minetest.register_craft({
 
 
 ----fence gate----
---[[
+
 function doors.register_fencegate(name, def)
 	local fence = {
 		description = def.description,
@@ -772,4 +772,3 @@ doors.register_fencegate("doors:gate_aspen_wood", {
 	material = "default:aspen_wood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2}
 })
---]]

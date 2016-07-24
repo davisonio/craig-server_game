@@ -45,7 +45,6 @@ This is the game used by Craig's Minetest Server.
 |Dye (dye)                                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/dye)|
 |Fake Fire (fake_fire)                      |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/fake_fire)|
 |Farming (farming)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/farming)|
-|Fences (fences)                            ||[GitHub/sfan5](https://github.com/sfan5/minetest_game/tree/fences/mods/fences)|
 |Flowers (flowers)                          ||[GitHub/flowers](https://github.com/minetest/minetest_game/tree/master/mods/flowers)|
 |Give initial stuff (give_initial_stuff)    ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/give_initial_stuff)|
 |Gloopblocks (gloopblocks)                  |[4019](https://forum.minetest.net/viewtopic.php?id=4019)|[GitHub/minetest-mods](https://github.com/minetest-mods/gloopblocks)|
