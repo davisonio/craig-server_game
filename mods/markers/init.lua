@@ -5,26 +5,9 @@
 
 markers = {}
 
--- stores up to 4 marker positions for each player
-markers.positions = {}
-
--- store the positions of that many markers for each player (until server restart)
-markers.MAX_MARKERS  = 50;
-
--- the protection against digging of the marker by other players expires after this time
-markers.EXPIRE_AFTER = 60*60*24;
-
--- self-protected areas can not get higher than 100 blocks
-markers.MAX_HEIGHT   = 200;
-
--- only areas up to this size (in square meters) can be protected
-markers.MAX_SIZE     = 40000; -- 200m * 200m = 40000 m^2
-
-
+dofile(minetest.get_modpath("markers").."/config.lua");
 dofile(minetest.get_modpath("markers").."/areas.lua");
-
 dofile(minetest.get_modpath("markers").."/marker_stone.lua");
-
 dofile(minetest.get_modpath("markers").."/land_title_register.lua");
 
 
@@ -331,8 +314,8 @@ markers.get_marker_formspec = function(player, pos, error_msg)
                     "button_exit[2,6.0;2,0.5;abort;OK]";
     else
        formspec =   formspec..
-                    --'label[0.5,2.0;Buying this area will cost you ]'..
-                    --'label[4.7,2.0;'..markers.calculate_area_price_text( coords[1], coords[2], name )..'.]'..
+--                    'label[0.5,2.0;Buying this area will cost you ]'..
+--                    'label[4.7,2.0;'..markers.calculate_area_price_text( coords[1], coords[2], name )..'.]'..
 
                     'label[0.5,3.0;Your area ought to go..]'..
                     'label[0.5,3.5;this many blocks up:]'..
@@ -550,4 +533,3 @@ minetest.register_craft({
               { "default:apple" },
               { "group:stick" },
              } });
-

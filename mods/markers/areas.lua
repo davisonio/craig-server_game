@@ -92,22 +92,36 @@ markers.get_area_list_formspec = function(ppos, player, mode, pos, mode_data, se
 
    -- show only areas that do not have parents
    elseif( mode=='main_areas' ) then
-      title  = 'All main areas:';
+      title  = 'All main areas withhin '..tostring( markers.AREA_RANGE )..' m:';
       tlabel = '*all main areas*';
       for id, area in pairs(areas.areas) do
 
-         if( not( area.parent )) then
+         if( not( area.parent )
+           -- ppos is always available
+           and(   (area.pos1.x >= ppos.x-markers.AREA_RANGE and area.pos1.x <= ppos.x+markers.AREA_RANGE )
+                or(area.pos2.x >= ppos.x-markers.AREA_RANGE and area.pos2.x <= ppos.x+markers.AREA_RANGE ))
+           and(   (area.pos1.y >= ppos.y-markers.AREA_RANGE and area.pos1.y <= ppos.y+markers.AREA_RANGE )
+                or(area.pos2.y >= ppos.y-markers.AREA_RANGE and area.pos2.y <= ppos.y+markers.AREA_RANGE ))
+           and(   (area.pos1.z >= ppos.z-markers.AREA_RANGE and area.pos1.z <= ppos.z+markers.AREA_RANGE )
+                or(area.pos2.z >= ppos.z-markers.AREA_RANGE and area.pos2.z <= ppos.z+markers.AREA_RANGE ))) then
             table.insert( id_list, id );
          end
       end
  
 
    elseif( mode=='all' ) then
-      title  = 'All areas:'; 
+      title  = 'All areas withhin '..tostring( markers.AREA_RANGE )..' m:';
       tlabel = '*all areas*';
 
       for id, area in pairs(areas.areas) do
-         table.insert( id_list, id );
+         if(  (   (area.pos1.x >= ppos.x-markers.AREA_RANGE and area.pos1.x <= ppos.x+markers.AREA_RANGE )
+                or(area.pos2.x >= ppos.x-markers.AREA_RANGE and area.pos2.x <= ppos.x+markers.AREA_RANGE ))
+           and(   (area.pos1.y >= ppos.y-markers.AREA_RANGE and area.pos1.y <= ppos.y+markers.AREA_RANGE )
+                or(area.pos2.y >= ppos.y-markers.AREA_RANGE and area.pos2.y <= ppos.y+markers.AREA_RANGE ))
+           and(   (area.pos1.z >= ppos.z-markers.AREA_RANGE and area.pos1.z <= ppos.z+markers.AREA_RANGE )
+                or(area.pos2.z >= ppos.z-markers.AREA_RANGE and area.pos2.z <= ppos.z+markers.AREA_RANGE ))) then
+            table.insert( id_list, id );
+         end
       end
    end
 

@@ -1,6 +1,6 @@
 
 minetest.register_node("markers:stone", {
-	description = "Area Edit Stone (for editing protected areas)",
+	description = "Area Editing Stone (for editing protected areas)",
 	tiles = {"markers_stone.png", "markers_stone.png", "markers_stone_side.png",
                 "markers_stone_side.png", "markers_stone_side.png", "markers_stone_side.png" },
 -- no facedir here - we want a fixed north indication!
@@ -21,4 +21,3 @@ minetest.register_craft({
    recipe = { { "markers:mark" },
               { "default:cobble" },
              } });
-
