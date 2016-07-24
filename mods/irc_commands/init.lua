@@ -44,22 +44,27 @@ irc:register_bot_command("login", {
 			return false, "Player name and password required."
 		end
 		local inChannel = false
-		local users = irc.conn.channels[irc.config.channel].users
-		for cnick, cuser in pairs(users) do
+		local channel = irc.conn.channels[irc.config.channel]
+		if not channel then
+			return false, "The server needs to be in its "..
+				"channel for anyone to log in."
+		end
+		for cnick, cuser in pairs(channel.users) do
 			if user.nick == cnick then
 				inChannel = true
 				break
 			end
 		end
 		if not inChannel then
-			return false, "You need to be in the server's channel to login."
+			return false, "You need to be in the server's channel to log in."
 		end
-		if minetest.auth_table[playerName] and
-				minetest.auth_table[playerName].password ==
-				minetest.get_password_hash(playerName, password) then
+		local handler = minetest.get_auth_handler()
+		local auth = handler.get_auth(playerName)
+		if auth and minetest.check_password_entry(playerName, auth.password, password) then
 			minetest.log("action", "User "..user.nick
 					.." from IRC logs in as "..playerName)
 			irc_users[user.nick] = playerName
+			handler.record_login(playerName)
 			return true, "You are now logged in as "..playerName
 		else
 			minetest.log("action", user.nick.."@IRC attempted to log in as "
@@ -132,4 +137,3 @@ irc:register_bot_command("say", {
 		return true, "Message sent successfuly."
 	end
 })
-
