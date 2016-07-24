@@ -47,7 +47,6 @@ This is the game used by Craig's Minetest Server.
 |Farming (farming)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/farming)|
 |Fences (fences)                            ||[GitHub/sfan5](https://github.com/sfan5/minetest_game/tree/fences/mods/fences)|
 |Flowers (flowers)                          ||[GitHub/flowers](https://github.com/minetest/minetest_game/tree/master/mods/flowers)|
-|Forbidden usernames (forbidden_usernames)  |||
 |Give initial stuff (give_initial_stuff)    ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/give_initial_stuff)|
 |Gloopblocks (gloopblocks)                  |[4019](https://forum.minetest.net/viewtopic.php?id=4019)|[GitHub/minetest-mods](https://github.com/minetest-mods/gloopblocks)|
 |Home GUI (home_gui)                        |[3101](https://forum.minetest.net/viewtopic.php?id=3101)|[GitHub/cornernote](https://github.com/cornernote/minetest-home_gui)|
@@ -64,6 +63,7 @@ This is the game used by Craig's Minetest Server.
 |More Chests (more_chests)                  ||[GitHub/minetest-mods](https://github.com/minetest-mods/more_chests)|
 |More Blocks (moreblocks)                   |[509](https://forum.minetest.net/viewtopic.php?id=509)|[GitHub/minetest-mods](https://github.com/minetest-mods/moreblocks)|
 |More Ores (moreores)                       |[549](https://forum.minetest.net/viewtopic.php?id=549)|[GitHub/minetest-mods](https://github.com/minetest-mods/moreores)|
+|Name Restrictions (name_restrictions)                ||[GitHub/ShadowNinja](https://github.com/ShadowNinja/name_restrictions)|
 |Names per IP (names_per_ip)                |[9768](https://forum.minetest.net/viewtopic.php?id=9768)|[GitHub/Calinou](https://github.com/Calinou/carbone/tree/master/mods/names_per_ip)|
 |Nyan Cat (nyancat)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/nyancat)|
 |Replacer (replacer)                        |[4676](https://forum.minetest.net/viewtopic.php?id=4676)|[GitHub/Sokomine](https://github.com/Sokomine/replacer)|
