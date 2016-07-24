@@ -50,7 +50,7 @@ end)
 ------------------------
 -- Case-insensitivity --
 ------------------------
-
+--[[
 minetest.register_on_prejoinplayer(function(name, ip)
 	if exemptions[name] then return end
 
@@ -84,13 +84,13 @@ minetest.register_chatcommand("choosecase", {
 		return true, "Done."
 	end,
 })
-
+--]]
 
 ------------------------
 -- Anti-impersonation --
 ------------------------
 -- Prevents names that are too similar to another player's name.
-
+--[[
 local similar_chars = {
 	-- Only A-Z, a-z, 1-9, dash, and underscore are allowed in player names
 	"A4",
@@ -141,7 +141,7 @@ minetest.register_on_prejoinplayer(function(name, ip)
 		end
 	end
 end)
-
+--]]
 
 
 -----------------
