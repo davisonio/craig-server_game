@@ -38,21 +38,21 @@ local function hoe_on_use(itemstack, user, pointed_thing, uses)
 	if pt.type ~= "node" then
 		return
 	end
-	
+
 	local under = minetest.get_node(pt.under)
 	local pos = {x = pt.under.x, y = pt.under.y + 1, z = pt.under.z}
 	local above = minetest.get_node(pos)
-	
+
 	-- Return if any of the nodes is not registered:
 	if not minetest.registered_nodes[under.name] then return end
 	if not minetest.registered_nodes[above.name] then return end
-	
+
 	-- Check if the node above the pointed thing is air:
 	if above.name ~= "air" then return end
-	
+
 	-- Check if pointing at dirt:
 	if minetest.get_item_group(under.name, "soil") ~= 1 then return end
-	
+
 	-- Turn the node into soil, wear out item and play sound:
 	minetest.set_node(pt.under, {name ="farming:soil"})
 	minetest.sound_play("default_dig_crumbly", {pos = pt.under, gain = 0.5})
@@ -149,7 +149,7 @@ local function add_ore(modname, description, mineral_name, oredef)
 		})
 		minetest.register_alias(mineral_name .. "_ingot", ingot)
 	end
-	
+
 	if oredef.makes.chest then
 		minetest.register_craft( {
 			output = "default:chest_locked",
@@ -163,11 +163,11 @@ local function add_ore(modname, description, mineral_name, oredef)
 			recipe = get_recipe(ingot, "lockedchest")
 		})
 	end
-	
+
 	oredef.oredef.ore_type = "scatter"
 	oredef.oredef.ore = modname .. ":mineral_" .. mineral_name
 	oredef.oredef.wherein = "default:stone"
-	
+
 	minetest.register_ore(oredef.oredef)
 
 	for tool_name, tooldef in pairs(oredef.tools) do
@@ -179,19 +179,19 @@ local function add_ore(modname, description, mineral_name, oredef)
 				groupcaps = tooldef
 			}
 		}
-		
+
 		if tool_name == "sword" then
 			tdef.tool_capabilities.full_punch_interval = oredef.full_punch_interval
 			tdef.tool_capabilities.damage_groups = oredef.damage_groups
 			tdef.description = S("%s Sword"):format(S(description))
 		end
-	
+
 		if tool_name == "pick" then
 			tdef.tool_capabilities.full_punch_interval = oredef.full_punch_interval
 			tdef.tool_capabilities.damage_groups = oredef.damage_groups
 			tdef.description = S("%s Pickaxe"):format(S(description))
 		end
-		  
+
 		if tool_name == "axe" then
 			tdef.tool_capabilities.full_punch_interval = oredef.full_punch_interval
 			tdef.tool_capabilities.damage_groups = oredef.damage_groups
@@ -203,7 +203,7 @@ local function add_ore(modname, description, mineral_name, oredef)
 			tdef.tool_capabilities.damage_groups = oredef.damage_groups
 			tdef.description = S("%s Shovel"):format(S(description))
 		end
-		
+
 		if tool_name == "hoe" then
 			tdef.description = S("%s Hoe"):format(S(description))
 			local uses = tooldef.uses
@@ -235,8 +235,8 @@ local oredefs = {
 		oredef = {clust_scarcity = moreores_silver_chunk_size * moreores_silver_chunk_size * moreores_silver_chunk_size,
 			clust_num_ores = moreores_silver_ore_per_chunk,
 			clust_size     = moreores_silver_chunk_size,
-			height_min     = moreores_silver_min_depth,
-			height_max     = moreores_silver_max_depth
+			y_min     = moreores_silver_min_depth,
+			y_max     = moreores_silver_max_depth
 			},
 		tools = {
 			pick = {
@@ -267,8 +267,8 @@ local oredefs = {
 		oredef = {clust_scarcity = moreores_tin_chunk_size * moreores_tin_chunk_size * moreores_tin_chunk_size,
 			clust_num_ores = moreores_tin_ore_per_chunk,
 			clust_size     = moreores_tin_chunk_size,
-			height_min     = moreores_tin_min_depth,
-			height_max     = moreores_tin_max_depth
+			y_min     = moreores_tin_min_depth,
+			y_max     = moreores_tin_max_depth
 			},
 		tools = {},
 	},
@@ -278,8 +278,8 @@ local oredefs = {
 		oredef = {clust_scarcity = moreores_mithril_chunk_size * moreores_mithril_chunk_size * moreores_mithril_chunk_size,
 			clust_num_ores = moreores_mithril_ore_per_chunk,
 			clust_size     = moreores_mithril_chunk_size,
-			height_min     = moreores_mithril_min_depth,
-			height_max     = moreores_mithril_max_depth
+			y_min     = moreores_mithril_min_depth,
+			y_max     = moreores_mithril_max_depth
 			},
 		tools = {
 			pick = {
@@ -309,6 +309,55 @@ local oredefs = {
 for orename,def in pairs(oredefs) do
 	add_ore(modname, def.description, orename, def)
 end
+
+-- Copper rail (special node):
+minetest.register_craft({
+	output = "moreores:copper_rail 24",
+	recipe = {
+		{"default:copper_ingot", "", "default:copper_ingot"},
+		{"default:copper_ingot", "group:stick", "default:copper_ingot"},
+		{"default:copper_ingot", "", "default:copper_ingot"}
+	}
+})
+
+-- Bronze has some special cases, because it is made from copper and tin:
+minetest.register_craft( {
+	type = "shapeless",
+	output = "default:bronze_ingot 3",
+	recipe = {
+		"moreores:tin_ingot",
+		"default:copper_ingot",
+		"default:copper_ingot",
+	}
+})
+
+-- Unique node:
+minetest.register_node("moreores:copper_rail", {
+	description = S("Copper Rail"),
+	drawtype = "raillike",
+	tiles = {"moreores_copper_rail.png", "moreores_copper_rail_curved.png", "moreores_copper_rail_t_junction.png", "moreores_copper_rail_crossing.png"},
+	inventory_image = "moreores_copper_rail.png",
+	wield_image = "moreores_copper_rail.png",
+	paramtype = "light",
+	sunlight_propagates = true,
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
+	},
+	groups = {bendy = 2,snappy = 1,dig_immediate = 2,rail= 1, connect_to_raillike = 1},
+	mesecons = {
+		effector = {
+			action_on = function(pos, node)
+				minetest.get_meta(pos):set_string("cart_acceleration", "0.5")
+			end,
+
+			action_off = function(pos, node)
+				minetest.get_meta(pos):set_string("cart_acceleration", "0")
+			end,
+		},
+	},
+})
 
 
 if minetest.setting_getbool("log_mods") then
