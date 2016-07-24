@@ -3,6 +3,19 @@
 --
 
 -- /me
+
+minetest.register_chatcommand("admin", {
+	description = "Show the name of the server owner",
+	func = function(name)
+		local admin = minetest.setting_get("name")
+		if admin then
+			return true, "The administrators of this server are listed at https://davison.io/minetest/craig-server#team"
+		else
+			return false, "There's no administrator named in the config file."
+		end
+	end,
+})
+
 -- /help
 -- /privs
 -- /grant
@@ -12,8 +25,18 @@
 -- /auth_reload
 -- /teleport
 -- /set
+-- /emergeblocks
 -- /deleteblocks
--- /mods
+
+core.register_chatcommand("mods", {
+	params = "",
+	description = "List mods installed on the server",
+	privs = {},
+	func = function(name, param)
+		return true, "Mod List: https://github.com/davisonio/craig-server_game#mod-list"
+	end,
+})
+
 -- /give
 -- /giveme
 -- /spawnentity
@@ -22,6 +45,7 @@
 -- /rollback
 -- /status
 -- /time
+-- /days
 -- /shutdown
 
 minetest.register_chatcommand("ban", {
@@ -44,28 +68,7 @@ minetest.register_chatcommand("unban", {
 
 -- /kick
 -- /clearobjects
-
-minetest.register_chatcommand("msg", {
-	params = "<name> <message>",
-	description = "Send a private message",
-	privs = {shout=true},
-	func = function(name, param)
-		local sendto, message = param:match("^(%S+)%s(.+)$")
-		if not sendto then
-			return false, "Invalid usage, see /help msg."
-		end
-		if not core.get_player_by_name(sendto) then
-			return false, "The player " .. sendto
-					.. " is not online."
-		end
-		core.log("action", "PM from " .. name .. " to " .. sendto
-				.. ": " .. message)
-		core.chat_send_player(sendto, "PM from " .. name .. ": "
-				.. message)
-		return true, "Message sent."
-	end,
-})
-
+-- /msg
 -- /last-login
 
 --
@@ -85,7 +88,7 @@ minetest.register_chatcommand("spawn", {
     end,
 })
 
--- Sethome command
+-- Sethome command (from some old mod somewhere)
 minetest.register_chatcommand("sethome", {
         params = "",
         description = "Set your home location.",
@@ -104,7 +107,7 @@ minetest.register_chatcommand("sethome", {
         end
 })
 
--- Home command
+-- Home command (from some old mod somewhere)
 minetest.register_chatcommand("home", {
 	params = "",
 	description = "Teleport to your home location.",
