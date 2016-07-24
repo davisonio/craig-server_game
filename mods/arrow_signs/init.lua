@@ -1,128 +1,113 @@
---arrow_signs by addi
---thanks to Jat15 for the new place and rotate-system.
---Code and Textures are under the CC by-sa 3.0 licence 	
---see: http://creativecommons.org/licenses/by-sa/3.0/	
-	
-	
-	
+--[[
+	Arrow signs mod for Minetest.
+
+	This mods adds arrowsigns into Minetest. Rotatable in all directions.
+
+	Thanks to:
+		Jat15 for the place and rotate system
+		Hectic for the new Textures that fit into Minetest  0.4.14
+
+	This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
+	To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+]]
+
 arrow_signs={}
 
-arrow_signs.formspec = "field[text;Sign text:;${text}]";
+arrow_signs.formspec = "field[text;Sign text:            (Hint: Use / or | to create a new line);${text}]";
 
 arrow_signs.on_place = function(itemstack, placer, pointed_thing)
-	
+
 	local posabove = pointed_thing.above
 	local posunder = pointed_thing.under
 	local vector = placer:get_look_dir()
-	local place = true
-	
+	local param2 = 0
+
+	-- I wonder if there is a way to calculate the param2 instad of using so much if here.
+	-- +Y
 	if posabove.y>posunder.y then
 		if(vector.z>0.5 and vector.z<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 10})
+			param2 = 10
 		elseif (vector.x>0.5 and vector.x<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 19})
+			param2 = 19
 		elseif(-0.5>vector.z and -1<=vector.z) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 4})	
+			param2 = 4
 		elseif (-0.5>vector.x and -1<=vector.x) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 13})
-		else
-			place = false
+			param2 = 13
 		end
+	-- -Y
 	elseif posabove.y<posunder.y then
 		if(vector.z>0.5 and vector.z<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 8})
+			param2 = 8
 		elseif (vector.x>0.5 and vector.x<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 17})
+			param2 = 17
 		elseif(-0.5>vector.z and -1<=vector.z) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 6})	
+			param2 = 6
 		elseif (-0.5>vector.x and -1<=vector.x) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 15})
-		else
-			place = false
+			param2 = 15
 		end
+	-- +Z
 	elseif posabove.z>posunder.z then
 		if(vector.y>0.75 and vector.y<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 22})
+			param2 = 22
 		elseif (vector.y>=-1 and vector.y<-0.75) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 2})
+			param2 = 2
 		elseif (vector.x>=0 and vector.x<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 18})
+			param2 = 18
 		elseif (vector.x<0 and vector.x>=-1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 14})
-		else
-			place = false
+			param2 = 14
 		end
+	-- -Z
 	elseif posabove.z<posunder.z then
 		if(vector.y>0.75 and vector.y<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 20})
+			param2 = 20
 		elseif (vector.y>=-1 and vector.y<-0.75) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 0})
+			param2 = 0
 		elseif (vector.x>=0 and vector.x<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 16})
+			param2 = 16
 		elseif (vector.x<0 and vector.x>=-1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 12})
-		else
-			place = false
+			param2 = 12
 		end
+	-- +X
 	elseif posabove.x>posunder.x then
 		if(vector.y>0.75 and vector.y<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 21})
+			 param2 = 21
 		elseif (vector.y>=-1 and vector.y<-0.75) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 3})
+			param2 = 3
 		elseif (vector.z>=0 and vector.z<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 11})
+			param2 = 11
 		elseif (vector.z<0 and vector.z>=-1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 7})
-		else
-			place = false
+			param2 = 7
 		end
+	-- -X
 	elseif posabove.x<posunder.x then
 		if(vector.y>0.75 and vector.y<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 23})
+			param2 = 23
 		elseif (vector.y>=-1 and vector.y<-0.75) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 1})
+			param2 = 1
 		elseif (vector.z>=0 and vector.z<=1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 9})
+			param2 = 9
 		elseif (vector.z<0 and vector.z>=-1) then
-			minetest.add_node(posabove,{name = itemstack:get_name(), param2 = 5})
-		else
-			place = false
+			param2 = 5
 		end
-	else
-		place = false
 	end
 
-	if not(place) then
-		minetest.rotate_node(itemstack, placer, pointed_thing)
-	else
-		itemstack:take_item()
-	end
-		
-	if not minetest.setting_getbool("creative_mode") then
-		return itemstack
-	end
-	
+	return minetest.item_place_node(itemstack, placer, pointed_thing, param2)
 end
 
 arrow_signs.savetext = function(pos, formname, fields, sender)
 	if fields.text then
-		if not minetest.get_player_privs(sender:get_player_name())["interact"] then
-			minetest.chat_send_player(sender:get_player_name(), "error: you don't have permission to edit the sign. you need the interact priv")
-		return
+		local playername = sender:get_player_name() or ""
+		if minetest.is_protected(pos, playername) then
+			minetest.record_protection_violation(pos, playername)
+			return
 		end
-		--if minetest.is_protected(pos, sender:get_player_name()) then
-		--	minetest.record_protection_violation(pos, sender:get_player_name())
-		--	return
-		--end
 		local meta = minetest.get_meta(pos)
-		fields.text = fields.text or ""
-		minetest.log("action", (sender:get_player_name() or "").." wrote \""..fields.text..
-				"\" to sign at "..minetest.pos_to_string(pos));
+		minetest.log("action", string.format("%q wrote %q to sign at %s", playername, fields.text, minetest.pos_to_string(pos)));
 		meta:set_string("text", fields.text)
-		local text,lines = arrow_signs.create_lines(fields.text)
+		local text, lines = arrow_signs.create_lines(fields.text)
 		meta:set_string("infotext", '"'..text..'"')
-		if lines > 4 then
-			minetest.chat_send_player(sender:get_player_name(),"Information: \nYou've written more than 5 lines. \nIt may be that not all lines are displayed. \nPlease remove the last entry")
+		if lines >= 6 then
+			minetest.chat_send_player(playername, "Information: \nYou've written "..lines.." lines. \nThe sign can only display 5 lines \nPlease remove the last entries")
 		end
 	return true
 	end
@@ -132,89 +117,34 @@ end
 arrow_signs.create_lines = function(text)
 	local text, n = text:gsub("[ ]*(%|)[ ]*", '"\n"')--search for |
 	local text, m = text:gsub("[ ]*(%/)[ ]*", '"\n"')--search for /
-	return text, n+m
+	return text, n+m+1
 end
 
-minetest.override_item("default:sign_wall", {
-    groups = {choppy=2,dig_immediate=2,attached_node=1,sign=1},
-})
-
---Sign arrow
-minetest.register_node("arrow_signs:wall", {
-	description = "Arrow signs",
-	drawtype = "nodebox",
-	node_box = {		
-		type = "fixed", 
-		fixed = {
-			{ 0.25, -0.25, 0.5, -0.25, 0.5, 0.47},
-			{ 0.1875, -0.3125, 0.5, -0.1875, -0.25, 0.47},
-			{ 0.125, -0.3125, 0.5, -0.125, -0.375, 0.47},
-			{ 0.0625, -0.375, 0.5, -0.0625, -0.437, 0.47}
-		}
-	},
-    selection_box = {
-        type = "fixed", 
-        fixed = {
-            { 0.30, -0.5, 0.5, -0.30, 0.5, 0.47}
-        }
-    },
-	tiles = {"arrow_sign_border_left.png","arrow_sign_border_right.png","arrow_sign_border_up.png","arrow_sign_border_down.png","arrow_sign.png","arrow_sign.png"},
-	inventory_image = "arrow_sign.png",
-	paramtype = "light",
-	paramtype2 = "facedir",
-	sunlight_propagates = true,
-	walkable = false,
-	groups = {choppy=2,dig_immediate=2,sign=1},
-	sounds = default.node_sound_defaults(),
-	on_place = arrow_signs.on_place,	
-	on_construct = function(pos)
-		--local n = minetest.get_node(pos)
-		local meta = minetest.get_meta(pos)
-		meta:set_string("formspec", arrow_signs.formspec)
-		meta:set_string("infotext", [[""]])
-	end,
-	on_receive_fields = arrow_signs.savetext,
-})
-
---Recipes
-minetest.register_craft({
-	type = 'shapeless',
-	output = 'arrow_signs:wall',
-	recipe = {'group:sign', 'default:stick'},
-})
-minetest.register_craft({
-	output = 'default:sign_wall',
-	recipe = {
-		{'group:sign'},
+arrow_signs.nodebox = {
+	type = "fixed",
+	fixed = {
+		{ 0.25, -0.25, 0.4375, -0.25, 0.5, 0.5},
+		{ 0.1875, -0.3125, 0.4375, -0.1875, -0.25, 0.5},
+		{ 0.125, -0.3125, 0.4375, -0.125, -0.375, 0.5},
+		{ 0.0625, -0.375, 0.4375, -0.0625, -0.437, 0.5}
 	}
-})
+}
 
---Redefinition
-minetest.register_abm({
-	nodenames = {"arrow_signs:wall_right", "arrow_signs:wall_left", "arrow_signs:wall_up", "arrow_signs:wall_down",
-		"more_signs:wall_right","more_signs:wall_left","more_signs:wall_up"	,"more_signs:wall_down"
-	},
-	interval = 1,
-	chance = 1,
-	action = function(pos, node)
-		local convert_facedir={
-			["arrow_signs:wall_right"]	=	{6,4,5,11,16,14},
-			["arrow_signs:wall_left"]	=	{8,10,9,7,12,18},
-			["arrow_signs:wall_up"]		=	{15,19,23,21,20,22},
-			["arrow_signs:wall_down"]	=	{17,13,1,3,0,2},
-			-- For old mod
-			["more_signs:wall_right"] 	=	{6,4,5,11,16,14},
-			["more_signs:wall_left"] 	=	{8,10,9,7,12,18},
-			["more_signs:wall_up"] 		=	{15,19,23,21,20,22},
-			["more_signs:wall_down"] 	=	{17,13,1,3,0,2},
+arrow_signs.selection_box = {
+		type = "fixed",
+		fixed = {
+			{ 0.30, -0.5, 0.4375, -0.30, 0.5, 0.5}
 		}
-		minetest.swap_node(pos, {name="arrow_signs:wall",param2=convert_facedir[node.name][node.param2+1]})
-	end,
-})
+	}
 
+local MODPATH = minetest.get_modpath("arrow_signs")
 
---Locked sign
-if locks then
-	local MODPATH = minetest.get_modpath("arrow_signs");
+-- Wooden Sign
+dofile(MODPATH.."/wood.lua")
+-- Steel Sign
+dofile(MODPATH.."/steel.lua")
+
+--Shared Locked sign
+if minetest.get_modpath("locks") then
 	dofile(MODPATH.."/shared_locked.lua")
 end

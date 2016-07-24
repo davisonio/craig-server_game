@@ -1,35 +1,30 @@
--- a sign
+--[[
+    Shared Locked Arrow sign
+
+    This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
+	To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+]]
 minetest.register_node("arrow_signs:shared_locked", {
 	description = "Shared locked sign",
 	drawtype = "nodebox",
-	node_box = {		
-		type = "fixed", 
-		fixed = {
-			{ 0.25, -0.25, 0.5, -0.25, 0.5, 0.47},
-			{ 0.1875, -0.3125, 0.5, -0.1875, -0.25, 0.47},
-			{ 0.125, -0.3125, 0.5, -0.125, -0.375, 0.47},
-			{ 0.0625, -0.375, 0.5, -0.0625, -0.437, 0.47}
-		}
-	},
-    selection_box = {
-        type = "fixed", 
-        fixed = {
-            { 0.30, -0.5, 0.5, -0.30, 0.5, 0.47}
-        }
-    },
-	tiles = {"arrow_sign_border_left.png","arrow_sign_border_right.png","arrow_sign_border_up.png","arrow_sign_border_down.png","arrow_sign.png","arrow_sign.png"},
-	inventory_image = "arrow_sign.png",
+	node_box = arrow_signs.nodebox,
+	selection_box = arrow_signs.selection_box,
+	tiles = {"arrow_signs_wood.png^arrow_signs_wood_border.png"},
+	inventory_image = "arrow_signs_wood.png",
+	wield_image = "arrow_signs_wood.png",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
 	walkable = false,
-	groups = {choppy=2,dig_immediate=2,sign_locked=1},
+	groups = {choppy = 2, oddly_breakable_by_hand = 3 },
 	legacy_wallmounted = true,
-	
+
 	on_place = function(itemstack, placer, pointed_thing)
-			arrow_signs.on_place(itemstack, placer, pointed_thing);
-			locks:lock_set_owner( pointed_thing.above, placer, "Shared locked sign" );
+			itemstack = arrow_signs.on_place(itemstack, placer, pointed_thing);
+			locks:lock_set_owner( pointed_thing.above, placer, "Shared locked sign");
+			return itemstack
 	end,
+
 	on_construct = function(pos)
 			local meta =  minetest.get_meta(pos)
 			-- prepare the lock of the sign
@@ -40,17 +35,12 @@ minetest.register_node("arrow_signs:shared_locked", {
 							"button_exit[6.3,3.2;1.7,0.7;locks_sent_input;Proceed]" );
 	end,
 
-	after_place_node = function(pos, placer)
-			locks:lock_set_owner( pos, placer, "Shared locked sign" );
-	end,
-
-
 	can_dig = function(pos,player)
 			return locks:lock_allow_dig( pos, player );
 	end,
 
 	on_receive_fields = function(pos, formname, fields, sender)
-			
+
 			-- if the user already has the right to use this and did input text
 			if( fields.text
 				and ( not(fields.locks_sent_lock_command)
@@ -83,10 +73,9 @@ minetest.register_craft({
 })
 
 --Redefinition
-minetest.register_abm({
-	nodenames = {"arrow_signs:shared_locked_right", "'arrow_signs:shared_locked_left", "arrow_signs:shared_locked_up", "arrow_signs:shared_locked_down"},
-	interval = 1,
-	chance = 1,
+minetest.register_lbm({
+	name = "arrow_signs:replace_old_shared_locked",
+	nodenames = {"arrow_signs:shared_locked_right", "arrow_signs:shared_locked_left", "arrow_signs:shared_locked_up", "arrow_signs:shared_locked_down"},
 	action = function(pos, node)
 		local convert_facedir={
 			["arrow_signs:shared_locked_right"]={6,4,5,11,16,14},

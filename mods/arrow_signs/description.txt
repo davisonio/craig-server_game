@@ -1,0 +1,2 @@
+This mods adds arrowsigns into Minetest. 
+Rotatable in all directions.
