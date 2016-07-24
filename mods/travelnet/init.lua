@@ -57,7 +57,8 @@
 --]]
 
 
-minetest.register_privilege("travelnet", "Travelnet admin.")
+minetest.register_privilege("travelnet_attach", { description = "allows to attach travelnet boxes to travelnets of other players", give_to_singleplayer = false});
+minetest.register_privilege("travelnet_remove", { description = "allows to dig travelnet boxes which belog to nets of other players", give_to_singleplayer = false});
 
 travelnet = {};
 
@@ -171,7 +172,7 @@ travelnet.update_formspec = function( pos, puncher_name )
 
 
       local zeit = meta:get_int("timestamp");
-      if( not( zeit) or zeit<100000 ) then
+      if( not( zeit) or type(zeit)~="number" or zeit<100000 ) then
          zeit = os.time();
       end
 
@@ -211,6 +212,9 @@ travelnet.update_formspec = function( pos, puncher_name )
       -- find ground level
       local vgl_timestamp = 999999999999;
       for index,k in ipairs( stations ) do
+         if( not( travelnet.targets[ owner_name ][ station_network ][ k ].timestamp )) then
+            travelnet.targets[ owner_name ][ station_network ][ k ].timestamp = os.time();
+         end
          if( travelnet.targets[ owner_name ][ station_network ][ k ].timestamp < vgl_timestamp ) then
             vgl_timestamp = travelnet.targets[ owner_name ][ station_network ][ k ].timestamp;       
             ground_level  = index;
@@ -320,10 +324,10 @@ travelnet.add_target = function( station_name, network_name, pos, player_name, m
       minetest.chat_send_player(player_name, "There is no network named "..tostring( network_name ).." owned by "..tostring( owner_name )..". Aborting.");
       return;
 
-   elseif( not( minetest.check_player_privs(player_name, {travelnet=true}))
+   elseif( not( minetest.check_player_privs(player_name, {travelnet_attach=true}))
        and not( travelnet.allow_attach( player_name, owner_name, network_name ))) then
 
-        minetest.chat_send_player(player_name, "You do not have the travelnet priv which is required to attach your box to the network of someone else. Aborting.");
+        minetest.chat_send_player(player_name, "You do not have the travelnet_attach priv which is required to attach your box to the network of someone else. Aborting.");
       return;
    end
 
@@ -479,6 +483,19 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
       end
    end
 
+   if(  not( owner_name )
+     or not( station_network )
+     or not( travelnet.targets )
+     or not( travelnet.targets[ owner_name ] )
+     or not( travelnet.targets[ owner_name ][ station_network ] )) then
+      minetest.chat_send_player(name, "Error: This travelnet is lacking data and/or improperly configured.");
+      print( "ERROR: The travelnet at "..minetest.pos_to_string( pos ).." has a problem: "..
+                                      " DATA: owner: "..(  owner_name or "?")..
+                                      " station_name: "..(station_name or "?")..
+                                      " station_network: "..(station_network or "?")..".");
+      return;
+   end
+
    local this_node = minetest.get_node( pos );
    if( this_node ~= nil and this_node.name == 'travelnet:elevator' ) then 
       for k,v in pairs( travelnet.targets[ owner_name ][ station_network ] ) do
@@ -607,7 +624,7 @@ travelnet.can_dig = function( pos, player, description )
    local name          = player:get_player_name();
 
    -- players with that priv can dig regardless of owner
-   if( minetest.check_player_privs(name, {travelnet=true})
+   if( minetest.check_player_privs(name, {travelnet_remove=true})
        or travelnet.allow_dig( player_name, owner_name, network_name )) then
       return true;
    end
