@@ -162,7 +162,7 @@ end)
 ----------------------
 -- Pronounceability --
 ----------------------
-
+--[[
 -- Original implementation (in Python) by sfan5
 local function pronounceable(pronounceability, text)
 	local pronounceable = 0
@@ -222,3 +222,4 @@ if pronounceability then
 		end
 	end)
 end
+--]]
