@@ -326,3 +326,6 @@ load_db()
 xban.db = db
 
 minetest.after(1, check_temp_bans)
+
+-- dofile(xban.MP.."/dbimport.lua")
+-- dofile(xban.MP.."/gui.lua")
