@@ -7,10 +7,25 @@ end
 
 minetest.register_node("more_chests:dropbox", {
 	description = "Dropbox",
-	tiles = {"default_chest_top.png", "default_chest_top.png", "dropbox_right.png",
-		"default_chest_side.png", "default_chest_side.png", "dropbox_front.png"},
+	tiles = {"dropbox_top.png", "dropbox_top.png", "dropbox_side.png",
+		"dropbox_side.png", "dropbox_side.png", "dropbox_front.png"},
 	paramtype2 = "facedir",
-	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
+	groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2, tubedevice = 1, tubedevice_receiver = 1},
+-- Pipeworks
+	tube = {
+		insert_object = function(pos, node, stack, direction)
+			local meta = minetest.get_meta(pos)
+			local inv = meta:get_inventory()
+			return inv:add_item("main", stack)
+		end,
+		can_insert = function(pos, node, stack, direction)
+			local meta = minetest.get_meta(pos)
+			local inv = meta:get_inventory()
+			return inv:room_for_item("main", stack)
+		end,
+		input_inventory = "main",
+		connect_sides = {left = 1, right = 1, back = 1, front = 1, bottom = 1, top = 1}
+	},
 	legacy_facedir_simple = true,
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
@@ -25,7 +40,7 @@ minetest.register_node("more_chests:dropbox", {
 				"size[8,9]"..
 				"list[current_name;main;0,0;8,4;]"..
 				"list[current_player;main;0,5;8,4;]"..
-				"listring[current_name;main]"..
+				"listring[current_name;main]" ..
 				"listring[current_player;main]")
 		meta:set_string("infotext", "Chest")
 		local inv = meta:get_inventory()
@@ -81,8 +96,9 @@ minetest.register_node("more_chests:dropbox", {
 minetest.register_craft({
 	output = 'more_chests:dropbox',
 	recipe = {
-		{'group:wood','','group:wood'},
-		{'group:wood','default:steel_ingot','group:wood'},
-		{'group:wood','group:wood','group:wood'}
+		{'default:wood','','default:wood'},
+		{'default:wood','default:steel_ingot','default:wood'},
+		{'default:wood','default:wood','default:wood'}
 	}
 })
+

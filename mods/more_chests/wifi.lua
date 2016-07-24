@@ -1,20 +1,18 @@
 minetest.register_node("more_chests:wifi", {
 	description = "Wifi Chest",
 	tiles = {"wifi_top.png", "wifi_top.png", "wifi_side.png",
-		"wifi_side.png", "wifi_side.png",
-{name="wifi_front_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=2.0}}
-},
+		"wifi_side.png", "wifi_side.png", "wifi_front.png"},
 	paramtype2 = "facedir",
-	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
+	groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2,},
 	legacy_facedir_simple = true,
 	sounds = default.node_sound_wood_defaults(),
 	on_construct = function(pos)
-		local meta = minetest.env:get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec",
 				"size[8,9]"..
 				"list[current_player;more_chests:wifi;0,0;8,4;]"..
-				"list[current_player;main;0,5;8,4;]"..
-				"listring[current_player;more_chests:wifi]"..
+				"list[current_player;main;0,5;8,4;]" ..
+				"listring[current_player;more_chests:wifi]" ..
 				"listring[current_player;main]")
 		meta:set_string("infotext", "Wifi Chest")
 	end,
@@ -35,9 +33,9 @@ minetest.register_node("more_chests:wifi", {
 minetest.register_craft({
 	output = 'more_chests:wifi',
 	recipe = {
-		{'group:wood','default:mese','group:wood'},
-		{'group:wood','default:steel_ingot','group:wood'},
-		{'group:wood','group:wood','group:wood'}
+		{'default:wood','default:mese','default:wood'},
+		{'default:wood','default:steel_ingot','default:wood'},
+		{'default:wood','default:wood','default:wood'}
 	}
 })
 
@@ -45,3 +43,4 @@ minetest.register_on_joinplayer(function(player)
 	local inv = player:get_inventory()
 	inv:set_size("more_chests:wifi", 8*4)
 end)
+

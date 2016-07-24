@@ -1,0 +1,1 @@
+Adds several chests that behave differently, and can be used to donate items, share items, hide chests, make secret chests, and more.
