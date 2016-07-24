@@ -166,6 +166,7 @@ minetest.register_alias("rubber_sheet:rubber_base", "default:steel_ingot")
 --minetest.register_alias("transactor:transactor", "")
 
 -- fences --> default fences
+minetest.register_alias("fences:wood", "default:fence_wood")
 minetest.register_alias("fences:cobble", "default:fence_cobble")
 minetest.register_alias("fences:desert_cobble", "default:fence_desert_cobble")
 minetest.register_alias("fences:sandstone", "default:fence_sandstone")
