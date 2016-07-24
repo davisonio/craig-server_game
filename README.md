@@ -43,6 +43,7 @@ This is the game used by Craig's Minetest Server.
 |Default (default)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/default)|
 |Doors (doors)                              ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/doors)|
 |Dye (dye)                                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/dye)|
+|Email (email)                          |[13754](https://forum.minetest.net/viewtopic.php?id=13754)|[GitHub/rubenwardy](https://github.com/rubenwardy/email)|
 |Fake Fire (fake_fire)                      |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/fake_fire)|
 |Farming (farming)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/farming)|
 |Flowers (flowers)                          ||[GitHub/flowers](https://github.com/minetest/minetest_game/tree/master/mods/flowers)|
@@ -66,6 +67,7 @@ This is the game used by Craig's Minetest Server.
 |Names per IP (names_per_ip)                |[9768](https://forum.minetest.net/viewtopic.php?id=9768)|[GitHub/Calinou](https://github.com/Calinou/carbone/tree/master/mods/names_per_ip)|
 |Nyan Cat (nyancat)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/nyancat)|
 |Replacer (replacer)                        |[4676](https://forum.minetest.net/viewtopic.php?id=4676)|[GitHub/Sokomine](https://github.com/Sokomine/replacer)|
+|Report (report)                          |[13752](https://forum.minetest.net/viewtopic.php?id=13752)|[GitHub/rubenwardy](https://github.com/rubenwardy/report)|
 |Screwdriver (screwdriver)                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/screwdriver)|
 |Shields (shields)                          |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/shields)|
 |Simple Skins (simple_skins)                |[9100](https://forum.minetest.net/viewtopic.php?id=9100)|[GitHub/tenplus1](https://github.com/tenplus1/simple_skins)|
