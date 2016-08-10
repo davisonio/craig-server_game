@@ -28,6 +28,7 @@ local msg_misleading = "Your player name is misleading.  "..
 		"Please choose a more appropriate name."
 local disallowed = {
 	["^guest[0-9]+"] = msg_guest,
+	["^sadie[0-9]+"] = msg_guest,
 	["^squeakecrafter[0-9]+"] = msg_guest,
 	["adm[1il]n"] = msg_misleading,
 	["[0o]wn[e3]r"]  = msg_misleading,
