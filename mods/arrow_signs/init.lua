@@ -143,6 +143,8 @@ local MODPATH = minetest.get_modpath("arrow_signs")
 dofile(MODPATH.."/wood.lua")
 -- Steel Sign
 dofile(MODPATH.."/steel.lua")
+-- Locked Sign
+dofile(MODPATH.."/locked.lua")
 
 --Shared Locked sign
 if minetest.get_modpath("locks") then
