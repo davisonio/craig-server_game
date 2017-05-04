@@ -1,7 +1,7 @@
 --[[
-    Shared Locked Arrow sign
+	Shared Locked Arrow sign
 
-    This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
+	This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
 	To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 ]]
 minetest.register_node("arrow_signs:shared_locked", {
@@ -10,7 +10,7 @@ minetest.register_node("arrow_signs:shared_locked", {
 	node_box = arrow_signs.nodebox,
 	selection_box = arrow_signs.selection_box,
 	tiles = {"arrow_signs_wood.png^arrow_signs_wood_border.png"},
-	inventory_image = "arrow_signs_wood.png",
+	inventory_image = "arrow_signs_wood.png^[transformR90",
 	wield_image = "arrow_signs_wood.png",
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -24,7 +24,7 @@ minetest.register_node("arrow_signs:shared_locked", {
 			locks:lock_set_owner( pointed_thing.above, placer, "Shared locked sign");
 			return itemstack
 	end,
-
+	on_rotate = arrow_signs.on_rotate,
 	on_construct = function(pos)
 			local meta =  minetest.get_meta(pos)
 			-- prepare the lock of the sign

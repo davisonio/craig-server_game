@@ -94,6 +94,50 @@ arrow_signs.on_place = function(itemstack, placer, pointed_thing)
 	return minetest.item_place_node(itemstack, placer, pointed_thing, param2)
 end
 
+local matrix = {
+	-- Mounted on Ground (-Y)
+	[10]=19,
+	[19]=4,
+	[4]=13,
+	[13]=10,
+
+	-- Mounted on Top (+Y)
+	[8]=17,
+	[17]=6,
+	[6]=15,
+	[15]=8,
+
+	-- Mounted at South (-Z)
+	[2]=18, -- down
+	[18]=22, -- left
+	[22]=14, -- up
+	[14]=2, -- right
+
+	-- Mounted at North (+Z)
+	[0]=12, -- down
+	[12]=20, -- left
+	[20]=16, -- up
+	[16]=0, -- right
+
+	-- Mounted at West (-X)
+	[3]=7, -- down
+	[7]=21, -- left
+	[21]=11, -- up
+	[11]=3, -- right
+
+	-- Mounted at East (+X)
+	[1]=9, -- down
+	[9]=23, -- left
+	[23]=5, -- up
+	[5]=1, -- right
+}
+
+arrow_signs.on_rotate = function(pos, node, player, mode, new_param2)
+	node.param2 = matrix[node.param2] or 0 --in case of error
+	minetest.swap_node(pos,node)
+	return true
+end
+
 arrow_signs.savetext = function(pos, formname, fields, sender)
 	if fields.text then
 		local playername = sender:get_player_name() or ""
