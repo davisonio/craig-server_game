@@ -11,32 +11,30 @@ minetest.register_chatcommand("irc_msg", {
 	privs = {shout=true},
 	func = function(name, param)
 		if not irc.connected then
-			minetest.chat_send_player(name, "Not connected to IRC. Use /irc_connect to connect.")
-			return
+			return false, "Not connected to IRC. Use /irc_connect to connect."
 		end
 		local found, _, toname, message = param:find("^([^%s]+)%s(.+)")
 		if not found then
-			minetest.chat_send_player(name, "Invalid usage, see /help irc_msg.")
-			return
+			return false, "Invalid usage, see /help irc_msg."
 		end
 		local toname_l = toname:lower()
 		local validNick = false
-		for nick, user in pairs(irc.conn.channels[irc.config.channel].users) do
+		local hint = "They have to be in the channel"
+		for nick in pairs(irc.conn.channels[irc.config.channel].users) do
 			if nick:lower() == toname_l then
 				validNick = true
 				break
 			end
 		end
 		if toname_l:find("serv$") or toname_l:find("bot$") then
+			hint = "it looks like a bot or service"
 			validNick = false
 		end
 		if not validNick then
-			minetest.chat_send_player(name,
-				"You can not message that user. (Hint: They have to be in the channel)")
-			return
+			return false, "You can not message that user. ("..hint..")"
 		end
-		irc:say(toname, irc:playerMessage(name, message))
-		minetest.chat_send_player(name, "Message sent!")
+		irc.say(toname, irc.playerMessage(name, message))
+		return true, "Message sent!"
 	end
 })
 
@@ -44,16 +42,15 @@ minetest.register_chatcommand("irc_msg", {
 minetest.register_chatcommand("irc_names", {
 	params = "",
 	description = "List the users in IRC.",
-	func = function(name, params)
+	func = function()
 		if not irc.connected then
-			minetest.chat_send_player(name, "Not connected to IRC. Use /irc_connect to connect.")
-			return
+			return false, "Not connected to IRC. Use /irc_connect to connect."
 		end
 		local users = { }
-		for k, v in pairs(irc.conn.channels[irc.config.channel].users) do
-			table.insert(users, k)
+		for nick in pairs(irc.conn.channels[irc.config.channel].users) do
+			table.insert(users, nick)
 		end
-		minetest.chat_send_player(name, "Users in IRC: "..table.concat(users, ", "))
+		return true, "Users in IRC: "..table.concat(users, ", ")
 	end
 })
 
@@ -61,13 +58,12 @@ minetest.register_chatcommand("irc_names", {
 minetest.register_chatcommand("irc_connect", {
 	description = "Connect to the IRC server.",
 	privs = {irc_admin=true},
-	func = function(name, param)
+	func = function(name)
 		if irc.connected then
-			minetest.chat_send_player(name, "You are already connected to IRC.")
-			return
+			return false, "You are already connected to IRC."
 		end
 		minetest.chat_send_player(name, "IRC: Connecting...")
-		irc:connect()
+		irc.connect()
 	end
 })
 
@@ -78,13 +74,12 @@ minetest.register_chatcommand("irc_disconnect", {
 	privs = {irc_admin=true},
 	func = function(name, param)
 		if not irc.connected then
-			minetest.chat_send_player(name, "You are not connected to IRC.")
-			return
+			return false, "Not connected to IRC. Use /irc_connect to connect."
 		end
-		if params == "" then
-			params = "Manual disconnect by "..name
+		if param == "" then
+			param = "Manual disconnect by "..name
 		end
-		irc:disconnect(param)
+		irc.disconnect(param)
 	end
 })
 
@@ -92,13 +87,13 @@ minetest.register_chatcommand("irc_disconnect", {
 minetest.register_chatcommand("irc_reconnect", {
 	description = "Reconnect to the IRC server.",
 	privs = {irc_admin=true},
-	func = function(name, param)
+	func = function(name)
 		if not irc.connected then
-			minetest.chat_send_player(name, "You are not connected to IRC.")
-			return
+			return false, "Not connected to IRC. Use /irc_connect to connect."
 		end
-		irc:disconnect("Reconnecting...")
-		irc:connect()
+		minetest.chat_send_player(name, "IRC: Reconnecting...")
+		irc.disconnect("Reconnecting...")
+		irc.connect()
 	end
 })
 
@@ -109,18 +104,31 @@ minetest.register_chatcommand("irc_quote", {
 	privs = {irc_admin=true},
 	func = function(name, param)
 		if not irc.connected then
-			minetest.chat_send_player(name, "You are not connected to IRC.")
-			return
+			return false, "Not connected to IRC. Use /irc_connect to connect."
 		end
-		irc:queue(param)
+		irc.queue(param)
 		minetest.chat_send_player(name, "Command sent!")
 	end
 })
 
 
 local oldme = minetest.chatcommands["me"].func
+-- luacheck: ignore
 minetest.chatcommands["me"].func = function(name, param, ...)
-	oldme(name, param, ...)
-	irc:say(("* %s %s"):format(name, param))
+	irc.say(("* %s %s"):format(name, param))
+	return oldme(name, param, ...)
 end
 
+if irc.config.send_kicks and minetest.chatcommands["kick"] then
+	local oldkick = minetest.chatcommands["kick"].func
+	-- luacheck: ignore
+	minetest.chatcommands["kick"].func = function(name, param, ...)
+		local plname, reason = param:match("^(%S+)%s*(.*)$")
+		if not plname then
+			return false, "Usage: /kick player [reason]"
+		end
+		irc.say(("*** Kicked %s.%s"):format(name,
+				reason~="" and " Reason: "..reason or ""))
+		return oldkick(name, param, ...)
+	end
+end

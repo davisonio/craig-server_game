@@ -137,3 +137,4 @@ irc:register_bot_command("say", {
 		return true, "Message sent successfuly."
 	end
 })
+
