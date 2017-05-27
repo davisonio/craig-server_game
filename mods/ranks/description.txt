@@ -1,0 +1,1 @@
+Ranks is an advanced ranks mod geared towards larger servers helps to both distiguish between players and make managing privileges much easier. With several ranks premade and a simplistic API, ranks is a good addition to any server, especially those with many players.
