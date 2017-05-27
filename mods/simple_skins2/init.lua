@@ -1,16 +1,14 @@
-
--- Simple Skins mod for minetest (5th June 2016)
--- Adds a simple skin selector to the inventory, using inventory_plus
--- or by using the /skin command to bring up selection list.
+-- Simple Skins mod for minetest (5th July 2015)
+-- Adds a skin gallery to the inventory, using inventory_plus
 -- Released by TenPlus1 and based on Zeg9's code under WTFPL
 
 skins = {}
 skins.skins = {}
 skins.modpath = minetest.get_modpath("simple_skins")
 skins.armor = minetest.get_modpath("3d_armor")
-skins.inv = minetest.get_modpath("inventory_plus")
 
--- load skin list
+-- Load Skins List
+
 skins.list = {}
 skins.add = function(skin)
 	table.insert(skins.list, skin)
@@ -26,12 +24,11 @@ while true do
 	id = id + 1
 end
 
-id = id - 1
+-- Load Metadata
 
--- load Metadata
 skins.meta = {}
 local f, data
-for _, i in pairs(skins.list) do
+for _, i in ipairs(skins.list) do
 	skins.meta[i] = {}
 	f = io.open(skins.modpath .. "/meta/" .. i .. ".txt")
 	data = nil
@@ -44,7 +41,8 @@ for _, i in pairs(skins.list) do
 	skins.meta[i].author = data.author or ""
 end
 
--- player load/save routines
+-- Player Load/Save Routines
+
 skins.file = minetest.get_worldpath() .. "/simple_skins.mt"
 
 skins.load = function()
@@ -55,7 +53,7 @@ skins.load = function()
 	end
 	if data and data ~= "" then
 		local lines = string.split(data, "\n")
-		for _, line in pairs(lines) do
+		for _, line in ipairs(lines) do
 			data = string.split(line, ' ', 2)
 			skins.skins[data[1]] = data[2]
 		end
@@ -63,7 +61,7 @@ skins.load = function()
 	end
 end
 
--- load player skins now
+-- Load player skins
 skins.load()
 
 skins.save = function()
@@ -76,29 +74,29 @@ skins.save = function()
 	io.close(output)
 end
 
--- skin selection page
+-- Skins Selection Page
+
 skins.formspec = {}
 skins.formspec.main = function(name)
 
-	local selected = 1 -- select default
-	local formspec = "size[7,7]"
-		.. "bgcolor[#08080822;true]"
-		.. "label[.5,2;Select Player Skin:]"
-		.. "textlist[.5,2.5;5.8,4;skins_set;"
+local selected = 1 -- select default
 
-	for i = 1, #skins.list do
+local formspec = "size[7,7]"
+	.. "bgcolor[#08080822;true]"
+	.. "button[0,.75;2,.5;main;Back]"
+	.. "label[.5,2;Select Player Skin:]"
+	.. "textlist[.5,2.5;5.8,4;skins_set;"
 
-		formspec = formspec .. skins.meta[ skins.list[i] ].name .. ","
-
-		if skins.skins[name] == skins.list[i] then
-			selected = i
-		end
+for i, v in ipairs(skins.list) do
+	formspec = formspec .. skins.meta[v].name .. ","
+	if skins.skins[name] == skins.list[i] then
+		selected = i
 	end
+end
 
-	formspec = formspec .. ";" .. selected .. ";true]"
+formspec = formspec .. ";" .. selected .. ";true]"
 
-	local meta = skins.meta[ skins.skins[name] ]
-
+	local meta = skins.meta[skins.skins[name]]
 	if meta then
 		if meta.name then
 			formspec = formspec .. "label[2,.5;Name: " .. meta.name .. "]"
@@ -111,52 +109,30 @@ skins.formspec.main = function(name)
 	return formspec
 end
 
--- update player skin
+-- Update Player Skin
+
 skins.update_player_skin = function(player)
-
-	if not player then
-		return
-	end
-
-	local name = player:get_player_name()
-
---	if skins.armor then
---		armor.textures[name].skin = skins.skins[name] .. ".png"
---		armor:set_player_armor(player)
---	else
-		player:set_properties({
-			textures = {skins.skins[name] .. ".png"},
-		})
---	end
-
+	player:set_properties({
+		visual = "mesh",
+		textures = {skins.skins[player:get_player_name()] .. ".png"},
+		visual_size = {x = 1, y = 1},
+	})
 	skins.save()
 end
 
--- load player skin on join
+-- Load Skin on Join
+
 minetest.register_on_joinplayer(function(player)
-
-	local name = player:get_player_name()
-
-	if not skins.skins[name] then
-		skins.skins[name] = "character_1"
+	if not skins.skins[player:get_player_name()] then
+		skins.skins[player:get_player_name()] = "character_1"
 	end
-
 	skins.update_player_skin(player)
-
-	if skins.inv then
-		inventory_plus.register_button(player,"skins", "Skin")
-	end
+	inventory_plus.register_button(player,"skins","Skin")
 end)
 
--- formspec control
-minetest.register_on_player_receive_fields(function(player, formname, fields)
-
-	local name = player:get_player_name()
-
+minetest.register_on_player_receive_fields(function(player,formname,fields)
 	if fields.skins then
-		inventory_plus.set_inventory_formspec(player,
-			skins.formspec.main(name) .. "button[0,.75;2,.5;main;Back]"
-		)
+		inventory_plus.set_inventory_formspec(player, skins.formspec.main(player:get_player_name()))
 	end
 
 	local event = minetest.explode_textlist_event(fields["skins_set"])
@@ -165,22 +141,24 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
 		local index = event.index
 
-		if index > id then index = id end
+		if skins.list[index] then
+			skins.skins[player:get_player_name()] = skins.list[index]
+			skins.update_player_skin(player)
+			local name = player:get_player_name()
+			inventory_plus.set_inventory_formspec(player, skins.formspec.main(player:get_player_name()))
 
-		skins.skins[name] = skins.list[index]
-
-		if skins.inv then
-			inventory_plus.set_inventory_formspec(player,
-				skins.formspec.main(name) .. "button[0,.75;2,.5;main;Back]"
-			)
+			if skins.armor then
+				armor.textures[player:get_player_name()].skin = skins.list[index] .. ".png"
+				minetest.after(0, function(player)
+					local skin = armor:get_player_skin(name)
+					armor.textures[name].skin = skin .. ".png"
+					armor:set_player_armor(player)
+				end, player)
+			end
 		end
-
-		skins.update_player_skin(player)
-
 	end
 end)
 
--- admin command to set player skin (usually for custom skins)
 minetest.register_chatcommand("setskin", {
 	params = "<player> <skin number>",
 	description = "Admin command to set player skin",
@@ -200,17 +178,3 @@ minetest.register_chatcommand("setskin", {
 			 "** " .. user .. "'s skin set to character_" .. skin .. ".png")
 	end,
 })
-
--- player command to set skin
-minetest.register_chatcommand("skin", {
-	description = "Set player skin",
-	func = function(name, param)
-		minetest.show_formspec(name,
-			"skins_set",
-			skins.formspec.main(name)
-			.."button_exit[0,.75;2,.5;;Close]"
-		)
-	end,
-})
-
-print ("[MOD] Simple Skins loaded")
