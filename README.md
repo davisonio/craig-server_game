@@ -49,10 +49,9 @@ This is the game used by Craig's Minetest Server.
 |Flowers (flowers)                          ||[GitHub/flowers](https://github.com/minetest/minetest_game/tree/master/mods/flowers)|
 |Give initial stuff (give_initial_stuff)    ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/give_initial_stuff)|
 |Gloopblocks (gloopblocks)                  |[4019](https://forum.minetest.net/viewtopic.php?id=4019)|[GitHub/minetest-mods](https://github.com/minetest-mods/gloopblocks)|
-|Home GUI (home_gui)                        |[3101](https://forum.minetest.net/viewtopic.php?id=3101)|[GitHub/cornernote](https://github.com/cornernote/minetest-home_gui)|
 |Homedecor (homedecor)                      |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/homedecor)|
+|Homedecor i18n (homedecor_i18n)                      |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/homedecor_i18n)|
 |Interact (interact)               |[11200](https://forum.minetest.net/viewtopic.php?id=11200)|[GitHub/minetest-mods](https://github.com/minetest-mods/interact)|
-|Inventory++ (inventory_plus)               |[6204](https://forum.minetest.net/viewtopic.php?id=6204)|[GitHub/Zeg9](https://github.com/Zeg9/minetest-inventory_plus)|
 |IRC (irc)             						|[3905](https://forum.minetest.net/viewtopic.php?id=3905)|[GitHub/minetest-mods](https://github.com/minetest-mods/irc)|
 |IRC commands (irc_commands)             	|[5275](https://forum.minetest.net/viewtopic.php?id=5275)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/minetest-irc_commands)|
 |Item Frames (itemframes)                   |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/itemframes)|
@@ -82,7 +81,6 @@ This is the game used by Craig's Minetest Server.
 |WorldEdit commands (worldedit_commands)    |[572](https://forum.minetest.net/viewtopic.php?id=572)|[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit_commands)|
 |WorldEdit GUI (worldedit_gui)              |[572](https://forum.minetest.net/viewtopic.php?id=572)|[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit_gui)|
 |Extended Ban v2 (xban2)                    |[9315](https://forum.minetest.net/viewtopic.php?id=9315)|[GitHub/minetest-mods](https://github.com/minetest-mods/xban2)|
-|Zeg's Craft Guide (zcg)                    |[5564](https://forum.minetest.net/viewtopic.php?id=5564)|[GitHub/CiaranG](https://github.com/CiaranG/minetest-zcg)|
 
 ## Authors
 
