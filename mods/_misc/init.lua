@@ -16,3 +16,6 @@ dofile(minetest.get_modpath("_misc").."/admin_tools.lua")
 
 -- World Edge
 dofile(minetest.get_modpath("_misc").."/worldedge.lua")
+
+-- legacy
+dofile(minetest.get_modpath("_misc").."/legacy.lua")
