@@ -36,7 +36,7 @@ This is the game used by Craig's Minetest Server.
 |Advanced Area Protection (areas)           |[7239](https://forum.minetest.net/viewtopic.php?id=7239)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/areas)|
 |Arrow Signs (arrow_signs)                  |[3353](https://forum.minetest.net/viewtopic.php?id=3353)|[Bitbucket/adrido](https://bitbucket.org/adrido/arrow_signs)|
 |BitChange (bitchange)                      |[7821](https://forum.minetest.net/viewtopic.php?id=7821)|[GitHub/SmallJoker](https://github.com/SmallJoker/bitchange)|
-|Boost Cart (boost_cart)                    |[10172](https://forum.minetest.net/viewtopic.php?id=10172)|[GitHub/SmallJoker](https://github.com/SmallJoker/boost_cart)|
+|Carts (carts)                    ||[GitHub/minetest](https://github.com/minetest_game/tree/master/mods/carts)|
 |Bucket (bucket)                            ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/bucket)|
 |Carbone torches (carbone_torches)|[12824](https://forum.minetest.net/viewtopic.php?id=12824)|[GitHub/Calinou](https://github.com/Calinou/carbone-ng/tree/master/mods/carbone_torches)|
 |Coloured Stone Bricks (colouredstonebricks)|[8784](https://forum.minetest.net/viewtopic.php?id=8784)|[GitHub/davisonio](https://github.com/davisonio/colouredstonebricks)|
