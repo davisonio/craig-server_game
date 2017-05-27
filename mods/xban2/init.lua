@@ -24,9 +24,7 @@ local function make_logger(level)
 end
 
 local ACTION = make_logger("action")
-local INFO = make_logger("info")
 local WARNING = make_logger("warning")
-local ERROR = make_logger("error")
 
 local unit_to_secs = {
 	s = 1, m = 60, h = 3600,
@@ -72,7 +70,13 @@ function xban.get_info(player) --> ip_name_list, banned, last_record
 end
 
 function xban.ban_player(player, source, expires, reason) --> bool, err
+	if xban.get_whitelist(player) then
+		return nil, "Player is whitelisted; remove from whitelist first"
+	end
 	local e = xban.find_entry(player, true)
+	if e.banned then
+		return nil, "Already banned"
+	end
 	local rec = {
 		source = source,
 		time = os.time(),
@@ -131,6 +135,28 @@ function xban.unban_player(player, source) --> bool, err
 	return true
 end
 
+function xban.get_whitelist(name_or_ip)
+	return db.whitelist and db.whitelist[name_or_ip]
+end
+
+function xban.remove_whitelist(name_or_ip)
+	if db.whitelist then
+		db.whitelist[name_or_ip] = nil
+	end
+end
+
+function xban.add_whitelist(name_or_ip, source)
+	local wl = db.whitelist
+	if not wl then
+		wl = { }
+		db.whitelist = wl
+	end
+	wl[name_or_ip] = {
+		source=source,
+	}
+	return true
+end
+
 function xban.get_record(player)
 	local e = xban.find_entry(player)
 	if not e then
@@ -158,6 +184,8 @@ function xban.get_record(player)
 end
 
 minetest.register_on_prejoinplayer(function(name, ip)
+	local wl = db.whitelist or { }
+	if wl[name] or wl[ip] then return end
 	local e = xban.find_entry(name) or xban.find_entry(ip)
 	if not e then return end
 	if e.banned then
@@ -195,8 +223,8 @@ minetest.register_chatcommand("xban", {
 		if not (plname and reason) then
 			return false, "Usage: /xban <player> <reason>"
 		end
-		xban.ban_player(plname, name, nil, reason)
-		return true, ("Banned %s."):format(plname)
+		local ok, e = xban.ban_player(plname, name, nil, reason)
+		return ok, ok and ("Banned %s."):format(plname) or e
 	end,
 })
 
@@ -214,8 +242,9 @@ minetest.register_chatcommand("xtempban", {
 			return false, "You must ban for at least 60 seconds."
 		end
 		local expires = os.time() + time
-		xban.ban_player(plname, name, expires, reason)
-		return true, ("Banned %s until %s."):format(plname, os.date("%c", expires))
+		local ok, e = xban.ban_player(plname, name, expires, reason)
+		return ok, (ok and ("Banned %s until %s."):format(
+				plname, os.date("%c", expires)) or e)
 	end,
 })
 
@@ -257,6 +286,31 @@ minetest.register_chatcommand("xban_record", {
 			minetest.chat_send_player(name, "[xban] "..last_pos)
 		end
 		return true, "Record listed."
+	end,
+})
+
+minetest.register_chatcommand("xban_wl", {
+	description = "Manages the whitelist",
+	params = "(add|del|get) <name_or_ip>",
+	privs = { ban=true },
+	func = function(name, params)
+		local cmd, plname = params:match("%s*(%S+)%s*(%S+)")
+		if cmd == "add" then
+			xban.add_whitelist(plname, name)
+			ACTION("%s adds %s to whitelist", name, plname)
+			return true, "Added to whitelist: "..plname
+		elseif cmd == "del" then
+			xban.remove_whitelist(plname)
+			ACTION("%s removes %s to whitelist", name, plname)
+			return true, "Removed from whitelist: "..plname
+		elseif cmd == "get" then
+			local e = xban.get_whitelist(plname)
+			if e then
+				return true, "Source: "..(e.source or "Unknown")
+			else
+				return true, "No whitelist for: "..plname
+			end
+		end
 	end,
 })
 
@@ -305,10 +359,10 @@ local function load_db()
 		WARNING("Unable to load database: %s", "Read failed")
 		return
 	end
-	local t = minetest.deserialize(cont)
+	local t, e2 = minetest.deserialize(cont)
 	if not t then
 		WARNING("Unable to load database: %s",
-		  "Deserialization failed")
+		  "Deserialization failed: "..(e2 or "unknown error"))
 		return
 	end
 	db = t
@@ -327,5 +381,5 @@ xban.db = db
 
 minetest.after(1, check_temp_bans)
 
--- dofile(xban.MP.."/dbimport.lua")
--- dofile(xban.MP.."/gui.lua")
+dofile(xban.MP.."/dbimport.lua")
+dofile(xban.MP.."/gui.lua")
