@@ -148,7 +148,7 @@ end)
 -----------------
 -- Name length --
 -----------------
-
+--[[
 local min_name_len = tonumber(minetest.setting_get("name_restrictions.minimum_name_length")) or 3
 
 minetest.register_on_prejoinplayer(function(name, ip)
@@ -158,7 +158,7 @@ minetest.register_on_prejoinplayer(function(name, ip)
 		return "Your player name is too short, please try a longer name."
 	end
 end)
-
+--]]
 
 ----------------------
 -- Pronounceability --
