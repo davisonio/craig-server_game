@@ -1,7 +1,7 @@
 --[[
 More Blocks: Stairs+
 
-Copyright (c) 2011-2015 Calinou and contributors.
+Copyright (c) 2011-2017 Hugo Locurcio and contributors.
 Licensed under the zlib license. See LICENSE.md for more information.
 --]]
 
@@ -11,6 +11,8 @@ local modpath = minetest.get_modpath("moreblocks").. "/stairsplus"
 
 stairsplus = {}
 stairsplus.expect_infinite_stacks = false
+
+stairsplus.shapes_list = {}
 
 if not minetest.get_modpath("unified_inventory")
 and minetest.setting_getbool("creative_mode") then

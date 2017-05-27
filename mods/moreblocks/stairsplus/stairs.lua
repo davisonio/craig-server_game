@@ -1,7 +1,7 @@
 --[[
 More Blocks: stair definitions
 
-Copyright (c) 2011-2015 Calinou and contributors.
+Copyright (c) 2011-2017 Hugo Locurcio and contributors.
 Licensed under the zlib license. See LICENSE.md for more information.
 --]]
 
@@ -105,6 +105,10 @@ local stairs_defs = {
 	},
 }
 
+for k,v in pairs(stairs_defs) do
+	table.insert(stairsplus.shapes_list, { "stair_", k })
+end
+
 function stairsplus:register_stair_alias(modname_old, subname_old, modname_new, subname_new)
 	local defs = stairsplus.copytable(stairs_defs)
 	for alternate, def in pairs(defs) do
@@ -128,7 +132,7 @@ function stairsplus:register_stair(modname, subname, recipeitem, fields)
 		end
 		def.drawtype = "nodebox"
 		def.paramtype = "light"
-		def.paramtype2 = "facedir"
+		def.paramtype2 = def.paramtype2 or "facedir"
 		def.on_place = minetest.rotate_node
 		def.description = desc
 		def.groups = stairsplus:prepare_groups(fields.groups)
