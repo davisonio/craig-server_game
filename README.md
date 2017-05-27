@@ -30,57 +30,60 @@ This is the game used by Craig's Minetest Server.
 
 | Name                                      | Forum | Source |
 |-------------------------------------------|-------|--------|
-|3D Armor (3d_armor)                       |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/3d_armor)|
-|3D Armor sfinv (3d_armor_sfinv)                       |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/3d_armor)|
-|Miscellaneous (_misc)                      |||
-|Advanced Area Protection (areas)           |[7239](https://forum.minetest.net/viewtopic.php?id=7239)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/areas)|
-|Arrow Signs (arrow_signs)                  |[3353](https://forum.minetest.net/viewtopic.php?id=3353)|[Bitbucket/adrido](https://bitbucket.org/adrido/arrow_signs)|
-|BitChange (bitchange)                      |[7821](https://forum.minetest.net/viewtopic.php?id=7821)|[GitHub/SmallJoker](https://github.com/SmallJoker/bitchange)|
-|Carts (carts)                    ||[GitHub/minetest](https://github.com/minetest_game/tree/master/mods/carts)|
-|Bucket (bucket)                            ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/bucket)|
+|3D Armor (3d_armor)|[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/3d_armor)|
+|3D Armor sfinv (3d_armor_sfinv)|[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/3d_armor)|
+|Miscellaneous (_misc)|||
+|Advanced Area Protection (areas)|[7239](https://forum.minetest.net/viewtopic.php?id=7239)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/areas)|
+|Arrow Signs (arrow_signs)|[3353](https://forum.minetest.net/viewtopic.php?id=3353)|[Bitbucket/adrido](https://bitbucket.org/adrido/arrow_signs)|
+|BitChange (bitchange)|[7821](https://forum.minetest.net/viewtopic.php?id=7821)|[GitHub/SmallJoker](https://github.com/SmallJoker/bitchange)|
+|Bucket (bucket)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/bucket)|
+|Carts (carts)||[GitHub/minetest](https://github.com/minetest_game/tree/master/mods/carts)|
 |Coloured Stone Bricks (colouredstonebricks)|[8784](https://forum.minetest.net/viewtopic.php?id=8784)|[GitHub/davisonio](https://github.com/davisonio/colouredstonebricks)|
-|Darkage (darkage)                          |[10063](https://forum.minetest.net/viewtopic.php?id=10063)|[GitHub/davisonio](https://github.com/davisonio/darkage)|
-|Default (default)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/default)|
-|Doors (doors)                              ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/doors)|
-|Dye (dye)                                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/dye)|
-|Email (email)                          |[13754](https://forum.minetest.net/viewtopic.php?id=13754)|[GitHub/rubenwardy](https://github.com/rubenwardy/email)|
-|Fake Fire (fake_fire)                      |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/fake_fire)|
-|Farming (farming)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/farming)|
-|Flowers (flowers)                          ||[GitHub/flowers](https://github.com/minetest/minetest_game/tree/master/mods/flowers)|
-|Give initial stuff (give_initial_stuff)    ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/give_initial_stuff)|
-|Gloopblocks (gloopblocks)                  |[4019](https://forum.minetest.net/viewtopic.php?id=4019)|[GitHub/minetest-mods](https://github.com/minetest-mods/gloopblocks)|
-|Homedecor (homedecor)                      |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/homedecor)|
-|Homedecor i18n (homedecor_i18n)                      |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/homedecor_i18n)|
-|Interact (interact)               |[11200](https://forum.minetest.net/viewtopic.php?id=11200)|[GitHub/minetest-mods](https://github.com/minetest-mods/interact)|
-|IRC (irc)             						|[3905](https://forum.minetest.net/viewtopic.php?id=3905)|[GitHub/minetest-mods](https://github.com/minetest-mods/irc)|
-|IRC commands (irc_commands)             	|[5275](https://forum.minetest.net/viewtopic.php?id=5275)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/minetest-irc_commands)|
-|Item Frames (itemframes)                   |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/itemframes)|
-|Locked Sign (locked_sign)                  |[2256](https://forum.minetest.net/viewtopic.php?id=2256)||
-|Living Room Furniture (lrfun)              |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/lrfurn)|
-|Area Protection Markers (markers)          |[124128](https://forum.minetest.net/viewtopic.php?pid=124128)|[GitHub/Sokomine](https://github.com/Sokomine/markers)|
-|More Chests (more_chests)                  ||[GitHub/minetest-mods](https://github.com/minetest-mods/more_chests)|
-|More Blocks (moreblocks)                   |[509](https://forum.minetest.net/viewtopic.php?id=509)|[GitHub/minetest-mods](https://github.com/minetest-mods/moreblocks)|
-|More Ores (moreores)                       |[549](https://forum.minetest.net/viewtopic.php?id=549)|[GitHub/minetest-mods](https://github.com/minetest-mods/moreores)|
-|Name Restrictions (name_restrictions)                ||[GitHub/ShadowNinja](https://github.com/ShadowNinja/name_restrictions)|
-|Names per IP (names_per_ip)                |[9768](https://forum.minetest.net/viewtopic.php?id=9768)|[GitHub/Calinou](https://github.com/Calinou/carbone/tree/master/mods/names_per_ip)|
-|Nyan Cat (nyancat)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/91182d6a9ec56c88096c1bad653a85426892c54d/mods/nyancat)|
-|Replacer (replacer)                        |[4676](https://forum.minetest.net/viewtopic.php?id=4676)|[GitHub/Sokomine](https://github.com/Sokomine/replacer)|
-|Report (report)                          |[13752](https://forum.minetest.net/viewtopic.php?id=13752)|[GitHub/rubenwardy](https://github.com/rubenwardy/report)|
-|Screwdriver (screwdriver)                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/screwdriver)|
-|sfinv (sfinv)                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/sfinv)|
-|Shields (shields)                          |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/shields)|
-|Simple Skins (simple_skins)                |[9100](https://forum.minetest.net/viewtopic.php?id=9100)|[GitHub/tenplus1](https://github.com/tenplus1/simple_skins)|
-|Stairs (stairs)                            ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/stairs)|
-|Streets (streets)                          |[2984](https://forum.minetest.net/viewtopic.php?id=2984)|[GitHub/webdesigner97](https://github.com/minetest-streets/streets)|
-|TravelNet (travelnet)                      |[4877](https://forum.minetest.net/viewtopic.php?id=4877)|[GitHub/travelnet](https://github.com/Sokomine/travelnet)|
-|Unified Dyes (unifieddyes)                 |[2178](https://forum.minetest.net/viewtopic.php?id=2178)|[GitHub/minetest-mods](https://github.com/minetest-mods/unifieddyes)|
-|Vessels (vessels)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/vessels)|
-|Wieldview (wieldview)                      |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/wieldview)|
-|Wool (wool)                                ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/wool)|
-|WorldEdit (worldedit)                      |[572](https://forum.minetest.net/viewtopic.php?id=572)|[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit)|
-|WorldEdit commands (worldedit_commands)    |[572](https://forum.minetest.net/viewtopic.php?id=572)|[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit_commands)|
-|WorldEdit GUI (worldedit_gui)              |[572](https://forum.minetest.net/viewtopic.php?id=572)|[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit_gui)|
-|Extended Ban v2 (xban2)                    |[9315](https://forum.minetest.net/viewtopic.php?id=9315)|[GitHub/minetest-mods](https://github.com/minetest-mods/xban2)|
+|Craft Guide (craftguide)|[14088](https://forum.minetest.net/viewtopic.php?t=14088)|[GitHub/minetest-mods](https://github.com/minetest-mods/craftguide)|
+|Darkage (darkage)|[10063](https://forum.minetest.net/viewtopic.php?id=10063)|[GitHub/davisonio](https://github.com/davisonio/darkage)|
+|Default (default)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/default)|
+|Doors (doors)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/doors)|
+|Dye (dye)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/dye)|
+|Email (email)|[13754](https://forum.minetest.net/viewtopic.php?id=13754)|[GitHub/rubenwardy](https://github.com/rubenwardy/email)|
+|Fake Fire (fake_fire)|[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/fake_fire)|
+|Farming (farming)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/farming)|
+|Flowers (flowers)||[GitHub/flowers](https://github.com/minetest/minetest_game/tree/master/mods/flowers)|
+|Give initial stuff (give_initial_stuff)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/give_initial_stuff)|
+|Gloopblocks (gloopblocks)|[4019](https://forum.minetest.net/viewtopic.php?id=4019)|[GitHub/minetest-mods](https://github.com/minetest-mods/gloopblocks)|
+|Homedecor (homedecor)|[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/homedecor)|
+|Homedecor i18n (homedecor_i18n)|[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/homedecor_i18n)|
+|Interact (interact)|[11200](https://forum.minetest.net/viewtopic.php?id=11200)|[GitHub/minetest-mods](https://github.com/minetest-mods/interact)|
+|IRC (irc)|[3905](https://forum.minetest.net/viewtopic.php?id=3905)|[GitHub/minetest-mods](https://github.com/minetest-mods/irc)|
+|IRC commands (irc_commands)|[5275](https://forum.minetest.net/viewtopic.php?id=5275)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/minetest-irc_commands)|
+|Item Frames (itemframes)|[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/itemframes)|
+|Locked Sign (locked_sign)|[2256](https://forum.minetest.net/viewtopic.php?id=2256)||
+|Living Room Furniture (lrfun)|[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/lrfurn)|
+|Area Protection Markers (markers)|[124128](https://forum.minetest.net/viewtopic.php?pid=124128)|[GitHub/Sokomine](https://github.com/Sokomine/markers)|
+|More Chests (more_chests)||[GitHub/minetest-mods](https://github.com/minetest-mods/more_chests)|
+|More Blocks (moreblocks)|[509](https://forum.minetest.net/viewtopic.php?id=509)|[GitHub/minetest-mods](https://github.com/minetest-mods/moreblocks)|
+|More Ores (moreores|[549](https://forum.minetest.net/viewtopic.php?id=549)|[GitHub/minetest-mods](https://github.com/minetest-mods/moreores)|
+|Name Restrictions (name_restrictions)||[GitHub/ShadowNinja](https://github.com/ShadowNinja/name_restrictions)|
+|Names per IP (names_per_ip)|[9768](https://forum.minetest.net/viewtopic.php?id=9768)|[GitHub/Calinou](https://github.com/Calinou/carbone/tree/master/mods/names_per_ip)|
+|Nyan Cat (nyancat)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/91182d6a9ec56c88096c1bad653a85426892c54d/mods/nyancat)|
+|Replacer (replacer)|[4676](https://forum.minetest.net/viewtopic.php?id=4676)|[GitHub/Sokomine](https://github.com/Sokomine/replacer)|
+|Report (report)|[13752](https://forum.minetest.net/viewtopic.php?id=13752)|[GitHub/rubenwardy](https://github.com/rubenwardy/report)|
+|Screwdriver (screwdriver)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/screwdriver)|
+|Simple Fast Inventory (sfinv)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/sfinv)|
+|Simple Fast Inventory Buttons (sfinv_buttons)||[repo.or.cz](http://repo.or.cz/minetest_sfinv_buttons.git)|
+|Shields (shields)|[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/shields)|
+|Simple Skins (simple_skins)|[9100](https://forum.minetest.net/viewtopic.php?id=9100)|[GitHub/tenplus1](https://github.com/tenplus1/simple_skins)|
+|Stairs (stairs)
+||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/stairs)|
+|Streets (streets)|[2984](https://forum.minetest.net/viewtopic.php?id=2984)|[GitHub/webdesigner97](https://github.com/minetest-streets/streets)|
+|TravelNet (travelnet)|[4877](https://forum.minetest.net/viewtopic.php?id=4877)|[GitHub/travelnet](https://github.com/Sokomine/travelnet)|
+|Unified Dyes (unifieddyes)|[2178](https://forum.minetest.net/viewtopic.php?id=2178)|[GitHub/minetest-mods](https://github.com/minetest-mods/unifieddyes)|
+|Vessels (vessels)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/vessels)|
+|Wieldview (wieldview)|[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/wieldview)|
+|Wool (wool)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/wool)|
+|WorldEdit (worldedit)|[572](https://forum.minetest.net/viewtopic.php?id=572)|[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit)|
+|WorldEdit commands (worldedit_commands)|[572](https://forum.minetest.net/viewtopic.php?id=572)|[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit_commands)|
+|WorldEdit GUI (worldedit_gui)|[572](https://forum.minetest.net/viewtopic.php?id=572)|[GitHub/Uberi](https://github.com/Uberi/Minetest-WorldEdit/tree/master/worldedit_gui)|
+|Extended Ban v2 (xban2)|[9315](https://forum.minetest.net/viewtopic.php?id=9315)|[GitHub/minetest-mods](https://github.com/minetest-mods/xban2)|
 
 ## Authors
 
