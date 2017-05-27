@@ -1,6 +1,6 @@
 -- Craft obsidian
 minetest.register_craft({
-	output = "default:obsidian",
+	output = "default:obsidian 10",
 	recipe = {
 		{"bucket:bucket_lava"},
 	},
