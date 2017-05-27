@@ -1,5 +1,8 @@
+
+local S = homedecor_i18n.gettext
+
 minetest.register_node("lrfurn:endtable", {
-	description = "End Table",
+	description = S("End Table"),
 	drawtype = "nodebox",
 	tiles = {"lrfurn_coffeetable_back.png", "lrfurn_coffeetable_back.png",  "lrfurn_coffeetable_back.png",  "lrfurn_coffeetable_back.png",  "lrfurn_coffeetable_back.png",  "lrfurn_coffeetable_back.png"},
 	paramtype = "light",
@@ -45,6 +48,6 @@ minetest.register_craft({
 	}
 })
 
-if minetest.setting_get("log_mods") then
-	minetest.log("action", "endtable loaded")
+if minetest.settings:get("log_mods") then
+	minetest.log("action", "[lrfurn/endtable] "..S("Loaded!"))
 end
