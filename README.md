@@ -20,7 +20,7 @@ This is the game used by Craig's Minetest Server.
 
 ###### Requirements
 
-- [Minetest](http://www.minetest.net) >= 0.4.13
+- [Minetest](http://www.minetest.net) >= 0.4.15
 
 [Download](https://github.com/davisonio/craig-server_game/archive/master.zip) & unzip the game, rename it to "craig-server_game" and move it into your `minetest/games` folder.
 
