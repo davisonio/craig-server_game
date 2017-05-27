@@ -56,7 +56,6 @@ This is the game used by Craig's Minetest Server.
 |IRC (irc)             						|[3905](https://forum.minetest.net/viewtopic.php?id=3905)|[GitHub/minetest-mods](https://github.com/minetest-mods/irc)|
 |IRC commands (irc_commands)             	|[5275](https://forum.minetest.net/viewtopic.php?id=5275)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/minetest-irc_commands)|
 |Item Frames (itemframes)                   |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/itemframes)|
-|Legacy (legacy)                            |||
 |Locked Sign (locked_sign)                  |[2256](https://forum.minetest.net/viewtopic.php?id=2256)||
 |Living Room Furniture (lrfun)              |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/lrfurn)|
 |Area Protection Markers (markers)          |[124128](https://forum.minetest.net/viewtopic.php?pid=124128)|[GitHub/Sokomine](https://github.com/Sokomine/markers)|
@@ -69,6 +68,7 @@ This is the game used by Craig's Minetest Server.
 |Replacer (replacer)                        |[4676](https://forum.minetest.net/viewtopic.php?id=4676)|[GitHub/Sokomine](https://github.com/Sokomine/replacer)|
 |Report (report)                          |[13752](https://forum.minetest.net/viewtopic.php?id=13752)|[GitHub/rubenwardy](https://github.com/rubenwardy/report)|
 |Screwdriver (screwdriver)                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/screwdriver)|
+|sfinv (sfinv)                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/sfinv)|
 |Shields (shields)                          |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/shields)|
 |Simple Skins (simple_skins)                |[9100](https://forum.minetest.net/viewtopic.php?id=9100)|[GitHub/tenplus1](https://github.com/tenplus1/simple_skins)|
 |Stairs (stairs)                            ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/stairs)|
