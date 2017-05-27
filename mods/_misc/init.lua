@@ -17,8 +17,5 @@ dofile(minetest.get_modpath("_misc").."/craft_obsidian.lua")
 -- Admin Tools
 dofile(minetest.get_modpath("_misc").."/admin_tools.lua")
 
--- Item Pickup
-dofile(minetest.get_modpath("_misc").."/item_pickup.lua")
-
 -- World Edge
 dofile(minetest.get_modpath("_misc").."/worldedge.lua")
