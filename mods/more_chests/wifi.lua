@@ -10,10 +10,16 @@ minetest.register_node("more_chests:wifi", {
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec",
 				"size[8,9]"..
-				"list[current_player;more_chests:wifi;0,0;8,4;]"..
-				"list[current_player;main;0,5;8,4;]" ..
+				default.gui_bg ..
+				default.gui_bg_img ..
+				default.gui_slots ..
+				"list[current_player;more_chests:wifi;0,0.3;8,4;]"..
+				"list[current_player;main;0,4.85;8,1;]" ..
+				"list[current_player;main;0,6.08;8,3;8]" ..
 				"listring[current_player;more_chests:wifi]" ..
-				"listring[current_player;main]")
+				"listring[current_player;main]" ..
+				default.get_hotbar_bg(0,4.85))
+
 		meta:set_string("infotext", "Wifi Chest")
 	end,
 	on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)

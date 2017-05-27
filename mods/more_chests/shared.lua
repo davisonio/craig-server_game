@@ -13,12 +13,17 @@ end
 
 local function get_formspec(string)
 	return "size[8,10]"..
-		"list[current_name;main;0,0;8,4;]"..
-		"list[current_player;main;0,5;8,4;]"..
+		default.gui_bg ..
+		default.gui_bg_img ..
+		default.gui_slots ..	
+		"list[current_name;main;0,0.3;8,4;]"..
+		"list[current_player;main;0,4.85;8,1;]" ..
+		"list[current_player;main;0,6;8,3;8]" ..
 		"field[.25,9.5;6,1;shared;Shared with (separate names with spaces):;"..string.."]"..
-		"button[6,9;2,1;submit;submit]" ..
+		"button[6,9.2;2,1;submit;submit]" ..
 		"listring[current_name;main]" ..
-		"listring[current_player;main]"
+		"listring[current_player;main]" ..
+		default.get_hotbar_bg(0,4.85)
 end
 
 minetest.register_node("more_chests:shared", {
