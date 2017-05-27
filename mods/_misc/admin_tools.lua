@@ -26,7 +26,7 @@ minetest.register_craftitem("_misc:remove_stick", {
 	inventory_image = "misc_remove_stick.png",
 	on_use = function(item, user, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:remove_node(pointed_thing.under)
+			minetest.remove_node(pointed_thing.under)
 		elseif pointed_thing.type == "object" then
 			obj = pointed_thing.ref
 			if obj ~= nil then
