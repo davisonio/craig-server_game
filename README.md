@@ -72,8 +72,7 @@ This is the game used by Craig's Minetest Server.
 |Simple Fast Inventory Buttons (sfinv_buttons)||[repo.or.cz](http://repo.or.cz/minetest_sfinv_buttons.git)|
 |Shields (shields)|[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/shields)|
 |Simple Skins (simple_skins)|[9100](https://forum.minetest.net/viewtopic.php?id=9100)|[GitHub/tenplus1](https://github.com/tenplus1/simple_skins)|
-|Stairs (stairs)
-||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/stairs)|
+|Stairs (stairs)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/stairs)|
 |Streets (streets)|[2984](https://forum.minetest.net/viewtopic.php?id=2984)|[GitHub/webdesigner97](https://github.com/minetest-streets/streets)|
 |TravelNet (travelnet)|[4877](https://forum.minetest.net/viewtopic.php?id=4877)|[GitHub/travelnet](https://github.com/Sokomine/travelnet)|
 |Unified Dyes (unifieddyes)|[2178](https://forum.minetest.net/viewtopic.php?id=2178)|[GitHub/minetest-mods](https://github.com/minetest-mods/unifieddyes)|
