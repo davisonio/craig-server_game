@@ -135,12 +135,12 @@ minetest.register_alias("homedecor:book_brown", "default:book")
 minetest.register_alias("homedecor:book_open_brown", "default:book")
 
 -- homedecor armchairs -> lrfurn armchairs
-minetest.register_alias("homedecor:armchair_black", "lrfurn:armchair_black")
-minetest.register_alias("homedecor:armchair_red", "lrfurn:armchair_red")
-minetest.register_alias("homedecor:armchair_pink", "lrfurn:armchair_violet")
-minetest.register_alias("homedecor:armchair_violet", "lrfurn:armchair_violet")
-minetest.register_alias("homedecor:armchair_blue", "lrfurn:armchair_blue")
-minetest.register_alias("homedecor:armchair_dark_green", "lrfurn:armchair_green")
+--minetest.register_alias("homedecor:armchair_black", "lrfurn:armchair_black")
+--minetest.register_alias("homedecor:armchair_red", "lrfurn:armchair_red")
+--minetest.register_alias("homedecor:armchair_pink", "lrfurn:armchair_violet")
+--minetest.register_alias("homedecor:armchair_violet", "lrfurn:armchair_violet")
+--minetest.register_alias("homedecor:armchair_blue", "lrfurn:armchair_blue")
+--minetest.register_alias("homedecor:armchair_dark_green", "lrfurn:armchair_green")
 
 -- homedecor plasma lamp ->
 --minetest.register_alias("homedecor:plasma_lamp", "")
