@@ -9,24 +9,26 @@ minetest.register_chatcommand("admin", {
 	func = function(name)
 		local admin = minetest.setting_get("name")
 		if admin then
-			return true, "The administrators of this server are listed at https://davison.io/minetest/craig-server#team"
+			return true, "Admins: https://davison.io/minetest/craig-server#team"
 		else
 			return false, "There's no administrator named in the config file."
 		end
 	end,
 })
 
--- /help
 -- /privs
 -- /grant
+-- /grantme
 -- /revoke
 -- /setpassword
 -- /clearpassword
 -- /auth_reload
+-- /remove_player
 -- /teleport
 -- /set
 -- /emergeblocks
 -- /deleteblocks
+-- /fixlight
 
 core.register_chatcommand("mods", {
 	params = "",
@@ -70,6 +72,7 @@ minetest.register_chatcommand("unban", {
 -- /clearobjects
 -- /msg
 -- /last-login
+-- /clearinv
 
 --
 -- Other chat commands
