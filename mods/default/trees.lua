@@ -27,10 +27,7 @@ end
 -- 'is snow nearby' function
 
 local function is_snow_nearby(pos)
-	return #minetest.find_nodes_in_area(
-		{x = pos.x - 1, y = pos.y - 1, z = pos.z - 1},
-		{x = pos.x + 1, y = pos.y + 1, z = pos.z + 1},
-		{"default:snow", "default:snowblock", "default:dirt_with_snow"}) > 0
+	return minetest.find_node_near(pos, 1, {"group:snowy"})
 end
 
 
@@ -80,6 +77,14 @@ function default.grow_sapling(pos)
 		minetest.log("action", "An aspen sapling grows into a tree at "..
 			minetest.pos_to_string(pos))
 		default.grow_new_aspen_tree(pos)
+	elseif node.name == "default:bush_sapling" then
+		minetest.log("action", "A bush sapling grows into a bush at "..
+			minetest.pos_to_string(pos))
+		default.grow_bush(pos)
+	elseif node.name == "default:acacia_bush_sapling" then
+		minetest.log("action", "An acacia bush sapling grows into a bush at "..
+			minetest.pos_to_string(pos))
+		default.grow_acacia_bush(pos)
 	end
 end
 
@@ -375,7 +380,7 @@ function default.grow_new_apple_tree(pos)
 	local path = minetest.get_modpath("default") ..
 		"/schematics/apple_tree_from_sapling.mts"
 	minetest.place_schematic({x = pos.x - 2, y = pos.y - 1, z = pos.z - 2},
-		path, "0", nil, false)
+		path, "random", nil, false)
 end
 
 
@@ -418,6 +423,7 @@ function default.grow_new_acacia_tree(pos)
 		path, "random", nil, false)
 end
 
+
 -- New aspen tree
 
 function default.grow_new_aspen_tree(pos)
@@ -425,4 +431,105 @@ function default.grow_new_aspen_tree(pos)
 		"/schematics/aspen_tree_from_sapling.mts"
 	minetest.place_schematic({x = pos.x - 2, y = pos.y - 1, z = pos.z - 2},
 		path, "0", nil, false)
+end
+
+
+-- Bushes do not need 'from sapling' schematic variants because
+-- only the stem node is force-placed in the schematic.
+
+-- Bush
+
+function default.grow_bush(pos)
+	local path = minetest.get_modpath("default") ..
+		"/schematics/bush.mts"
+	minetest.place_schematic({x = pos.x - 1, y = pos.y - 1, z = pos.z - 1},
+		path, "0", nil, false)
+end
+
+
+-- Acacia bush
+
+function default.grow_acacia_bush(pos)
+	local path = minetest.get_modpath("default") ..
+		"/schematics/acacia_bush.mts"
+	minetest.place_schematic({x = pos.x - 1, y = pos.y - 1, z = pos.z - 1},
+		path, "0", nil, false)
+end
+
+
+--
+-- Sapling 'on place' function to check protection of node and resulting tree volume
+--
+
+function default.sapling_on_place(itemstack, placer, pointed_thing,
+		sapling_name, minp_relative, maxp_relative, interval)
+	-- Position of sapling
+	local pos = pointed_thing.under
+	local node = minetest.get_node_or_nil(pos)
+	local pdef = node and minetest.registered_nodes[node.name]
+
+	if pdef and pdef.on_rightclick and not placer:get_player_control().sneak then
+		return pdef.on_rightclick(pos, node, placer, itemstack, pointed_thing)
+	end
+
+	if not pdef or not pdef.buildable_to then
+		pos = pointed_thing.above
+		node = minetest.get_node_or_nil(pos)
+		pdef = node and minetest.registered_nodes[node.name]
+		if not pdef or not pdef.buildable_to then
+			return itemstack
+		end
+	end
+
+	local player_name = placer:get_player_name()
+	-- Check sapling position for protection
+	if minetest.is_protected(pos, player_name) then
+		minetest.record_protection_violation(pos, player_name)
+		return itemstack
+	end
+	-- Check tree volume for protection
+	if default.intersects_protection(
+			vector.add(pos, minp_relative),
+			vector.add(pos, maxp_relative),
+			player_name,
+			interval) then
+		minetest.record_protection_violation(pos, player_name)
+		-- Print extra information to explain
+		minetest.chat_send_player(player_name, "Tree will intersect protection")
+		return itemstack
+	end
+
+	minetest.log("action", player_name .. " places node "
+			.. sapling_name .. " at " .. minetest.pos_to_string(pos))
+
+	local take_item = not (creative and creative.is_enabled_for
+		and creative.is_enabled_for(player_name))
+	local newnode = {name = sapling_name}
+	local ndef = minetest.registered_nodes[sapling_name]
+	minetest.set_node(pos, newnode)
+
+	-- Run callback
+	if ndef and ndef.after_place_node then
+		-- Deepcopy place_to and pointed_thing because callback can modify it
+		if ndef.after_place_node(table.copy(pos), placer,
+				itemstack, table.copy(pointed_thing)) then
+			take_item = false
+		end
+	end
+
+	-- Run script hook
+	for _, callback in ipairs(minetest.registered_on_placenodes) do
+		-- Deepcopy pos, node and pointed_thing because callback can modify them
+		if callback(table.copy(pos), table.copy(newnode),
+				placer, table.copy(node or {}),
+				itemstack, table.copy(pointed_thing)) then
+			take_item = false
+		end
+	end
+
+	if take_item then
+		itemstack:take_item()
+	end
+
+	return itemstack
 end
