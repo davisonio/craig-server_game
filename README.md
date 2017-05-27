@@ -51,7 +51,7 @@ This is the game used by Craig's Minetest Server.
 |Gloopblocks (gloopblocks)                  |[4019](https://forum.minetest.net/viewtopic.php?id=4019)|[GitHub/minetest-mods](https://github.com/minetest-mods/gloopblocks)|
 |Home GUI (home_gui)                        |[3101](https://forum.minetest.net/viewtopic.php?id=3101)|[GitHub/cornernote](https://github.com/cornernote/minetest-home_gui)|
 |Homedecor (homedecor)                      |[2041](https://forum.minetest.net/viewtopic.php?id=2041)|[GitHub/minetest-mods](https://github.com/minetest-mods/homedecor_modpack/tree/master/homedecor)|
-|Interact (interact)               |[11200](https://forum.minetest.net/viewtopic.php?id=11200)|[GitHub/Amaz1](https://github.com/Amaz1/interact)|
+|Interact (interact)               |[11200](https://forum.minetest.net/viewtopic.php?id=11200)|[GitHub/minetest-mods](https://github.com/minetest-mods/interact)|
 |Inventory++ (inventory_plus)               |[6204](https://forum.minetest.net/viewtopic.php?id=6204)|[GitHub/Zeg9](https://github.com/Zeg9/minetest-inventory_plus)|
 |IRC (irc)             						|[3905](https://forum.minetest.net/viewtopic.php?id=3905)|[GitHub/minetest-mods](https://github.com/minetest-mods/irc)|
 |IRC commands (irc_commands)             	|[5275](https://forum.minetest.net/viewtopic.php?id=5275)|[GitHub/ShadowNinja](https://github.com/ShadowNinja/minetest-irc_commands)|
@@ -65,14 +65,14 @@ This is the game used by Craig's Minetest Server.
 |More Ores (moreores)                       |[549](https://forum.minetest.net/viewtopic.php?id=549)|[GitHub/minetest-mods](https://github.com/minetest-mods/moreores)|
 |Name Restrictions (name_restrictions)                ||[GitHub/ShadowNinja](https://github.com/ShadowNinja/name_restrictions)|
 |Names per IP (names_per_ip)                |[9768](https://forum.minetest.net/viewtopic.php?id=9768)|[GitHub/Calinou](https://github.com/Calinou/carbone/tree/master/mods/names_per_ip)|
-|Nyan Cat (nyancat)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/nyancat)|
+|Nyan Cat (nyancat)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/91182d6a9ec56c88096c1bad653a85426892c54d/mods/nyancat)|
 |Replacer (replacer)                        |[4676](https://forum.minetest.net/viewtopic.php?id=4676)|[GitHub/Sokomine](https://github.com/Sokomine/replacer)|
 |Report (report)                          |[13752](https://forum.minetest.net/viewtopic.php?id=13752)|[GitHub/rubenwardy](https://github.com/rubenwardy/report)|
 |Screwdriver (screwdriver)                  ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/screwdriver)|
 |Shields (shields)                          |[4654](https://forum.minetest.net/viewtopic.php?id=4654)|[GitHub/stujones11](https://github.com/stujones11/minetest-3d_armor/tree/master/shields)|
 |Simple Skins (simple_skins)                |[9100](https://forum.minetest.net/viewtopic.php?id=9100)|[GitHub/tenplus1](https://github.com/tenplus1/simple_skins)|
 |Stairs (stairs)                            ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/stairs)|
-|Streets (streets)                          |[2984](https://forum.minetest.net/viewtopic.php?id=2984)|[GitHub/webdesigner97](https://github.com/webdesigner97/streets)|
+|Streets (streets)                          |[2984](https://forum.minetest.net/viewtopic.php?id=2984)|[GitHub/webdesigner97](https://github.com/minetest-streets/streets)|
 |TravelNet (travelnet)                      |[4877](https://forum.minetest.net/viewtopic.php?id=4877)|[GitHub/travelnet](https://github.com/Sokomine/travelnet)|
 |Unified Dyes (unifieddyes)                 |[2178](https://forum.minetest.net/viewtopic.php?id=2178)|[GitHub/minetest-mods](https://github.com/minetest-mods/unifieddyes)|
 |Vessels (vessels)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/vessels)|
