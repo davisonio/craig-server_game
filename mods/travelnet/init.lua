@@ -22,6 +22,10 @@
  Please configure this mod in config.lua
 
  Changelog:
+ 30.08.16 - If the station the traveller just travelled to no longer exists, the player is sent back to the
+            station where he/she came from.
+ 30.08.16 - Attaching a travelnet box to a non-existant network of another player is possible (requested by OldCoder).
+            Still requires the travelnet_attach-priv.
  05.10.14 - Added an optional abm so that the travelnet network can heal itshelf in case of loss of the savefile.
             If you want to use this, set
                   travelnet.enable_abm = true
@@ -185,12 +189,19 @@ travelnet.update_formspec = function( pos, puncher_name )
 
 
    -- add name of station + network + owner + update-button
-   local formspec = "size[12,10]"..
+   local zusatzstr = "";
+   local trheight = "10";
+   if( this_node and this_node.name=="locked_travelnet:travelnet" ) then
+      zusatzstr = "field[0.3,11;6,0.7;locks_sent_lock_command;Locked travelnet. Type /help for help:;]";
+      trheight = "11.5";
+   end
+   local formspec = "size[12,"..trheight.."]"..
                             "label[3.3,0.0;Travelnet-Box:]".."label[6.3,0.0;Punch box to update target list.]"..
                             "label[0.3,0.4;Name of this station:]".."label[6.3,0.4;"..(station_name or "?").."]"..
                             "label[0.3,0.8;Assigned to Network:]" .."label[6.3,0.8;"..(station_network or "?").."]"..
                             "label[0.3,1.2;Owned by:]"            .."label[6.3,1.2;"..(owner_name or "?").."]"..
-                            "label[3.3,1.6;Click on target to travel there:]";
+                            "label[3.3,1.6;Click on target to travel there:]"..
+			    zusatzstr;
 --                            "button_exit[5.3,0.3;8,0.8;do_update;Punch box to update destination list. Click on target to travel there.]"..
    local x = 0;
    local y = 0;
@@ -318,16 +329,15 @@ travelnet.add_target = function( station_name, network_name, pos, player_name, m
    elseif( is_elevator ) then -- elevator networks
       owner_name = player_name;
 
-   elseif( not( travelnet.targets[ owner_name ] )
-        or not( travelnet.targets[ owner_name ][ network_name ] )) then
+   elseif( not( minetest.check_player_privs(player_name, {interact=true}))) then
 
-      minetest.chat_send_player(player_name, "There is no network named "..tostring( network_name ).." owned by "..tostring( owner_name )..". Aborting.");
+      minetest.chat_send_player(player_name, "There is no player with interact privilege named '"..tostring( player_name ).."'. Aborting.");
       return;
 
    elseif( not( minetest.check_player_privs(player_name, {travelnet_attach=true}))
        and not( travelnet.allow_attach( player_name, owner_name, network_name ))) then
 
-        minetest.chat_send_player(player_name, "You do not have the travelnet_attach priv which is required to attach your box to the network of someone else. Aborting.");
+       minetest.chat_send_player(player_name, "You do not have the travelnet_attach priv which is required to attach your box to the network of someone else. Aborting.");
       return;
    end
 
@@ -555,6 +565,8 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
                                        station_network = station_network }};
 
       travelnet.remove_box( target_pos, nil, oldmetadata, player );
+      -- send the player back as there's no receiving travelnet
+      player:moveto( pos, false );
 
    -- do this only on servers where the function exists
    elseif( player.set_look_yaw ) then
