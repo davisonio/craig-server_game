@@ -38,7 +38,6 @@ This is the game used by Craig's Minetest Server.
 |BitChange (bitchange)                      |[7821](https://forum.minetest.net/viewtopic.php?id=7821)|[GitHub/SmallJoker](https://github.com/SmallJoker/bitchange)|
 |Carts (carts)                    ||[GitHub/minetest](https://github.com/minetest_game/tree/master/mods/carts)|
 |Bucket (bucket)                            ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/bucket)|
-|Carbone torches (carbone_torches)|[12824](https://forum.minetest.net/viewtopic.php?id=12824)|[GitHub/Calinou](https://github.com/Calinou/carbone-ng/tree/master/mods/carbone_torches)|
 |Coloured Stone Bricks (colouredstonebricks)|[8784](https://forum.minetest.net/viewtopic.php?id=8784)|[GitHub/davisonio](https://github.com/davisonio/colouredstonebricks)|
 |Darkage (darkage)                          |[10063](https://forum.minetest.net/viewtopic.php?id=10063)|[GitHub/davisonio](https://github.com/davisonio/darkage)|
 |Default (default)                          ||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/default)|
