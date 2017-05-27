@@ -89,17 +89,13 @@ minetest.register_tool( "replacer:replacer",
        local node = minetest.env:get_node_or_nil( pos );
        
        --minetest.chat_send_player( name, "  Target node: "..minetest.serialize( node ).." at pos "..minetest.serialize( pos ).."."); 
-
-       local item = itemstack:to_table();
-       -- make sure metadata is always set
+       local metadata = "default:dirt 0 0";
        if( node ~= nil and node.name ) then
-          item[ "metadata" ] = node.name..' '..node.param1..' '..node.param2;
-       else
-          item[ "metadata" ] = "default:dirt 0 0";
+          metadata = node.name..' '..node.param1..' '..node.param2;
        end
-       itemstack:replace( item );
+       itemstack:set_metadata( metadata );
 
-       minetest.chat_send_player( name, "Node replacement tool set to: '"..item[ "metadata" ].."'."); 
+       minetest.chat_send_player( name, "Node replacement tool set to: '"..metadata.."'.");
 
        return itemstack; -- nothing consumed but data changed
     end,
