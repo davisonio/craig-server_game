@@ -2,9 +2,6 @@
 -- Server Misc Mod --
 ---------------------
 
--- Nodename on the HUD
-dofile(minetest.get_modpath("_misc").."/nodename_hud.lua")
-
 -- Chat Commands
 dofile(minetest.get_modpath("_misc").."/chatcommands.lua")
 
