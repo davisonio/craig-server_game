@@ -3,10 +3,17 @@
 ** More Ores **
 By Calinou, with the help of Nore.
 
-Copyright (c) 2011-2015 Calinou and contributors.
+Copyright (c) 2011-2017 Hugo Locurcio and contributors.
 Licensed under the zlib license. See LICENSE.md for more information.
 =====================================================================
 --]]
+
+moreores = {}
+
+local default_tin = false
+if minetest.registered_items["default:tin_ingot"] then
+	default_tin = true
+end
 
 local S
 if minetest.get_modpath("intllib") then
@@ -28,6 +35,7 @@ end
 -- =================
 
 local default_stone_sounds = default.node_sound_stone_defaults()
+local default_metal_sounds = default.node_sound_metal_defaults()
 
 local function hoe_on_use(itemstack, user, pointed_thing, uses)
 	local pt = pointed_thing
@@ -110,7 +118,7 @@ local function add_ore(modname, description, mineral_name, oredef)
 			description = S("%s Block"):format(S(description)),
 			tiles = { img_base .. "_block.png" },
 			groups = {snappy = 1, bendy = 2, cracky = 1, melty = 2, level= 2},
-			sounds = default_stone_sounds
+			sounds = default_metal_sounds,
 		})
 		minetest.register_alias(mineral_name.."_block", block_item)
 		if oredef.makes.ingot then
@@ -177,7 +185,8 @@ local function add_ore(modname, description, mineral_name, oredef)
 			tool_capabilities = {
 				max_drop_level = 3,
 				groupcaps = tooldef
-			}
+			},
+            sound = {breaks = "default_tool_breaks"},
 		}
 
 		if tool_name == "sword" then
@@ -202,6 +211,7 @@ local function add_ore(modname, description, mineral_name, oredef)
 			tdef.full_punch_interval = oredef.full_punch_interval
 			tdef.tool_capabilities.damage_groups = oredef.damage_groups
 			tdef.description = S("%s Shovel"):format(S(description))
+            tdef.wield_image = toolimg_base .. tool_name .. ".png^[transformR90"
 		end
 
 		if tool_name == "hoe" then
@@ -232,11 +242,11 @@ local oredefs = {
 	silver = {
 		description = "Silver",
 		makes = {ore = true, block = true, lump = true, ingot = true, chest = true},
-		oredef = {clust_scarcity = moreores_silver_chunk_size * moreores_silver_chunk_size * moreores_silver_chunk_size,
-			clust_num_ores = moreores_silver_ore_per_chunk,
-			clust_size     = moreores_silver_chunk_size,
-			y_min     = moreores_silver_min_depth,
-			y_max     = moreores_silver_max_depth
+		oredef = {clust_scarcity = moreores.silver_chunk_size * moreores.silver_chunk_size * moreores.silver_chunk_size,
+			clust_num_ores = moreores.silver_ore_per_chunk,
+			clust_size     = moreores.silver_chunk_size,
+			y_min     = moreores.silver_min_depth,
+			y_max     = moreores.silver_max_depth
 			},
 		tools = {
 			pick = {
@@ -261,43 +271,32 @@ local oredefs = {
 		full_punch_interval = 1.0,
 		damage_groups = {fleshy = 6},
 	},
-	tin = {
-		description = "Tin",
-		makes = {ore = true, block = true, lump = true, ingot = true, chest = false},
-		oredef = {clust_scarcity = moreores_tin_chunk_size * moreores_tin_chunk_size * moreores_tin_chunk_size,
-			clust_num_ores = moreores_tin_ore_per_chunk,
-			clust_size     = moreores_tin_chunk_size,
-			y_min     = moreores_tin_min_depth,
-			y_max     = moreores_tin_max_depth
-			},
-		tools = {},
-	},
 	mithril = {
 		description = "Mithril",
 		makes = {ore = true, block = true, lump = true, ingot = true, chest = false},
-		oredef = {clust_scarcity = moreores_mithril_chunk_size * moreores_mithril_chunk_size * moreores_mithril_chunk_size,
-			clust_num_ores = moreores_mithril_ore_per_chunk,
-			clust_size     = moreores_mithril_chunk_size,
-			y_min     = moreores_mithril_min_depth,
-			y_max     = moreores_mithril_max_depth
+		oredef = {clust_scarcity = moreores.mithril_chunk_size * moreores.mithril_chunk_size * moreores.mithril_chunk_size,
+			clust_num_ores = moreores.mithril_ore_per_chunk,
+			clust_size     = moreores.mithril_chunk_size,
+			y_min     = moreores.mithril_min_depth,
+			y_max     = moreores.mithril_max_depth
 			},
 		tools = {
 			pick = {
-				cracky = {times = {[1] = 2.25, [2] = 0.55, [3] = 0.35}, uses = 200, maxlevel= 1}
+				cracky = {times = {[1] = 2.25, [2] = 0.55, [3] = 0.35}, uses = 200, maxlevel= 2}
 			},
 			hoe = {
 				uses = 1000
 			},
 			shovel = {
-				crumbly = {times = {[1] = 0.70, [2] = 0.35, [3] = 0.20}, uses = 200, maxlevel= 1}
+				crumbly = {times = {[1] = 0.70, [2] = 0.35, [3] = 0.20}, uses = 200, maxlevel= 2}
 			},
 			axe = {
-				choppy = {times = {[1] = 1.75, [2] = 0.45, [3] = 0.45}, uses = 200, maxlevel= 1},
+				choppy = {times = {[1] = 1.75, [2] = 0.45, [3] = 0.45}, uses = 200, maxlevel= 2},
 				fleshy = {times = {[2] = 0.95, [3] = 0.30}, uses = 200, maxlevel= 1}
 			},
 			sword = {
-				fleshy = {times = {[2] = 0.65, [3] = 0.25}, uses = 200, maxlevel= 1},
-				snappy = {times = {[2] = 0.70, [3] = 0.25}, uses = 200, maxlevel= 1},
+				fleshy = {times = {[2] = 0.65, [3] = 0.25}, uses = 200, maxlevel= 2},
+				snappy = {times = {[2] = 0.70, [3] = 0.25}, uses = 200, maxlevel= 2},
 				choppy = {times = {[3] = 0.65}, uses = 200, maxlevel= 0}
 			}
 		},
@@ -305,6 +304,20 @@ local oredefs = {
 		damage_groups = {fleshy = 9},
 	}
 }
+
+if not default_tin then
+	oredefs.tin = {
+		description = "Tin",
+		makes = {ore = true, block = true, lump = true, ingot = true, chest = false},
+		oredef = {clust_scarcity = moreores.tin_chunk_size * moreores.tin_chunk_size * moreores.tin_chunk_size,
+			clust_num_ores = moreores.tin_ore_per_chunk,
+			clust_size     = moreores.tin_chunk_size,
+			y_min     = moreores.tin_min_depth,
+			y_max     = moreores.tin_max_depth
+		},
+		tools = {},
+	}
+end
 
 for orename,def in pairs(oredefs) do
 	add_ore(modname, def.description, orename, def)
@@ -320,16 +333,23 @@ minetest.register_craft({
 	}
 })
 
--- Bronze has some special cases, because it is made from copper and tin:
-minetest.register_craft( {
-	type = "shapeless",
-	output = "default:bronze_ingot 3",
-	recipe = {
-		"moreores:tin_ingot",
-		"default:copper_ingot",
-		"default:copper_ingot",
-	}
-})
+if default_tin then
+	minetest.register_alias("moreores:mineral_tin", "default:stone_with_tin")
+	minetest.register_alias("moreores:tin_lump", "default:tin_lump")
+	minetest.register_alias("moreores:tin_ingot", "default:tin_ingot")
+	minetest.register_alias("moreores:tin_block", "default:tinblock")
+else
+	-- Bronze has some special cases, because it is made from copper and tin:
+	minetest.register_craft( {
+		type = "shapeless",
+		output = "default:bronze_ingot 3",
+		recipe = {
+			"moreores:tin_ingot",
+			"default:copper_ingot",
+			"default:copper_ingot",
+		}
+	})
+end
 
 -- Unique node:
 minetest.register_node("moreores:copper_rail", {
@@ -345,6 +365,7 @@ minetest.register_node("moreores:copper_rail", {
 		type = "fixed",
 		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
+	sounds = default_metal_sounds,
 	groups = {bendy = 2,snappy = 1,dig_immediate = 2,rail= 1, connect_to_raillike = 1},
 	mesecons = {
 		effector = {
