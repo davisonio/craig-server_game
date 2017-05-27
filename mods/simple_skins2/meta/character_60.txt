@@ -1,2 +1,0 @@
-name = "Old Black Assassin",
-author = "InfiltratorHero",

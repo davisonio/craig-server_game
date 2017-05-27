@@ -1,2 +1,0 @@
-name = "Katniss Everdeen",
-author = "agapl00",

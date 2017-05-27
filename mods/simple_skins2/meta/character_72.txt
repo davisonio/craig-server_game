@@ -1,2 +1,0 @@
-name = "Pug",
-author = "LordTrilobite",

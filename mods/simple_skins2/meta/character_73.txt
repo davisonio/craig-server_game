@@ -1,2 +1,0 @@
-name = "Nyan Cat Girl",
-author = "Unknown",

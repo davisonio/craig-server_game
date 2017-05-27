@@ -1,2 +1,0 @@
-name = "Girl Jock Skin",
-author = "logan5232",

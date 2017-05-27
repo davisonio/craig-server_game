@@ -1,2 +1,0 @@
-name = "Valentines Day skin-chikk",
-author = "chikk7490",

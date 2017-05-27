@@ -1,2 +1,0 @@
-name = "Casual Girl",
-author = "Waffle Toaster",

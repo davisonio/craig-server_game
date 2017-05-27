@@ -1,2 +1,0 @@
-name = "Skull",
-author = "Redbones",

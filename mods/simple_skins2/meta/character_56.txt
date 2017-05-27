@@ -1,2 +1,0 @@
-name = "Darth Maul",
-author = "aphung2",

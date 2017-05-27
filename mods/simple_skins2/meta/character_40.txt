@@ -1,2 +1,0 @@
-name = "Mario Bros",
-author = "nachocapo51",

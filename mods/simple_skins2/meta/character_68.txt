@@ -1,2 +1,0 @@
-name = "Daft Punk",
-author = "Kaychain",

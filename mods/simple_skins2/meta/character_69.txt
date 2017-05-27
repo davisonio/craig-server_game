@@ -1,2 +1,0 @@
-name = "Guy Manual (Dart Punk)",
-author = "kvSketch",
