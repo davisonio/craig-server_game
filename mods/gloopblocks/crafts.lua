@@ -41,6 +41,7 @@ minetest.register_craft({
 	}
 })
 --]]
+
 minetest.register_craft({
 	type = "shapeless",
 	output = "gloopblocks:wet_cement",
@@ -299,6 +300,13 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	type = "cooking",
+	output = "gloopblocks:stonebrick",
+	recipe = "default:stone_brick_mossy",
+	cooktime = 6
+})
+
+minetest.register_craft({
 	type = "shapeless",
 	output = "gloopblocks:cobble_road 5",
 	recipe = {
@@ -365,3 +373,17 @@ minetest.register_craft({
 		{"xpanes:bar", "xpanes:bar", "xpanes:bar"},
 	},
 })
+
+if minetest.get_modpath("technic") then
+	technic.register_grinder_recipe({input={"gloopblocks:pumice"},output="default:sand"})
+	technic.register_grinder_recipe({input={"gloopblocks:basalt"},output="default:cobble"})
+	minetest.register_craft({
+		type = "shapeless",
+		output = "technic:concrete 3",
+		recipe = {
+			"gloopblocks:wet_cement",
+			"group:sand",
+			"default:gravel",
+		}
+	})
+end
