@@ -39,6 +39,7 @@ This is the game used by Craig's Minetest Server.
 |Carts (carts)||[GitHub/minetest](https://github.com/minetest_game/tree/master/mods/carts)|
 |Coloured Stone Bricks (colouredstonebricks)|[8784](https://forum.minetest.net/viewtopic.php?id=8784)|[GitHub/davisonio](https://github.com/davisonio/colouredstonebricks)|
 |Craft Guide (craftguide)|[14088](https://forum.minetest.net/viewtopic.php?t=14088)|[GitHub/minetest-mods](https://github.com/minetest-mods/craftguide)|
+|Creative (creative)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/creative)|
 |Darkage (darkage)|[10063](https://forum.minetest.net/viewtopic.php?id=10063)|[GitHub/davisonio](https://github.com/davisonio/darkage)|
 |Default (default)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/default)|
 |Doors (doors)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/doors)|
