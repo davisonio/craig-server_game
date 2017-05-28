@@ -57,22 +57,4 @@ minetest.register_node("locked_sign:sign_wall_locked", {
 	end,
 })
 
-minetest.register_craft({
-	output = "locked_sign:sign_wall_locked",
-	recipe = {
-		{"group:wood", "group:wood", "group:wood"},
-		{"group:wood", "group:wood", "default:steel_ingot"},
-		{"", "group:stick", ""},
-	}
-})
-
---Alternate recipe.
-minetest.register_craft({
-    	output = "locked_sign:sign_wall_locked",
-    	recipe = {
-        	{"default:sign_wall"},
-        	{"default:steel_ingot"},
-    },
-})
-
 minetest.register_alias("sign_wall_locked", "locked_sign:sign_wall_locked")
