@@ -24,7 +24,6 @@ This is the game used by Craig's Minetest Server.
 
 [Download](https://github.com/davisonio/craig-server_game/archive/master.zip) & unzip the game, rename it to "craig-server_game" and move it into your `minetest/games` folder.
 
-**Unless you know what you're doing, remove the legacy, welcome & email mod.**
 
 ## Mod List
 
