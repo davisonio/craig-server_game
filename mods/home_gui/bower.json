@@ -1,0 +1,18 @@
+{
+    "name": "home_gui",
+    "description": "Set home position and then go to it using the inventory screen.",
+    "keywords": [
+        "home_gui"
+    ],
+    "homepage": "http://cornernote.github.io/minetest-home_gui/",
+    "forum": "http://forum.minetest.net/viewtopic.php?t=3101",
+    "screenshots": [
+        "https://cornernote.github.io/minetest-home_gui/img/screenshot.png"
+    ],
+    "dependencies": {
+        "inventory_plus": "~1.0.0"
+    },
+    "authors": [
+        "cornernote"
+    ]
+}
