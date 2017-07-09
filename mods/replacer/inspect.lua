@@ -20,12 +20,12 @@ end
 minetest.register_tool( "replacer:inspect",
 {
     description = "Node inspection tool",
-    groups = {}, 
+    groups = {},
     inventory_image = "replacer_inspect.png",
     wield_image = "",
     wield_scale = {x=1,y=1,z=1},
     liquids_pointable = true, -- it is ok to request information about liquids
-    -- the tool_capabilities are of no intrest here; it is not for digging
+    --[[-- the tool_capabilities are of no intrest here; it is not for digging
     tool_capabilities = {
         full_punch_interval = 1.0,
         max_drop_level=0,
@@ -34,7 +34,7 @@ minetest.register_tool( "replacer:inspect",
             snappy={times={[2]=0.80, [3]=0.40}, maxwear=0.05, maxlevel=1},
             choppy={times={[3]=0.90}, maxwear=0.05, maxlevel=0}
         }
-    },
+    },--]]
     node_placement_prediction = nil,
 
     on_use = function(itemstack, user, pointed_thing)
@@ -59,7 +59,7 @@ replacer.inspect = function( itemstack, user, pointed_thing, mode, show_receipe 
 	if( keys["sneak"] ) then
 		show_receipe = true;
 	end
- 
+
 	if(     pointed_thing.type == 'object' ) then
 		local text = 'This is ';
 		local ref = pointed_thing.ref;
@@ -97,16 +97,16 @@ replacer.inspect = function( itemstack, user, pointed_thing, mode, show_receipe 
 		minetest.chat_send_player( name, 'Sorry. This is an unkown something of type \"'..tostring( pointed_thing.type )..'\". No information available.');
 		return nil;
 	end
-	
+
 	local pos  = minetest.get_pointed_thing_position( pointed_thing, mode );
 	local node = minetest.env:get_node_or_nil( pos );
-       
+
 	if( node == nil ) then
 		minetest.chat_send_player( name, "Error: Target node not yet loaded. Please wait a moment for the server to catch up.");
 		return nil;
 	end
 
-	local text = ' ['..tostring( node.name )..'] with param2='..tostring( node.param2 )..' at '..minetest.pos_to_string( pos )..'.';	
+	local text = ' ['..tostring( node.name )..'] with param2='..tostring( node.param2 )..' at '..minetest.pos_to_string( pos )..'.';
 	if( not( minetest.registered_nodes[ node.name ] )) then
 		text = 'This node is an UNKOWN block'..text;
 	else
@@ -121,7 +121,7 @@ replacer.inspect = function( itemstack, user, pointed_thing, mode, show_receipe 
 	text = text..' '..protected_info;
 -- no longer spam the chat; the craft guide is more informative
 --	minetest.chat_send_player( name, text );
-	
+
 	if( show_receipe ) then
 		-- get light of the node at the current time
 		local light = minetest.get_node_light(pos, nil);
@@ -160,7 +160,7 @@ if( minetest.get_modpath("dye") and dye and dye.basecolors) then
 			replacer.group_placeholder[ 'group:flower,color_'..color ] = 'dye:'..color;
 		end
 	end
-end 
+end
 
 replacer.image_button_link = function( stack_string )
 	local group = '';
@@ -170,7 +170,7 @@ replacer.image_button_link = function( stack_string )
 	if( replacer.group_placeholder[ stack_string ] ) then
 		stack_string = replacer.group_placeholder[ stack_string ];
 		group = 'G';
-	end		
+	end
 -- TODO: show information about other groups not handled above
 	local stack = ItemStack( stack_string );
 	local new_node_name = stack_string;
@@ -272,7 +272,7 @@ replacer.inspect_show_crafting = function( name, node_name, fields )
 			desc = " - no description provided - block";
 		end
 	elseif( minetest.registered_items[ node_name ] ) then
-		if(     minetest.registered_items[ node_name ].description 
+		if(     minetest.registered_items[ node_name ].description
 		    and minetest.registered_items[ node_name ].description~= "") then
 			desc = "\""..minetest.registered_items[ node_name ].description.."\" item";
 		elseif( minetest.registered_items[ node_name ].name ) then
@@ -284,7 +284,7 @@ replacer.inspect_show_crafting = function( name, node_name, fields )
 	if( not( desc ) or desc=="") then
 		desc = ' - no description provided - ';
 	end
-		
+
 	local formspec = "size[6,6]"..
 		"label[0,5.5;This is a "..minetest.formspec_escape( desc )..".]"..
 		"button_exit[5.0,4.3;1,0.5;quit;Exit]"..
@@ -304,7 +304,7 @@ replacer.inspect_show_crafting = function( name, node_name, fields )
 		if( fields.light ) then
 			formspec = formspec.." and receiving "..tostring( fields.light ).." light";
 		end
-		formspec = formspec..".]";	
+		formspec = formspec..".]";
 	end
 
 	-- show information about protection
