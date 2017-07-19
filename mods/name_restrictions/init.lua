@@ -14,8 +14,8 @@ for _, allowed_name in pairs(temp) do
 end
 temp = nil
 -- Exempt server owner
---exemptions[minetest.setting_get("name")] = true
---exemptions["singleplayer"] = true
+exemptions[minetest.setting_get("name")] = true
+exemptions["singleplayer"] = true
 
 
 ---------------------
