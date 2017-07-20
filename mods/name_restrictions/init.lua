@@ -33,15 +33,15 @@ local disallowed = {
 	["adm[1il]n"] = msg_misleading,
 	["[0o]wn[e3]r"]  = msg_misleading,
 	["^[0-9]+$"] = "All-numeric usernames are disallowed on this server.",
+	["%u%l+%d+"] = msg_guest,
 }
 
 minetest.register_on_prejoinplayer(function(name, ip)
 	if exemptions[name] then return end
 
 	-- Check for disallowed names
-	local lname = name:lower()
 	for re, reason in pairs(disallowed) do
-		if lname:find(re) then
+		if name:find(re) then
 			return reason
 		end
 	end
