@@ -22,3 +22,6 @@ dofile(minetest.get_modpath("_misc").."/legacy.lua")
 
 -- MOTD
 dofile(minetest.get_modpath("_misc").."/motd.lua")
+
+-- Cactus & Papyrus
+dofile(minetest.get_modpath("_misc").."/craft_fix.lua")
