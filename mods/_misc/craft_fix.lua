@@ -23,3 +23,11 @@ minetest.register_alias("homedecor:standing_lamp_off", "homedecor:standing_lamp_
 
 minetest.register_alias("chains:chain_top_brass", "homedecor:chainlink_brass")
 
+minetest.register_craft({
+	output = "moreblocks:cobble_compressed",
+	recipe = {
+		{"darkage:stone_brick", "darkage:stone_brick", "darkage:stone_brick"},
+		{"darkage:stone_brick", "darkage:stone_brick", "darkage:stone_brick"},
+		{"darkage:stone_brick", "darkage:stone_brick", "darkage:stone_brick"}
+	}
+})
