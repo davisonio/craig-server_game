@@ -22,3 +22,6 @@ dofile(minetest.get_modpath("_misc").."/legacy.lua")
 
 -- MOTD
 dofile(minetest.get_modpath("_misc").."/motd.lua")
+
+-- Fix crafts
+dofile(minetest.get_modpath("_misc").."/craft_fix.lua")
