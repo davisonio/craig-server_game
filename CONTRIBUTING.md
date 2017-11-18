@@ -15,6 +15,8 @@
 3. Commit & [push](https://help.github.com/articles/pushing-to-a-remote/) your changes to a new branch.
 4. Once you're happy with your changes, [create a pull request](https://help.github.com/articles/creating-a-pull-request/).
 
+If creating a pull request for a big change that takes a lot of work please let me know first to avoid potential dissapointment.
+
 ## Something else
 
 Questions, feedback & ideas are all welcome - just [open an issue](https://github.com/davisonio/craig-server_game/issues)! :smile:
