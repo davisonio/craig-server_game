@@ -1,4 +1,19 @@
 local player_inventory = {}
+local inventory_cache = {}
+
+local function init_creative_cache(items)
+	inventory_cache[items] = {}
+	local i_cache = inventory_cache[items]
+
+	for name, def in pairs(items) do
+		if def.groups.not_in_creative_inventory ~= 1 and
+				def.description and def.description ~= "" then
+			i_cache[name] = def
+		end
+	end
+	table.sort(i_cache)
+	return i_cache
+end
 
 function creative.init_creative_inventory(player)
 	local player_name = player:get_player_name()
@@ -10,21 +25,24 @@ function creative.init_creative_inventory(player)
 
 	minetest.create_detached_inventory("creative_" .. player_name, {
 		allow_move = function(inv, from_list, from_index, to_list, to_index, count, player2)
-			if not to_list == "main" then
-				return count
-			else
+			local name = player2 and player2:get_player_name() or ""
+			if not creative.is_enabled_for(name) or
+					to_list == "main" then
 				return 0
 			end
+			return count
 		end,
 		allow_put = function(inv, listname, index, stack, player2)
 			return 0
 		end,
 		allow_take = function(inv, listname, index, stack, player2)
+			local name = player2 and player2:get_player_name() or ""
+			if not creative.is_enabled_for(name) then
+				return 0
+			end
 			return -1
 		end,
 		on_move = function(inv, from_list, from_index, to_list, to_index, count, player2)
-		end,
-		on_put = function(inv, listname, index, stack, player2)
 		end,
 		on_take = function(inv, listname, index, stack, player2)
 			if stack and stack:get_count() > 0 then
@@ -42,11 +60,11 @@ function creative.update_creative_inventory(player_name, tab_content)
 			creative.init_creative_inventory(minetest.get_player_by_name(player_name))
 	local player_inv = minetest.get_inventory({type = "detached", name = "creative_" .. player_name})
 
-	for name, def in pairs(tab_content) do
-		if not (def.groups.not_in_creative_inventory == 1) and
-				def.description and def.description ~= "" and
-				(def.name:find(inv.filter, 1, true) or
-					def.description:lower():find(inv.filter, 1, true)) then
+	local items = inventory_cache[tab_content] or init_creative_cache(tab_content)
+
+	for name, def in pairs(items) do
+		if def.name:find(inv.filter, 1, true) or
+				def.description:lower():find(inv.filter, 1, true) then
 			creative_list[#creative_list+1] = name
 		end
 	end
@@ -157,10 +175,6 @@ function creative.register_tab(name, title, items)
 		end
 	})
 end
-
-minetest.register_on_joinplayer(function(player)
-	creative.update_creative_inventory(player:get_player_name(), minetest.registered_items)
-end)
 
 creative.register_tab("all", "All", minetest.registered_items)
 creative.register_tab("nodes", "Nodes", minetest.registered_nodes)
