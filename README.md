@@ -36,7 +36,7 @@ This is the game used by Craig's Minetest Server.
 |Arrow Signs (arrow_signs)|[3353](https://forum.minetest.net/viewtopic.php?id=3353)|[Bitbucket/adrido](https://bitbucket.org/adrido/arrow_signs)|
 |BitChange (bitchange)|[7821](https://forum.minetest.net/viewtopic.php?id=7821)|[GitHub/SmallJoker](https://github.com/SmallJoker/bitchange)|
 |Bucket (bucket)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/bucket)|
-|Carts (carts)||[GitHub/minetest](https://github.com/minetest_game/tree/master/mods/carts)|
+|Carts (carts)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/carts)|
 |Coloured Stone Bricks (colouredstonebricks)|[8784](https://forum.minetest.net/viewtopic.php?id=8784)|[GitHub/davisonio](https://github.com/davisonio/colouredstonebricks)|
 |Craft Guide (craftguide)|[14088](https://forum.minetest.net/viewtopic.php?t=14088)|[GitHub/minetest-mods](https://github.com/minetest-mods/craftguide)|
 |Creative (creative)||[GitHub/minetest](https://github.com/minetest/minetest_game/tree/master/mods/creative)|
