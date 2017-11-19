@@ -17,6 +17,8 @@
 
 If creating a pull request for a big change that takes a lot of work please let me know first to avoid potential dissapointment.
 
+When adding or removing a mod please update the mod list in `README.md`
+
 ## Something else
 
 Questions, feedback & ideas are all welcome - just [open an issue](https://github.com/davisonio/craig-server_game/issues)! :smile:
