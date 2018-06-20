@@ -12,8 +12,8 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 
 * 3d_armor - [GitHub](https://github.com/stujones11/minetest-3d_armor)
 * 3d_armor_sfinv - [GitHub](https://github.com/stujones11/minetest-3d_armor)
-* areas
-* arrow_signs
+* areas - [GitHub](https://github.com/ShadowNinja/areas)
+* arrow_signs - [Bitbucket](https://bitbucket.org/adrido/arrow_signs/src)
 * bitchange
 * bucket
 * carts
