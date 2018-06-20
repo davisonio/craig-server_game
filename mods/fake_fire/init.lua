@@ -95,7 +95,7 @@ minetest.register_node("fake_fire:ice_fire", {
 	drop = ""
 })
 
-minetest.register_alias("fake_fire:fake_fire", "fire:permanent_flame")
+minetest.register_alias("fake_fire:fake_fire", "fake_fire:fancy_fire")
 
 minetest.register_node("fake_fire:fancy_fire", {
 		inventory_image = "fancy_fire_inv.png",
