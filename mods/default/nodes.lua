@@ -1,6 +1,3 @@
- mods/default/nodes.lua
-
-
 [[ Node name convention:
 
 Although many node names are in combinedword form, the required form for new
