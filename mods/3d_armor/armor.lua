@@ -1,7 +1,5 @@
-local S = function(s) return s end
-if minetest.global_exists("intllib") then
-	S = intllib.Getter()
-end
+-- support for i18n
+local S = armor_i18n.gettext
 
 armor:register_armor("3d_armor:helmet_admin", {
 	description = S("Admin Helmet"),
