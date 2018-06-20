@@ -1,16 +1,9 @@
 creative = {}
 
-minetest.register_privilege("creative", {
-	description = "Allow player to use creative inventory",
-	give_to_singleplayer = false,
-	give_to_admin = false
-})
-
 local creative_mode_cache = minetest.settings:get_bool("creative_mode")
 
 function creative.is_enabled_for(name)
-	return creative_mode_cache or
-		minetest.check_player_privs(name, {creative = true})
+	return creative_mode_cache
 end
 
 dofile(minetest.get_modpath("creative") .. "/inventory.lua")

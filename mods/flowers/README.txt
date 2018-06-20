@@ -11,6 +11,7 @@ Authors of media (textures)
 ---------------------------
 RHRhino (CC BY-SA 3.0):
   flowers_dandelion_white.png
+  flowers_dandelion_yellow.png
   flowers_geranium.png
   flowers_rose.png
   flowers_tulip.png
@@ -22,9 +23,4 @@ Gambit (CC BY-SA 3.0):
   flowers_waterlily.png
 
 yyt16384 (CC BY-SA 3.0):
-  flowers_waterlily_bottom.png -- Derived from Gambit's texture
-
-paramat (CC BY-SA 3.0):
-  flowers_dandelion_yellow.png -- Derived from RHRhino's texture
-  flowers_tulip_black.png -- Derived from RHRhino's texture
-  flowers_chrysanthemum_green.png
+  flowers_waterlily_bottom.png, derived from Gambit's texture

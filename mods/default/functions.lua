@@ -1,3 +1,5 @@
+-- mods/default/functions.lua
+
 --
 -- Sounds
 --
@@ -115,21 +117,6 @@ function default.node_sound_water_defaults(table)
 	return table
 end
 
-function default.node_sound_snow_defaults(table)
-	table = table or {}
-	table.footstep = table.footstep or
-			{name = "default_snow_footstep", gain = 0.2}
-	table.dig = table.dig or
-			{name = "default_snow_footstep", gain = 0.3}
-	table.dug = table.dug or
-			{name = "default_snow_footstep", gain = 0.3}
-	table.place = table.place or
-			{name = "default_place_node", gain = 1.0}
-	default.node_sound_defaults(table)
-	return table
-end
-
-
 --
 -- Lavacooling
 --
@@ -158,9 +145,8 @@ if minetest.settings:get_bool("enable_lavacooling") ~= false then
 	})
 end
 
-
 --
--- Optimized helper to put all items in an inventory into a drops list
+-- optimized helper to put all items in an inventory into a drops list
 --
 
 function default.get_inventory_drops(pos, inventory, drops)
@@ -175,12 +161,11 @@ function default.get_inventory_drops(pos, inventory, drops)
 	end
 end
 
-
 --
 -- Papyrus and cactus growing
 --
 
--- Wrapping the functions in ABM action is necessary to make overriding them possible
+-- wrapping the functions in abm action is necessary to make overriding them possible
 
 function default.grow_cactus(pos, node)
 	if node.param2 >= 4 then
@@ -257,7 +242,7 @@ minetest.register_abm({
 
 
 --
--- Dig upwards
+-- dig upwards
 --
 
 function default.dig_up(pos, node, digger)
@@ -401,7 +386,6 @@ function default.register_leafdecay(def)
 	end
 end
 
-
 --
 -- Convert dirt to something that fits the environment
 --
@@ -498,6 +482,46 @@ minetest.register_abm({
 
 
 --
+-- Checks if specified volume intersects a protected volume
+--
+
+function default.intersects_protection(minp, maxp, player_name, interval)
+	-- 'interval' is the largest allowed interval for the 3D lattice of checks
+
+	-- Compute the optimal float step 'd' for each axis so that all corners and
+	-- borders are checked. 'd' will be smaller or equal to 'interval'.
+	-- Subtracting 1e-4 ensures that the max co-ordinate will be reached by the
+	-- for loop (which might otherwise not be the case due to rounding errors).
+	local d = {}
+	for _, c in pairs({"x", "y", "z"}) do
+		if maxp[c] > minp[c] then
+			d[c] = (maxp[c] - minp[c]) / math.ceil((maxp[c] - minp[c]) / interval) - 1e-4
+		elseif maxp[c] == minp[c] then
+			d[c] = 1 -- Any value larger than 0 to avoid division by zero
+		else -- maxp[c] < minp[c], print error and treat as protection intersected
+			minetest.log("error", "maxp < minp in 'default.intersects_protection()'")
+			return true
+		end
+	end
+
+	for zf = minp.z, maxp.z, d.z do
+		local z = math.floor(zf + 0.5)
+		for yf = minp.y, maxp.y, d.y do
+			local y = math.floor(yf + 0.5)
+			for xf = minp.x, maxp.x, d.x do
+				local x = math.floor(xf + 0.5)
+				if minetest.is_protected({x = x, y = y, z = z}, player_name) then
+					return true
+				end
+			end
+		end
+	end
+
+	return false
+end
+
+
+--
 -- Coral death near air
 --
 
@@ -514,7 +538,7 @@ minetest.register_abm({
 
 
 --
--- NOTICE: This method is not an official part of the API yet.
+-- NOTICE: This method is not an official part of the API yet!
 -- This method may change in future.
 --
 
@@ -534,7 +558,7 @@ function default.can_interact_with_node(player, pos)
 		return true
 	end
 
-	-- Is player wielding the right key?
+	-- is player wielding the right key?
 	local item = player:get_wielded_item()
 	if item:get_name() == "default:key" then
 		local key_meta = item:get_meta()

@@ -94,7 +94,7 @@ minetest.register_craft({
 })
 
 minetest.register_node("vessels:glass_bottle", {
-	description = "Empty Glass Bottle",
+	description = "Glass Bottle (empty)",
 	drawtype = "plantlike",
 	tiles = {"vessels_glass_bottle.png"},
 	inventory_image = "vessels_glass_bottle.png",
@@ -120,7 +120,7 @@ minetest.register_craft( {
 })
 
 minetest.register_node("vessels:drinking_glass", {
-	description = "Empty Drinking Glass",
+	description = "Drinking Glass (empty)",
 	drawtype = "plantlike",
 	tiles = {"vessels_drinking_glass.png"},
 	inventory_image = "vessels_drinking_glass_inv.png",
@@ -146,7 +146,7 @@ minetest.register_craft( {
 })
 
 minetest.register_node("vessels:steel_bottle", {
-	description = "Empty Heavy Steel Bottle",
+	description = "Heavy Steel Bottle (empty)",
 	drawtype = "plantlike",
 	tiles = {"vessels_steel_bottle.png"},
 	inventory_image = "vessels_steel_bottle.png",
@@ -175,7 +175,7 @@ minetest.register_craft( {
 -- Glass and steel recycling
 
 minetest.register_craftitem("vessels:glass_fragments", {
-	description = "Glass Fragments",
+	description = "Pile of Glass Fragments",
 	inventory_image = "vessels_glass_fragments.png",
 })
 

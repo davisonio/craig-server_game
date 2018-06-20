@@ -83,6 +83,13 @@ farming.register_hoe = function(name, def)
 	if def.inventory_image == nil then
 		def.inventory_image = "unknown_item.png"
 	end
+	if def.recipe == nil then
+		def.recipe = {
+			{"air","air",""},
+			{"","group:stick",""},
+			{"","group:stick",""}
+		}
+	end
 	if def.max_uses == nil then
 		def.max_uses = 30
 	end
@@ -97,12 +104,12 @@ farming.register_hoe = function(name, def)
 		sound = {breaks = "default_tool_breaks"},
 	})
 	-- Register its recipe
-	if def.recipe then
+	if def.material == nil then
 		minetest.register_craft({
 			output = name:sub(2),
 			recipe = def.recipe
 		})
-	elseif def.material then
+	else
 		minetest.register_craft({
 			output = name:sub(2),
 			recipe = {
@@ -323,7 +330,7 @@ farming.register_plant = function(name, def)
 	minetest.register_craftitem(":" .. mname .. ":" .. pname, {
 		description = pname:gsub("^%l", string.upper),
 		inventory_image = mname .. "_" .. pname .. ".png",
-		groups = def.groups or {flammable = 2},
+		groups = {flammable = 2},
 	})
 
 	-- Register growing steps

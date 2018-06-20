@@ -44,46 +44,46 @@ local function rotate_and_place(itemstack, placer, pointed_thing)
 	return minetest.item_place(itemstack, placer, pointed_thing, param2)
 end
 
-
--- Register stair
+-- Register stairs.
 -- Node will be called stairs:stair_<subname>
 
 function stairs.register_stair(subname, recipeitem, groups, images, description, sounds)
-	-- Set backface culling and world-aligned textures
 	local stair_images = {}
 	for i, image in ipairs(images) do
 		if type(image) == "string" then
 			stair_images[i] = {
 				name = image,
 				backface_culling = true,
-				align_style = "world",
 			}
-		else
+		elseif image.backface_culling == nil then -- override using any other value
 			stair_images[i] = table.copy(image)
-			if stair_images[i].backface_culling == nil then
-				stair_images[i].backface_culling = true
-			end
-			if stair_images[i].align_style == nil then
-				stair_images[i].align_style = "world"
-			end
+			stair_images[i].backface_culling = true
 		end
 	end
 	local new_groups = table.copy(groups)
 	new_groups.stair = 1
 	minetest.register_node(":stairs:stair_" .. subname, {
 		description = description,
-		drawtype = "nodebox",
+		drawtype = "mesh",
+		mesh = "stairs_stair.obj",
 		tiles = stair_images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		groups = new_groups,
 		sounds = sounds,
-		node_box = {
+		selection_box = {
 			type = "fixed",
 			fixed = {
-				{-0.5, -0.5, -0.5, 0.5, 0.0, 0.5},
-				{-0.5, 0.0, 0.0, 0.5, 0.5, 0.5},
+				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+				{-0.5, 0, 0, 0.5, 0.5, 0.5},
+			},
+		},
+		collision_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+				{-0.5, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
 		on_place = function(itemstack, placer, pointed_thing)
@@ -114,15 +114,6 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 			},
 		})
 
-		-- Use stairs to craft full blocks again (1:1)
-		minetest.register_craft({
-			output = recipeitem .. ' 3',
-			recipe = {
-				{'stairs:stair_' .. subname, 'stairs:stair_' .. subname},
-				{'stairs:stair_' .. subname, 'stairs:stair_' .. subname},
-			},
-		})
-
 		-- Fuel
 		local baseburntime = minetest.get_craft_result({
 			method = "fuel",
@@ -143,32 +134,16 @@ end
 -- Slab facedir to placement 6d matching table
 local slab_trans_dir = {[0] = 8, 0, 2, 1, 3, 4}
 
-
--- Register slab
+-- Register slabs.
 -- Node will be called stairs:slab_<subname>
 
 function stairs.register_slab(subname, recipeitem, groups, images, description, sounds)
-	-- Set world-aligned textures
-	local slab_images = {}
-	for i, image in ipairs(images) do
-		if type(image) == "string" then
-			slab_images[i] = {
-				name = image,
-				align_style = "world",
-			}
-		else
-			slab_images[i] = table.copy(image)
-			if image.align_style == nil then
-				slab_images[i].align_style = "world"
-			end
-		end
-	end
 	local new_groups = table.copy(groups)
 	new_groups.slab = 1
 	minetest.register_node(":stairs:slab_" .. subname, {
 		description = description,
 		drawtype = "nodebox",
-		tiles = slab_images,
+		tiles = images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
@@ -248,15 +223,6 @@ function stairs.register_slab(subname, recipeitem, groups, images, description, 
 			},
 		})
 
-		-- Use 2 slabs to craft a full block again (1:1)
-		minetest.register_craft({
-			output = recipeitem,
-			recipe = {
-				{'stairs:slab_' .. subname},
-				{'stairs:slab_' .. subname},
-			},
-		})
-
 		-- Fuel
 		local baseburntime = minetest.get_craft_result({
 			method = "fuel",
@@ -297,168 +263,12 @@ if replace then
 end
 
 
--- Register inner stair
--- Node will be called stairs:stair_inner_<subname>
-
-function stairs.register_stair_inner(subname, recipeitem, groups, images, description, sounds)
-	-- Set backface culling and world-aligned textures
-	local stair_images = {}
-	for i, image in ipairs(images) do
-		if type(image) == "string" then
-			stair_images[i] = {
-				name = image,
-				backface_culling = true,
-				align_style = "world",
-			}
-		else
-			stair_images[i] = table.copy(image)
-			if stair_images[i].backface_culling == nil then
-				stair_images[i].backface_culling = true
-			end
-			if stair_images[i].align_style == nil then
-				stair_images[i].align_style = "world"
-			end
-		end
-	end
-	local new_groups = table.copy(groups)
-	new_groups.stair = 1
-	minetest.register_node(":stairs:stair_inner_" .. subname, {
-		description = "Inner " .. description,
-		drawtype = "nodebox",
-		tiles = stair_images,
-		paramtype = "light",
-		paramtype2 = "facedir",
-		is_ground_content = false,
-		groups = new_groups,
-		sounds = sounds,
-		node_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5, -0.5, -0.5, 0.5, 0.0, 0.5},
-				{-0.5, 0.0, 0.0, 0.5, 0.5, 0.5},
-				{-0.5, 0.0, -0.5, 0.0, 0.5, 0.0},
-			},
-		},
-		on_place = function(itemstack, placer, pointed_thing)
-			if pointed_thing.type ~= "node" then
-				return itemstack
-			end
-
-			return rotate_and_place(itemstack, placer, pointed_thing)
-		end,
-	})
-
-	if recipeitem then
-		minetest.register_craft({
-			output = 'stairs:stair_inner_' .. subname .. ' 7',
-			recipe = {
-				{ "", recipeitem, ""},
-				{ recipeitem, "", recipeitem},
-				{recipeitem, recipeitem, recipeitem},
-			},
-		})
-
-		-- Fuel
-		local baseburntime = minetest.get_craft_result({
-			method = "fuel",
-			width = 1,
-			items = {recipeitem}
-		}).time
-		if baseburntime > 0 then
-			minetest.register_craft({
-				type = "fuel",
-				recipe = 'stairs:stair_inner_' .. subname,
-				burntime = math.floor(baseburntime * 0.875),
-			})
-		end
-	end
-end
-
-
--- Register outer stair
--- Node will be called stairs:stair_outer_<subname>
-
-function stairs.register_stair_outer(subname, recipeitem, groups, images, description, sounds)
-	-- Set backface culling and world-aligned textures
-	local stair_images = {}
-	for i, image in ipairs(images) do
-		if type(image) == "string" then
-			stair_images[i] = {
-				name = image,
-				backface_culling = true,
-				align_style = "world",
-			}
-		else
-			stair_images[i] = table.copy(image)
-			if stair_images[i].backface_culling == nil then
-				stair_images[i].backface_culling = true
-			end
-			if stair_images[i].align_style == nil then
-				stair_images[i].align_style = "world"
-			end
-		end
-	end
-	local new_groups = table.copy(groups)
-	new_groups.stair = 1
-	minetest.register_node(":stairs:stair_outer_" .. subname, {
-		description = "Outer " .. description,
-		drawtype = "nodebox",
-		tiles = stair_images,
-		paramtype = "light",
-		paramtype2 = "facedir",
-		is_ground_content = false,
-		groups = new_groups,
-		sounds = sounds,
-		node_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5, -0.5, -0.5, 0.5, 0.0, 0.5},
-				{-0.5, 0.0, 0.0, 0.0, 0.5, 0.5},
-			},
-		},
-		on_place = function(itemstack, placer, pointed_thing)
-			if pointed_thing.type ~= "node" then
-				return itemstack
-			end
-
-			return rotate_and_place(itemstack, placer, pointed_thing)
-		end,
-	})
-
-	if recipeitem then
-		minetest.register_craft({
-			output = 'stairs:stair_outer_' .. subname .. ' 6',
-			recipe = {
-				{ "", "", ""},
-				{ "", recipeitem, ""},
-				{recipeitem, recipeitem, recipeitem},
-			},
-		})
-
-		-- Fuel
-		local baseburntime = minetest.get_craft_result({
-			method = "fuel",
-			width = 1,
-			items = {recipeitem}
-		}).time
-		if baseburntime > 0 then
-			minetest.register_craft({
-				type = "fuel",
-				recipe = 'stairs:stair_outer_' .. subname,
-				burntime = math.floor(baseburntime * 0.625),
-			})
-		end
-	end
-end
-
-
 -- Stair/slab registration function.
 -- Nodes will be called stairs:{stair,slab}_<subname>
 
-function stairs.register_stair_and_slab(subname, recipeitem, groups, images, desc_stair, desc_slab, sounds)
+function stairs.register_stair_and_slab(subname, recipeitem,
+		groups, images, desc_stair, desc_slab, sounds)
 	stairs.register_stair(subname, recipeitem, groups, images, desc_stair, sounds)
-	stairs.register_stair_inner(subname, recipeitem, groups, images, desc_stair, sounds)
-	stairs.register_stair_outer(subname, recipeitem, groups, images, desc_stair, sounds)
 	stairs.register_slab(subname, recipeitem, groups, images, desc_slab, sounds)
 end
 
@@ -537,7 +347,7 @@ stairs.register_stair_and_slab(
 
 stairs.register_stair_and_slab(
 	"mossycobble",
-	"default:mossycobble",
+	nil,
 	{cracky = 3},
 	{"default_mossycobble.png"},
 	"Mossy Cobblestone Stair",
@@ -746,16 +556,6 @@ stairs.register_stair_and_slab(
 )
 
 stairs.register_stair_and_slab(
-	"tinblock",
-	"default:tinblock",
-	{cracky = 1, level = 2},
-	{"default_tin_block.png"},
-	"Tin Block Stair",
-	"Tin Block Slab",
-	default.node_sound_metal_defaults()
-)
-
-stairs.register_stair_and_slab(
 	"copperblock",
 	"default:copperblock",
 	{cracky = 1, level = 2},
@@ -788,7 +588,7 @@ stairs.register_stair_and_slab(
 stairs.register_stair_and_slab(
 	"ice",
 	"default:ice",
-	{cracky = 3, puts_out_fire = 1, cools_lava = 1, slippery = 3},
+	{cracky = 3, puts_out_fire = 1, cools_lava = 1},
 	{"default_ice.png"},
 	"Ice Stair",
 	"Ice Slab",
@@ -802,5 +602,9 @@ stairs.register_stair_and_slab(
 	{"default_snow.png"},
 	"Snow Block Stair",
 	"Snow Block Slab",
-	default.node_sound_snow_defaults()
+	default.node_sound_dirt_defaults({
+		footstep = {name = "default_snow_footstep", gain = 0.15},
+		dug = {name = "default_snow_footstep", gain = 0.2},
+		dig = {name = "default_snow_footstep", gain = 0.2}
+	})
 )
