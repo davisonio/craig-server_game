@@ -2,15 +2,22 @@
 -- see http://forum.minetest.net/viewtopic.php?pid=26061 or https://github.com/VanessaE/homedecor for details!
 function replacer_homedecor_node_is_owned(pos, placer)
 
-	if type( minetest.is_protected == "function") then
-		return minetest.is_protected( pos, placer:get_player_name() );
+	if( not( placer ) or not(pos )) then
+		return true;
 	end
-
+	local pname = placer:get_player_name();
+	if (type( minetest.is_protected ) == "function") then
+		local res = minetest.is_protected( pos, pname );
+		if( res ) then
+			minetest.chat_send_player( pname, "Cannot replace node. It is protected." );
+		end
+		return res;
+	end
 
         local ownername = false
         if type(IsPlayerNodeOwner) == "function" then                                   -- node_ownership mod
                 if HasOwner(pos, placer) then                                           -- returns true if the node is owned
-                        if not IsPlayerNodeOwner(pos, placer:get_player_name()) then
+                        if not IsPlayerNodeOwner(pos, pname) then
                                 if type(getLastOwner) == "function" then                -- ...is an old version
                                         ownername = getLastOwner(pos)
                                 elseif type(GetNodeOwnerName) == "function" then        -- ...is a recent version
@@ -28,7 +35,7 @@ function replacer_homedecor_node_is_owned(pos, placer)
         end
 
         if ownername ~= false then
-                minetest.chat_send_player( placer:get_player_name(), "Sorry, "..ownername.." owns that spot." )
+                minetest.chat_send_player( pname, "Sorry, "..ownername.." owns that spot." )
                 return true
         else
                 return false

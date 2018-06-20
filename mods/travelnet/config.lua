@@ -1,5 +1,5 @@
 
-travelnet.MAX_STATIONS_PER_NETWORK = 27;
+travelnet.MAX_STATIONS_PER_NETWORK = 24;
 
 -- set this to true if you want a simulated beam effect
 travelnet.travelnet_effect_enabled = false;
@@ -36,7 +36,7 @@ travelnet.elevator_recipe = {
 -- if you want to allow *everybody* to attach stations to all nets, let the
 -- function always return true;
 -- if the function returns false, players with the travelnet_attach priv
--- can still add stations to that network
+-- can still add stations to that network 
 
 travelnet.allow_attach = function( player_name, owner_name, network_name )
    return false;

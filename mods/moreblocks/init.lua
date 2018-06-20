@@ -11,8 +11,12 @@ Licensed under the zlib license. See LICENSE.md for more information.
 moreblocks = {}
 
 local S
-if minetest.get_modpath("intllib") then
-	S = intllib.Getter()
+if minetest.global_exists("intllib") then
+	if intllib.make_gettext_pair then
+		S = intllib.make_gettext_pair()
+	else
+		S = intllib.Getter()
+	end
 else
 	S = function(s) return s end
 end
@@ -28,6 +32,6 @@ dofile(modpath .. "/redefinitions.lua")
 dofile(modpath .. "/crafting.lua")
 dofile(modpath .. "/aliases.lua")
 
-if minetest.setting_getbool("log_mods") then
+if minetest.settings:get_bool("log_mods") then
 	minetest.log("action", S("[moreblocks] loaded."))
 end
