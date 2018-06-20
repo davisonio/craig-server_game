@@ -9,15 +9,10 @@
 
 local modpath = minetest.get_modpath("homedecor")
 
-homedecor = {
-	modpath = modpath,
+local S = homedecor_i18n.gettext
 
-	-- Boilerplate to support localized strings if intllib mod is installed.
-	gettext = rawget(_G, "intllib") and intllib.Getter() or function(s) return s end,
-
-	-- infinite stacks
-	expect_infinite_stacks = minetest.setting_getbool("creative_mode") and not minetest.get_modpath("unified_inventory")
-}
+homedecor = {}
+homedecor.modpath = modpath
 
 -- Determine if the item being pointed at is the underside of a node (e.g a ceiling)
 function homedecor.find_ceiling(itemstack, placer, pointed_thing)
@@ -32,9 +27,6 @@ function homedecor.find_ceiling(itemstack, placer, pointed_thing)
 				itemstack, pointed_thing)
 		return
 	end
-	local pitch = placer:get_look_pitch()
-	local fdir = core.dir_to_facedir(placer:get_look_dir())
-	local wield_name = itemstack:get_name()
 
 	local above = pointed_thing.above
 	local under = pointed_thing.under
@@ -50,7 +42,6 @@ function homedecor.find_ceiling(itemstack, placer, pointed_thing)
 	if undef and undef.buildable_to then
 		pos = pointed_thing.under
 		node = unode
-		iswall = false
 	end
 
 	if core.is_protected(pos, placer:get_player_name()) then
@@ -68,18 +59,15 @@ end
 
 screwdriver = screwdriver or {}
 
-homedecor.plain_wood = "homedecor_generic_wood_plain.png^"..
-					   "(homedecor_generic_wood_boards_overlay.png^[colorize:#a7682020:100)"
+homedecor.plain_wood    = { name = "homedecor_generic_wood_plain.png",  color = 0xffa76820 }
+homedecor.mahogany_wood = { name = "homedecor_generic_wood_plain.png",  color = 0xff7d2506 }
+homedecor.white_wood    = "homedecor_generic_wood_plain.png"
+homedecor.dark_wood     = { name = "homedecor_generic_wood_plain.png",  color = 0xff39240f }
+homedecor.lux_wood      = { name = "homedecor_generic_wood_luxury.png", color = 0xff643f23 }
 
-homedecor.mahogany_wood = "(homedecor_generic_wood_plain.png^[colorize:#401010:125)^"..
-					      "(homedecor_generic_wood_boards_overlay.png^[colorize:#66493880:200)"
-
-homedecor.white_wood = "(homedecor_generic_wood_plain.png^[colorize:#e0f0ff:200)^"..
-					   "(homedecor_generic_wood_boards_overlay.png^[colorize:#ffffff:200)"
-
-homedecor.dark_wood = "(homedecor_generic_wood_plain.png^[colorize:#140900:200)^"..
-					  "(homedecor_generic_wood_boards_overlay.png^[colorize:#21110180:180)"
-
+homedecor.color_black     = 0xff303030
+homedecor.color_dark_grey = 0xff606060
+homedecor.color_med_grey  = 0xffa0a0a0
 
 -- load different handler subsystems
 dofile(modpath.."/handlers/init.lua")
@@ -124,11 +112,13 @@ dofile(modpath.."/furniture_recipes.lua")
 dofile(modpath.."/climate-control.lua")
 
 dofile(modpath.."/cobweb.lua")
--- dofile(modpath.."/books.lua")
+dofile(modpath.."/books.lua")
 dofile(modpath.."/exterior.lua")
 dofile(modpath.."/trash_cans.lua")
 dofile(modpath.."/wardrobe.lua")
 
 dofile(modpath.."/crafts.lua")
 
-print("[HomeDecor] " .. homedecor.gettext("Loaded!"))
+if minetest.settings:get_bool("log_mod") then
+	minetest.log("action", "[HomeDecor] " .. S("Loaded!"))
+end

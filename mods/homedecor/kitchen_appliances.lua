@@ -1,6 +1,8 @@
 -- This file supplies refrigerators
 
-local S = homedecor.gettext
+local S = homedecor_i18n.gettext
+
+local function N_(x) return x end
 
 -- steel-textured fridge
 homedecor.register("refrigerator_steel", {
@@ -48,6 +50,7 @@ minetest.register_alias("homedecor:refrigerator_steel_top", "air")
 
 minetest.register_alias("homedecor:refrigerator_white_bottom_locked", "homedecor:refrigerator_white_locked")
 minetest.register_alias("homedecor:refrigerator_white_top_locked", "air")
+minetest.register_alias("homedecor:refrigerator_locked", "homedecor:refrigerator_white_locked")
 
 minetest.register_alias("homedecor:refrigerator_steel_bottom_locked", "homedecor:refrigerator_steel_locked")
 minetest.register_alias("homedecor:refrigerator_steel_top_locked", "air")
@@ -111,7 +114,7 @@ homedecor.register("coffee_maker", {
 		"homedecor_coffeemaker_cup.png",
 		"homedecor_coffeemaker_case.png",
 	},
-	description = "Coffee Maker",
+	description = S("Coffee Maker"),
 	inventory_image = "homedecor_coffeemaker_inv.png",
 	walkable = false,
 	groups = {snappy=3},
@@ -158,7 +161,7 @@ minetest.register_abm({
 })
 
 homedecor.register("toaster", {
-	description = "Toaster",
+	description = S("Toaster"),
 	tiles = { "homedecor_toaster_sides.png" },
 	inventory_image = "homedecor_toaster_inv.png",
 	walkable = false,
@@ -169,7 +172,7 @@ homedecor.register("toaster", {
 			{-0.0625, -0.5, -0.125, 0.125, -0.3125, 0.125}, -- NodeBox1
 		},
 	},
-	on_rightclick = function(pos, node, clicker)
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		local fdir = node.param2
 		minetest.set_node(pos, { name = "homedecor:toaster_loaf", param2 = fdir })
 		minetest.sound_play("toaster", {
@@ -177,6 +180,7 @@ homedecor.register("toaster", {
 			gain = 1.0,
 			max_hear_distance = 5
 		})
+		return itemstack
 	end
 })
 
@@ -199,16 +203,17 @@ homedecor.register("toaster_loaf", {
 			{0.0625, -0.3125, -0.0935, 0.0935, -0.25, 0.0935}, -- NodeBox3
 		},
 	},
-	on_rightclick = function(pos, node, clicker)
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		local fdir = node.param2
 		minetest.set_node(pos, { name = "homedecor:toaster", param2 = fdir })
+		return itemstack
 	end,
 	drop = "homedecor:toaster"
 })
 
 
 homedecor.register("dishwasher", {
-	description = "Dishwasher",
+	description = S("Dishwasher"),
 	drawtype = "nodebox",
 	tiles = {
 		"homedecor_dishwasher_top.png",
@@ -232,11 +237,11 @@ homedecor.register("dishwasher", {
 	groups = { snappy = 3 },
 })
 
-local materials = {"granite", "marble", "steel", "wood"}
+local materials = { N_("granite"), N_("marble"), N_("steel"), N_("wood") }
 
 for _, m in ipairs(materials) do
 homedecor.register("dishwasher_"..m, {
-	description = "Dishwasher ("..m..")",
+	description = S("Dishwasher (@1)", S(m)),
 	tiles = {
 		"homedecor_kitchen_cabinet_top_"..m..".png",
 		"homedecor_dishwasher_bottom.png",

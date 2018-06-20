@@ -1,4 +1,5 @@
-local S = homedecor.gettext
+
+local S = homedecor_i18n.gettext
 
 local tg_cbox = {
 	type = "fixed",
@@ -10,8 +11,8 @@ homedecor.register("trash_can_green", {
 	mesh = "homedecor_trash_can_green.obj",
 	tiles = { "homedecor_pool_table_baize.png" },
 	inventory_image = "homedecor_trash_can_green_inv.png",
-	description = "Trash Can (green)",
-   	groups = {snappy=3},
+	description = S("Green Trash Can"),
+	groups = {snappy=3},
 	selection_box = tg_cbox,
 	collision_box = tg_cbox,
 	on_punch = function(pos, node, puncher, pointed_thing)
@@ -30,13 +31,14 @@ homedecor.register("trash_can_green_open", {
 	on_punch = function(pos, node, puncher, pointed_thing)
 		minetest.set_node(pos, {name = "homedecor:trash_can_green", param2 = node.param2})
 	end,
-	infotext="Trash Can",
+	infotext=S("Trash Can"),
 	inventory= {
 		size = 9,
 		formspec = "size[8,9]" .. default.gui_bg .. default.gui_bg_img .. default.gui_slots ..
 		"button[2.5,3.8;3,1;empty;Empty Trash]"..
 		"list[context;main;2.5,0.5;3,3;]"..
-		"list[current_player;main;0,5;8,4;]",
+		"list[current_player;main;0,5;8,4;]" ..
+		"listring[]",
 	},
 	on_receive_fields = function(pos, formname, fields, sender)
 		if fields.empty then
@@ -57,7 +59,7 @@ homedecor.register("trash_can", {
 	mesh = "homedecor_trash_can.obj",
 	tiles = { "homedecor_trash_can.png" },
 	inventory_image = "homedecor_trash_can_inv.png",
-	description = "Trash Can (small)",
+	description = S("Small Trash Can"),
 	groups = {snappy=3},
 	selection_box = trash_cbox,
 	collision_box = trash_cbox,

@@ -1,10 +1,13 @@
 -- This file supplies Kitchen cabinets and kitchen sink
 
-local S = homedecor.gettext
+local S = homedecor_i18n.gettext
 
-local counter_materials = { "", "granite", "marble", "steel" }
 local cabinet_sides = "(default_wood.png^[transformR90)^homedecor_kitchen_cabinet_bevel.png"
 local cabinet_bottom = "(default_wood.png^[colorize:#000000:100)^(homedecor_kitchen_cabinet_bevel.png^[colorize:#46321580)"
+
+local function N_(x) return x end
+
+local counter_materials = { "", N_("granite"), N_("marble"), N_("steel") }
 
 for _, mat in ipairs(counter_materials) do
 
@@ -12,7 +15,7 @@ for _, mat in ipairs(counter_materials) do
 	local material = ""
 
 	if mat ~= "" then
-		desc = S("Kitchen Cabinet ("..mat.." top)")
+		desc = S("Kitchen Cabinet (@1 top)", S(mat))
 		material = "_"..mat
 	end
 
@@ -93,7 +96,7 @@ local cp_cbox = {
 }
 
 homedecor.register("copper_pans", {
-	description = "Copper pans",
+	description = S("Copper pans"),
 	mesh = "homedecor_copper_pans.obj",
 	tiles = { "homedecor_polished_copper.png" },
 	inventory_image = "homedecor_copper_pans_inv.png",
@@ -112,16 +115,17 @@ homedecor.register("kitchen_faucet", {
 	mesh = "homedecor_kitchen_faucet.obj",
 	tiles = { "homedecor_generic_metal_bright.png" },
 	inventory_image = "homedecor_kitchen_faucet_inv.png",
-	description = "Kitchen Faucet",
+	description = S("Kitchen Faucet"),
 	groups = {snappy=3},
 	selection_box = kf_cbox,
 	walkable = false,
 	on_rotate = screwdriver.disallow,
-	on_rightclick = function(pos, node, clicker)
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		local below = minetest.get_node_or_nil({x=pos.x, y=pos.y-1, z=pos.z})
 		if below and
 		  below.name == "homedecor:sink" or
-		  below.name == "homedecor:kitchen_cabinet_with_sink" then
+		  below.name == "homedecor:kitchen_cabinet_with_sink" or
+		  below.name == "homedecor:kitchen_cabinet_with_sink_locked" then
 			local particledef = {
 				outlet      = { x = 0, y = -0.19, z = 0.13 },
 				velocity_x  = { min = -0.05, max = 0.05 },
@@ -131,6 +135,7 @@ homedecor.register("kitchen_faucet", {
 			}
 			homedecor.start_particle_spawner(pos, node, particledef, "homedecor_faucet")
 		end
+		return itemstack
 	end,
 	on_destruct = homedecor.stop_particle_spawner
 })
@@ -142,7 +147,7 @@ homedecor.register("paper_towel", {
 		"default_wood.png"
 	},
 	inventory_image = "homedecor_paper_towel_inv.png",
-	description = "Paper towels",
+	description = S("Paper towels"),
 	groups = { snappy=3 },
 	walkable = false,
 	selection_box = {

@@ -18,28 +18,28 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * bucket - [GitHub](https://github.com/minetest/minetest_game)
 * carts - [GitHub](https://github.com/minetest/minetest_game)
 * colouredstonebricks
-* craftguide
+* craftguide - [GitHub](https://github.com/minetest-mods/craftguide)
 * craig_server - Custom code for this server
 * creative - [GitHub](https://github.com/minetest/minetest_game)
 * darkage
 * default - Modified to include stone fences - [GitHub](https://github.com/minetest/minetest_game)
 * doors - [GitHub](https://github.com/minetest/minetest_game)
 * dye - [GitHub](https://github.com/minetest/minetest_game)
-* email
-* fake_fire
+* email - [GitHub](https://github.com/rubenwardy/email)
+* fake_fire - Modified to include Diamond & Steel - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * farming - [GitHub](https://github.com/minetest/minetest_game)
 * flowers - [GitHub](https://github.com/minetest/minetest_game)
 * give_initial_stuff - [GitHub](https://github.com/minetest/minetest_game)
 * gloopblocks
 * home_gui
-* homedecor
-* homedecor_i18n
+* homedecor - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
+* homedecor_i18n - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * interact
 * irc
 * irc_commands
-* itemframes
+* itemframes - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * locked_sign
-* lrfurn
+* lrfurn - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * markers
 * more_chests
 * moreblocks
@@ -63,7 +63,6 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * worldedit
 * worldedit_commands
 * worldedit_gui
-* xban2
 
 ## Credits
 
