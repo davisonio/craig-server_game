@@ -10,9 +10,8 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 
 ## Mod List
 
-* 3d_armor
-* 3d_armor_sfinv
-* `_misc`
+* 3d_armor - [GitHub](https://github.com/stujones11/minetest-3d_armor)
+* 3d_armor_sfinv - [GitHub](https://github.com/stujones11/minetest-3d_armor)
 * areas
 * arrow_signs
 * bitchange
@@ -20,6 +19,7 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * carts
 * colouredstonebricks
 * craftguide
+* craig_server - Custom code for this server
 * creative
 * darkage
 * default
@@ -47,17 +47,18 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * nyancat
 * replacer
 * report
+* sban - [GitHub](https://github.com/shivajiva101/sban)
 * screwdriver
 * sfinv
 * sfinv_buttons
-* shields
+* shields - [GitHub](https://github.com/stujones11/minetest-3d_armor)
 * simple_skins
 * stairs
 * streets
 * travelnet
 * unifieddyes
 * vessels
-* wieldview
+* wieldview - [GitHub](https://github.com/stujones11/minetest-3d_armor)
 * wool
 * worldedit
 * worldedit_commands

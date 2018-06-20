@@ -1,7 +1,6 @@
--- Admin pick
-minetest.register_tool("_misc:pick_admin", {
-	description = "Admin Pickaxe [Digs blocks instantly - returns in inv]",
-	inventory_image = "misc_admin_pick.png",
+minetest.register_tool(":_misc:pick_admin", {
+	description = "Server Admin Pickaxe [Digs blocks instantly - returns in inv]",
+	inventory_image = "craig_server_admin_pick.png",
 	tool_capabilities = {
 		full_punch_interval = 0,
 		max_drop_level=3,
@@ -20,15 +19,14 @@ minetest.register_tool("_misc:pick_admin", {
 	end,
 })
 
--- Remove stick
-minetest.register_craftitem("_misc:remove_stick", {
+minetest.register_craftitem(":_misc:remove_stick", {
 	description = "Remove Stick [Removes items not removable normally - does not return in inv]",
-	inventory_image = "misc_remove_stick.png",
+	inventory_image = "craig_server_remove_stick.png",
 	on_use = function(item, user, pointed_thing)
 		if pointed_thing.type == "node" then
 			minetest.remove_node(pointed_thing.under)
 		elseif pointed_thing.type == "object" then
-			obj = pointed_thing.ref
+			local obj = pointed_thing.ref
 			if obj ~= nil then
 				if obj:get_player_name() ~= nil then
 					-- Player
