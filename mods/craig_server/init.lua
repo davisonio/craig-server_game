@@ -3,19 +3,19 @@
 ---------------------
 
 -- Chat Commands
-dofile(minetest.get_modpath("_misc").."/chatcommands.lua")
+dofile(minetest.get_modpath("craig_server").."/chatcommands.lua")
 
 -- Craft Obsidian
-dofile(minetest.get_modpath("_misc").."/craft_obsidian.lua")
+dofile(minetest.get_modpath("craig_server").."/craft_obsidian.lua")
 
 -- Admin Tools
-dofile(minetest.get_modpath("_misc").."/admin_tools.lua")
+dofile(minetest.get_modpath("craig_server").."/admin_tools.lua")
 
 -- Legacy
-dofile(minetest.get_modpath("_misc").."/legacy.lua")
+dofile(minetest.get_modpath("craig_server").."/legacy.lua")
 
 -- Cactus & Papyrus
-dofile(minetest.get_modpath("_misc").."/cactus_papyrus.lua")
+dofile(minetest.get_modpath("craig_server").."/cactus_papyrus.lua")
 
 -- Fix crafts
-dofile(minetest.get_modpath("_misc").."/craft_fix.lua")
+dofile(minetest.get_modpath("craig_server").."/craft_fix.lua")
