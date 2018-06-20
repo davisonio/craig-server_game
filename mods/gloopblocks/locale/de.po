@@ -1,0 +1,235 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-14 07:09+0200\n"
+"PO-Revision-Date: 2017-05-14 07:22+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"Last-Translator: Xanthin\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+
+#: init.lua
+#, fuzzy
+msgid "Diagonal Rainbow Block"
+msgstr "Regenbogenblock (diagonal)"
+
+#: init.lua
+#, fuzzy
+msgid "Horizontal Rainbow Block"
+msgstr "Regenbogenblock (horizontal)"
+
+#: init.lua
+msgid "Cement"
+msgstr "Zement"
+
+#: init.lua
+msgid "Evil Block"
+msgstr "Teuflischer Block"
+
+#: init.lua
+msgid "Basalt"
+msgstr "Basalt"
+
+#: init.lua
+msgid "Pumice"
+msgstr "Bimsstein"
+
+#: init.lua
+msgid "Pavement"
+msgstr "Strassenbelag"
+
+#: init.lua
+msgid "Oerkki Block"
+msgstr "Oerkkiblock"
+
+#: init.lua
+msgid "Mossy Stone Brick"
+msgstr "Moosiger Steinziegel"
+
+#: init.lua
+msgid "Mossy Stone"
+msgstr "Moosiger Stein"
+
+#: init.lua
+msgid "Cobblestone Road Bed"
+msgstr "Kopfsteinpflasterstrasse"
+
+#: init.lua
+msgid "Mossy Cobblestone Road Bed"
+msgstr "Moosige Kopfsteinpflasterstrasse"
+
+#: init.lua
+msgid "Wooden Scaffold"
+msgstr "Holzgeruest"
+
+#: init.lua
+msgid "Cobblestone Roadbed"
+msgstr "Kopfsteinpflasterstrasse"
+
+#: init.lua
+msgid "Mossy Cobblestone Roadbed"
+msgstr "Moosige Kopfsteinpflasterstrasse"
+
+#: init.lua
+msgid "Rainbow Block"
+msgstr "Regenbogenblock"
+
+#: init.lua
+msgid "Glow Crystal"
+msgstr ""
+
+#: init.lua
+msgid "Glow Emerald"
+msgstr ""
+
+#: init.lua
+msgid "Glow Mese"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Stone Stair"
+msgstr "Moosige Steintreppe"
+
+#: init.lua
+msgid "Mossy Stone Slab"
+msgstr "Moosige Pflastersteintreppe"
+
+#: init.lua
+msgid "Mossy Cobble Stair"
+msgstr "Moosige Pflastersteintreppe"
+
+#: init.lua
+msgid "Mossy Cobble Slab"
+msgstr "Moosige Pflastersteinstufe"
+
+#: init.lua
+msgid "Mossy Stone Brick Stair"
+msgstr "Moosige Steinziegeltreppe"
+
+#: init.lua
+msgid "Mossy Stone Brick Slab"
+msgstr "Moosige Steinziegelstufe"
+
+#: init.lua
+msgid "Cobble Roadbed Stair"
+msgstr "Kopfsteinstrassentreppe"
+
+#: init.lua
+msgid "Cobble Roadbed Slab"
+msgstr "Kopfsteinstrassenstufe"
+
+#: init.lua
+msgid "Mossy Cobble Roadbed Stair"
+msgstr "Moosige Kopfsteinstrassentreppe"
+
+#: init.lua
+msgid "Mossy Cobble Roadbed Slab"
+msgstr "Moosige Kopfsteinstrassenstufe"
+
+#: init.lua
+msgid "Cement Stair"
+msgstr "Zementtreppe"
+
+#: init.lua
+msgid "Cement Slab"
+msgstr "Zementstufe"
+
+#: init.lua
+msgid "Pavement Stair"
+msgstr "Strassenbelagtreppe"
+
+#: init.lua
+msgid "Pavement Slab"
+msgstr "Strassenbelagstufe"
+
+#: init.lua
+#, fuzzy
+msgid "Basalt Stair"
+msgstr "Basalttreppe"
+
+#: init.lua
+#, fuzzy
+msgid "Basalt Slab"
+msgstr "Basaltstufe"
+
+#: init.lua
+#, fuzzy
+msgid "Pumice Stair"
+msgstr "Bimssteintreppe"
+
+#: init.lua
+#, fuzzy
+msgid "Pumice Slab"
+msgstr "Bimssteinstufe"
+
+#: init.lua
+#, fuzzy
+msgid "Rainbow Block Stair"
+msgstr "Regenbogenblocktreppe"
+
+#: init.lua
+#, fuzzy
+msgid "Rainbow Block Slab"
+msgstr "Regenbogenblockstufe"
+
+#: init.lua
+msgid "Cement Pickaxe"
+msgstr "Zementspitzhacke"
+
+#: init.lua
+msgid "Cement Shovel"
+msgstr "Zementschaufel"
+
+#: init.lua
+msgid "Cement Axe"
+msgstr "Zementaxt"
+
+#: init.lua
+msgid "Cement Sword"
+msgstr "Zementschwert"
+
+#: init.lua
+msgid "Evil Pickaxe"
+msgstr "Teuflische Spitzhacke"
+
+#: init.lua
+msgid "Evil Shovel"
+msgstr "Teuflische Schaufel"
+
+#: init.lua
+msgid "Evil Axe"
+msgstr "Teuflische Axt"
+
+#: init.lua
+msgid "Evil Sword"
+msgstr "Teuflisches Schwert"
+
+#: init.lua
+msgid "Wet Cement"
+msgstr "Feuchter Zement"
+
+#: init.lua
+msgid "Evil Stick"
+msgstr "Teuflischer Stock"
+
+#: init.lua
+msgid "Obsidian"
+msgstr "Obsidian"
+
+#: init.lua
+msgid "Steel Fence"
+msgstr ""
+
+#: init.lua
+msgid "Gloopblocks Loaded!"
+msgstr "Gloopblocks geladen!"

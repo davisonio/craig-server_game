@@ -1,0 +1,226 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-14 06:45+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: init.lua
+msgid "Diagonal Rainbow Block"
+msgstr ""
+
+#: init.lua
+msgid "Horizontal Rainbow Block"
+msgstr ""
+
+#: init.lua
+msgid "Cement"
+msgstr ""
+
+#: init.lua
+msgid "Evil Block"
+msgstr ""
+
+#: init.lua
+msgid "Basalt"
+msgstr ""
+
+#: init.lua
+msgid "Pumice"
+msgstr ""
+
+#: init.lua
+msgid "Pavement"
+msgstr ""
+
+#: init.lua
+msgid "Oerkki Block"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Stone Brick"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Stone"
+msgstr ""
+
+#: init.lua
+msgid "Cobblestone Road Bed"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Cobblestone Road Bed"
+msgstr ""
+
+#: init.lua
+msgid "Wooden Scaffold"
+msgstr ""
+
+#: init.lua
+msgid "Cobblestone Roadbed"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Cobblestone Roadbed"
+msgstr ""
+
+#: init.lua
+msgid "Rainbow Block"
+msgstr ""
+
+#: init.lua
+msgid "Glow Crystal"
+msgstr ""
+
+#: init.lua
+msgid "Glow Emerald"
+msgstr ""
+
+#: init.lua
+msgid "Glow Mese"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Stone Stair"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Stone Slab"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Cobble Stair"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Cobble Slab"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Stone Brick Stair"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Stone Brick Slab"
+msgstr ""
+
+#: init.lua
+msgid "Cobble Roadbed Stair"
+msgstr ""
+
+#: init.lua
+msgid "Cobble Roadbed Slab"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Cobble Roadbed Stair"
+msgstr ""
+
+#: init.lua
+msgid "Mossy Cobble Roadbed Slab"
+msgstr ""
+
+#: init.lua
+msgid "Cement Stair"
+msgstr ""
+
+#: init.lua
+msgid "Cement Slab"
+msgstr ""
+
+#: init.lua
+msgid "Pavement Stair"
+msgstr ""
+
+#: init.lua
+msgid "Pavement Slab"
+msgstr ""
+
+#: init.lua
+msgid "Basalt Stair"
+msgstr ""
+
+#: init.lua
+msgid "Basalt Slab"
+msgstr ""
+
+#: init.lua
+msgid "Pumice Stair"
+msgstr ""
+
+#: init.lua
+msgid "Pumice Slab"
+msgstr ""
+
+#: init.lua
+msgid "Rainbow Block Stair"
+msgstr ""
+
+#: init.lua
+msgid "Rainbow Block Slab"
+msgstr ""
+
+#: init.lua
+msgid "Cement Pickaxe"
+msgstr ""
+
+#: init.lua
+msgid "Cement Shovel"
+msgstr ""
+
+#: init.lua
+msgid "Cement Axe"
+msgstr ""
+
+#: init.lua
+msgid "Cement Sword"
+msgstr ""
+
+#: init.lua
+msgid "Evil Pickaxe"
+msgstr ""
+
+#: init.lua
+msgid "Evil Shovel"
+msgstr ""
+
+#: init.lua
+msgid "Evil Axe"
+msgstr ""
+
+#: init.lua
+msgid "Evil Sword"
+msgstr ""
+
+#: init.lua
+msgid "Wet Cement"
+msgstr ""
+
+#: init.lua
+msgid "Evil Stick"
+msgstr ""
+
+#: init.lua
+msgid "Obsidian"
+msgstr ""
+
+#: init.lua
+msgid "Steel Fence"
+msgstr ""
+
+#: init.lua
+msgid "Gloopblocks Loaded!"
+msgstr ""

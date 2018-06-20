@@ -20,7 +20,7 @@ minetest.register_craft({
 	type = "shapeless",
 	output = "default:nyancat_rainbow",
 	recipe = {
-		"gloopblocks:rainbow_block",
+		"gloopblocks:rainbow_block", 
 		"default:diamondblock",
 		"default:steelblock",
 		"default:copperblock",
