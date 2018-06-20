@@ -34,34 +34,34 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * home_gui - [GitHub](https://github.com/cornernote/minetest-home_gui)
 * homedecor - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * homedecor_i18n - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
-* irc
-* irc_commands
+* irc - [GitHub](https://github.com/minetest-mods/irc)
+* irc_commands - [GitHub](https://github.com/ShadowNinja/minetest-irc_commands)
 * itemframes - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * locked_sign
 * lrfurn - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
-* markers
-* more_chests
-* moreblocks
-* moreores
-* nyancat
-* replacer
-* report
+* markers - [GitHub](https://github.com/Sokomine/markers)
+* more_chests - [GitHub](https://github.com/minetest-mods/more_chests)
+* moreblocks - [GitHub](https://github.com/minetest-mods/moreblocks)
+* moreores - [GitHub](https://github.com/minetest-mods/moreores)
+* nyancat - From Minetest Game before it got removed
+* replacer - [GitHub](https://github.com/Sokomine/replacer)
+* report - [GitHub](https://github.com/rubenwardy/report)
 * sban - [GitHub](https://github.com/shivajiva101/sban)
 * screwdriver - [GitHub](https://github.com/minetest/minetest_game)
 * sfinv - [GitHub](https://github.com/minetest/minetest_game)
-* sfinv_buttons
+* sfinv_buttons [repo.or.cz](http://repo.or.cz/minetest_sfinv_buttons.git)
 * shields - [GitHub](https://github.com/stujones11/minetest-3d_armor)
-* simple_skins
+* skinsdb - [GitHub](https://github.com/minetest-mods/skinsdb)
 * stairs - [GitHub](https://github.com/minetest/minetest_game)
 * streets
-* travelnet
-* unifieddyes
+* travelnet - [GitHub](https://github.com/Sokomine/travelnet)
+* unifieddyes - [GitHub](https://gitlab.com/VanessaE/unifieddyes)
 * vessels - [GitHub](https://github.com/minetest/minetest_game)
 * wieldview - [GitHub](https://github.com/stujones11/minetest-3d_armor)
 * wool - [GitHub](https://github.com/minetest/minetest_game)
-* worldedit
-* worldedit_commands
-* worldedit_gui
+* worldedit - [GitHub](https://github.com/Uberi/Minetest-WorldEdit)
+* worldedit_commands - [GitHub](https://github.com/Uberi/Minetest-WorldEdit)
+* worldedit_gui - [GitHub](https://github.com/Uberi/Minetest-WorldEdit)
 
 ## Credits
 

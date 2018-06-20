@@ -1,2 +1,0 @@
-name = "DrakeOfDuty",
-author = "jmfApprentice Prince",
