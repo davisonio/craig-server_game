@@ -190,6 +190,9 @@ minetest.register_craft({
 	}
 })
 
+-- Axes
+-- Recipes face left to match appearence in textures and inventory
+
 minetest.register_craft({
 	output = 'default:axe_wood',
 	recipe = {
@@ -241,60 +244,6 @@ minetest.register_craft({
 		{'default:diamond', 'default:diamond'},
 		{'default:diamond', 'group:stick'},
 		{'', 'group:stick'},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:axe_wood',
-	recipe = {
-		{'group:wood', 'group:wood'},
-		{'group:stick', 'group:wood'},
-		{'group:stick',''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:axe_stone',
-	recipe = {
-		{'group:stone', 'group:stone'},
-		{'group:stick', 'group:stone'},
-		{'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:axe_steel',
-	recipe = {
-		{'default:steel_ingot', 'default:steel_ingot'},
-		{'group:stick', 'default:steel_ingot'},
-		{'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:axe_bronze',
-	recipe = {
-		{'default:bronze_ingot', 'default:bronze_ingot'},
-		{'group:stick', 'default:bronze_ingot'},
-		{'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:axe_mese',
-	recipe = {
-		{'default:mese_crystal', 'default:mese_crystal'},
-		{'group:stick', 'default:mese_crystal'},
-		{'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:axe_diamond',
-	recipe = {
-		{'default:diamond', 'default:diamond'},
-		{'group:stick', 'default:diamond'},
-		{'group:stick', ''},
 	}
 })
 
@@ -814,13 +763,25 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = "default:emergent_jungle_sapling",
+	recipe = {
+		{"default:junglesapling", "default:junglesapling", "default:junglesapling"},
+		{"default:junglesapling", "default:junglesapling", "default:junglesapling"},
+		{"default:junglesapling", "default:junglesapling", "default:junglesapling"},
+	}
+})
+
+
 --
 -- Crafting (tool repair)
 --
+
 minetest.register_craft({
 	type = "toolrepair",
 	additional_wear = -0.02,
 })
+
 
 --
 -- Cooking recipes
@@ -900,11 +861,12 @@ minetest.register_craft({
 	cooktime = 5,
 })
 
+
 --
 -- Fuels
 --
 
--- Support use of group:tree
+-- Support use of group:tree, includes default:tree which has the same burn time
 minetest.register_craft({
 	type = "fuel",
 	recipe = "group:tree",
@@ -929,12 +891,6 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "default:tree",
-	burntime = 30,
-})
-
-minetest.register_craft({
-	type = "fuel",
 	recipe = "default:acacia_tree",
 	burntime = 34,
 })
@@ -946,7 +902,7 @@ minetest.register_craft({
 })
 
 
--- Support use of group:wood
+-- Support use of group:wood, includes default:wood which has the same burn time
 minetest.register_craft({
 	type = "fuel",
 	recipe = "group:wood",
@@ -967,12 +923,6 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "default:wood",
-	burntime = 7,
-})
-
-minetest.register_craft({
-	type = "fuel",
 	recipe = "default:acacia_wood",
 	burntime = 8,
 })
@@ -984,53 +934,53 @@ minetest.register_craft({
 })
 
 
--- Support use of group:sapling
+-- Support use of group:sapling, includes default:sapling which has the same burn time
 minetest.register_craft({
 	type = "fuel",
 	recipe = "group:sapling",
-	burntime = 10,
+	burntime = 5,
 })
 
 minetest.register_craft({
 	type = "fuel",
 	recipe = "default:bush_sapling",
-	burntime = 6,
+	burntime = 3,
 })
 
 minetest.register_craft({
 	type = "fuel",
 	recipe = "default:acacia_bush_sapling",
-	burntime = 7,
+	burntime = 4,
 })
 
 minetest.register_craft({
 	type = "fuel",
 	recipe = "default:aspen_sapling",
-	burntime = 8,
+	burntime = 4,
 })
 
 minetest.register_craft({
 	type = "fuel",
 	recipe = "default:pine_sapling",
-	burntime = 9,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "default:sapling",
-	burntime = 10,
+	burntime = 5,
 })
 
 minetest.register_craft({
 	type = "fuel",
 	recipe = "default:acacia_sapling",
-	burntime = 11,
+	burntime = 6,
 })
 
 minetest.register_craft({
 	type = "fuel",
 	recipe = "default:junglesapling",
-	burntime = 12,
+	burntime = 6,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:emergent_jungle_sapling",
+	burntime = 7,
 })
 
 
@@ -1080,13 +1030,13 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "fuel",
 	recipe = "default:junglegrass",
-	burntime = 2,
+	burntime = 3,
 })
 
 minetest.register_craft({
 	type = "fuel",
 	recipe = "group:leaves",
-	burntime = 1,
+	burntime = 4,
 })
 
 minetest.register_craft({
@@ -1098,7 +1048,7 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "fuel",
 	recipe = "default:papyrus",
-	burntime = 1,
+	burntime = 3,
 })
 
 minetest.register_craft({
@@ -1110,7 +1060,7 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "fuel",
 	recipe = "default:ladder_wood",
-	burntime = 2,
+	burntime = 7,
 })
 
 minetest.register_craft({
@@ -1145,12 +1095,6 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "default:apple",
-	burntime = 3,
-})
-
-minetest.register_craft({
-	type = "fuel",
 	recipe = "default:coal_lump",
 	burntime = 40,
 })
@@ -1170,6 +1114,18 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "fuel",
 	recipe = "default:dry_grass_1",
+	burntime = 2,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:fern_1",
+	burntime = 2,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:marram_grass_1",
 	burntime = 2,
 })
 

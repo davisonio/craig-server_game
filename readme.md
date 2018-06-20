@@ -22,7 +22,7 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * craig_server - Custom code for this server
 * creative
 * darkage
-* default
+* default - Modified to include stone fences
 * doors
 * dye
 * email

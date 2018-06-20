@@ -30,6 +30,14 @@ minetest.override_item("default:dirt_with_rainforest_litter", {
 	}
 })
 
+minetest.override_item("default:dirt_with_coniferous_litter", {
+	soil = {
+		base = "default:dirt_with_coniferous_litter",
+		dry = "farming:soil",
+		wet = "farming:soil_wet"
+	}
+})
+
 minetest.register_node("farming:soil", {
 	description = "Soil",
 	tiles = {"default_dirt.png^farming_soil.png", "default_dirt.png"},
@@ -97,6 +105,16 @@ minetest.register_node("farming:straw", {
 	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30},
 	sounds = default.node_sound_leaves_defaults(),
 })
+
+stairs.register_stair_and_slab(
+	"straw",
+	"farming:straw",
+	{snappy = 3, flammable = 4},
+	{"farming_straw.png"},
+	"Straw Stair",
+	"Straw Slab",
+	default.node_sound_leaves_defaults()
+)
 
 minetest.register_abm({
 	label = "Farming soil",
