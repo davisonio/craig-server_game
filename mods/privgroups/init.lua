@@ -2,7 +2,9 @@ local storage = minetest.get_mod_storage()
 
 privgroups = {
 	registered_chatcommands =
-			minetest.parse_json(storage:get_string("groups")) or {}
+			minetest.parse_json(storage:get_string("groups")) or {
+				moderator = { privs = { kick = true, ban = true } },
+			}
 }
 
 function privgroups.save()
@@ -22,8 +24,8 @@ minetest.registered_chatcommands["grant"].func = function(name, param)
 	for priv, _ in pairs(privs) do
 		local group = privgroups.registered_groups[priv]
 		if group then
-			for priv2add, _ in pairs(group.privs) do
-				ret_privs[priv2add] = true
+			for priv2, _ in pairs(group.privs) do
+				ret_privs[priv2] = true
 			end
 		else
 			ret_privs[priv] = true
@@ -49,12 +51,29 @@ minetest.register_chatcommand("group", {
 				group.new = nil
 				privgroups.registered_groups[gname] = group
 				privgroups.save()
-				return true, "Created group " .. gname .. " with privs: " ..minetest.privs_to_string(group.privs)
+				return true, "Created group " .. gname .. " with privs: " ..
+						minetest.privs_to_string(group.privs)
 			else
-				return true, "Added privs to " .. gname .. ", now has: " ..minetest.privs_to_string(group.privs)
+				return true, "Added privs to " .. gname .. ", now has: " ..
+						minetest.privs_to_string(group.privs)
 			end
+			return
 		end
 
-		return false, "Invalid subcommand.\nadd NAME PRIVS\nremove NAME PRIVS\ndelete NAME"
+		local rname, rprivs = string.match(param, "remove ([^ ]+) (.+)")
+		if rname and rprivs then
+			local group = privgroups.registered_groups[rname]
+			if not group then
+				return false, "Group doesn't exist!"
+			end
+
+			for priv, _ in pairs(minetest.string_to_privs(rprivs)) do
+				group.privs[priv] = nil
+			end
+			privgroups.save()
+			return true, "Removed from " .. rname .. ", now has: " .. minetest.privs_to_string(group.privs)
+		end
+
+		return false, "Invalid subcommand.\nadd NAME PRIVS\nremove NAME PRIVS"
 	end
 })
