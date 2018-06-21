@@ -45,7 +45,7 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * moreores - [GitHub](https://github.com/minetest-mods/moreores)
 * nyancat - From Minetest Game before it got removed
 * player_api - [GitHub](https://github.com/minetest/minetest_game)
-* privgroups - [GitHub](https://github.com/rubenwardy/privgroups)
+* ranks - [GitHub](https://github.com/octacian/ranks)
 * replacer - [GitHub](https://github.com/Sokomine/replacer)
 * report - [GitHub](https://github.com/rubenwardy/report)
 * sban - [GitHub](https://github.com/shivajiva101/sban)
