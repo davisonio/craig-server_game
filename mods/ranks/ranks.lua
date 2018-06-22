@@ -14,10 +14,9 @@ ranks.register("owner", {
 		interact = true,
 		-- builder
 		fly = true,
-		noclip = true,
-		server = true,
-		-- moderator
 		settime = true,
+		-- moderator
+		noclip = true,
 		teleport = true,
 		bring = true,
 		kick = true,
@@ -35,6 +34,7 @@ ranks.register("owner", {
 		rollback = true,
 		irc_admin = true,
 		-- owner
+		server = true,
 		password = true,
 		worldedit = true,
 		give = true,
@@ -56,9 +56,9 @@ ranks.register("admin", {
 		interact = true,
 		-- builder
 		fly = true,
-		noclip = true,
-		-- moderator
 		settime = true,
+		-- moderator
+		noclip = true,
 		teleport = true,
 		bring = true,
 		kick = true,
@@ -92,9 +92,9 @@ ranks.register("moderator", {
 		interact = true,
 		-- builder
 		fly = true,
-		noclip = true,
-		-- moderator
 		settime = true,
+		-- moderator
+		noclip = true,
 		teleport = true,
 		bring = true,
 		kick = true,
@@ -122,6 +122,6 @@ ranks.register("builder", {
 		interact = true,
 		-- builder
 		fly = true,
-		noclip = true
+		settime = true
 	}
 })
