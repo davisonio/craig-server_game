@@ -60,8 +60,8 @@ homedecor.register("bed_regular", {
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		unifieddyes.after_dig_node(pos, oldnode, oldmetadata, digger)
 		homedecor.unextend_bed(pos)
-	end,
-	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+	end
+	--[[ on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		local itemname = itemstack:get_name()
 		if itemname == "homedecor:bed_regular" then
 			homedecor.bed_expansion(pos, clicker, itemstack, pointed_thing, true)
@@ -70,7 +70,7 @@ homedecor.register("bed_regular", {
 			homedecor.beds_on_rightclick(pos, node, clicker)
 			return itemstack
 		end
-	end
+	end ]]--
 })
 
 homedecor.register("bed_extended", {
@@ -96,10 +96,10 @@ homedecor.register("bed_extended", {
 		unifieddyes.after_dig_node(pos, oldnode, oldmetadata, digger)
 		homedecor.unextend_bed(pos)
 	end,
-	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+	--[[on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		homedecor.beds_on_rightclick(pos, node, clicker)
 		return itemstack
-	end,
+	end, --]]
 	drop = "homedecor:bed_regular"
 })
 
@@ -133,11 +133,11 @@ homedecor.register("bed_kingsize", {
 			inv:remove_item("main", "homedecor:bed_kingsize 1")
 			inv:add_item("main", "homedecor:bed_regular 2")
 		end
-	end,
-	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+	end
+	--[[ on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		homedecor.beds_on_rightclick(pos, node, clicker)
 		return itemstack
-	end
+	end ]]--
 })
 
 for _, w in pairs({ N_("mahogany"), N_("oak") }) do
