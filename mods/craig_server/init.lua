@@ -19,3 +19,6 @@ dofile(minetest.get_modpath("craig_server").."/cactus_papyrus.lua")
 
 -- Fix crafts
 dofile(minetest.get_modpath("craig_server").."/craft_fix.lua")
+
+-- Spawn command
+dofile(minetest.get_modpath("craig_server").."/spawn.lua")
