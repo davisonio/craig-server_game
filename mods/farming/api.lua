@@ -41,10 +41,10 @@ farming.hoe_on_use = function(itemstack, user, pointed_thing, uses)
 		return
 	end
 
-	if minetest.is_protected(pt.under, user:get_player_name()) then
+	--[[if minetest.is_protected(pt.under, user:get_player_name()) then
 		minetest.record_protection_violation(pt.under, user:get_player_name())
 		return
-	end
+	end]]
 	if minetest.is_protected(pt.above, user:get_player_name()) then
 		minetest.record_protection_violation(pt.above, user:get_player_name())
 		return
