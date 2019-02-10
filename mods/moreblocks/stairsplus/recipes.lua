@@ -303,7 +303,8 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 		})
 
 		minetest.register_alias(modname .. ":micro_" .. subname .. "_bottom", modname .. ":micro_" .. subname)
-	--[[elseif category == "panel" and alternate == "" then
+		
+	elseif category == "panel" and alternate == "" then
 		minetest.register_craft({
 			output = modname .. ":panel_" .. subname .. " 12",
 			recipe = {
@@ -325,12 +326,14 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 			output = modname .. ":panel_" .. subname,
 			recipe = {modname .. ":micro_" .. subname, modname .. ":micro_" .. subname},
 		})
-
+		
+		--[[
 		minetest.register_craft({
 			type = "shapeless",
 			output = recipeitem,
 			recipe = {modname .. ":panel_" .. subname, modname .. ":panel_" .. subname, modname .. ":panel_" .. subname, modname .. ":panel_" .. subname},
-		})
+		}) 
+		--]]
 
 		minetest.register_alias(modname.. ":panel_" ..subname.. "_bottom", modname.. ":panel_" ..subname)
 	elseif category == "slab" then
@@ -368,13 +371,12 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 				},
 			})
 			------------------------------
-
 			minetest.register_craft({
 				type = "shapeless",
 				output = recipeitem,
 				recipe = {modname .. ":slab_" .. subname, modname .. ":slab_" .. subname},
 			})
-
+			
 			minetest.register_craft({
 				type = "shapeless",
 				output = modname .. ":slab_" .. subname .. " 3",
@@ -417,6 +419,7 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 				recipe =  {modname .. ":slope_" .. subname .. "_outer_cut_half", modname .. ":slope_" .. subname .. "_inner_cut_half"},
 			})
 		elseif alternate == "_quarter" then
+			--[[
 			minetest.register_craft({
 				type = "shapeless",
 				output = recipeitem,
@@ -428,6 +431,7 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 				output = recipeitem,
 				recipe = {modname .. ":slab_" .. subname .. "_three_quarter", modname .. ":slab_" .. subname .. "_quarter"},
 			})
+			--]]
 
 			minetest.register_craft({
 				type = "shapeless",
@@ -459,7 +463,7 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 				recipe = {modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2"},
 			})
 		elseif alternate == "_2" then
-			minetest.register_craft({
+			--[[minetest.register_craft({
 				type = "shapeless",
 				output = recipeitem,
 				recipe = {modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2"},
@@ -469,7 +473,7 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 				type = "shapeless",
 				output = recipeitem,
 				recipe = {modname .. ":slab_" .. subname .. "_14", modname .. ":slab_" .. subname .. "_2"},
-			})
+			})]]
 
 			minetest.register_craft({
 				type = "shapeless",
@@ -489,11 +493,13 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 				recipe = {modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2", modname .. ":slab_" .. subname .. "_2"},
 			})
 		elseif alternate == "_15" then
+			--[[
 			minetest.register_craft({
 				type = "shapeless",
 				output = recipeitem,
 				recipe = {modname .. ":slab_" .. subname .. "_15", modname .. ":slab_" .. subname .. "_1"},
 			})
+			--]]
 
 			minetest.register_craft({
 				type = "shapeless",
@@ -509,6 +515,7 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 				recipe =  {modname .. ":slope_" .. subname, modname .. ":slope_" .. subname},
 			})
 		elseif alternate == "_half" then
+			--[[
 			minetest.register_craft({
 				type = "shapeless",
 				output = recipeitem,
@@ -521,6 +528,8 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 				recipe =  {modname .. ":slope_" .. subname .. "_half", modname .. ":slope_" .. subname .. "_half",
 					modname .. ":slope_" .. subname .. "_half", modname .. ":slope_" .. subname .. "_half"},
 			})
+			--]]
+		--[[
 		elseif alternate == "_outer" then
 			minetest.register_craft({
 				type = "shapeless",
@@ -557,6 +566,7 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 				output = recipeitem,
 				recipe =  {modname .. ":slope_" .. subname .. "_cut", modname .. ":slope_" .. subname .. "_cut"},
 			})
+		--]]
 		elseif alternate == "_half_raised" then
 			minetest.register_craft({
 				type = "shapeless",
@@ -684,6 +694,6 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 					{modname .. ":panel_" .. subname, ""},
 				},
 			})
-		end]]
+		end
 	end
 end
