@@ -38,3 +38,10 @@ minetest.register_craft({
 		{"darkage:stone_brick", "darkage:stone_brick", "darkage:stone_brick"}
 	}
 })
+
+minetest.register_craft({
+	output = 'default:skeleton_key',
+	recipe = {
+		{'default:gold_ingot', 'default:gold_ingot'},
+	}
+})
