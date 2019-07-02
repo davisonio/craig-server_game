@@ -1,5 +1,7 @@
-local function has_locked_chest_privilege(meta, player)
-	if player:get_player_name() ~= meta:get_string("owner") then
+local function has_locked_chest_privilege(meta, player, pos)
+	if default.can_interact_with_node(player, pos) then
+		return true
+	elseif player:get_player_name() ~= meta:get_string("owner") then
 		return false
 	end
 	return true
@@ -57,7 +59,7 @@ minetest.register_node("more_chests:cobble", {
 	end,
 	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 		local meta = minetest.get_meta(pos)
-		if not has_locked_chest_privilege(meta, player) then
+		if not has_locked_chest_privilege(meta, player, pos) then
 			minetest.log("action", player:get_player_name()..
 					" tried to access a locked chest belonging to "..
 					meta:get_string("owner").." at "..
@@ -68,7 +70,7 @@ minetest.register_node("more_chests:cobble", {
 	end,
     allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
-		if not has_locked_chest_privilege(meta, player) then
+		if not has_locked_chest_privilege(meta, player, pos) then
 			minetest.log("action", player:get_player_name()..
 					" tried to access a locked chest belonging to "..
 					meta:get_string("owner").." at "..
@@ -79,7 +81,7 @@ minetest.register_node("more_chests:cobble", {
 	end,
     allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
-		if not has_locked_chest_privilege(meta, player) then
+		if not has_locked_chest_privilege(meta, player, pos) then
 			minetest.log("action", player:get_player_name()..
 					" tried to access a locked chest belonging to "..
 					meta:get_string("owner").." at "..
