@@ -13,6 +13,8 @@ end
 function irc.player_join(name)
 	if irc.joined_players[name] then
 		return false, "You are already in the channel"
+	elseif not minetest.get_player_by_name(name) then
+		return false, "You need to be in-game to join the channel"
 	end
 	irc.joined_players[name] = true
 	return true, "You joined the channel"
@@ -63,7 +65,8 @@ end)
 
 function irc.sendLocal(message)
 	for name, _ in pairs(irc.joined_players) do
-		minetest.chat_send_player(name, message)
+		minetest.chat_send_player(name,
+					minetest.colorize(irc.config.chat_color, message))
 	end
 	irc.logChat(message)
 end
