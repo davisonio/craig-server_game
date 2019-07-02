@@ -9,10 +9,37 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Brazilian translation.
+- Polish translation.
+
+### Changed
+
+- The minimum supported Minetest version is now 5.0.0.
+- Copper rails are now registered using functions from the `carts` mod,
+  making them interoperate seamlessly with default rails.
+  - Copper rails can no longer be placed in the air.
+
+## [1.1.0] - 2019-03-23
+
+### Added
+
+- Brazilian and Dutch translations.
+
+### Changed
+
+- Ores are now slower to mine and cannot be mined using wooden tools anymore.
+- Updated intllib support to avoid using deprecated functions.
+
+### Deprecated
+
+- Deprecated hoes to follow Minetest Game's deprecation of hoes
+  made of "rare" materials.
+  - Hoes are still available in existing worlds, but they
+    cannot be crafted anymore.
 
 ### Fixed
 
+- Hoes now use the `farming` mod's handling function and can no longer
+  turn desert sand into dirt.
 - Handle tin which is now included in [Minetest Game](https://github.com/minetest/minetest_game).
   If it is detected, then the tin nodes and items from More Ores won't be registered.
 
@@ -20,4 +47,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Initial versioned release.
 
-[Unreleased]: https://github.com/minetest-mods/moreblocks/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/minetest-mods/moreores/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/minetest-mods/moreores/compare/v1.0.0...v1.1.0
