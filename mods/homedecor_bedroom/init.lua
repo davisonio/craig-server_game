@@ -127,6 +127,7 @@ homedecor.register("bed_kingsize", {
 			inv:remove_item("main", "homedecor:bed_kingsize 1")
 			inv:add_item("main", "homedecor:bed_regular 2")
 		end
+	end
 --	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 --		homedecor.beds_on_rightclick(pos, node, clicker)
 --		return itemstack
