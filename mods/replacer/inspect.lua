@@ -92,7 +92,7 @@ replacer.inspect = function( itemstack, user, pointed_thing, mode, show_receipe 
 			end
 
 		end
-		text = text..' at '..minetest.pos_to_string( ref:getpos() );
+		text = text..' at '..minetest.pos_to_string( ref:get_pos() );
 		minetest.chat_send_player( name, text );
 		return nil;
 	elseif( pointed_thing.type ~= 'node' ) then
