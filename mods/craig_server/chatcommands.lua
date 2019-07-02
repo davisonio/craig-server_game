@@ -19,19 +19,6 @@ minetest.register_chatcommand("mods", {
 	end,
 })
 
--- Spawn command
-minetest.register_chatcommand("spawn", {
-    params = "",
-    description = "Teleport to the spawn location.",
-    privs = {shout=true},
-    func = function(name, param)
-            local player = minetest.get_player_by_name(name)
-            minetest.chat_send_player(name, "Teleported to spawn!")
-            player:setpos(minetest.string_to_pos(minetest.setting_get("static_spawnpoint")))
-            return true
-    end,
-})
-
 -- Sethome command (from some old mod somewhere)
 minetest.register_chatcommand("sethome", {
         params = "",
