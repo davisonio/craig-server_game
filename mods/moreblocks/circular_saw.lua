@@ -1,11 +1,12 @@
 --[[
 More Blocks: circular saw
 
-Copyright (c) 2011-2017 Hugo Locurcio, Sokomine and contributors.
+Copyright © 2011-2019 Hugo Locurcio, Sokomine and contributors.
 Licensed under the zlib license. See LICENSE.md for more information.
 --]]
 
-local S = moreblocks.intllib
+local S = moreblocks.S
+local F = minetest.formspec_escape
 
 circular_saw = {}
 
@@ -126,15 +127,20 @@ end
 function circular_saw:reset(pos)
 	local meta = minetest.get_meta(pos)
 	local inv  = meta:get_inventory()
+	local owned_by = meta:get_string("owner")
+
+	if owned_by and owned_by ~= "" then
+		owned_by = (" (%s)"):format(S("owned by @1", meta:get_string("owner")))
+	else
+		owned_by = ""
+	end
 
 	inv:set_list("input",  {})
 	inv:set_list("micro",  {})
 	inv:set_list("output", {})
-	meta:set_int("anz", 0)
 
-	meta:set_string("infotext",
-			S("Circular Saw is empty (owned by %s)")
-			:format(meta:get_string("owner") or ""))
+	meta:set_int("anz", 0)
+	meta:set_string("infotext", S("Circular Saw is empty") .. owned_by)
 end
 
 
@@ -146,7 +152,7 @@ function circular_saw:update_inventory(pos, amount)
 
 	amount = meta:get_int("anz") + amount
 
-	-- The material is recycled automaticly.
+	-- The material is recycled automatically.
 	inv:set_list("recycle",  {})
 
 	if amount < 1 then -- If the last block is taken out.
@@ -164,9 +170,17 @@ function circular_saw:update_inventory(pos, amount)
 
 	end
 	local node_name = stack:get_name() or ""
+	local node_def = stack:get_definition()
 	local name_parts = circular_saw.known_nodes[node_name] or ""
 	local modname  = name_parts[1] or ""
 	local material = name_parts[2] or ""
+	local owned_by = meta:get_string("owner")
+
+	if owned_by and owned_by ~= "" then
+		owned_by = (" (%s)"):format(S("owned by @1", meta:get_string("owner")))
+	else
+		owned_by = ""
+	end
 
 	inv:set_list("input", { -- Display as many full blocks as possible:
 		node_name.. " " .. math.floor(amount / 8)
@@ -191,8 +205,10 @@ function circular_saw:update_inventory(pos, amount)
 	meta:set_int("anz", amount)
 
 	meta:set_string("infotext",
-			S("Circular Saw is working on %s (owned by %s)")
-			:format(material, meta:get_string("owner") or ""))
+		S("Circular Saw is working on @1",
+			node_def and node_def.description or material
+		) .. owned_by
+	)
 end
 
 
@@ -230,7 +246,7 @@ function circular_saw.allow_metadata_inventory_put(
 	local stackname = stack:get_name()
 	local count = stack:get_count()
 
-	-- Only alow those items that are offered in the output inventory to be recycled:
+	-- Only allow those items that are offered in the output inventory to be recycled:
 	if listname == "recycle" then
 		if not inv:contains_item("output", stackname) then
 			return 0
@@ -329,7 +345,7 @@ function circular_saw.on_metadata_inventory_take(
 	end
 
 	-- If it is one of the offered stairs: find out how many
-	-- microblocks have to be substracted:
+	-- microblocks have to be subtracted:
 	if listname == "output" then
 		-- We do know how much each block at each position costs:
 		local cost = circular_saw.cost_in_microblocks[index]
@@ -351,14 +367,14 @@ function circular_saw.on_construct(pos)
 	local fancy_inv = default.gui_bg..default.gui_bg_img..default.gui_slots
 	meta:set_string(
 		"formspec", "size[11,10]"..fancy_inv..
-		"label[0,0;" ..S("Input\nmaterial").. "]" ..
+		"label[0,0;" ..F(S("Input\nmaterial")).. "]" ..
 		"list[current_name;input;1.5,0;1,1;]" ..
-		"label[0,1;" ..S("Left-over").. "]" ..
+		"label[0,1;" ..F(S("Left-over")).. "]" ..
 		"list[current_name;micro;1.5,1;1,1;]" ..
-		"label[0,2;" ..S("Recycle\noutput").. "]" ..
+		"label[0,2;" ..F(S("Recycle\noutput")).. "]" ..
 		"list[current_name;recycle;1.5,2;1,1;]" ..
-		"field[0.3,3.5;1,1;max_offered;" ..S("Max").. ":;${max_offered}]" ..
-		"button[1,3.2;1,1;Set;" ..S("Set").. "]" ..
+		"field[0.3,3.5;1,1;max_offered;" ..F(S("Max")).. ":;${max_offered}]" ..
+		"button[1,3.2;1,1;Set;" ..F(S("Set")).. "]" ..
 		"list[current_name;output;2.8,0;8,6;]" ..
 		"list[current_player;main;1.5,6.25;8,4;]" ..
 		"listring[current_name;output]" ..
@@ -427,10 +443,14 @@ minetest.register_node("moreblocks:circular_saw",  {
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos)
 		local owner = placer and placer:get_player_name() or ""
+		local owned_by = owner
+
+		if owner ~= "" then
+			owned_by = (" (%s)"):format(S("owned by @1", owner))
+		end
+
 		meta:set_string("owner",  owner)
-		meta:set_string("infotext",
-				S("Circular Saw is empty (owned by %s)")
-				:format(owner))
+		meta:set_string("infotext", S("Circular Saw is empty") .. owned_by)
 	end,
 
 	-- The amount of items offered per shape can be configured:

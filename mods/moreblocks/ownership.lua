@@ -1,11 +1,11 @@
 --[[
 More Blocks: ownership handling
 
-Copyright (c) 2011-2017 Hugo Locurcio and contributors.
+Copyright © 2011-2019 Hugo Locurcio and contributors.
 Licensed under the zlib license. See LICENSE.md for more information.
 --]]
 
-local S = moreblocks.gettext
+local S = moreblocks.S
 
 function moreblocks.node_is_owned(pos, placer)
 	local ownername = false
@@ -33,7 +33,7 @@ function moreblocks.node_is_owned(pos, placer)
 	end
 
 	if ownername ~= false then
-		minetest.chat_send_player( placer:get_player_name(), S("Sorry, %s owns that spot."):format(ownername) )
+		minetest.chat_send_player( placer:get_player_name(), S("Sorry, @1 owns that spot.", ownername) )
 		return true
 	else
 		return false

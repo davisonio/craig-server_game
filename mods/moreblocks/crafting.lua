@@ -1,7 +1,7 @@
 --[[
 More Blocks: crafting recipes
 
-Copyright (c) 2011-2017 Hugo Locurcio and contributors.
+Copyright © 2011-2019 Hugo Locurcio and contributors.
 Licensed under the zlib license. See LICENSE.md for more information.
 --]]
 
@@ -44,12 +44,8 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
-	type = "shapeless",
-	output = "moreblocks:wood_tile",
-	recipe = {"moreblocks:wood_tile_flipped"}
-})
-
+-- This must be registered after `moreblocks:wood_tile` to avoid recipe conflicts,
+-- since `moreblocks:wood_tile` is part of `group:wood`
 minetest.register_craft({
 	output = "moreblocks:wood_tile_center 9",
 	recipe = {
@@ -57,6 +53,12 @@ minetest.register_craft({
 		{"group:wood", "moreblocks:wood_tile", "group:wood"},
 		{"group:wood", "group:wood", "group:wood"},
 	}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "moreblocks:wood_tile",
+	recipe = {"moreblocks:wood_tile_flipped"}
 })
 
 minetest.register_craft({
