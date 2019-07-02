@@ -127,19 +127,10 @@ homedecor.register("bed_kingsize", {
 			inv:remove_item("main", "homedecor:bed_kingsize 1")
 			inv:add_item("main", "homedecor:bed_regular 2")
 		end
-<<<<<<< HEAD:mods/homedecor/bedroom.lua
-	end
-	--[[ on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-		homedecor.beds_on_rightclick(pos, node, clicker)
-		return itemstack
-	end ]]--
-=======
-	end,
 --	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 --		homedecor.beds_on_rightclick(pos, node, clicker)
 --		return itemstack
 --	end,
->>>>>>> Update homedecor:mods/homedecor_bedroom/init.lua
 })
 
 for _, w in pairs({ N_("mahogany"), N_("oak") }) do
