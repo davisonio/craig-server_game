@@ -30,7 +30,7 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * farming - [GitHub](https://github.com/minetest/minetest_game)
 * flowers - [GitHub](https://github.com/minetest/minetest_game)
 * give_initial_stuff - [GitHub](https://github.com/minetest/minetest_game)
-* gloopblocks - Modified to disable nyancat crafting - [GitLab](https://gitlab.com/VanessaE/gloopblocks)
+* gloopblocks - Modified to disable nyan cat crafting - [GitLab](https://gitlab.com/VanessaE/gloopblocks)
 * home_gui - [GitHub](https://github.com/cornernote/minetest-home_gui)
 * homedecor_* - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * irc - [GitHub](https://github.com/minetest-mods/irc)
