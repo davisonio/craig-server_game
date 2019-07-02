@@ -114,16 +114,10 @@ minetest.register_node("travelnet:elevator", {
 		},
 	},
 
-	tiles = {
-		"travelnet_elevator_front.png",
-		"travelnet_elevator_inside_controls.png",
-		"travelnet_elevator_sides_outside.png",
-		"travelnet_elevator_inside_ceiling.png",
-		"travelnet_elevator_inside_floor.png",
-		"default_steel_block.png"
-	},
-	inventory_image = "travelnet_elevator_inv.png",
-	groups = {cracky=1,choppy=1,snappy=1},
+	tiles = travelnet.tiles_elevator,
+
+	inventory_image = travelnet.elevator_inventory_image,
+	groups = {}, --cracky=1,choppy=1,snappy=1,
 
     light_source = 10,
 
@@ -149,9 +143,7 @@ minetest.register_node("travelnet:elevator", {
     
     on_receive_fields = travelnet.on_receive_fields,
     on_punch          = function(pos, node, puncher)
-                          if( not( travelnet.check_if_trying_to_dig( puncher, node ))) then
                              travelnet.update_formspec(pos, puncher:get_player_name())
-                          end
     end,
 
     can_dig = function( pos, player )
