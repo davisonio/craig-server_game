@@ -92,17 +92,10 @@ homedecor.register("bed_extended", {
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		homedecor.unextend_bed(pos)
 	end,
-<<<<<<< HEAD:mods/homedecor/bedroom.lua
-	--[[on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-		homedecor.beds_on_rightclick(pos, node, clicker)
-		return itemstack
-	end, --]]
-=======
 --	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 --		homedecor.beds_on_rightclick(pos, node, clicker)
 --		return itemstack
 --	end,
->>>>>>> Update homedecor:mods/homedecor_bedroom/init.lua
 	drop = "homedecor:bed_regular"
 })
 
