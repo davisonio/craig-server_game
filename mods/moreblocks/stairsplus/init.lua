@@ -1,7 +1,7 @@
 --[[
 More Blocks: Stairs+
 
-Copyright (c) 2011-2017 Hugo Locurcio and contributors.
+Copyright © 2011-2019 Hugo Locurcio and contributors.
 Licensed under the zlib license. See LICENSE.md for more information.
 --]]
 
@@ -14,8 +14,10 @@ stairsplus.expect_infinite_stacks = false
 
 stairsplus.shapes_list = {}
 
-if not minetest.get_modpath("unified_inventory")
-and minetest.settings:get_bool("creative_mode") then
+if
+	not minetest.get_modpath("unified_inventory")
+	and minetest.settings:get_bool("creative_mode")
+then
 	stairsplus.expect_infinite_stacks = true
 end
 
@@ -36,7 +38,7 @@ end
 
 function stairsplus:register_all(modname, subname, recipeitem, fields)
 	self:register_stair(modname, subname, recipeitem, fields)
-	self:register_slab (modname, subname, recipeitem, fields)
+	self:register_slab(modname, subname, recipeitem, fields)
 	self:register_slope(modname, subname, recipeitem, fields)
 	self:register_panel(modname, subname, recipeitem, fields)
 	self:register_micro(modname, subname, recipeitem, fields)
@@ -58,7 +60,8 @@ function stairsplus:register_alias_force_all(modname_old, subname_old, modname_n
 	self:register_micro_alias_force(modname_old, subname_old, modname_new, subname_new)
 end
 
-function register_stair_slab_panel_micro(modname, subname, recipeitem, groups, images, description, drop, light)
+-- luacheck: no unused
+local function register_stair_slab_panel_micro(modname, subname, recipeitem, groups, images, description, drop, light)
 	stairsplus:register_all(modname, subname, recipeitem, {
 		groups = groups,
 		tiles = images,

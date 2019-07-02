@@ -109,7 +109,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if fields.home_gui_go then
 		home_gui.go_home(player)
 	end
-	if fields.home_gui or fields.home_gui_set or fields.home_gui_go then
+	if fields.main or fields.home_gui or fields.home_gui_set or fields.home_gui_go then
 		if use_sfinv then
 			sfinv.set_page(player, "sfinv_buttons:buttons")
 		else

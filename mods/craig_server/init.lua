@@ -22,3 +22,6 @@ dofile(minetest.get_modpath("craig_server").."/craft_fix.lua")
 
 -- Spawn command
 dofile(minetest.get_modpath("craig_server").."/spawn.lua")
+
+-- Fix main inventory (incompatible with sinv)
+dofile(minetest.get_modpath("craig_server").."/main_inv_fix.lua")

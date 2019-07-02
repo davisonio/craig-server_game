@@ -50,16 +50,14 @@ local function book_on_use(itemstack, user)
 
 	local formspec
 	if owner == player_name then
-		formspec = "size[8,8]" .. default.gui_bg ..
-			default.gui_bg_img ..
+		formspec = "size[8,8]" ..
 			"field[0.5,1;7.5,0;title;Title:;" ..
 				minetest.formspec_escape(title) .. "]" ..
 			"textarea[0.5,1.5;7.5,7;text;Contents:;" ..
 				minetest.formspec_escape(text) .. "]" ..
 			"button_exit[2.5,7.5;3,1;save;Save]"
 	else
-		formspec = "size[8,8]" .. default.gui_bg ..
-			default.gui_bg_img ..
+		formspec = "size[8,8]" ..
 			"label[0.5,0.5;by " .. owner .. "]" ..
 			"tablecolumns[color;text]" ..
 			"tableoptions[background=#00000000;highlight=#00000000;border=false]" ..
@@ -121,7 +119,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			if inv:room_for_item("main", new_stack) then
 				inv:add_item("main", new_stack)
 			else
-				minetest.add_item(player:getpos(), new_stack)
+				minetest.add_item(player:get_pos(), new_stack)
 			end
 		else
 			stack:get_meta():from_table({ fields = data })
@@ -247,7 +245,7 @@ minetest.register_craftitem("default:skeleton_key", {
 				itemstack = new_stack
 			else
 				if inv:add_item("main", new_stack):get_count() > 0 then
-					minetest.add_item(user:getpos(), new_stack)
+					minetest.add_item(user:get_pos(), new_stack)
 				end -- else: added to inventory successfully
 			end
 
@@ -264,17 +262,17 @@ minetest.register_craftitem("default:coal_lump", {
 
 minetest.register_craftitem("default:iron_lump", {
 	description = "Iron Lump",
-	inventory_image = "default_iron_lump.png",
+	inventory_image = "default_iron_lump.png"
 })
 
 minetest.register_craftitem("default:copper_lump", {
 	description = "Copper Lump",
-	inventory_image = "default_copper_lump.png",
+	inventory_image = "default_copper_lump.png"
 })
 
 minetest.register_craftitem("default:tin_lump", {
 	description = "Tin Lump",
-	inventory_image = "default_tin_lump.png",
+	inventory_image = "default_tin_lump.png"
 })
 
 minetest.register_craftitem("default:mese_crystal", {
@@ -284,7 +282,7 @@ minetest.register_craftitem("default:mese_crystal", {
 
 minetest.register_craftitem("default:gold_lump", {
 	description = "Gold Lump",
-	inventory_image = "default_gold_lump.png",
+	inventory_image = "default_gold_lump.png"
 })
 
 minetest.register_craftitem("default:diamond", {
@@ -299,22 +297,22 @@ minetest.register_craftitem("default:clay_lump", {
 
 minetest.register_craftitem("default:steel_ingot", {
 	description = "Steel Ingot",
-	inventory_image = "default_steel_ingot.png",
+	inventory_image = "default_steel_ingot.png"
 })
 
 minetest.register_craftitem("default:copper_ingot", {
 	description = "Copper Ingot",
-	inventory_image = "default_copper_ingot.png",
+	inventory_image = "default_copper_ingot.png"
 })
 
 minetest.register_craftitem("default:tin_ingot", {
 	description = "Tin Ingot",
-	inventory_image = "default_tin_ingot.png",
+	inventory_image = "default_tin_ingot.png"
 })
 
 minetest.register_craftitem("default:bronze_ingot", {
 	description = "Bronze Ingot",
-	inventory_image = "default_bronze_ingot.png",
+	inventory_image = "default_bronze_ingot.png"
 })
 
 minetest.register_craftitem("default:gold_ingot", {
@@ -340,4 +338,11 @@ minetest.register_craftitem("default:obsidian_shard", {
 minetest.register_craftitem("default:flint", {
 	description = "Flint",
 	inventory_image = "default_flint.png"
+})
+
+minetest.register_craftitem("default:blueberries", {
+	description = "Blueberries",
+	inventory_image = "default_blueberries.png",
+	groups = {food_blueberries = 1, food_berry = 1},
+	on_use = minetest.item_eat(2),
 })

@@ -253,43 +253,6 @@ local function list_bans(id)
 	return r
 end
 
-local function find_records(name_or_ip)
-	local r,q = {}
-	if ip_checker(name_or_ip) then
-		-- construct
-		q = ([[
-			SELECT  players.id,
-				players.ban,
-				playerdata.name,
-				playerdata.ip,
-				playerdata.created,
-				playerdata.last_login
-			FROM players
-			INNER JOIN
-				playerdata ON playerdata.id = players.id
-			WHERE playerdata.ip = '%s';
-		]]):format(name_or_ip)
-	else
-		q = ([[
-			SELECT  players.id,
-				players.ban,
-				playerdata.name,
-				playerdata.ip,
-				playerdata.created,
-				playerdata.last_login
-			FROM players
-			INNER JOIN
-				playerdata ON playerdata.id = players.id
-			WHERE playerdata.name = '%s';
-		]]):format(name_or_ip)
-	end
-	-- fill return table
-	for row in db:nrows(q) do
-		r[#r + 1] = row
-	end
-	return r
-end
-
 local function find_records_by_id(id)
 	local r = {}
 	local q = ([[
@@ -1546,7 +1509,7 @@ minetest.register_chatcommand("tempban", {
 				return false, "Player doesn't exist!"
 			end
 			-- create entry before ban
-			create_entry(player_name, "0.0.0.0")
+			id = create_entry(player_name, "0.0.0.0") -- arbritary ip
 			ban_player(player_name, name, reason, expires)
 			if not(active_ban(id) and active_ban_record(id)) then
 				minetest.log("error", "Failed to ban "..player_name)
@@ -1693,8 +1656,6 @@ minetest.register_on_prejoinplayer(function(name, ip)
 	local banned = active_ban(id)
 	if not banned then
 		if names_per_id then
-			-- owner exemption
-			if name == owner then return end
 			-- names per ip
 			local names = account_names(id)
 			-- allow existing
@@ -1748,8 +1709,6 @@ minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
 	local ip = minetest.get_player_ip(name)
 	if not ip then return end
-	local record = find_records(name)
-	local ip_record
 	local id = get_id(name)
 
 	hotlistp(name)

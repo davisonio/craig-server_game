@@ -1,5 +1,5 @@
 
-          
+
 --[[
     Teleporter networks that allow players to choose a destination out of a list
     Copyright (C) 2013 Sokomine
@@ -17,13 +17,23 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- Version: 2.2 (with optional abm for self-healing)
-    
+ Version: 2.3 (click button to dig)
+
  Please configure this mod in config.lua
 
  Changelog:
+ 10.03.19 - Added the extra config buttons for locked_travelnet mod.
+ 09.03.19 - Several PRs merged (sound added, locale changed etc.)
+            Version bumped to 2.3
+ 26.02.19 - Removing a travelnet can now be done by clicking on a button (no need to
+            wield a diamond pick anymore)
+ 26.02.19 - Added compatibility with MineClone2
+ 22.09.18 - Move up/move down no longer close the formspec.
+ 22.09.18 - If in creative mode, wield a diamond pick to dig the station. This avoids
+            conflicts with too fast punches.
  24.12.17 - Added support for localization through intllib.
             Added localization for German (de).
+            Door opening/closing can now handle more general doors.
  17.07.17 - Added more detailled licence information.
             TNT and DungeonMasters ought to leave travelnets and elevators untouched now.
             Added function to register elevator doors.
@@ -74,57 +84,65 @@
           - target list is now centered if there are less than 9 targets
 --]]
 
+-- Required to save the travelnet data properly in all cases
+if not minetest.safe_file_write then
+	error("[Mod travelnet] Your Minetest version is no longer supported. (version < 0.4.17)")
+end
 
 travelnet = {};
 
 travelnet.targets = {};
+travelnet.path = minetest.get_modpath(minetest.get_current_modname())
 
--- Boilerplate to support localized strings if intllib mod is installed.
-if minetest.get_modpath( "intllib" ) and intllib then
-	travelnet.S = intllib.Getter()
-else
-	travelnet.S = function(s) return s end
-end
 
-local S = travelnet.S;
+-- Intllib
+local S = dofile(travelnet.path .. "/intllib.lua")
+travelnet.S = S
+
 
 minetest.register_privilege("travelnet_attach", { description = S("allows to attach travelnet boxes to travelnets of other players"), give_to_singleplayer = false});
 minetest.register_privilege("travelnet_remove", { description = S("allows to dig travelnet boxes which belog to nets of other players"), give_to_singleplayer = false});
 
 -- read the configuration
-dofile(minetest.get_modpath("travelnet").."/config.lua"); -- the normal, default travelnet
+dofile(travelnet.path.."/config.lua"); -- the normal, default travelnet
 
-
+travelnet.mod_data_path = minetest.get_worldpath().."/mod_travelnet.data"
 
 -- TODO: save and restore ought to be library functions and not implemented in each individual mod!
 -- called whenever a station is added or removed
 travelnet.save_data = function()
-   
-   local data = minetest.serialize( travelnet.targets );
-   local path = minetest.get_worldpath().."/mod_travelnet.data";
 
-   local file = io.open( path, "w" );
-   if( file ) then
-      file:write( data );
-      file:close();
-   else
-      print(S("[Mod travelnet] Error: Savefile '%s' could not be written."):format(tostring(path)));
+   local data = minetest.serialize( travelnet.targets );
+
+   local success = minetest.safe_file_write( travelnet.mod_data_path, data );
+   if( not success ) then
+      print(S("[Mod travelnet] Error: Savefile '%s' could not be written.")
+         :format(travelnet.mod_data_path));
    end
 end
 
 
 travelnet.restore_data = function()
-
-   local path = minetest.get_worldpath().."/mod_travelnet.data";
    
-   local file = io.open( path, "r" );
-   if( file ) then
-      local data = file:read("*all");
-      travelnet.targets = minetest.deserialize( data );
-      file:close();
-   else
-      print(S("[Mod travelnet] Error: Savefile '%s' not found."):format(tostring(path)));
+   local file = io.open( travelnet.mod_data_path, "r" );
+   if( not file ) then
+      print(S("[Mod travelnet] Error: Savefile '%s' not found.")
+         :format(travelnet.mod_data_path));
+      return;
    end
+
+   local data = file:read("*all");
+   travelnet.targets = minetest.deserialize( data );
+
+   if( not travelnet.targets ) then
+       local backup_file = travelnet.mod_data_path..".bak"
+       print(S("[Mod travelnet] Error: Savefile '%s' is damaged. Saved the backup as '%s'.")
+          :format(travelnet.mod_data_path, backup_file));
+
+       minetest.safe_file_write( backup_file, data );
+       travelnet.targets = {};
+   end
+   file:close();
 end
 
 
@@ -135,6 +153,14 @@ end
 travelnet.check_if_trying_to_dig = function( puncher, node )
 	-- if in doubt: show formspec
 	if( not( puncher) or not( puncher:get_wielded_item())) then
+		return false;
+	end
+	-- show menu when in creative mode
+        if(   creative
+	  and creative.is_enabled_for(puncher:get_player_name())
+--          and (not(puncher:get_wielded_item())
+--                or puncher:get_wielded_item():get_name()~="default:pick_diamond")) then
+		) then
 		return false;
 	end
 	local tool_capabilities = puncher:get_wielded_item():get_tool_capabilities();
@@ -179,6 +205,9 @@ end
 travelnet.form_input_handler = function( player, formname, fields)
         if(formname == "travelnet:show" and fields and fields.pos2str) then
 		local pos = minetest.string_to_pos( fields.pos2str );
+		if( locks and (fields.locks_config or fields.locks_authorize)) then
+			return locks:lock_handle_input( pos, formname, fields, player )
+		end
 		-- back button leads back to the main menu
 		if( fields.back and fields.back ~= "" ) then
 			return travelnet.show_current_formspec( pos,
@@ -212,13 +241,14 @@ travelnet.reset_formspec = function( meta )
       meta:set_string("formspec",
 		"size[10,6.0]"..
 		"label[2.0,0.0;--> "..S("Configure this travelnet station").." <--]"..
+		"button_exit[8.0,0.0;2.2,0.7;station_dig;"..S("Remove station").."]"..
 		"field[0.3,1.2;9,0.9;station_name;"..S("Name of this station")..":;"..
 			minetest.formspec_escape(station_name or "").."]"..
 		"label[0.3,1.5;"..S("How do you call this place here? Example: \"my first house\", \"mine\", \"shop\"...").."]"..
 
 		"field[0.3,2.8;9,0.9;station_network;"..S("Assign to Network:")..";"..
 			minetest.formspec_escape(station_network or "").."]"..
-		"label[0.3,3.1;"..S("You can have more than one network. If unsure, use \"%s\""):format(tostring(station_network)).."\".]"..
+		"label[0.3,3.1;"..S("You can have more than one network. If unsure, use \"%s\""):format(tostring(station_network))..".]"..
 		"field[0.3,4.4;9,0.9;owner;"..S("Owned by:")..";]"..
 		"label[0.3,4.7;"..S("Unless you know what you are doing, leave this empty.").."]"..
 		"button_exit[1.3,5.3;1.7,0.7;station_help_setup;"..S("Help").."]"..
@@ -235,7 +265,7 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
 
    if( this_node ~= nil and this_node.name == 'travelnet:elevator' ) then
       is_elevator = true;
-   end 
+   end
 
    if( not( meta )) then
       return;
@@ -245,7 +275,7 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
    local station_name    = meta:get_string( "station_name" );
    local station_network = meta:get_string( "station_network" );
 
-   if(  not( owner_name ) 
+   if(  not( owner_name )
      or not( station_name ) or station_network == ''
      or not( station_network )) then
 
@@ -275,7 +305,7 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
       if( not( travelnet.targets[ owner_name ] )) then
          travelnet.targets[       owner_name ] = {};
       end
- 
+
       -- first station on this network?
       if( not( travelnet.targets[ owner_name ][ station_network ] )) then
          travelnet.targets[       owner_name ][ station_network ] = {};
@@ -299,8 +329,10 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
    -- add name of station + network + owner + update-button
    local zusatzstr = "";
    local trheight = "10";
-   if( this_node and this_node.name=="locked_travelnet:travelnet" ) then
-      zusatzstr = "field[0.3,11;6,0.7;locks_sent_lock_command;"..S("Locked travelnet. Type /help for help:")..";]";
+   if( this_node and this_node.name=="locked_travelnet:travelnet" and locks) then
+      zusatzstr = "field[0.3,11;6,0.7;locks_sent_lock_command;"..S("Locked travelnet. Type /help for help:")..";]"..
+		  locks.get_authorize_button(10,"10.5")..
+		  locks.get_config_button(11,"10.5")
       trheight = "11.5";
    end
    local formspec = "size[12,"..trheight.."]"..
@@ -318,15 +350,15 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
 
    -- collect all station names in a table
    local stations = {};
-   
+
    for k,v in pairs( travelnet.targets[ owner_name ][ station_network ] ) do
       table.insert( stations, k );
    end
    -- minetest.chat_send_player(puncher_name, "stations: "..minetest.serialize( stations ));
-    
+
    local ground_level = 1;
    if( is_elevator ) then
-      table.sort( stations, function(a,b) return travelnet.targets[ owner_name ][ station_network ][ a ].pos.y > 
+      table.sort( stations, function(a,b) return travelnet.targets[ owner_name ][ station_network ][ a ].pos.y >
                                                  travelnet.targets[ owner_name ][ station_network ][ b ].pos.y  end);
       -- find ground level
       local vgl_timestamp = 999999999999;
@@ -335,7 +367,7 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
             travelnet.targets[ owner_name ][ station_network ][ k ].timestamp = os.time();
          end
          if( travelnet.targets[ owner_name ][ station_network ][ k ].timestamp < vgl_timestamp ) then
-            vgl_timestamp = travelnet.targets[ owner_name ][ station_network ][ k ].timestamp;       
+            vgl_timestamp = travelnet.targets[ owner_name ][ station_network ][ k ].timestamp;
             ground_level  = index;
          end
       end
@@ -346,10 +378,10 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
             travelnet.targets[ owner_name ][ station_network ][ k ].nr = tostring( ground_level - index );
          end
       end
-            
-   else 
+
+   else
       -- sort the table according to the timestamp (=time the station was configured)
-      table.sort( stations, function(a,b) return travelnet.targets[ owner_name ][ station_network ][ a ].timestamp < 
+      table.sort( stations, function(a,b) return travelnet.targets[ owner_name ][ station_network ][ a ].timestamp <
                                                  travelnet.targets[ owner_name ][ station_network ][ b ].timestamp  end);
    end
 
@@ -387,9 +419,9 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
       else
          -- swap the actual data by which the stations are sorted
          local old_timestamp = travelnet.targets[ owner_name ][ station_network ][ stations[swap_with_pos]].timestamp;
-         travelnet.targets[    owner_name ][ station_network ][ stations[swap_with_pos]].timestamp = 
+         travelnet.targets[    owner_name ][ station_network ][ stations[swap_with_pos]].timestamp =
             travelnet.targets[ owner_name ][ station_network ][ stations[current_pos  ]].timestamp;
-         travelnet.targets[    owner_name ][ station_network ][ stations[current_pos  ]].timestamp = 
+         travelnet.targets[    owner_name ][ station_network ][ stations[current_pos  ]].timestamp =
             old_timestamp;
 
          -- for elevators, only the "G"(round) marking is moved; no point in swapping stations
@@ -410,7 +442,7 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
       x = 4;
    end
 
-   for index,k in ipairs( stations ) do 
+   for index,k in ipairs( stations ) do
 
       -- check if there is an elevator door in front that needs to be opened
       local open_door_cmd = false;
@@ -418,7 +450,7 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
          open_door_cmd = true;
       end
 
-      if( k ~= station_name or open_door_cmd) then 
+      if( k ~= station_name or open_door_cmd) then
          i = i+1;
 
          -- new column
@@ -449,8 +481,9 @@ travelnet.update_formspec = function( pos, puncher_name, fields )
    formspec = formspec..
          "label[8.0,1.6;"..S("Position in list:").."]"..
          "button_exit[11.3,0.0;1.0,0.5;station_exit;"..S("Exit").."]"..
-         "button_exit[9.6,1.6;1.4,0.5;move_up;"..S("move up").."]"..
-         "button_exit[10.9,1.6;1.4,0.5;move_down;"..S("move down").."]";
+         "button_exit[10.0,0.5;2.2,0.7;station_dig;"..S("Remove station").."]"..
+         "button[9.6,1.6;1.4,0.5;move_up;"..S("move up").."]"..
+         "button[10.9,1.6;1.4,0.5;move_down;"..S("move down").."]";
 
    meta:set_string( "formspec", formspec );
 
@@ -475,7 +508,7 @@ travelnet.add_target = function( station_name, network_name, pos, player_name, m
    if( this_node.name == 'travelnet:elevator' ) then
 --      owner_name   = '*'; -- the owner name is not relevant here
       is_elevator  = true;
-      network_name = tostring( pos.x )..','..tostring( pos.z ); 
+      network_name = tostring( pos.x )..','..tostring( pos.z );
       if( not( station_name ) or station_name == '' ) then
          station_name = S('at %s m'):format(tostring( pos.y ));
       end
@@ -517,7 +550,7 @@ travelnet.add_target = function( station_name, network_name, pos, player_name, m
    if( not( travelnet.targets[ owner_name ] )) then
       travelnet.targets[       owner_name ] = {};
    end
- 
+
    -- first station on this network?
    if( not( travelnet.targets[ owner_name ][ network_name ] )) then
       travelnet.targets[       owner_name ][ network_name ] = {};
@@ -544,7 +577,7 @@ travelnet.add_target = function( station_name, network_name, pos, player_name, m
 	"Please choose a diffrent/new network name."):format(travelnet.MAX_STATIONS_PER_NETWORK));
       return;
    end
-     
+
    -- add this station
    travelnet.targets[ owner_name ][ network_name ][ station_name ] = {pos=pos, timestamp=os.time() };
 
@@ -560,7 +593,7 @@ travelnet.add_target = function( station_name, network_name, pos, player_name, m
       meta:set_string( "owner",           owner_name );
       meta:set_int( "timestamp",       travelnet.targets[ owner_name ][ network_name ][ station_name ].timestamp);
 
-      meta:set_string("formspec", 
+      meta:set_string("formspec",
                      "size[12,10]"..
                      "field[0.3,0.6;6,0.7;station_name;"..S("Station:")..";"..   minetest.formspec_escape(meta:get_string("station_name")).."]"..
                      "field[0.3,3.6;6,0.7;station_network;"..S("Network:")..";"..minetest.formspec_escape(meta:get_string("station_network")).."]" );
@@ -578,7 +611,11 @@ end
 -- allow doors to open
 travelnet.open_close_door = function( pos, player, mode )
 
-   local this_node = minetest.get_node( pos );
+   local this_node = minetest.get_node_or_nil( pos );
+   -- give up if the area is *still* not loaded
+   if( this_node == nil ) then
+      return
+   end
    local pos2 = {x=pos.x,y=pos.y,z=pos.z};
 
    if(     this_node.param2 == 0 ) then pos2 = {x=pos.x,y=pos.y,z=(pos.z-1)};
@@ -593,24 +630,24 @@ travelnet.open_close_door = function( pos, player, mode )
       -- at least for homedecor, same facedir would mean "door closed"
 
       -- do not close the elevator door if it is already closed
-      if( mode==1 and ( door_node.name == 'travelnet:elevator_door_glass_closed'
-                     or door_node.name == 'travelnet:elevator_door_steel_closed' 
+      if( mode==1 and ( string.sub( door_node.name, -7 ) == '_closed'
                      -- handle doors that change their facedir
-                     or ( door_node.param2 == this_node.param2
+                     or ( door_node.param2 == ((this_node.param2 + 2)%4)
                       and door_node.name ~= 'travelnet:elevator_door_glass_open'
+                      and door_node.name ~= 'travelnet:elevator_door_tin_open'
                       and door_node.name ~= 'travelnet:elevator_door_steel_open'))) then
          return;
       end
       -- do not open the doors if they are already open (works only on elevator-doors; not on doors in general)
-      if( mode==2 and ( door_node.name == 'travelnet:elevator_door_glass_open'
-                     or door_node.name == 'travelnet:elevator_door_steel_open'
+      if( mode==2 and ( string.sub( door_node.name, -5 ) == '_open'
                      -- handle doors that change their facedir
-                     or ( door_node.param2 ~= this_node.param2 
+                     or ( door_node.param2 ~= ((this_node.param2 + 2)%4)
                       and door_node.name ~= 'travelnet:elevator_door_glass_closed'
+                      and door_node.name ~= 'travelnet:elevator_door_tin_closed'
                       and door_node.name ~= 'travelnet:elevator_door_steel_closed'))) then
          return;
       end
-        
+
       if( mode==2 ) then
          minetest.after( 1, minetest.registered_nodes[ door_node.name ].on_rightclick, pos2, door_node, player );
       else
@@ -633,6 +670,11 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
       return;
    end
 
+   -- show special locks buttons if needed
+   if( locks and (fields.locks_config or fields.locks_authorize)) then
+      return locks:lock_handle_input( pos, formname, fields, player )
+   end
+
    -- show help text
    if( fields and fields.station_help_setup and fields.station_help_setup ~= "") then
       -- simulate right-click
@@ -645,10 +687,56 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
       return;
    end
 
+   -- the player wants to remove the station
+   if( fields.station_dig ) then
+      local owner = meta:get_string( "owner" );
+
+      local node = minetest.get_node(pos)
+      local description = "station"
+      if( node and node.name and node.name == "travelnet:travelnet") then
+         description = "travelnet box"
+      elseif( node and node.name and node.name == "travelnet:elevator") then
+         description = "elevator"
+      elseif( node and node.name and node.name == "locked_travelnet:travelnet") then
+         description = "locked travelnet"
+      else
+         minetest.chat_send_player(name, "Error: Unkown node.");
+         return
+      end
+      -- players with travelnet_remove priv can dig the station
+      if( not(minetest.check_player_privs(name, {travelnet_remove=true}))
+       -- the function travelnet.allow_dig(..) may allow additional digging
+       and not(travelnet.allow_dig( name, owner, network_name ))
+       -- the owner can remove the station
+       and owner ~= name
+       -- stations without owner can be removed by anybody
+       and owner ~= "") then
+         minetest.chat_send_player(name, S("This %s belongs to %s. You can't remove it."):format(description, tostring( meta:get_string('owner'))));
+         return
+      end
+
+      local pinv = player:get_inventory()
+      if(not(pinv:room_for_item("main", node.name))) then
+         minetest.chat_send_player(name, S("You do not have enough room in your inventory."));
+         return
+      end
+
+      -- give the player the box
+      pinv:add_item("main", node.name)
+      -- remove the box from the data structure
+      travelnet.remove_box( pos, nil, meta:to_table(), player );
+      -- remove the node as such
+      minetest.remove_node(pos)
+      return;
+   end
+
+
+
+
    -- if the box has not been configured yet
    if( meta:get_string("station_network")=="" ) then
 
-      travelnet.add_target( fields.station_name, fields.station_network, pos, name, meta, fields.owner_name );
+      travelnet.add_target( fields.station_name, fields.station_network, pos, name, meta, fields.owner );
       return;
    end
 
@@ -674,8 +762,8 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
    local station_name    = meta:get_string( "station_name" );
    local station_network = meta:get_string( "station_network" );
 
-   if(  not( owner_name  ) 
-     or not( station_name ) 
+   if(  not( owner_name  )
+     or not( station_name )
      or not( station_network )
      or not( travelnet.targets[ owner_name ] )
      or not( travelnet.targets[ owner_name ][ station_network ] )) then
@@ -710,7 +798,7 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
    end
 
    local this_node = minetest.get_node( pos );
-   if( this_node ~= nil and this_node.name == 'travelnet:elevator' ) then 
+   if( this_node ~= nil and this_node.name == 'travelnet:elevator' ) then
       for k,v in pairs( travelnet.targets[ owner_name ][ station_network ] ) do
          if( travelnet.targets[ owner_name ][ station_network ][ k ].nr  --..' ('..tostring( travelnet.targets[ owner_name ][ station_network ][ k ].pos.y )..'m)'
                == fields.target) then
@@ -738,9 +826,13 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
 
 
    if( travelnet.travelnet_sound_enabled ) then
-      minetest.sound_play("128590_7037-lq.mp3", {pos = pos, gain = 1.0, max_hear_distance = 10,})
+      if ( this_node.name == 'travelnet:elevator' ) then
+         minetest.sound_play("travelnet_bell", {pos = pos, gain = 0.75, max_hear_distance = 10,});
+      else
+         minetest.sound_play("travelnet_travel", {pos = pos, gain = 0.75, max_hear_distance = 10,});
+      end
    end
-   if( travelnet.travelnet_effect_enabled ) then 
+   if( travelnet.travelnet_effect_enabled ) then
       minetest.add_entity( {x=pos.x,y=pos.y+0.5,z=pos.z}, "travelnet:effect"); -- it self-destructs after 20 turns
    end
 
@@ -749,18 +841,15 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
 
    -- transport the player to the target location
    local target_pos = travelnet.targets[ owner_name ][ station_network ][ fields.target ].pos;
-   player:moveto( target_pos, false);
+   player:move_to( target_pos, false);
 
-   if( travelnet.travelnet_sound_enabled ) then
-      minetest.sound_play("travelnet_travel.wav", {pos = target_pos, gain = 1.0, max_hear_distance = 10,})
-   end
    if( travelnet.travelnet_effect_enabled ) then 
       minetest.add_entity( {x=target_pos.x,y=target_pos.y+0.5,z=target_pos.z}, "travelnet:effect"); -- it self-destructs after 20 turns
    end
 
 
    -- check if the box has at the other end has been removed.
-   local node2 = minetest.get_node(  target_pos );
+   local node2 = minetest.get_node_or_nil(  target_pos );
    if( node2 ~= nil and node2.name ~= 'ignore' and node2.name ~= 'travelnet:travelnet' and node2.name ~= 'travelnet:elevator' and node2.name ~= "locked_travelnet:travelnet" and node2.name ~= "travelnet:travelnet_private") then
 
       -- provide information necessary to identify the removed box
@@ -770,11 +859,34 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
 
       travelnet.remove_box( target_pos, nil, oldmetadata, player );
       -- send the player back as there's no receiving travelnet
-      player:moveto( pos, false );
+      player:move_to( pos, false );
+
+   else
+      travelnet.rotate_player( target_pos, player, 0 )
+   end
+end
+
+travelnet.rotate_player = function( target_pos, player, tries )
+   -- try later when the box is loaded
+   local node2 = minetest.get_node_or_nil( target_pos );
+   if( node2 == nil ) then
+      if( tries < 30 ) then
+         minetest.after( 0, travelnet.rotate_player, target_pos, player, tries+1 )
+      end
+      return
+   end
+
+   -- play sound at the target position as well
+   if( travelnet.travelnet_sound_enabled ) then
+      if ( node2.name == 'travelnet:elevator' ) then
+         minetest.sound_play("travelnet_bell", {pos = target_pos, gain = 0.75, max_hear_distance = 10,});
+      else
+         minetest.sound_play("travelnet_travel", {pos = target_pos, gain = 0.75, max_hear_distance = 10,});
+      end
+   end
 
    -- do this only on servers where the function exists
-   elseif( player.set_look_horizontal ) then
-
+   if( player.set_look_horizontal ) then
       -- rotate the player so that he/she can walk straight out of the box
       local yaw    = 0;
       local param2 = node2.param2;
@@ -787,7 +899,7 @@ travelnet.on_receive_fields = function(pos, formname, fields, player)
       elseif( param2==3 ) then
          yaw = 270;
       end
-       
+
       player:set_look_horizontal( math.rad( yaw ));
       player:set_look_vertical( math.rad( 0 ));
    end
@@ -809,19 +921,19 @@ travelnet.remove_box = function( pos, oldnode, oldmetadata, digger )
    local station_network = oldmetadata.fields[ "station_network" ];
 
    -- station is not known? then just remove it
-   if(  not( owner_name ) 
-     or not( station_name ) 
-     or not( station_network ) 
+   if(  not( owner_name )
+     or not( station_name )
+     or not( station_network )
      or not( travelnet.targets[ owner_name ] )
      or not( travelnet.targets[ owner_name ][ station_network ] )) then
-       
+
       minetest.chat_send_player( digger:get_player_name(), S("Error")..": "..
 		S("Could not find the station that is to be removed."));
       return;
    end
 
    travelnet.targets[ owner_name ][ station_network ][ station_name ] = nil;
-   
+
    -- inform the owner
    minetest.chat_send_player( owner_name, S("Station '%s'"):format(station_name ).." "..
 		S("has been REMOVED from the network '%s'."):format(station_network));
@@ -837,7 +949,12 @@ end
 
 
 travelnet.can_dig = function( pos, player, description )
+   -- forbid digging of the travelnet
+   return false;
+end
 
+-- obsolete function
+travelnet.can_dig_old = function( pos, player, description )
    if( not( player )) then
       return false;
    end
@@ -845,6 +962,15 @@ travelnet.can_dig = function( pos, player, description )
    local meta          = minetest.get_meta( pos );
    local owner         = meta:get_string('owner');
    local network_name  = meta:get_string( "station_network" );
+
+   -- in creative mode, accidental digging could happen too easily when trying to update the net
+   if(creative and creative.is_enabled_for(player:get_player_name())) then
+     -- only a diamond pick can dig the travelnet
+     if( not(player:get_wielded_item())
+          or player:get_wielded_item():get_name()~="default:pick_diamond") then
+        return false;
+     end
+   end
 
    -- players with that priv can dig regardless of owner
    if( minetest.check_player_privs(name, {travelnet_remove=true})
@@ -889,7 +1015,7 @@ if( travelnet.travelnet_effect_enabled ) then
 
     on_step = function( self, dtime )
        -- this is supposed to be more flickering than smooth animation
-       self.object:setyaw( self.object:getyaw()+1);
+       self.object:set_yaw( self.object:get_yaw()+1);
        self.anz_rotations = self.anz_rotations + 1;
        -- eventually self-destruct
        if( self.anz_rotations > 15 ) then
@@ -901,17 +1027,17 @@ end
 
 
 if( travelnet.travelnet_enabled ) then
-   dofile(minetest.get_modpath("travelnet").."/travelnet.lua"); -- the travelnet node definition
+   dofile(travelnet.path.."/travelnet.lua"); -- the travelnet node definition
 end
 if( travelnet.elevator_enabled ) then
-   dofile(minetest.get_modpath("travelnet").."/elevator.lua");  -- allows up/down transfers only
+   dofile(travelnet.path.."/elevator.lua");  -- allows up/down transfers only
 end
 if( travelnet.doors_enabled ) then
-   dofile(minetest.get_modpath("travelnet").."/doors.lua");     -- doors that open and close automaticly when the travelnet or elevator is used
+   dofile(travelnet.path.."/doors.lua");     -- doors that open and close automaticly when the travelnet or elevator is used
 end
 
 if( travelnet.abm_enabled ) then
-   dofile(minetest.get_modpath("travelnet").."/restore_network_via_abm.lua"); -- restore travelnet data when players pass by broken networks
+   dofile(travelnet.path.."/restore_network_via_abm.lua"); -- restore travelnet data when players pass by broken networks
 end
 
 -- upon server start, read the savefile

@@ -2,11 +2,9 @@
 
 > Game used by Craig's [Minetest](https://www.minetest.net) Server
 
-This is the game that runs my Minetest Server. You can connect to the world at `minetest.davison.io` port `3000`.
+This is the game that runs my Minetest server. Connect to the server on `minetest.davison.io` port `30000`.
 
-Since 2013, I've been adding, tweaking and removing mods to create a great game codebase that can keep a server alive and thriving for many years. This, I consider, to be a great setup if you are looking to create a great Minetest Server experience.
-
-![Screenshot](https://davison.io/assets/img/minetest-craig-server_game-screenshot.jpg)
+Since 2013, I've been adding, tweaking and removing mods to create a great game codebase that can keep a server alive and thriving for many years. This is a good setup if you're looking to create a great Minetest server experience.
 
 ## Mod List
 
@@ -14,15 +12,17 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * 3d_armor_sfinv - [GitHub](https://github.com/stujones11/minetest-3d_armor)
 * areas - [GitHub](https://github.com/ShadowNinja/areas)
 * arrow_signs - [Bitbucket](https://bitbucket.org/adrido/arrow_signs/src)
+* basic_materials - [GitLab](https://gitlab.com/VanessaE/basic_materials)
 * bitchange
 * bucket - [GitHub](https://github.com/minetest/minetest_game)
+* building_blocks - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * carts - [GitHub](https://github.com/minetest/minetest_game)
 * colouredstonebricks
 * craftguide - [GitHub](https://github.com/minetest-mods/craftguide)
 * craig_server - Custom code for this server
 * creative - [GitHub](https://github.com/minetest/minetest_game)
 * darkage
-* default - Modified to include stone fences - [GitHub](https://github.com/minetest/minetest_game)
+* default - [GitHub](https://github.com/minetest/minetest_game)
 * doors - [GitHub](https://github.com/minetest/minetest_game)
 * dye - [GitHub](https://github.com/minetest/minetest_game)
 * email - [GitHub](https://github.com/rubenwardy/email)
@@ -32,8 +32,7 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * give_initial_stuff - [GitHub](https://github.com/minetest/minetest_game)
 * gloopblocks - Modified to disable nyancat crafting - [GitLab](https://gitlab.com/VanessaE/gloopblocks)
 * home_gui - [GitHub](https://github.com/cornernote/minetest-home_gui)
-* homedecor - Modified to remove bed on_rightclick - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
-* homedecor_i18n - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
+* homedecor_* - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * irc - [GitHub](https://github.com/minetest-mods/irc)
 * irc_commands - [GitHub](https://github.com/ShadowNinja/minetest-irc_commands)
 * itemframes - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
