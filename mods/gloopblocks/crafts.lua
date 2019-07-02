@@ -4,18 +4,18 @@ minetest.register_craft( {
 	type = "shapeless",
 	output = "gloopblocks:rainbow_block",
 	recipe = {
-		"group:basecolor_red",
-		"group:excolor_orange",
-		"group:basecolor_yellow",
-		"group:basecolor_green",
-		"group:basecolor_blue",
-		"group:excolor_violet",
+		"group:dye,color_red",
+		"group:dye,color_orange",
+		"group:dye,color_yellow",
+		"group:dye,color_green",
+		"group:dye,color_blue",
+		"group:dye,color_violet",
 		"default:stone",
 		"default:mese_crystal",
 	},
 })
 
---[[
+
 minetest.register_craft({
 	type = "shapeless",
 	output = "default:nyancat_rainbow",
@@ -40,32 +40,6 @@ minetest.register_craft({
 		{"gloopblocks:rainbow_block", "gloopblocks:rainbow_block", "gloopblocks:rainbow_block"},
 	}
 })
---]]
-
-minetest.register_craft({
-	type = "shapeless",
-	output = "gloopblocks:wet_cement",
-	recipe = {
-		"bucket:bucket_water",
-		"default:gravel",
-	},
-	replacements = {{'bucket:bucket_water', 'bucket:bucket_empty'},},
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "gloopblocks:cement",
-	recipe = "gloopblocks:wet_cement",
-	cooktime = 8
-})
-
-minetest.register_craft({
-	output = "default:gravel",
-	recipe = {
-		{"gloopblocks:cement"},
-	},
-})
-
 
 if minetest.get_modpath("glooptest") then
 
@@ -80,38 +54,66 @@ if minetest.get_modpath("glooptest") then
 		}
 	})
 
-elseif minetest.get_modpath("gloopores") then
-
 	minetest.register_craft({
-		type = "shapeless",
-		output = "gloopblocks:evil_stick",
+		output = "gloopblocks:evil_block",
 		recipe = {
-			"gloopores:kalite_lump",
-			"default:gold_ingot",
-			"default:coal_lump",
-			"group:stick"
+			{"gloopblocks:evil_stick", "gloopblocks:evil_stick"},
+			{"gloopblocks:evil_stick", "gloopblocks:evil_stick"},
 		}
 	})
-else
+
 	minetest.register_craft({
-		type = "shapeless",
-		output = "gloopblocks:evil_stick",
+		output = "gloopblocks:evil_stick 4",
 		recipe = {
-			"default:gold_ingot",
-			"default:gold_ingot",
-			"default:coal_lump",
-			"group:stick"
+			{"gloopblocks:evil_block"}
+		}
+	})
+
+	minetest.register_craft({
+		output = "gloopblocks:pick_evil",
+		recipe = {
+			{"gloopblocks:evil_block", "gloopblocks:evil_block", "gloopblocks:evil_block"},
+			{"", "gloopblocks:evil_stick", ""},
+			{"", "gloopblocks:evil_stick", ""},
+		}
+	})
+
+	minetest.register_craft({
+		output = "gloopblocks:axe_evil",
+		recipe = {
+			{"gloopblocks:evil_block", "gloopblocks:evil_block"},
+			{"gloopblocks:evil_block", "gloopblocks:evil_stick"},
+			{"", "gloopblocks:evil_stick"},
+		}
+	})
+
+	minetest.register_craft({
+		output = "gloopblocks:axe_evil",
+		recipe = {
+			{"gloopblocks:evil_block", "gloopblocks:evil_block"},
+			{"gloopblocks:evil_stick", "gloopblocks:evil_block"},
+			{"gloopblocks:evil_stick", ""},
+		}
+	})
+
+	minetest.register_craft({
+		output = "gloopblocks:shovel_evil",
+		recipe = {
+			{"gloopblocks:evil_block"},
+			{"gloopblocks:evil_stick"},
+			{"gloopblocks:evil_stick"},
+		}
+	})
+
+	minetest.register_craft({
+		output = "gloopblocks:sword_evil",
+		recipe = {
+			{"gloopblocks:evil_block"},
+			{"gloopblocks:evil_block"},
+			{"gloopblocks:evil_stick"},
 		}
 	})
 end
-
-minetest.register_craft({
-	output = "gloopblocks:evil_block",
-	recipe = {
-		{"gloopblocks:evil_stick", "gloopblocks:evil_stick"},
-		{"gloopblocks:evil_stick", "gloopblocks:evil_stick"},
-	}
-})
 
 minetest.register_craft({
 	output = "gloopblocks:scaffolding 12",
@@ -119,13 +121,6 @@ minetest.register_craft({
 		{"group:stick", "group:wood", "group:stick"},
 		{"", "group:stick", ""},
 		{"group:stick", "group:wood", "group:stick"},
-	}
-})
-
-minetest.register_craft({
-	output = "gloopblocks:evil_stick 4",
-	recipe = {
-		{"gloopblocks:evil_block"}
 	}
 })
 
@@ -173,69 +168,6 @@ minetest.register_craft({
 		{"group:stick"},
 	}
 })
-
-minetest.register_craft({
-	output = "gloopblocks:pick_evil",
-	recipe = {
-		{"gloopblocks:evil_block", "gloopblocks:evil_block", "gloopblocks:evil_block"},
-		{"", "gloopblocks:evil_stick", ""},
-		{"", "gloopblocks:evil_stick", ""},
-	}
-})
-
-minetest.register_craft({
-	output = "gloopblocks:axe_evil",
-	recipe = {
-		{"gloopblocks:evil_block", "gloopblocks:evil_block"},
-		{"gloopblocks:evil_block", "gloopblocks:evil_stick"},
-		{"", "gloopblocks:evil_stick"},
-	}
-})
-
-minetest.register_craft({
-	output = "gloopblocks:axe_evil",
-	recipe = {
-		{"gloopblocks:evil_block", "gloopblocks:evil_block"},
-		{"gloopblocks:evil_stick", "gloopblocks:evil_block"},
-		{"gloopblocks:evil_stick", ""},
-	}
-})
-
-minetest.register_craft({
-	output = "gloopblocks:shovel_evil",
-	recipe = {
-		{"gloopblocks:evil_block"},
-		{"gloopblocks:evil_stick"},
-		{"gloopblocks:evil_stick"},
-	}
-})
-
-minetest.register_craft({
-	output = "gloopblocks:sword_evil",
-	recipe = {
-		{"gloopblocks:evil_block"},
-		{"gloopblocks:evil_block"},
-		{"gloopblocks:evil_stick"},
-	}
-})
-
-if minetest.get_modpath("building_blocks") then
-	minetest.register_craft({
-		output = "default:wood 4",
-		recipe = {
-			 {"building_blocks:sticks", "building_blocks:sticks"},
-			 {"building_blocks:sticks", "building_blocks:sticks"},
-		}
-	})
-else
-	minetest.register_craft({
-		output = "default:wood",
-		recipe = {
-			 {"default:stick", "default:stick"},
-			 {"default:stick", "default:stick"},
-		}
-	})
-end
 
 minetest.register_craft({
 	output = "gloopblocks:pavement 5",
