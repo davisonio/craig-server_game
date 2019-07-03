@@ -25,3 +25,6 @@ dofile(minetest.get_modpath("craig_server").."/spawn.lua")
 
 -- Fix main inventory (incompatible with sinv)
 dofile(minetest.get_modpath("craig_server").."/main_inv_fix.lua")
+
+-- Flowers v6 gen
+dofile(minetest.get_modpath("craig_server").."/gen_flowers.lua")
