@@ -25,3 +25,6 @@ dofile(minetest.get_modpath("craig_server").."/spawn.lua")
 
 -- Fix main inventory (incompatible with sinv)
 dofile(minetest.get_modpath("craig_server").."/main_inv_fix.lua")
+
+-- Events and motd
+dofile(minetest.get_modpath("craig_server").."/events.lua")
