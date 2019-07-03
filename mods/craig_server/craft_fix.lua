@@ -45,3 +45,19 @@ minetest.register_craft({
 		{'default:gold_ingot', 'default:gold_ingot'},
 	}
 })
+
+minetest.register_craft({
+	output = 'bitchange:bitcoin 12',
+	recipe = {
+		{'default:gold_ingot', 'default:gold_ingot'},
+		{'default:gold_ingot', 'default:gold_ingot'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:gold_ingot 2',
+	recipe = {
+		{'bitchange:bitcoin', 'bitchange:bitcoin', 'bitchange:bitcoin'},
+		{'bitchange:bitcoin', 'bitchange:bitcoin', 'bitchange:bitcoin'},
+	}
+})
