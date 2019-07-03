@@ -55,9 +55,8 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:gold_ingot 2',
+	output = 'default:gold_ingot',
 	recipe = {
-		{'bitchange:bitcoin', 'bitchange:bitcoin', 'bitchange:bitcoin'},
 		{'bitchange:bitcoin', 'bitchange:bitcoin', 'bitchange:bitcoin'},
 	}
 })
