@@ -27,7 +27,7 @@ minetest.register_abm({
 
 		local pos0 = vector.subtract(pos, 4)
 		local pos1 = vector.add(pos, 4)
-		if #minetest.find_nodes_in_area(pos0, pos1, "group:flora") > 3 then
+		if #minetest.find_nodes_in_area(pos0, pos1, "group:flora") > 12 then
 			return
 		end
 
