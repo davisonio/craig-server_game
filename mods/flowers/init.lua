@@ -113,7 +113,7 @@ end
 
 -- Flower spread
 -- Public function to enable override by mods
-
+--[[
 function flowers.flower_spread(pos, node)
 	pos.y = pos.y - 1
 	local under = minetest.get_node(pos)
@@ -173,7 +173,7 @@ minetest.register_abm({
 		flowers.flower_spread(...)
 	end,
 })
-
+]]
 
 --
 -- Mushrooms
