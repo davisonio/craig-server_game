@@ -2,7 +2,7 @@ minetest.register_abm({
 	label = "Flower spread 2",
 	nodenames = {"group:flora"},
 	interval = 13,
-	chance = 96,
+	chance = 50,
 	action = function(pos, node)
 		pos.y = pos.y - 1
 		local under = minetest.get_node(pos)
