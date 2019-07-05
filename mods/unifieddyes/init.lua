@@ -1342,18 +1342,18 @@ unifieddyes.palette_has_color["wallmounted_light_red"] = true
 -- crafting!
 
 unifieddyes.base_color_crafts = {
-	{ "red",		"flowers:rose",				nil,				nil,			nil,			nil,		4 },
+	{ "red",		"flowers:rose",				nil,				nil,			nil,			nil,		16 },
 	{ "vermilion",	"dye:red",					"dye:orange",		nil,			nil,			nil,		3 },
-	{ "orange",		"flowers:tulip",			nil,				nil,			nil,			nil,		4 },
+	{ "orange",		"flowers:tulip",			nil,				nil,			nil,			nil,		16 },
 	{ "orange",		"dye:red",					"dye:yellow",		nil,			nil,			nil,		2 },
 	{ "amber",		"dye:orange",				"dye:yellow",		nil,			nil,			nil,		2 },
-	{ "yellow",		"flowers:dandelion_yellow",	nil,				nil,			nil,			nil,		4 },
+	{ "yellow",		"flowers:dandelion_yellow",	nil,				nil,			nil,			nil,		16 },
 	{ "lime",		"dye:yellow",				"dye:chartreuse",	nil,			nil,			nil,		2 },
 	{ "lime",		"dye:yellow",				"dye:yellow",		"dye:green",	nil,			nil,		3 },
 	{ "chartreuse",	"dye:yellow",				"dye:green",		nil,			nil,			nil,		2 },
 	{ "harlequin",	"dye:chartreuse",			"dye:green",		nil,			nil,			nil,		2 },
 	{ "harlequin",	"dye:yellow",				"dye:green",		"dye:green",	nil,			nil,		3 },
-	{ "green", 		"default:cactus",			nil,				nil,			nil,			nil,		4 },
+	{ "green", 		"default:cactus",			nil,				nil,			nil,			nil,		16 },
 	{ "green", 		"dye:yellow",				"dye:blue",			nil,			nil,			nil,		2 },
 	{ "malachite",	"dye:green",				"dye:spring",		nil,			nil,			nil,		2 },
 	{ "malachite",	"dye:green",				"dye:green",		"dye:cyan",		nil,			nil,		3 },
@@ -1372,9 +1372,9 @@ unifieddyes.base_color_crafts = {
 	{ "sapphire",	"dye:azure",				"dye:blue",			nil,			nil,			nil,		2 },
 	{ "sapphire",	"dye:cyan",					"dye:blue",			"dye:blue",		nil,			nil,		3 },
 	{ "sapphire",	"dye:green",				"dye:blue",			"dye:blue",		"dye:blue",		nil,		4 },
-	{ "blue",		"flowers:geranium",			nil,				nil,			nil,			nil,		4 },
+	{ "blue",		"flowers:geranium",			nil,				nil,			nil,			nil,		16 },
 	{ "indigo",		"dye:blue",					"dye:violet",		nil,			nil,			nil,		2 },
-	{ "violet",		"flowers:viola",			nil,				nil,			nil,			nil,		4 },
+	{ "violet",		"flowers:viola",			nil,				nil,			nil,			nil,		16 },
 	{ "violet",		"dye:blue",					"dye:magenta",		nil,			nil,			nil,		2 },
 	{ "mulberry",	"dye:violet",				"dye:magenta",		nil,			nil,			nil,		2 },
 	{ "mulberry",	"dye:violet",				"dye:blue",			"dye:red",		nil,			nil,		3 },
@@ -1388,8 +1388,8 @@ unifieddyes.base_color_crafts = {
 	{ "crimson",	"dye:magenta",				"dye:red",			"dye:red",		nil,			nil,		3 },
 	{ "crimson",	"dye:red",					"dye:red",			"dye:red",		"dye:blue",		nil,		4 },
 
-	{ "black",		"default:coal_lump",		nil,				nil,			nil,			nil,		4 },
-	{ "white",		"flowers:dandelion_white",	nil,				nil,			nil,			nil,		4 },
+	{ "black",		"default:coal_lump",		nil,				nil,			nil,			nil,		16 },
+	{ "white",		"flowers:dandelion_white",	nil,				nil,			nil,			nil,		16 },
 }
 
 unifieddyes.shade_crafts = {
