@@ -25,3 +25,10 @@ minetest.register_craft({
 		{'default:desert_cobble'},
 	}
 })
+
+minetest.register_craft({
+	output = 'default:silver_sand',
+	recipe = {
+		{'default:desert_sand'},
+	}
+})
