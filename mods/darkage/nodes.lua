@@ -12,7 +12,7 @@ minetest.register_node("darkage:marble", {
 	description = "Marble",
 	tiles = {"darkage_marble.png"},
 	is_ground_content = true,
-	groups = {cracky=3},
+	groups = {cracky=3,marble=1},
 	sounds = default.node_sound_stone_defaults()
 })
 
