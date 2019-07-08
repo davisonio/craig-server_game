@@ -43,3 +43,6 @@ dofile(minetest.get_modpath("craig_server").."/events.lua")
 
 -- Cloud height
 dofile(minetest.get_modpath("craig_server").."/cloud_height.lua")
+
+-- Zoom
+dofile(minetest.get_modpath("craig_server").."/zoom.lua")
