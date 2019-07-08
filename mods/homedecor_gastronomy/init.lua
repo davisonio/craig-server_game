@@ -203,7 +203,7 @@ homedecor.register("soda_machine", {
 		local fdir_to_fwd = { {0, -1}, {-1, 0}, {0, 1}, {1, 0} }
 		local fdir = node.param2
 		local pos_drop = { x=pos.x+fdir_to_fwd[fdir+1][1], y=pos.y, z=pos.z+fdir_to_fwd[fdir+1][2] }
-		if wieldname == "currency:minegeld_cent_25" then
+		if wieldname == "bitchange:bitcoin" then
 			minetest.spawn_item(pos_drop, "homedecor:soda_can")
 			minetest.sound_play("insert_coin", {
 				pos=pos, max_hear_distance = 5
@@ -219,7 +219,7 @@ homedecor.register("soda_machine", {
 	end
 })
 
-minetest.register_alias("homedecor:coin", "currency:minegeld_cent_25")
+minetest.register_alias("homedecor:coin", "bitchange:bitcoin")
 
 -- coffee!
 -- coffee!
