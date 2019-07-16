@@ -1,6 +1,7 @@
 ---------------------
 -- Server Misc Mod --
 ---------------------
+mod_storage = minetest.get_mod_storage()
 
 -- Chat Commands
 dofile(minetest.get_modpath("craig_server").."/chatcommands.lua")
