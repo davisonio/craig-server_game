@@ -1,6 +1,3 @@
--- Spawn command
-local mod_storage = minetest.get_mod_storage()
-
 minetest.register_chatcommand("spawn", {
     params = "",
     description = "Teleport to the spawn location.",

@@ -1,5 +1,3 @@
-local mod_storage = minetest.get_mod_storage()
-
 -- Message of the day
 minetest.register_chatcommand("motd", {
 	description = "Message of the day.",
