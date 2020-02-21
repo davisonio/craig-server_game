@@ -1,72 +1,54 @@
-local COLOURS = {
-		"Black",
-		"Cyan",
-		"Brown",
-		"Dark Blue",
-		"Dark Green",
-		"Dark Grey",
-		"Dark Pink",
-		"Green",
-		"Grey",
-		"Orange",
-		"Pink",
-		"Purple",
-		"Red",
-		"White",
-		"Yellow"
+local colours = {
+		{"black", "Black"},
+		{"cyan", "Cyan"},
+		{"brown", "Brown"},
+		{"dark_blue", "Dark Blue"},
+		{"dark_green", "Dark Green"},
+		{"dark_grey", "Dark Grey"},
+		{"dark_pink", "Dark Pink"},
+		{"green", "Green"},
+		{"grey", "Grey"},
+		{"orange", "Orange"},
+		{"pink", "Pink"},
+		{"purple", "Purple"},
+		{"red", "Red"},
+		{"white", "White"},
+		{"yellow", "Yellow"}
 }
 
-local COLOURS2 = {
-		"black",
-		"cyan",
-		"brown",
-		"dark_blue",
-		"dark_green",
-		"dark_grey",
-		"dark_pink",
-		"green",
-		"grey",
-		"orange",
-		"pink",
-		"purple",
-		"red",
-		"white",
-		"yellow"
-}
+for _, row in ipairs(colours) do
 
-for number = 1, 15 do
+	local name = row[1]
+	local description = row[2]
 
-	local colour = COLOURS[number]
-	local colour2 = COLOURS2[number]
-
-	minetest.register_node("colouredstonebricks:"..colour2, {
-		description = colour.." Stone Brick",
-		tiles = {"colouredstonebricks_"..colour2..".png"},
+	minetest.register_node("colouredstonebricks:"..name, {
+		description = description.." Stone Brick",
+		tiles = {"colouredstonebricks_"..name..".png"},
 		groups = {cracky=3},
-        sounds = default.node_sound_defaults(),
+        sounds = default.node_sound_stone_defaults(),
 	})
 
 	minetest.register_craft({
 		type = "shapeless",
-		output = 'colouredstonebricks:'..colour2,
+		output = 'colouredstonebricks:'..name,
 		recipe = {
-			'dye:'..colour2, 'default:stonebrick',
+			'dye:'..name, 'default:stonebrick',
 		}
 	})
 
     -- Support for stairsplus mod
-
-    stairsplus:register_all("colouredstonebricks", colour2, "colouredstonebricks:"..colour2, {
-        description = colour.." Stone Brick",
-		tiles = {"colouredstonebricks_"..colour2..".png"},
-		groups = {cracky=3,not_in_craft_guide=1},
-		sounds = default.node_sound_defaults(),
-        sunlight_propagates = true,
-    })
+	if minetest.get_modpath("moreblocks") then
+	    stairsplus:register_all("colouredstonebricks", name, "colouredstonebricks:"..name, {
+	        description = description.." Stone Brick",
+			tiles = {"colouredstonebricks_"..name..".png"},
+			groups = {cracky=3},
+			sounds = default.node_sound_stone_defaults(),
+	        sunlight_propagates = true,
+	    })
+	end
 end
 
-
-
-minetest.register_alias("dye:dark_blue","dye:blue")
-minetest.register_alias("dye:dark_pink","dye:magenta")
-minetest.register_alias("dye:purple","dye:violet")
+-- We don't have blue, violet or magenta coloured stone bricks (yet)
+--minetest.register_alias("dye:dark_blue","dye:blue")
+--minetest.register_alias("dye:dark_pink","dye:magenta")
+--minetest.register_alias("dye:purple","dye:violet")

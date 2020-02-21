@@ -1,4 +1,7 @@
+--
 -- Naturally spawning blocks
+--
+
 minetest.register_node("darkage:chalk", {
 	description = "Chalk",
 	tiles = {"darkage_chalk.png"},
@@ -12,7 +15,7 @@ minetest.register_node("darkage:marble", {
 	description = "Marble",
 	tiles = {"darkage_marble.png"},
 	is_ground_content = true,
-	groups = {cracky=3,marble=1},
+	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults()
 })
 
@@ -98,44 +101,81 @@ minetest.register_node("darkage:basalt", {
 	sounds = default.node_sound_stone_defaults()
 })
 
+--
 -- Cobble
+--
+
 minetest.register_node("darkage:slate_cobble", {
 	description = "Slate Cobble",
-	tiles = {"darkage_slate_brick.png"},
+	tiles = {"darkage_slate_cobble.png"},
 	groups = {cracky=2},
 	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("darkage:ors_cobble", {
 	description = "Old Red Sandstone Cobble",
-	tiles = {"darkage_ors_brick.png"},
+	tiles = {"darkage_ors_cobble.png"},
 	groups = {crumbly=2,cracky=2},
 	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("darkage:gneiss_cobble", {
 	description = "Gneiss Cobble",
-	tiles = {"darkage_gneiss_brick.png"},
+	tiles = {"darkage_gneiss_cobble.png"},
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("darkage:basalt_cobble", {
 	description = "Basalt Cobble",
+	tiles = {"darkage_basalt_cobble.png"},
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults()
+})
+
+--
+-- Brick
+--
+
+minetest.register_node("darkage:slate_brick", {
+	description = "Slate Brick",
+	tiles = {"darkage_slate_brick.png"},
+	groups = {cracky=2},
+	sounds = default.node_sound_stone_defaults()
+})
+
+minetest.register_node("darkage:ors_brick", {
+	description = "Old Red Sandstone Brick",
+	tiles = {"darkage_ors_brick.png"},
+	groups = {crumbly=2,cracky=2},
+	sounds = default.node_sound_stone_defaults()
+})
+
+minetest.register_node("darkage:gneiss_brick", {
+	description = "Gneiss Brick",
+	tiles = {"darkage_gneiss_brick.png"},
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults()
+})
+
+minetest.register_node("darkage:basalt_brick", {
+	description = "Basalt Brick",
 	tiles = {"darkage_basalt_brick.png"},
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults()
 })
 
--- Brick
 minetest.register_node("darkage:stone_brick", {
-	description = "Darkage Stone Brick",
+	description = "Stone Brick",
 	tiles = {"darkage_stone_brick.png"},
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults()
 })
 
+--
 -- Other Blocks
+--
+
 minetest.register_node("darkage:straw", {
 	description = "Straw",
 	tiles = {"darkage_straw.png"},
@@ -183,7 +223,7 @@ minetest.register_node("darkage:lamp", {
 	description = "Lamp",
 	tiles = {"darkage_lamp.png"},
 	paramtype = "light",
-	light_source = 18,
+	light_source = 14,
 	groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3,flammable=1},
 	sounds = default.node_sound_glass_defaults(),
 })
@@ -213,7 +253,10 @@ minetest.register_node("darkage:dry_leaves", {
 	sounds = default.node_sound_leaves_defaults()
 })
 
+--
 -- Storage blocks (boxes, shelves, ect.)
+--
+
 minetest.register_node("darkage:box", {
 	description = "Box",
 	tiles = { "darkage_box_top.png","darkage_box_top.png","darkage_box.png"},
@@ -291,7 +334,10 @@ minetest.register_node("darkage:wood_shelves", {
 	end,
 })
 
+--
 -- Glass / Glow Glass
+--
+
 minetest.register_node("darkage:glass", {
 	description = "Medieval Glass",
 	drawtype = "glasslike",
@@ -307,13 +353,16 @@ minetest.register_node("darkage:glow_glass", {
 	drawtype = "glasslike",
 	tiles = {"darkage_glass.png"},
 	paramtype = "light",
-	light_source = 18,
+	light_source = 14,
 	sunlight_propagates = true,
 	groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
 	sounds = default.node_sound_glass_defaults(),
 })
 
+--
 -- Reinforced Wood
+--
+
 minetest.register_node("darkage:reinforced_wood", {
 	description = "Reinforced Wood",
 	tiles = {"default_wood.png^darkage_reinforce.png"},
@@ -335,7 +384,10 @@ minetest.register_node("darkage:reinforced_wood_right", {
 	sounds = default.node_sound_wood_defaults()
 })
 
--- Wood based deco items
+--
+-- Wood based decoration items
+--
+
 minetest.register_node("darkage:wood_bars", {
 	description = "Wooden Bars",
 	drawtype = "glasslike",
@@ -372,7 +424,10 @@ minetest.register_node("darkage:wood_frame", {
 	sounds = default.node_sound_stone_defaults()
 })
 
--- Metal based deco items
+--
+-- Metal based decoration items
+--
+
 minetest.register_node("darkage:chain", {
 	description = "Chain",
 	drawtype = "signlike",

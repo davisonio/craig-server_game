@@ -1,76 +1,57 @@
-# Darkage mod for Minetest
+# [Darkage](https://davison.io/minetest/darkage/) :video_game: [![](https://img.shields.io/travis/davisonio/darkage.svg?style=flat-square)](https://travis-ci.org/davisonio/darkage) [![](https://img.shields.io/gitter/room/davisonio/darkage.svg)](https://gitter.im/davisonio/darkage)
+
+> Darkage mod for [Minetest](http://www.minetest.net)
+
+<p align="center">
+<b><a href="#install">Install</a></b>
+·
+<b><a href="#authors">Authors</a></b>
+·
+<b><a href="#license--credits">License & Credits</a></b>
+</p>
+
+This is an improved version of the outdated but legendary [Darkage](https://forum.minetest.net/viewtopic.php?f=11&t=3213) mod.
+
 This mod adds some new blocks that allow pre-industrial looking buildings to be made.
+
 Of course, feel free to use them for any other type of construction.
 
-This mod originally created by MasterGollum and is now maintained and being improved upon by addi and CraigyDavi.
+- [Minetest Forum Topic](https://forum.minetest.net/viewtopic.php?id=10063)
+- [Freeminer Forum Topic](http://forum.freeminer.org/threads/darkage-improved-darkage.176/)
 
-**Depends:** default, stairs?, stairsplus?
+![](https://davison.io/assets/img/minetest-darkage-screenshot.png)
 
-**License:** Code and textures, [WTFPL](http://www.wtfpl.net/txt/copying/)
+## Install
 
-**Installation:** Unzip the file and rename it to "darkage". Then move it to the mod directory.
+###### Requirements
 
-## Changelog
-**Version Development**
+- [Minetest](http://www.minetest.net) >= 0.4.10
+- default
 
-**Version 1.3**
+###### Supports
 
-* Many, many craft recipe changes
-* New lamp texture
-* New mud and mud lump texture
-* Add some more stairs, fix existing stairs
-* Fixes problems with light emmiting nodes
-* Fix caves generating in blocks which are not ground content
-* Remove textures32 folder, code cleanup
+- stairs
+- stairsplus
 
-**Version 1.2**
+[Download](https://github.com/davisonio/darkage/archive/master.zip) & unzip the mod, rename it to "darkage" and move it into your `minetest/mods` folder.
 
-* Corrected Sounds of Stairs
-* Updated mod to use new moreblocks API
-* Added Serpentine Stairs
+## Authors
 
-**Version 1.1**
+**[Craig Davison](https://davison.io)**
 
-* Fix spelling mistakes in README file
-* Bug fix
-* Rename slate_tale to slate_tile
-* Remove unneeded code
-* Add marble tile
-* Remove unneeded code
-* Capitalise a couple of descriptions
-* Add marble tile texture
-* Rename alias.lua to aliases.lua
+[![](https://img.shields.io/github/followers/davisonio.svg?style=social&label=Follow%20davisonio)](https://github.com/davisonio) [![](https://img.shields.io/twitter/follow/davisonio.svg?style=social)](https://twitter.com/davisonio)
 
-**Version 1.0.1**
+With many thanks to the [contributors](https://github.com/davisonio/darkage/graphs/contributors). :clap:
 
-* Fixed broken init.lua
+**Contributions are welcome!** Check out the [Contributing Guidelines](https://github.com/davisonio/darkage/blob/master/CONTRIBUTING.md). :raised_hands:
 
-**Version 1.0**
+## License & Credits
 
-* Compatibility with stairsplus added
-* Added new iron_stick item
-* Added craft for iron stick
-* Changed craft reciep of iron_bars to avoid conflicts with iron bars mod
-* Changed craft recipe of chain to avoid conflicts with 3d furniture mod
-* Changed craft recipe of darkage:stonebrick to avoid conflicts with moreblocks
-* Disabled marble_tile
-* Added darkage:glass
-* Changed the sound_node_leaves_default to wood_default for boxes and wooden shelves
-* Added craft recipe for chalk
-* Improved the textures of reinforced wood and chalk
-* Added another recipe for darkage straw
+Unless otherwise stated:
 
-**Version 0.3**
+- Copyright © 2014+ [Craig Davison](https://davison.io). Released under the [WTFPL](http://www.wtfpl.net/txt/copying/).
 
-* 29 Nodes + 3 Craft Items
-* Furniture and building decoration
-* Stone layers
+Based on the original [Darkage](https://forum.minetest.net/viewtopic.php?id=3213) mod:
 
-**Version 0.2**
-
-* 13 Nodes
-* Sedimentary stones
-
-**Version 0.1**
-
-* 6 Nodes
+- Copyright © 2012 [MasterGollum](https://forum.minetest.net/memberlist.php?mode=viewprofile&u=3104). Released under the [WTFPL](http://www.wtfpl.net/txt/copying/).
+- Copyright © 2013-2014 [adrido](https://forum.minetest.net/memberlist.php?mode=viewprofile&u=3040). Released under the [WTFPL](http://www.wtfpl.net/txt/copying/).

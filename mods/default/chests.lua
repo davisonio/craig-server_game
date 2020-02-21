@@ -1,5 +1,8 @@
 default.chest = {}
 
+-- support for MT game translation.
+local S = default.get_translator
+
 function default.chest.get_chest_formspec(pos)
 	local spos = pos.x .. "," .. pos.y .. "," .. pos.z
 	local formspec =
@@ -43,7 +46,8 @@ function default.chest.chest_lid_close(pn)
 	local node = minetest.get_node(pos)
 	minetest.after(0.2, minetest.swap_node, pos, { name = "default:" .. swap,
 			param2 = node.param2 })
-	minetest.sound_play(sound, {gain = 0.3, pos = pos, max_hear_distance = 10})
+	minetest.sound_play(sound, {gain = 0.3, pos = pos,
+		max_hear_distance = 10}, true)
 end
 
 default.chest.open_chests = {}
@@ -84,7 +88,7 @@ function default.chest.register_chest(name, d)
 	if def.protected then
 		def.on_construct = function(pos)
 			local meta = minetest.get_meta(pos)
-			meta:set_string("infotext", "Locked Chest")
+			meta:set_string("infotext", S("Locked Chest"))
 			meta:set_string("owner", "")
 			local inv = meta:get_inventory()
 			inv:set_size("main", 8*4)
@@ -92,8 +96,7 @@ function default.chest.register_chest(name, d)
 		def.after_place_node = function(pos, placer)
 			local meta = minetest.get_meta(pos)
 			meta:set_string("owner", placer:get_player_name() or "")
-			meta:set_string("infotext", "Locked Chest (owned by " ..
-					meta:get_string("owner") .. ")")
+			meta:set_string("infotext", S("Locked Chest (owned by @1)", meta:get_string("owner")))
 		end
 		def.can_dig = function(pos,player)
 			local meta = minetest.get_meta(pos);
@@ -126,7 +129,7 @@ function default.chest.register_chest(name, d)
 			end
 
 			minetest.sound_play(def.sound_open, {gain = 0.3,
-					pos = pos, max_hear_distance = 10})
+					pos = pos, max_hear_distance = 10}, true)
 			if not default.chest.chest_lid_obstructed(pos) then
 				minetest.swap_node(pos,
 						{ name = "default:" .. name .. "_open",
@@ -171,7 +174,7 @@ function default.chest.register_chest(name, d)
 			-- verify placer is owner of lockable chest
 			if owner ~= pn then
 				minetest.record_protection_violation(pos, pn)
-				minetest.chat_send_player(pn, "You do not own this chest.")
+				minetest.chat_send_player(pn, S("You do not own this chest."))
 				return nil
 			end
 
@@ -181,12 +184,12 @@ function default.chest.register_chest(name, d)
 				meta:set_string("key_lock_secret", secret)
 			end
 
-			return secret, "a locked chest", owner
+			return secret, S("a locked chest"), owner
 		end
 	else
 		def.on_construct = function(pos)
 			local meta = minetest.get_meta(pos)
-			meta:set_string("infotext", "Chest")
+			meta:set_string("infotext", S("Chest"))
 			local inv = meta:get_inventory()
 			inv:set_size("main", 8*4)
 		end
@@ -197,7 +200,7 @@ function default.chest.register_chest(name, d)
 		end
 		def.on_rightclick = function(pos, node, clicker)
 			minetest.sound_play(def.sound_open, {gain = 0.3, pos = pos,
-					max_hear_distance = 10})
+					max_hear_distance = 10}, true)
 			if not default.chest.chest_lid_obstructed(pos) then
 				minetest.swap_node(pos, {
 						name = "default:" .. name .. "_open",
@@ -285,7 +288,7 @@ function default.chest.register_chest(name, d)
 end
 
 default.chest.register_chest("chest", {
-	description = "Chest",
+	description = S("Chest"),
 	tiles = {
 		"default_chest_top.png",
 		"default_chest_top.png",
@@ -301,7 +304,7 @@ default.chest.register_chest("chest", {
 })
 
 default.chest.register_chest("chest_locked", {
-	description = "Locked Chest",
+	description = S("Locked Chest"),
 	tiles = {
 		"default_chest_top.png",
 		"default_chest_top.png",
@@ -315,4 +318,40 @@ default.chest.register_chest("chest_locked", {
 	sound_close = "default_chest_close",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2},
 	protected = true,
+})
+
+minetest.register_craft({
+	output = "default:chest",
+	recipe = {
+		{"group:wood", "group:wood", "group:wood"},
+		{"group:wood", "", "group:wood"},
+		{"group:wood", "group:wood", "group:wood"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:chest_locked",
+	recipe = {
+		{"group:wood", "group:wood", "group:wood"},
+		{"group:wood", "default:steel_ingot", "group:wood"},
+		{"group:wood", "group:wood", "group:wood"},
+	}
+})
+
+minetest.register_craft( {
+	type = "shapeless",
+	output = "default:chest_locked",
+	recipe = {"default:chest", "default:steel_ingot"},
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:chest",
+	burntime = 30,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:chest_locked",
+	burntime = 30,
 })

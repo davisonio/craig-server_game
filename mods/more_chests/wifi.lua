@@ -1,5 +1,8 @@
+-- Load support for translation.
+local S = minetest.get_translator("more_chests")
+
 minetest.register_node("more_chests:wifi", {
-	description = "Wifi Chest",
+	description = S("Wifi Chest"),
 	tiles = {"wifi_top.png", "wifi_top.png", "wifi_side.png",
 		"wifi_side.png", "wifi_side.png", "wifi_front.png"},
 	paramtype2 = "facedir",
@@ -20,7 +23,7 @@ minetest.register_node("more_chests:wifi", {
 				"listring[current_player;main]" ..
 				default.get_hotbar_bg(0,4.85))
 
-		meta:set_string("infotext", "Wifi Chest")
+		meta:set_string("infotext", S("Wifi Chest"))
 	end,
 	on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 		minetest.log("action", player:get_player_name()..
@@ -49,4 +52,3 @@ minetest.register_on_joinplayer(function(player)
 	local inv = player:get_inventory()
 	inv:set_size("more_chests:wifi", 8*4)
 end)
-

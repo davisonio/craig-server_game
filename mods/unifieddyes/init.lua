@@ -33,13 +33,7 @@ unifieddyes = {}
 
 local creative_mode = minetest.settings:get_bool("creative_mode")
 
--- Boilerplate to support localized strings if intllib mod is installed.
-local S
-if minetest.get_modpath("intllib") then
-	S = intllib.Getter()
-else
-	S = function(s) return s end
-end
+local S = minetest.get_translator("unifieddyes")
 
 -- the names of the various colors here came from http://www.procato.com/rgb+index/
 
@@ -194,6 +188,48 @@ minetest.register_on_placenode(
 		end
 	end
 )
+
+-- The complementary function:  strip-off the color if the node being dug is still white/neutral
+
+local function move_item(item, pos, inv, digger)
+	local creative = creative_mode or minetest.check_player_privs(digger, "creative")
+	if inv:room_for_item("main", item)
+	  and (not creative or not inv:contains_item("main", item, true)) then
+		inv:add_item("main", item)
+	elseif not creative then
+		minetest.item_drop(ItemStack(item), digger, pos)
+	end
+	minetest.remove_node(pos)
+end
+
+function unifieddyes.on_dig(pos, node, digger)
+
+	local playername = digger:get_player_name()
+	if minetest.is_protected(pos, playername) then 
+		minetest.record_protection_violation(pos, playername)
+		return
+	end
+
+	local oldparam2 = minetest.get_node(pos).param2
+	local def = minetest.registered_items[node.name]
+	local del_color
+
+	if def.paramtype2 == "color" and oldparam2 == 240 and def.palette == "unifieddyes_palette_extended.png" then
+		del_color = true
+	elseif def.paramtype2 == "colorwallmounted" and math.floor(oldparam2 / 8) == 0 and def.palette == "unifieddyes_palette_colorwallmounted.png" then
+		del_color = true
+	elseif def.paramtype2 == "colorfacedir" and math.floor(oldparam2 / 32) == 0 and string.find(def.palette, "unifieddyes_palette_") then
+		del_color = true
+	end
+
+	local inv = digger:get_inventory()
+
+	if del_color then
+		move_item(node.name, pos, inv, digger)
+	else
+		return minetest.node_dig(pos, node, digger)
+	end
+end
 
 -- just stubs to keep old mods from crashing when expecting auto-coloring
 -- or getting back the dye on dig.
@@ -921,7 +957,7 @@ function unifieddyes.show_airbrush_form(player)
 	local nodepalette = "extended"
 	local showall = unifieddyes.player_showall[player_name]
 
-	t[1] = "size[14.5,8.5]label[7,-0.3;Select a color:]"
+	t[1] = "size[14.5,8.5]label[7,-0.3;"..S("Select a color:").."]"
 	local selindic = "unifieddyes_select_overlay.png^unifieddyes_question.png]"
 
 	local last_right_click = unifieddyes.player_last_right_clicked[player_name]
@@ -930,7 +966,7 @@ function unifieddyes.show_airbrush_form(player)
 			if last_right_click.def.palette == "unifieddyes_palette_colorwallmounted.png" then
 				nodepalette = "wallmounted"
 			elseif last_right_click.def.palette == "unifieddyes_palette_extended.png" then
-				t[#t+1] = "label[0.5,8.25;(Right-clicked a node that supports all 256 colors, showing them all)]"
+				t[#t+1] = "label[0.5,8.25;"..S("(Right-clicked a node that supports all 256 colors, showing them all)").."]"
 				showall = true
 			elseif last_right_click.def.palette ~= "unifieddyes_palette_extended.png"
 			  and last_right_click.def.palette ~= "unifieddyes_palette_colorwallmounted.png"
@@ -944,7 +980,7 @@ function unifieddyes.show_airbrush_form(player)
 	  or not last_right_click.def.groups.ud_param2_colorable
 	  or not last_right_click.def.palette
 	  or not string.find(last_right_click.def.palette, "unifieddyes_palette_") then
-		t[#t+1] = "label[0.5,8.25;(Right-clicked a node not supported by the Airbrush, showing all colors)]"
+		t[#t+1] = "label[0.5,8.25;"..S("(Right-clicked a node not supported by the Airbrush, showing all colors)").."]"
 	end
 
 	local explist = last_right_click.def.explist
@@ -1041,7 +1077,7 @@ function unifieddyes.show_airbrush_form(player)
 		t[#t+1] = color_button_size
 		t[#t+1] = "unifieddyes_onhand_overlay.png]label[10.7,"
 		t[#t+1] = (vps*5.51+vs)
-		t[#t+1] = ";Dyes]"
+		t[#t+1] = ";"..S("Dyes").."]"
 		t[#t+1] = "label[10.7,"
 		t[#t+1] = (vps*5.67+vs)
 		t[#t+1] = ";on hand]"
@@ -1056,7 +1092,7 @@ function unifieddyes.show_airbrush_form(player)
 	if painting_with then
 		t[#t+1] = "label[10.7,"
 		t[#t+1] = (vps*4.90+vs)
-		t[#t+1] = ";Your selection:]"
+		t[#t+1] = ";"..S("Your selection:").."]"
 		t[#t+1] = "label[10.7,"
 		t[#t+1] = (vps*5.07+vs)
 		t[#t+1] = ";"
@@ -1069,19 +1105,19 @@ function unifieddyes.show_airbrush_form(player)
 	else
 		t[#t+1] = "label[10.7,"
 		t[#t+1] = (vps*5.07+vs)
-		t[#t+1] = ";Your selection]"
+		t[#t+1] = ";"..S("Your selection").."]"
 	end
 
-	t[#t+1] = "button_exit[10.5,8;2,1;cancel;Cancel]button_exit[12.5,8;2,1;accept;Accept]"
+	t[#t+1] = "button_exit[10.5,8;2,1;cancel;"..S("Cancel").."]button_exit[12.5,8;2,1;accept;"..S("Accept").."]"
 
 
 	if last_right_click and last_right_click.def and nodepalette ~= "extended" then
 		if showall then
-			t[#t+1] = "button[0,8;2,1;show_avail;Show Available]"
-			t[#t+1] = "label[2,8.25;(Currently showing all 256 colors)]"
+			t[#t+1] = "button[0,8;2,1;show_avail;"..S("Show Available").."]"
+			t[#t+1] = "label[2,8.25;"..S("(Currently showing all 256 colors)").."]"
 		else
-			t[#t+1] = "button[0,8;2,1;show_all;Show All Colors]"
-			t[#t+1] = "label[2,8.25;(Currently only showing what the right-clicked node can use)]"
+			t[#t+1] = "button[0,8;2,1;show_all;"..S("Show All Colors").."]"
+			t[#t+1] = "label[2,8.25;"..S("(Currently only showing what the right-clicked node can use)").."]"
 		end
 	end
 
@@ -1342,18 +1378,18 @@ unifieddyes.palette_has_color["wallmounted_light_red"] = true
 -- crafting!
 
 unifieddyes.base_color_crafts = {
-	{ "red",		"flowers:rose",				nil,				nil,			nil,			nil,		16 },
+	{ "red",		"flowers:rose",				nil,				nil,			nil,			nil,		4 },
 	{ "vermilion",	"dye:red",					"dye:orange",		nil,			nil,			nil,		3 },
-	{ "orange",		"flowers:tulip",			nil,				nil,			nil,			nil,		16 },
+	{ "orange",		"flowers:tulip",			nil,				nil,			nil,			nil,		4 },
 	{ "orange",		"dye:red",					"dye:yellow",		nil,			nil,			nil,		2 },
 	{ "amber",		"dye:orange",				"dye:yellow",		nil,			nil,			nil,		2 },
-	{ "yellow",		"flowers:dandelion_yellow",	nil,				nil,			nil,			nil,		16 },
+	{ "yellow",		"flowers:dandelion_yellow",	nil,				nil,			nil,			nil,		4 },
 	{ "lime",		"dye:yellow",				"dye:chartreuse",	nil,			nil,			nil,		2 },
 	{ "lime",		"dye:yellow",				"dye:yellow",		"dye:green",	nil,			nil,		3 },
 	{ "chartreuse",	"dye:yellow",				"dye:green",		nil,			nil,			nil,		2 },
 	{ "harlequin",	"dye:chartreuse",			"dye:green",		nil,			nil,			nil,		2 },
 	{ "harlequin",	"dye:yellow",				"dye:green",		"dye:green",	nil,			nil,		3 },
-	{ "green", 		"default:cactus",			nil,				nil,			nil,			nil,		16 },
+	{ "green", 		"default:cactus",			nil,				nil,			nil,			nil,		4 },
 	{ "green", 		"dye:yellow",				"dye:blue",			nil,			nil,			nil,		2 },
 	{ "malachite",	"dye:green",				"dye:spring",		nil,			nil,			nil,		2 },
 	{ "malachite",	"dye:green",				"dye:green",		"dye:cyan",		nil,			nil,		3 },
@@ -1372,9 +1408,9 @@ unifieddyes.base_color_crafts = {
 	{ "sapphire",	"dye:azure",				"dye:blue",			nil,			nil,			nil,		2 },
 	{ "sapphire",	"dye:cyan",					"dye:blue",			"dye:blue",		nil,			nil,		3 },
 	{ "sapphire",	"dye:green",				"dye:blue",			"dye:blue",		"dye:blue",		nil,		4 },
-	{ "blue",		"flowers:geranium",			nil,				nil,			nil,			nil,		16 },
+	{ "blue",		"flowers:geranium",			nil,				nil,			nil,			nil,		4 },
 	{ "indigo",		"dye:blue",					"dye:violet",		nil,			nil,			nil,		2 },
-	{ "violet",		"flowers:viola",			nil,				nil,			nil,			nil,		16 },
+	{ "violet",		"flowers:viola",			nil,				nil,			nil,			nil,		4 },
 	{ "violet",		"dye:blue",					"dye:magenta",		nil,			nil,			nil,		2 },
 	{ "mulberry",	"dye:violet",				"dye:magenta",		nil,			nil,			nil,		2 },
 	{ "mulberry",	"dye:violet",				"dye:blue",			"dye:red",		nil,			nil,		3 },
@@ -1388,8 +1424,8 @@ unifieddyes.base_color_crafts = {
 	{ "crimson",	"dye:magenta",				"dye:red",			"dye:red",		nil,			nil,		3 },
 	{ "crimson",	"dye:red",					"dye:red",			"dye:red",		"dye:blue",		nil,		4 },
 
-	{ "black",		"default:coal_lump",		nil,				nil,			nil,			nil,		16 },
-	{ "white",		"flowers:dandelion_white",	nil,				nil,			nil,			nil,		16 },
+	{ "black",		"default:coal_lump",		nil,				nil,			nil,			nil,		4 },
+	{ "white",		"flowers:dandelion_white",	nil,				nil,			nil,			nil,		4 },
 }
 
 unifieddyes.shade_crafts = {

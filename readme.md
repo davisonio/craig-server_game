@@ -9,19 +9,16 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 ## Mod List
 
 * 3d_armor - [GitHub](https://github.com/stujones11/minetest-3d_armor)
-* 3d_armor_sfinv - [GitHub](https://github.com/stujones11/minetest-3d_armor)
 * areas - [GitHub](https://github.com/ShadowNinja/areas)
 * arrow_signs - [Bitbucket](https://bitbucket.org/adrido/arrow_signs/src)
 * basic_materials - [GitLab](https://gitlab.com/VanessaE/basic_materials)
-* bitchange
-* bucket - [GitHub](https://github.com/minetest/minetest_game)
+* bitchange [GitHub](https://github.com/SmallJoker/bitchange)
 * building_blocks - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
-* carts - [GitHub](https://github.com/minetest/minetest_game)
-* colouredstonebricks
+* colouredstonebricks [GitHub](https://github.com/davisonio/colouredstonebricks)
 * craftguide - [GitHub](https://github.com/minetest-mods/craftguide)
 * craig_server - Custom code for this server
 * creative - [GitHub](https://github.com/minetest/minetest_game)
-* darkage
+* darkage [GitHub](https://github.com/davisonio/darkage)
 * default - [GitHub](https://github.com/minetest/minetest_game)
 * doors - [GitHub](https://github.com/minetest/minetest_game)
 * dye - [GitHub](https://github.com/minetest/minetest_game)
@@ -36,13 +33,13 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * irc - [GitHub](https://github.com/minetest-mods/irc)
 * irc_commands - [GitHub](https://github.com/ShadowNinja/minetest-irc_commands)
 * itemframes - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
-* locked_sign
+* locked_sign [Forum](https://forum.minetest.net/viewtopic.php?p=216944#p216944)
 * lrfurn - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * markers - [GitHub](https://github.com/Sokomine/markers)
 * more_chests - [GitHub](https://github.com/minetest-mods/more_chests)
 * moreblocks - [GitHub](https://github.com/minetest-mods/moreblocks)
 * moreores - [GitHub](https://github.com/minetest-mods/moreores)
-* nyancat - From Minetest Game before it got removed
+* nyancat - [GitHub](https://github.com/minetest/minetest_game/tree/0.4.15/mods/nyancat) (removed from Minetest Game)
 * player_api - [GitHub](https://github.com/minetest/minetest_game)
 * ranks - [GitHub](https://github.com/octacian/ranks)
 * replacer - [GitHub](https://github.com/Sokomine/replacer)
@@ -51,18 +48,14 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * screwdriver - [GitHub](https://github.com/minetest/minetest_game)
 * sfinv - [GitHub](https://github.com/minetest/minetest_game)
 * sfinv_buttons - [repo.or.cz](http://repo.or.cz/minetest_sfinv_buttons.git)
-* shields - [GitHub](https://github.com/stujones11/minetest-3d_armor)
 * skinsdb - [GitHub](https://github.com/minetest-mods/skinsdb)
 * stairs - [GitHub](https://github.com/minetest/minetest_game)
-* streets
+* streets (v1) [GitHub](https://github.com/minetest-streets/streets/tree/streets-1)
 * travelnet - [GitHub](https://github.com/Sokomine/travelnet)
 * unifieddyes - [GitHub](https://gitlab.com/VanessaE/unifieddyes)
 * vessels - [GitHub](https://github.com/minetest/minetest_game)
-* wieldview - [GitHub](https://github.com/stujones11/minetest-3d_armor)
 * wool - [GitHub](https://github.com/minetest/minetest_game)
 * worldedit - [GitHub](https://github.com/Uberi/Minetest-WorldEdit)
-* worldedit_commands - [GitHub](https://github.com/Uberi/Minetest-WorldEdit)
-* worldedit_gui - [GitHub](https://github.com/Uberi/Minetest-WorldEdit)
 
 ## Credits
 

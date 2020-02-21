@@ -1,3 +1,6 @@
+--Created by Krock for the BitChange mod
+--License: WTFPL
+
 minetest.register_node("bitchange:donationbox", {
 	description = "Donation box",
 	tiles = {"default_wood.png"},
@@ -45,7 +48,7 @@ minetest.register_node("bitchange:donationbox", {
 		local inv = meta:get_inventory()
 		if not inv:is_empty("main") then
 			return false
-		elseif bitchange_has_access(meta:get_string("owner"), player:get_player_name()) then
+		elseif bitchange.has_access(meta:get_string("owner"), player:get_player_name()) then
 			return true
 		end
 		return false
@@ -56,9 +59,9 @@ minetest.register_node("bitchange:donationbox", {
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		return stack:get_count()
 	end,
-    allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
-		if(not bitchange_has_access(meta:get_string("owner"), player:get_player_name())) then
+		if not bitchange.has_access(meta:get_string("owner"), player:get_player_name()) then
 			return 0
 		end
 		return stack:get_count()
@@ -69,7 +72,7 @@ minetest.register_craft({
 	output = "bitchange:donationbox",
 	recipe = {
 		{"default:wood", "", "default:wood"},
-		{"default:wood", "bitchange:bitcoin", "default:wood"},
+		{"default:wood", "bitchange:minecoin", "default:wood"},
 		{"default:wood", "default:wood", "default:wood"}
 	}
 })

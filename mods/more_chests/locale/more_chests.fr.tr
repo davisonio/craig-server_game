@@ -1,0 +1,11 @@
+# textdomain: more_chests
+Cobble Chest=Coffre en pierre taillée
+Dropbox=Boîte de dépôt
+Secret Chest=Coffre secret
+Shared Chest=Coffre partagé
+Wifi Chest=Coffre wifi
+
+
+@1 (owned by @2)=@1 (appartient à @2)
+Shared with (separate names with spaces)=Partagé avec (séparez les noms avec des espaces)
+submit=valider

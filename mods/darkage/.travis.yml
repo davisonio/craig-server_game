@@ -1,0 +1,26 @@
+before_install:
+  # Unfortunately there's no other way to install a recent luarocks release
+  - cd ../
+  - wget https://keplerproject.github.io/luarocks/releases/luarocks-2.2.2.tar.gz -O luarocks-2.2.2.tar.gz
+  - tar -xvf luarocks-2.2.2.tar.gz
+  - cd luarocks-2.2.2
+  - ./configure
+  - make build
+  - sudo make install
+  - cd ../darkage
+
+install:
+  - sudo luarocks install luacheck
+
+script:
+  # Run luacheck and always return 0 for warnings
+  - luacheck . || true
+
+addons:
+  apt:
+    packages:
+      - lua5.2
+      - liblua5.2-dev
+
+notifications:
+  email: false

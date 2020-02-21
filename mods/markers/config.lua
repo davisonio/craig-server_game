@@ -9,10 +9,10 @@ markers.MAX_MARKERS  = 50;
 markers.EXPIRE_AFTER = 60*60*24;
 
 -- self-protected areas can not get higher than 100 blocks
-markers.MAX_HEIGHT   = 200;
+markers.MAX_HEIGHT   = 100;
 
 -- only areas up to this size (in square meters) can be protected
-markers.MAX_SIZE     = 40000; -- 200m * 200m = 40000 m^2
+markers.MAX_SIZE     = 4096; -- 64m * 64m= 4096 m^2
 
 -- show only areas withhin this range when showing the list of ALL areas
 -- (else it does get too crowded on multiplayer servers)
@@ -30,7 +30,18 @@ end
 -- for most cases, the default values ought to work
 --markers.AREA_RANGE   = 100000;
 
-if( io.open(minetest.get_worldpath().."/markers_settings.txt","r")) then
-	io.close()
-	dofile(minetest.get_worldpath().."/markers_settings.txt")
+local settings = Settings( minetest.get_worldpath().."/markers_settings.txt");
+if( settings ) then
+	if( settings:get( "markers_MAX_MARKERS" )) then
+		markers.MAX_MARKERS  = tonumber(settings:get( "markers_MAX_MARKERS"));
+	end
+	if( settings:get( "markers_EXPIRE_AFTER" )) then
+		markers.EXPIRE_AFTER = tonumber(settings:get( "markers_EXPIRE_AFTER"));
+	end
+	if( settings:get( "markers_MAX_HEIGHT" )) then
+		markers.MAX_HEIGHT   = tonumber(settings:get( "markers_MAX_HEIGHT"));
+	end
+	if( settings:get( "markers_MAX_SIZE" )) then
+		markers.MAX_SIZE     = tonumber(settings:get( "markers_MAX_SIZE"));
+	end
 end

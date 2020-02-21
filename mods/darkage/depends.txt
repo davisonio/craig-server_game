@@ -1,4 +1,3 @@
 default
 stairs?
-stairsplus?
 moreblocks?

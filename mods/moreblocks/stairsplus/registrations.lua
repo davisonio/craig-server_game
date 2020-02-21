@@ -1,7 +1,7 @@
 --[[
 More Blocks: registrations
 
-Copyright © 2011-2019 Hugo Locurcio and contributors.
+Copyright © 2011-2020 Hugo Locurcio and contributors.
 Licensed under the zlib license. See LICENSE.md for more information.
 --]]
 
@@ -49,6 +49,7 @@ local default_nodes = { -- Default stairs/slabs/panels/microblocks:
 	"desert_sandstone_block",
 	"sandstone_block",
 	"coral_skeleton",
+	"ice",
 }
 
 for _, name in pairs(default_nodes) do

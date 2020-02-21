@@ -490,7 +490,7 @@ minetest.register_on_player_receive_fields( markers.form_input_handler)
 
 
 minetest.register_node("markers:mark", {
-	description = "Area Marker (for protecting areas)",
+	description = "Marker",
 	tiles = {"markers_mark.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -533,3 +533,4 @@ minetest.register_craft({
               { "default:apple" },
               { "group:stick" },
              } });
+

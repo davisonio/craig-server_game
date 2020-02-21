@@ -3,18 +3,10 @@
 -- Copyright (c) 2012 cornernote, Dean Montgomery
 -- Rework 2017 by bell07
 -- License: GPLv3
--- Boilerplate to support localized strings if intllib mod is installed.
 
 skins = {}
 skins.modpath = minetest.get_modpath(minetest.get_current_modname())
 skins.default = "character"
-
-local S
-if minetest.get_modpath("intllib") then
-	skins.S = intllib.Getter()
-else
-	skins.S = function(s) return s end
-end
 
 dofile(skins.modpath.."/skin_meta_api.lua")
 dofile(skins.modpath.."/api.lua")
@@ -73,42 +65,30 @@ minetest.register_on_leaveplayer(function(player)
 	skins.ui_context[player:get_player_name()] = nil
 end)
 
-if minetest.global_exists("player_api") then
-	-- Minetest-5 and above compatible
-	player_api.register_model("skinsdb_3d_armor_character_5.b3d", {
-		animation_speed = 30,
-		textures = {
-			"blank.png",
-			"blank.png",
-			"blank.png",
-			"blank.png"
-		},
-		animations = {
-			stand = {x=0, y=79},
-			lay = {x=162, y=166},
-			walk = {x=168, y=187},
-			mine = {x=189, y=198},
-			walk_mine = {x=200, y=219},
-			sit = {x=81, y=160},
-		},
-	})
-else
-	-- Minetest-0.4 compatible
-	default.player_register_model("skinsdb_3d_armor_character.b3d", {
-		animation_speed = 30,
-		textures = {
-			"blank.png",
-			"blank.png",
-			"blank.png",
-			"blank.png",
-		},
-		animations = {
-			stand = {x=0, y=79},
-			lay = {x=162, y=166},
-			walk = {x=168, y=187},
-			mine = {x=189, y=198},
-			walk_mine = {x=200, y=219},
-			sit = {x=81, y=160},
-		},
-	})
+player_api.register_model("skinsdb_3d_armor_character_5.b3d", {
+	animation_speed = 30,
+	textures = {
+		"blank.png",
+		"blank.png",
+		"blank.png",
+		"blank.png"
+	},
+	animations = {
+		stand = {x=0, y=79},
+		lay = {x=162, y=166},
+		walk = {x=168, y=187},
+		mine = {x=189, y=198},
+		walk_mine = {x=200, y=219},
+		sit = {x=81, y=160},
+	},
+})
+
+-- Register default character.png if not part of this mod
+local default_skin_obj = skins.get(skins.default)
+if not default_skin_obj then
+	default_skin_obj = skins.new(skins.default)
+	default_skin_obj:set_texture("character.png")
+	default_skin_obj:set_meta("format", '1.0')
+	default_skin_obj:set_meta("_sort_id", 0)
+	default_skin_obj:set_meta("name", "Sam")
 end

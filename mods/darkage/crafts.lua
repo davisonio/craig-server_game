@@ -1,4 +1,6 @@
+--
 -- Naturally spawning blocks
+--
 minetest.register_craft({
 	output = "darkage:chalk",
 	recipe = {
@@ -87,9 +89,13 @@ minetest.register_craft({
 	recipe = "darkage:basalt_cobble",
 })
 
+--
 -- Cobble
+--
 
+--
 -- Other Blocks
+--
 
 minetest.register_craft({
 	output = "darkage:straw 2",
@@ -198,7 +204,10 @@ minetest.register_craft({
 	recipe = "default:leaves",
 })
 
+--
 -- Storage blocks (boxes, shelves, ect.)
+--
+
 minetest.register_craft({
 	output = "darkage:box",
 	recipe = {
@@ -216,7 +225,10 @@ minetest.register_craft({
 	}
 })
 
+--
 -- Glass / Glow Glass
+--
+
 minetest.register_craft({
 	output = "darkage:glass",
 		recipe = {
@@ -241,7 +253,10 @@ minetest.register_craft({
 	}
 })
 
+--
 -- Reinforced Wood
+--
+
 minetest.register_craft({
 	output = "darkage:reinforced_wood",
 	recipe = {
@@ -265,7 +280,9 @@ minetest.register_craft({
 	}
 })
 
--- Wood based deco items
+--
+-- Wood based decoration items
+--
 minetest.register_craft({
 	output = "darkage:wood_bars 2",
 	recipe = {
@@ -293,7 +310,10 @@ minetest.register_craft({
 	}
 })
 
--- Metal based deco items
+--
+-- Metal based decoration items
+--
+
 minetest.register_craft({
 	output = "darkage:chain 2",
 	recipe = {
@@ -321,7 +341,10 @@ minetest.register_craft({
 	}
 })
 
+--
 -- Craft items
+--
+
 minetest.register_craft({
 	output = "darkage:chalk_powder 4",
 	recipe = {
