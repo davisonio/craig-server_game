@@ -93,10 +93,10 @@ replacer.inspect = function( itemstack, user, pointed_thing, mode, show_receipe 
 
 		end
 		text = text..' at '..minetest.pos_to_string( ref:get_pos() );
-		minetest.chat_send_player( name, text );
+		replacer.set_hud( name, text );
 		return nil;
 	elseif( pointed_thing.type ~= 'node' ) then
-		minetest.chat_send_player( name, 'Sorry. This is an unkown something of type \"'..tostring( pointed_thing.type )..'\". No information available.');
+		replacer.set_hud( name, 'Sorry. This is an unkown something of type \"'..tostring( pointed_thing.type )..'\". No information available.');
 		return nil;
 	end
 	
@@ -104,7 +104,7 @@ replacer.inspect = function( itemstack, user, pointed_thing, mode, show_receipe 
 	local node = minetest.get_node_or_nil( pos );
        
 	if( node == nil ) then
-		minetest.chat_send_player( name, "Error: Target node not yet loaded. Please wait a moment for the server to catch up.");
+		replacer.set_hud( name, "Error: Target node not yet loaded. Please wait a moment for the server to catch up.");
 		return nil;
 	end
 
