@@ -30,3 +30,8 @@ function replacer.set_hud(playername, message)
         end
     end);
 end
+
+minetest.register_on_leaveplayer(function(player, timed_out)
+    local name = player:get_player_name()
+    replacer.hud_ids[name] = nil
+end)
