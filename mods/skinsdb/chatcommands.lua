@@ -1,4 +1,4 @@
-local S = skins.S
+local S = minetest.get_translator("skinsdb")
 
 local function show_selection_formspec(player)
 	local context = skins.get_formspec_context(player)
@@ -36,11 +36,14 @@ minetest.register_chatcommand("skinsdb", {
 		end
 
 		if command == "set" then
-			local success = skins.set_player_skin(player, parameter)
-			if success then
-				return true, S("skin set to").." "..parameter
-			else
-				return false, S("invalid skin").." "..parameter
+			if parameter then
+				local success = skins.set_player_skin(player, parameter)
+				if success then
+					return true, S("skin set to").." "..parameter
+				else
+					return false, S("invalid skin").." "..parameter
+				end
+			else return false, S("Requires skin key")
 			end
 		elseif command == "list" then
 			local list

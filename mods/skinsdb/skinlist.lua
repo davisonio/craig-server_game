@@ -1,4 +1,3 @@
-
 local skins_dir_list = minetest.get_dir_list(skins.modpath.."/textures")
 
 for _, fn in pairs(skins_dir_list) do
@@ -69,6 +68,18 @@ for _, fn in pairs(skins_dir_list) do
 	end
 end
 
+local function skins_sort(skinslist)
+	table.sort(skinslist, function(a,b)
+		local a_id = a:get_meta("_sort_id") or 10000
+		local b_id = b:get_meta("_sort_id") or 10000
+		if a_id ~= b_id then
+			return a:get_meta("_sort_id") < b:get_meta("_sort_id")
+		else
+			return a:get_meta("name") < b:get_meta("name")
+		end
+	end)
+end
+
 -- (obsolete) get skinlist. If assignment given ("mod:wardrobe" or "player:bell07") select skins matches the assignment. select_unassigned selects the skins without any assignment too
 function skins.get_skinlist(assignment, select_unassigned)
 	minetest.log("deprecated", "skins.get_skinlist() is deprecated. Use skins.get_skinlist_for_player() instead")
@@ -80,7 +91,7 @@ function skins.get_skinlist(assignment, select_unassigned)
 			table.insert(skinslist, skin)
 		end
 	end
-	table.sort(skinslist, function(a,b) return a:get_meta("_sort_id") < b:get_meta("_sort_id") end)
+	skins_sort(skinslist)
 	return skinslist
 end
 
@@ -92,7 +103,7 @@ function skins.get_skinlist_for_player(playername)
 			table.insert(skinslist, skin)
 		end
 	end
-	table.sort(skinslist, function(a,b) return a:get_meta("_sort_id") < b:get_meta("_sort_id") end)
+	skins_sort(skinslist)
 	return skinslist
 end
 
@@ -105,6 +116,6 @@ function skins.get_skinlist_with_meta(key, value)
 			table.insert(skinslist, skin)
 		end
 	end
-	table.sort(skinslist, function(a,b) return a:get_meta("_sort_id") < b:get_meta("_sort_id") end)
+	skins_sort(skinslist)
 	return skinslist
 end

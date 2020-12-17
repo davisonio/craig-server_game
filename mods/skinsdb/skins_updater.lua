@@ -1,6 +1,6 @@
 -- Skins update script
 
-local S = skins.S
+local S = minetest.get_translator("skinsdb")
 local _ID_ = "Lua Skins Updater"
 
 local internal = {}
@@ -75,7 +75,7 @@ end
 
 -- Insecure workaround since meta/ and textures/ cannot be written to
 local function unsafe_file_write(path, contents)
-	local f = ie.io.open(path, "w")
+	local f = ie.io.open(path, "wb")
 	f:write(contents)
 	f:close()
 end
