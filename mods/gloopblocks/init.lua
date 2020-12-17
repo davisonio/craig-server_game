@@ -6,6 +6,8 @@ Maintained by VanessaE.
 
 --]]
 
+gloopblocks = {}
+
 -- Load support for intllib.
 local MP = minetest.get_modpath(minetest.get_current_modname())
 local S, NS = dofile(MP.."/intllib.lua")
@@ -196,7 +198,8 @@ if not minetest.get_modpath("usesdirt") then
 		wield_image = "default_fence_overlay.png^("..dirt_brick_tex..")^default_fence_overlay.png^[makealpha:255,126,126",
 		material = "usesdirt:dirt_brick",
 		groups = {cracky=3, stone=2},
-		sounds = default.node_sound_stone_defaults()
+		sounds = default.node_sound_stone_defaults(),
+		check_for_pole = true
 	})
 
 	if minetest.get_modpath("moreblocks") then
@@ -254,7 +257,8 @@ if not minetest.get_modpath("usesdirt") then
 		wield_image = "default_fence_overlay.png^default_dirt.png^default_fence_overlay.png^[makealpha:255,126,126",
 		material = "default:dirt",
 		groups = {snappy=2,choppy=1,oddly_breakable_by_hand=3},
-		sounds = default.node_sound_dirt_defaults()
+		sounds = default.node_sound_dirt_defaults(),
+		check_for_pole = true
 	})
 
 ----
@@ -310,7 +314,8 @@ if not minetest.get_modpath("usesdirt") then
 		wield_image = "default_fence_overlay.png^("..dirt_cobble_tex..")^default_fence_overlay.png^[makealpha:255,126,126",
 		material = "usesdirt:dirt_cobble_stone",
 		groups = {cracky=3, stone=2},
-		sounds = default.node_sound_stone_defaults()
+		sounds = default.node_sound_stone_defaults(),
+		check_for_pole = true
 	})
 
 ----
@@ -358,7 +363,8 @@ if not minetest.get_modpath("usesdirt") then
 		wield_image = "default_fence_overlay.png^("..dirt_stone_tex..")^default_fence_overlay.png^[makealpha:255,126,126",
 		material = "usesdirt:dirt_stone",
 		groups = {cracky=3, stone=2},
-		sounds = default.node_sound_stone_defaults()
+		sounds = default.node_sound_stone_defaults(),
+		check_for_pole = true
 	})
 end
 
@@ -902,6 +908,42 @@ minetest.register_node("gloopblocks:fence_steel", {
 	groups = {choppy = 2, oddly_breakable_by_hand = 2 },
 	sounds = default.node_sound_stone_defaults(),
 })
+
+if minetest.get_modpath("worldedit") then
+	function gloopblocks.liquid_ungrief(pos1, pos2, name)
+		local count
+		local p1to2 = minetest.pos_to_string(pos1).." and "..minetest.pos_to_string(pos2)
+		local volume = worldedit.volume(pos1, pos2)
+		minetest.chat_send_player(name, "Cleaning-up lava/water griefing between "..p1to2.."...")
+		if volume > 1000000 then
+			minetest.chat_send_player(name, "This operation could affect up to "..volume.." nodes.  It may take a while.")
+		end
+		minetest.log("action", name.." performs lava/water greifing cleanup between "..p1to2..".")
+		count = worldedit.replace(pos1, pos2, "default:lava_source", "air")
+		count = worldedit.replace(pos1, pos2, "default:lava_flowing", "air")
+		count = worldedit.replace(pos1, pos2, "default:water_source", "air")
+		count = worldedit.replace(pos1, pos2, "default:water_flowing", "air")
+		count = worldedit.replace(pos1, pos2, "default:river_water_source", "air")
+		count = worldedit.replace(pos1, pos2, "default:river_water_flowing", "air")
+		count = worldedit.replace(pos1, pos2, "gloopblocks:pumice_cooled", "air")
+		count = worldedit.replace(pos1, pos2, "gloopblocks:basalt_cooled", "air")
+		count = worldedit.replace(pos1, pos2, "gloopblocks:obsidian_cooled", "air")
+		count = worldedit.fixlight(pos1, pos2)
+		minetest.chat_send_player(name, "Operation completed.")
+	end
+
+	minetest.register_chatcommand("/liquid_ungrief", {
+		params = "[size]",
+		privs = {worldedit = true},
+		description = "Repairs greifing caused by spilling lava and water (and their \"cooling\" results)",
+		func = function(name, params)
+			local pos1 = worldedit.pos1[name]
+			local pos2 = worldedit.pos2[name]
+			if not pos1 or not pos2 then return end
+			gloopblocks.liquid_ungrief(pos1, pos2, name)
+		end
+	})
+end
 
 dofile(minetest.get_modpath("gloopblocks").."/crafts.lua")
 

@@ -11,3 +11,5 @@ caverealms?
 technic?
 nyancat?
 usesdirt?
+worldedit?
+signs_lib?
