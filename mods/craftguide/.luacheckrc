@@ -9,4 +9,10 @@ read_globals = {
 	"vector",
 	"string",
 	"table",
+	"ItemStack",
+}
+
+globals = {
+	"craftguide",
+	"core",
 }

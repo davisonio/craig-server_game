@@ -3,7 +3,7 @@ License of source code
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2019 Jean-Patrick Guerrero and contributors.
+Copyright (c) 2015-2020 Jean-Patrick Guerrero and contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,9 @@ Licenses of media (textures)
 ----------------------------
 
 Copyright © Diego Martínez (kaeza): craftguide_*_icon.png (CC BY-SA 3.0)
+
+paramat (CC BY-SA 3.0):
+  sfinv_crafting_arrow.png - derived from a texture by BlockMen (CC BY-SA 3.0)
 
 You are free to:
 Share — copy and redistribute the material in any medium or format.
