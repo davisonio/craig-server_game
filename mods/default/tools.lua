@@ -6,6 +6,7 @@ local S = default.get_translator
 -- The hand
 minetest.register_item(":", {
 	type = "none",
+	range = 8,
 	wield_image = "wieldhand.png",
 	wield_scale = {x=1,y=1,z=2.5},
 	tool_capabilities = {
