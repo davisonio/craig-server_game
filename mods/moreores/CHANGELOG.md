@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- More Ores tools now have [`toolranks`](https://github.com/lisacvuk/minetest-toolranks) support.
+- Hungarian translation.
+
+### Changed
+
+- Migrated translations to the
+  [Minetest translation file format](https://rubenwardy.com/minetest_modding_book/lua_api.html#translation-file-format).
+
+## [2.0.0] - 2019-11-25
+
+### Added
+
+- More Ores nodes/items/tools can now be placed in item frames
+  from the [`frame`](https://github.com/minetest-mods/frame) mod.
 - Polish translation.
 
 ### Changed
@@ -47,5 +61,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Initial versioned release.
 
-[Unreleased]: https://github.com/minetest-mods/moreores/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/minetest-mods/moreores/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/minetest-mods/moreores/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/minetest-mods/moreores/compare/v1.0.0...v1.1.0
