@@ -26,6 +26,7 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * creative - [GitHub](https://github.com/minetest/minetest_game)
 * darkage
   * One of my mods, needs updating
+* debug
 * default - [GitHub](https://github.com/minetest/minetest_game)
 * discordmt - [GitHub](https://github.com/archfan7411/discordmt)
 * doors - [GitHub](https://github.com/minetest/minetest_game)
