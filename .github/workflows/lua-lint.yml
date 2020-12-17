@@ -1,0 +1,24 @@
+name: Lua Lint
+ 
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Install luarocks
+        run: sudo apt install luarocks
+
+      # Runs a set of commands using the runners shell
+      - name: Install luacheck
+        run: luarocks install --local luacheck
+
+      - name: Run luacheck
+        run: $HOME/.luarocks/bin/luacheck ./mods
