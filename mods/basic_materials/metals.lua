@@ -1,62 +1,73 @@
+-- Translation support
+local S = minetest.get_translator("basic_materials")
+
 -- items
 
 minetest.register_craftitem("basic_materials:steel_wire", {
-	description = "Spool of steel wire",
+	description = S("Spool of steel wire"),
+	groups = { wire = 1 },
 	inventory_image = "basic_materials_steel_wire.png"
 })
 
 minetest.register_craftitem("basic_materials:copper_wire", {
-	description = "Spool of copper wire",
+	description = S("Spool of copper wire"),
+	groups = { wire = 1 },
 	inventory_image = "basic_materials_copper_wire.png"
 })
 
 minetest.register_craftitem("basic_materials:silver_wire", {
-	description = "Spool of silver wire",
+	description = S("Spool of silver wire"),
+	groups = { wire = 1 },
 	inventory_image = "basic_materials_silver_wire.png"
 })
 
 minetest.register_craftitem("basic_materials:gold_wire", {
-	description = "Spool of gold wire",
+	description = S("Spool of gold wire"),
+	groups = { wire = 1 },
 	inventory_image = "basic_materials_gold_wire.png"
 })
 
 minetest.register_craftitem("basic_materials:steel_strip", {
-	description = "Steel Strip",
+	description = S("Steel Strip"),
+	groups = { strip = 1 },
 	inventory_image = "basic_materials_steel_strip.png"
 })
 
 minetest.register_craftitem("basic_materials:copper_strip", {
-	description = "Copper Strip",
+	description = S("Copper Strip"),
+	groups = { strip = 1 },
 	inventory_image = "basic_materials_copper_strip.png"
 })
 
 minetest.register_craftitem("basic_materials:steel_bar", {
-	description = "Steel Bar",
+	description = S("Steel Bar"),
 	inventory_image = "basic_materials_steel_bar.png",
 })
 
 minetest.register_craftitem("basic_materials:chainlink_brass", {
-	description = "Chainlinks (brass)",
+	description = S("Chainlinks (brass)"),
+	groups = { chainlinks = 1 },
 	inventory_image = "basic_materials_chainlink_brass.png"
 })
 
 minetest.register_craftitem("basic_materials:chainlink_steel", {
-	description = "Chainlinks (steel)",
+	description = S("Chainlinks (steel)"),
+	groups = { chainlinks = 1 },
 	inventory_image = "basic_materials_chainlink_steel.png"
 })
 
 minetest.register_craftitem("basic_materials:brass_ingot", {
-	description = "Brass Ingot",
+	description = S("Brass Ingot"),
 	inventory_image = "basic_materials_brass_ingot.png",
 })
 
 minetest.register_craftitem("basic_materials:gear_steel", {
-	description = "Steel gear",
+	description = S("Steel gear"),
 	inventory_image = "basic_materials_gear_steel.png"
 })
 
 minetest.register_craftitem("basic_materials:padlock", {
-	description = "Padlock",
+	description = S("Padlock"),
 	inventory_image = "basic_materials_padlock.png"
 })
 
@@ -67,16 +78,8 @@ local chains_sbox = {
 	fixed = { -0.1, -0.5, -0.1, 0.1, 0.5, 0.1 }
 }
 
-local topchains_sbox = {
-	type = "fixed",
-	fixed = {
-		{ -0.25, 0.35, -0.25, 0.25, 0.5, 0.25 },
-		{ -0.1, -0.5, -0.1, 0.1, 0.4, 0.1 }
-	}
-}
-
 minetest.register_node("basic_materials:chain_steel", {
-	description = "Chain (steel, hanging)",
+	description = S("Chain (steel, hanging)"),
 	drawtype = "mesh",
 	mesh = "basic_materials_chains.obj",
 	tiles = {"basic_materials_chain_steel.png"},
@@ -90,7 +93,7 @@ minetest.register_node("basic_materials:chain_steel", {
 })
 
 minetest.register_node("basic_materials:chain_brass", {
-	description = "Chain (brass, hanging)",
+	description = S("Chain (brass, hanging)"),
 	drawtype = "mesh",
 	mesh = "basic_materials_chains.obj",
 	tiles = {"basic_materials_chain_brass.png"},
@@ -104,7 +107,7 @@ minetest.register_node("basic_materials:chain_brass", {
 })
 
 minetest.register_node("basic_materials:brass_block", {
-	description = "Brass Block",
+	description = S("Brass Block"),
 	tiles = { "basic_materials_brass_block.png" },
 	is_ground_content = false,
 	groups = {cracky=1, level=2},
@@ -241,6 +244,18 @@ minetest.register_craft( {
 		"moreores:silver_ingot",
 	},
 })
+
+if not minetest.get_modpath("moreores") then
+    -- Without moreores, there still should be a way to create brass.
+    minetest.register_craft( {
+        output = "basic_materials:brass_ingot 9",
+        recipe = {
+	    {"default:copper_ingot", "default:tin_ingot", "default:copper_ingot"},
+	    {"default:gold_ingot", "default:copper_ingot", "default:gold_ingot"},
+	    {"default:copper_ingot", "default:tin_ingot", "default:copper_ingot"},
+        },
+    })
+end
 
 minetest.register_craft( {
 	type = "shapeless",
