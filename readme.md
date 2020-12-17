@@ -43,7 +43,6 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * itemframes - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * locked_sign
   * Very old mod, can't seem to find anywhere anymore
-* lrfurn - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
 * mapfix - [GitHub](https://github.com/minetest-mods/mapfix)
 * markers - [GitHub](https://github.com/Sokomine/markers)
 * more_chests - [GitHub](https://github.com/minetest-mods/more_chests)
