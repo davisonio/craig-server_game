@@ -1,5 +1,5 @@
 # Polish translation for More Blocks.
-# Copyright © 2011-2019 Hugo Locurcio and contributors
+# Copyright © 2011-2020 Hugo Locurcio and contributors
 # This file is distributed under the same license as the More Blocks package.
 # mat9117, 2019
 # CodeXP <codexp@gmx.net>, 2018.
@@ -131,6 +131,10 @@ msgstr "Węglowe kamienne cegły"
 #: nodes.lua
 msgid "Compressed Cobblestone"
 msgstr "Skompresowany bruk"
+
+#: nodes.lua
+msgid "Compressed Desert Cobblestone"
+msgstr ""
 
 #: nodes.lua
 msgid "Compressed Dirt"
