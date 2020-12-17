@@ -57,6 +57,8 @@ replacer.blacklist[ "protector:protect2"] = true;
 
 -- adds a tool for inspecting nodes and entities
 dofile(minetest.get_modpath("replacer").."/inspect.lua");
+-- add HUD support for tool information
+dofile(minetest.get_modpath("replacer").."/hud.lua")
 
 minetest.register_tool( "replacer:replacer",
 {
@@ -100,7 +102,8 @@ minetest.register_tool( "replacer:replacer",
 
  
        if( pointed_thing.type ~= "node" ) then
-          minetest.chat_send_player( name, "  Error: No node selected.");
+         -- minetest.chat_send_player( name, "  Error: No node selected.");
+          replacer.set_hud(name, "  Error: No node selected.");
           return nil;
        end
 
@@ -114,8 +117,8 @@ minetest.register_tool( "replacer:replacer",
        end
        itemstack:set_metadata( metadata );
 
-       minetest.chat_send_player( name, "Node replacement tool set to: '"..metadata.."'.");
-
+       --minetest.chat_send_player( name, "Node replacement tool set to: '"..metadata.."'.");
+       replacer.set_hud(name, "Node replacement tool set to: '"..metadata.."'.");
        return itemstack; -- nothing consumed but data changed
     end,
      
@@ -138,7 +141,8 @@ replacer.replace = function( itemstack, user, pointed_thing, mode )
        --minetest.chat_send_player( name, "You USED this on "..minetest.serialize( pointed_thing )..".");
  
        if( pointed_thing.type ~= "node" ) then
-          minetest.chat_send_player( name, "  Error: No node.");
+          --minetest.chat_send_player( name, "  Error: No node.");
+          replacer.set_hud(name, "  Error: No node.");
           return nil;
        end
 
@@ -149,7 +153,8 @@ replacer.replace = function( itemstack, user, pointed_thing, mode )
 
        if( node == nil ) then
 
-          minetest.chat_send_player( name, "Error: Target node not yet loaded. Please wait a moment for the server to catch up.");
+          --minetest.chat_send_player( name, "Error: Target node not yet loaded. Please wait a moment for the server to catch up.");
+          replacer.set_hud(name, "Error: Target node not yet loaded. Please wait a moment for the server to catch up.");
           return nil;
        end
 
@@ -176,14 +181,18 @@ replacer.replace = function( itemstack, user, pointed_thing, mode )
        end
 
        if( node.name and node.name ~= "" and replacer.blacklist[ node.name ]) then
-          minetest.chat_send_player( name, "Replacing blocks of the type '"..( node.name or "?" )..
-		"' is not allowed on this server. Replacement failed.");
-          return nil;
+          --minetest.chat_send_player( name, "Replacing blocks of the type '"..( node.name or "?" )..
+		--"' is not allowed on this server. Replacement failed.");
+          replacer.set_hud( name, "Replacing blocks of the type '"..( node.name or "?" )..
+		    "' is not allowed on this server. Replacement failed.");
+         return nil;
        end
 
        if( replacer.blacklist[ daten[1] ]) then
-          minetest.chat_send_player( name, "Placing blocks of the type '"..( daten[1] or "?" )..
-		"' with the replacer is not allowed on this server. Replacement failed.");
+         -- minetest.chat_send_player( name, "Placing blocks of the type '"..( daten[1] or "?" )..
+      --"' with the replacer is not allowed on this server. Replacement failed.");
+          replacer.set_hud( name, "Placing blocks of the type '"..( daten[1] or "?" )..
+		    "' with the replacer is not allowed on this server. Replacement failed.");
           return nil;
        end
 
@@ -214,7 +223,8 @@ replacer.replace = function( itemstack, user, pointed_thing, mode )
           if( not( user:get_inventory():contains_item("main", daten[1]))) then
  
 
-             minetest.chat_send_player( name, "You have no further '"..( daten[1] or "?" ).."'. Replacement failed.");
+             --minetest.chat_send_player( name, "You have no further '"..( daten[1] or "?" ).."'. Replacement failed.");
+             replacer.set_hud(name, "You have no further '"..( daten[1] or "?" ).."'. Replacement failed.");
              return nil;
           end
 
@@ -236,7 +246,8 @@ replacer.replace = function( itemstack, user, pointed_thing, mode )
              if( not( digged_node ) 
                 or digged_node.name == node.name ) then
 
-                minetest.chat_send_player( name, "Replacing '"..( node.name or "air" ).."' with '"..( item[ "metadata"] or "?" ).."' failed. Unable to remove old node.");
+                --minetest.chat_send_player( name, "Replacing '"..( node.name or "air" ).."' with '"..( item[ "metadata"] or "?" ).."' failed. Unable to remove old node.");
+                replacer.set_hud(name, "Replacing '"..( node.name or "air" ).."' with '"..( item[ "metadata"] or "?" ).."' failed. Unable to remove old node.");
                 return nil;
              end
             
