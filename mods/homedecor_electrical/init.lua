@@ -1,7 +1,8 @@
+local S = minetest.get_translator("homedecor_electrical")
 
-local S = homedecor.gettext
+homedecor_electrical = {}
 
-function homedecor.toggle_switch(pos, node, clicker, itemstack, pointed_thing)
+function homedecor_electrical.toggle_switch(pos, node, clicker, itemstack, pointed_thing)
 	if not clicker then return false end
 	local playername = clicker:get_player_name()
 	if minetest.is_protected(pos, playername) then
@@ -16,11 +17,9 @@ function homedecor.toggle_switch(pos, node, clicker, itemstack, pointed_thing)
 end
 
 local on_rc
-local switch_receptor
-
 if minetest.get_modpath("mesecons") then
 	on_rc = function(pos, node, clicker, itemstack, pointed_thing)
-		local t = homedecor.toggle_switch(pos, node, clicker, itemstack, pointed_thing)
+		local t = homedecor_electrical.toggle_switch(pos, node, clicker, itemstack, pointed_thing)
 		if not t then return end
 		if string.find(node.name, "_on", -5) then
 			mesecon.receptor_off(pos, mesecon.rules.buttonlike_get(node))
@@ -28,12 +27,6 @@ if minetest.get_modpath("mesecons") then
 			mesecon.receptor_on(pos, mesecon.rules.buttonlike_get(node))
 		end
 	end
-	switch_receptor = {
-		receptor = {
-			state = mesecon.state[onoff],
-			rules = mesecon.rules.buttonlike_get
-		}
-	}
 end
 
 homedecor.register("power_outlet", {
@@ -64,6 +57,16 @@ homedecor.register("power_outlet", {
 })
 
 for _, onoff in ipairs ({"on", "off"}) do
+
+	local switch_receptor
+	if minetest.get_modpath("mesecons") then
+		switch_receptor = {
+			receptor = {
+				state = mesecon.state[onoff],
+				rules = mesecon.rules.buttonlike_get
+			}
+		}
+	end
 
 	local model = {
 		{ -0.125,   -0.1875, 0.4375,  0.125,   0.125,  0.5 },
@@ -98,7 +101,10 @@ for _, onoff in ipairs ({"on", "off"}) do
 				{ -0.1875,   -0.25,    0.375,  0.1875,   0.1875, 0.5 },
 			}
 		},
-		groups = {cracky=3, dig_immediate=2, mesecon_needs_receiver=1, not_in_creative_inventory = (onoff == "on") and 1 or nil},
+		groups = {
+			cracky=3, dig_immediate=2, mesecon_needs_receiver=1,
+			not_in_creative_inventory = (onoff == "on") and 1 or nil
+		},
 		walkable = false,
 		drop = {
 			items = {
@@ -155,7 +161,7 @@ minetest.register_craft( {
 minetest.register_craft( {
         output = "homedecor:doorbell",
         recipe = {
-			{ "homedecor:light_switch", "basic_materials:energy_crystal_simple", "homedecor:speaker_driver" }
+			{ "homedecor:light_switch_off", "basic_materials:energy_crystal_simple", "homedecor:speaker_driver" }
         },
 })
 

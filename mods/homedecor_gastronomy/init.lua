@@ -1,5 +1,4 @@
-
-local S = homedecor.gettext
+local S = minetest.get_translator("homedecor_gastronomy")
 
 local cutlery_cbox = {
 	type = "fixed",
@@ -162,20 +161,8 @@ homedecor.register("beer_mug", {
 	sounds = default.node_sound_glass_defaults(),
 	selection_box = beer_cbox,
 	on_use = function(itemstack, user, pointed_thing)
-		local inv = user:get_inventory()
 		if not creative.is_enabled_for(user:get_player_name()) then
-			if inv:room_for_item("main", "vessels:drinking_glass 1") then
-				inv:add_item("main", "vessels:drinking_glass 1")
-			else
-				local pos = user:get_pos()
-				local dir = user:get_look_dir()
-				local fdir = minetest.dir_to_facedir(dir)
-				local pos_fwd = {	x = pos.x + homedecor.fdir_to_fwd[fdir+1][1],
-									y = pos.y + 1,
-									z = pos.z + homedecor.fdir_to_fwd[fdir+1][2] }
-				minetest.add_item(pos_fwd, "vessels:drinking_glass 1")
-			end
-			minetest.do_item_eat(2, nil, itemstack, user, pointed_thing)
+			minetest.do_item_eat(2, "vessels:drinking_glass 1", itemstack, user, pointed_thing)
 			return itemstack
 		end
 	end
@@ -195,7 +182,7 @@ homedecor.register("soda_machine", {
 	collision_box = svm_cbox,
 	expand = { top="placeholder" },
 	sounds = default.node_sound_wood_defaults(),
-	on_rotate = screwdriver.rotate_simple,
+	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.rotate_simple or nil,
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		local playername = clicker:get_player_name()
 		local wielditem = clicker:get_wielded_item()
@@ -203,7 +190,7 @@ homedecor.register("soda_machine", {
 		local fdir_to_fwd = { {0, -1}, {-1, 0}, {0, 1}, {1, 0} }
 		local fdir = node.param2
 		local pos_drop = { x=pos.x+fdir_to_fwd[fdir+1][1], y=pos.y, z=pos.z+fdir_to_fwd[fdir+1][2] }
-		if wieldname == "bitchange:bitcoin" then
+		if wieldname == "currency:minegeld_cent_25" then
 			minetest.spawn_item(pos_drop, "homedecor:soda_can")
 			minetest.sound_play("insert_coin", {
 				pos=pos, max_hear_distance = 5
@@ -219,7 +206,7 @@ homedecor.register("soda_machine", {
 	end
 })
 
-minetest.register_alias("homedecor:coin", "bitchange:bitcoin")
+minetest.register_alias("homedecor:coin", "currency:minegeld_cent_25")
 
 -- coffee!
 -- coffee!
@@ -246,7 +233,7 @@ homedecor.register("coffee_maker", {
 	groups = {snappy=3},
 	selection_box = cm_cbox,
 	node_box = cm_cbox,
-	on_rotate = screwdriver.disallow
+	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.disallow or nil,
 })
 
 homedecor.register("toaster", {

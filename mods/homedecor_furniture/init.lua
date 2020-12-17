@@ -1,5 +1,4 @@
-
-local S = homedecor.gettext
+local S = minetest.get_translator("homedecor_furniture")
 
 local table_colors = {
 	{ "",           S("Table"),           homedecor.plain_wood },
@@ -77,7 +76,7 @@ homedecor.register("wall_shelf", {
 minetest.register_craft({
 	output = "homedecor:table",
 	recipe = {
-		{ "default:wood","default:wood", "default:wood" },
+		{ "group:wood","group:wood", "group:wood" },
 		{ "group:stick", "", "group:stick" },
 	},
 })

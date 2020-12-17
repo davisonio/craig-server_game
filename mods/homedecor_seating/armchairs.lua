@@ -1,5 +1,4 @@
-
-local S = homedecor.gettext
+local S = minetest.get_translator("homedecor_seating")
 local armchair_cbox = {
 	type = "fixed",
 	fixed = {
@@ -26,6 +25,7 @@ minetest.register_node(":lrfurn:armchair", {
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		unifieddyes.fix_rotation_nsew(pos, placer, itemstack, pointed_thing)
 	end,
+	on_dig = unifieddyes.on_dig,
 	on_rotate = unifieddyes.fix_after_screwdriver_nsew,
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		if not clicker:is_player() then
@@ -51,10 +51,11 @@ homedecor.register("armchair", {
 	palette = "unifieddyes_palette_colorwallmounted.png",
 	groups = {snappy=3, ud_param2_colorable = 1},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = ac_cbox,
+	node_box = armchair_cbox,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		unifieddyes.fix_rotation_nsew(pos, placer, itemstack, pointed_thing)
 	end,
+	on_dig = unifieddyes.on_dig,
 	on_rotate = unifieddyes.fix_after_screwdriver_nsew,
 })
 
@@ -167,5 +168,5 @@ minetest.register_lbm({
 })
 
 if minetest.settings:get("log_mods") then
-	minetest.log("action", "[lrfurn/armchairs] "..S("Loaded!"))
+	minetest.log("action", "[lrfurn/armchairs] Loaded!")
 end

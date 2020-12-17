@@ -15,7 +15,7 @@ homedecor.register("deckchair", {
 	sounds = default.node_sound_wood_defaults(),
 	selection_box = dc_cbox,
 	collision_box = dc_cbox,
-	on_rotate = screwdriver.disallow
+	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.disallow or nil,
 })
 
 minetest.register_alias("homedecor:deckchair_foot", "homedecor:deckchair")
@@ -30,7 +30,7 @@ homedecor.register("deckchair_striped_blue", {
 	sounds = default.node_sound_wood_defaults(),
 	selection_box = dc_cbox,
 	collision_box = dc_cbox,
-	on_rotate = screwdriver.disallow
+	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.disallow or nil,
 })
 
 homedecor.register("simple_bench", {
@@ -74,7 +74,7 @@ homedecor.register("bench_large_1", {
 	sounds = default.node_sound_wood_defaults(),
 	selection_box = bl1_sbox,
 	node_box = bl1_cbox,
-	on_rotate = screwdriver.disallow
+	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.disallow or nil,
 })
 
 minetest.register_alias("homedecor:bench_large_1_left", "homedecor:bench_large_1")
@@ -103,7 +103,7 @@ homedecor.register("bench_large_2", {
 	node_box = bl2_cbox,
 	expand = { right="placeholder" },
 	sounds = default.node_sound_wood_defaults(),
-	on_rotate = screwdriver.disallow
+	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.disallow or nil,
 })
 
 minetest.register_alias("homedecor:bench_large_2_left", "homedecor:bench_large_2")
@@ -153,6 +153,7 @@ homedecor.register("kitchen_chair_padded", {
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		unifieddyes.fix_rotation_nsew(pos, placer, itemstack, pointed_thing)
 	end,
+	on_dig = unifieddyes.on_dig,
 	on_rotate = unifieddyes.fix_after_screwdriver_nsew,
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		pos.y = pos.y+0 -- where do I put my ass ?
@@ -160,14 +161,6 @@ homedecor.register("kitchen_chair_padded", {
 		return itemstack
 	end
 })
-
-local ac_cbox = {
-	type = "fixed",
-	fixed = {
-		{-0.5, -0.5, -0.5, 0.5, 0, 0.5 },
-		{-0.5, -0.5, 0.4, 0.5, 0.5, 0.5 }
-	}
-}
 
 local ofchairs_sbox = {
 	type = "fixed",
@@ -200,7 +193,7 @@ for _, c in pairs(chairs) do
 		selection_box = ofchairs_sbox,
 		collision_box = ofchairs_cbox,
 		expand = { top = "placeholder" },
-		on_rotate = screwdriver.rotate_simple
+		on_rotate = minetest.get_modpath("screwdriver") and screwdriver.rotate_simple or nil,
 	})
 end
 
@@ -211,7 +204,7 @@ minetest.register_craft( {
         recipe = {
 			{ "group:wood", "group:wood", "group:wood" },
 			{ "group:wood", "group:wood", "group:wood" },
-			{ "homedecor:pole_wrought_iron", "", "homedecor:pole_wrought_iron" }
+			{ "basic_materials:steel_bar", "", "basic_materials:steel_bar" }
         },
 })
 
@@ -315,7 +308,7 @@ minetest.register_craft({
 	recipe = {
 		{ "", "", "wool:black" },
 		{ "", "wool:black", "default:steel_ingot" },
-		{ "group:stick", "homedecor:pole_wrought_iron", "group:stick" }
+		{ "group:stick", "basic_materials:steel_bar", "group:stick" }
 	},
 })
 
@@ -324,7 +317,7 @@ minetest.register_craft({
 	recipe = {
 		{ "dye:black", "building_blocks:sticks", "group:wool" },
 		{ "basic_materials:plastic_sheet", "group:wool", "default:steel_ingot" },
-		{ "building_blocks:sticks", "homedecor:pole_wrought_iron", "building_blocks:sticks" }
+		{ "building_blocks:sticks", "basic_materials:steel_bar", "building_blocks:sticks" }
 	},
 })
 
