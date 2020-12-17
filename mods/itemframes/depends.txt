@@ -1,3 +1,0 @@
-default
-homedecor_common
-mesecons_mvps?

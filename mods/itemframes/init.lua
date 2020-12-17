@@ -1,8 +1,7 @@
-
-local S = homedecor.gettext
+local S = minetest.get_translator("itemframes")
 
 local tmp = {}
-screwdriver = screwdriver or {}
+local sd_disallow = minetest.get_modpath("screwdriver") and screwdriver.disallow or nil
 
 minetest.register_entity("itemframes:item",{
 	hp_max = 1,
@@ -139,7 +138,7 @@ minetest.register_node("itemframes:frame",{
 	groups = {choppy = 2, dig_immediate = 2},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_wood_defaults(),
-	on_rotate = screwdriver.disallow,
+	on_rotate = sd_disallow or nil,
 	after_place_node = function(pos, placer, itemstack)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("owner",placer:get_player_name())
@@ -154,6 +153,19 @@ minetest.register_node("itemframes:frame",{
 			drop_item(pos,node)
 			local s = itemstack:take_item()
 			meta:set_string("item",s:to_string())
+			local item_meta = s:get_meta()
+			local description = item_meta:get_string("description")
+			if description == "" then
+				local item_name = s:get_name()
+				if minetest.registered_items[item_name]
+					and minetest.registered_items[item_name].description
+				then
+					description = minetest.registered_items[item_name].description
+				else
+					description = item_name
+				end
+			end
+			meta:set_string("infotext", S("Item frame (owned by @1)", name) .. "\n" .. description)
 			update_item(pos,node)
 		end
 		return itemstack
@@ -164,6 +176,7 @@ minetest.register_node("itemframes:frame",{
 		if name == meta:get_string("owner") or
 				minetest.check_player_privs(name, "protection_bypass") then
 			drop_item(pos, node)
+			meta:set_string("infotext", S("Item frame (owned by @1)", name))
 		end
 	end,
 	can_dig = function(pos,player)
@@ -202,7 +215,7 @@ minetest.register_node("itemframes:pedestal",{
 	paramtype = "light",
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
-	on_rotate = screwdriver.disallow,
+	on_rotate = sd_disallow or nil,
 	after_place_node = function(pos, placer, itemstack)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("owner",placer:get_player_name())
@@ -217,6 +230,19 @@ minetest.register_node("itemframes:pedestal",{
 			drop_item(pos,node)
 			local s = itemstack:take_item()
 			meta:set_string("item",s:to_string())
+			local item_meta = s:get_meta()
+			local description = item_meta:get_string("description")
+			if description == "" then
+				local item_name = s:get_name()
+				if minetest.registered_items[item_name]
+					and minetest.registered_items[item_name].description
+				then
+					description = minetest.registered_items[item_name].description
+				else
+					description = item_name
+				end
+			end
+			meta:set_string("infotext", S("Pedestal (owned by @1)", name) .. "\n" .. description)
 			update_item(pos,node)
 		end
 		return itemstack
@@ -227,6 +253,7 @@ minetest.register_node("itemframes:pedestal",{
 		if name == meta:get_string("owner") or
 				minetest.check_player_privs(name, "protection_bypass") then
 			drop_item(pos,node)
+			meta:set_string("infotext", S("Pedestal (owned by @1)", name))
 		end
 	end,
 	can_dig = function(pos,player)
@@ -252,7 +279,7 @@ minetest.register_lbm({
 	name = "itemframes:maintain_entities",
 	nodenames = {"itemframes:frame", "itemframes:pedestal"},
 	run_at_every_load = true,
-	action = function(pos, node)
+	action = function(pos1, node1)
 		minetest.after(0,
 			function(pos, node)
 				local meta = minetest.get_meta(pos)
@@ -271,7 +298,7 @@ minetest.register_lbm({
 					end
 				end
 			end,
-		pos, node)
+		pos1, node1)
 	end
 })
 
@@ -300,3 +327,4 @@ if minetest.get_modpath("mesecons_mvps") then
 	mesecon.register_mvps_stopper("itemframes:frame")
 	mesecon.register_mvps_stopper("itemframes:pedestal")
 end
+
