@@ -46,6 +46,7 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * player_api - [GitHub](https://github.com/minetest/minetest_game)
 * ranks - [GitHub](https://github.com/octacian/ranks)
 * replacer - [GitHub](https://github.com/Sokomine/replacer)
+  * Add HUD support
 * report - [GitHub](https://github.com/rubenwardy/report)
 * sban - [GitHub](https://github.com/shivajiva101/sban)
 * screwdriver - [GitHub](https://github.com/minetest/minetest_game)
