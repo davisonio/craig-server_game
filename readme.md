@@ -52,6 +52,7 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * nyancat
   * From Minetest Game before it got removed
 * player_api - [GitHub](https://github.com/minetest/minetest_game)
+* mapserver
 * ranks - [GitHub](https://github.com/octacian/ranks)
 * replacer - [GitHub](https://github.com/Sokomine/replacer)
   * Added HUD support
