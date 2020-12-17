@@ -1,3 +1,6 @@
+-- Load support for translation.
+local S = minetest.get_translator("more_chests")
+
 local function has_locked_chest_privilege(meta, player)
 	if player:get_player_name() ~= meta:get_string("owner") then
 		return false
@@ -20,7 +23,7 @@ local closed = "size[2,1]"..
 	"button[0,0;2,1;open;open]"
 
 minetest.register_node("more_chests:secret", {
-	description = "Secret Chest",
+	description = S("Secret Chest"),
 	tiles = {"secret_top.png", "secret_top.png", "secret_side.png",
 		"secret_side.png", "secret_side.png", "secret_front.png"},
 	paramtype2 = "facedir",
@@ -45,13 +48,14 @@ minetest.register_node("more_chests:secret", {
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("owner", placer:get_player_name() or "")
-		meta:set_string("infotext", "Secret Chest (owned by "..
-				meta:get_string("owner")..")")
+		meta:set_string("infotext", S("@1 (owned by @2)",
+				S("Secret Chest"),
+				meta:get_string("owner")))
 	end,
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", open)
-		meta:set_string("infotext", "Secret Chest")
+		meta:set_string("infotext", S("Secret Chest"))
 		meta:set_string("owner", "")
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8*4)
@@ -126,4 +130,3 @@ minetest.register_craft({
 		{'default:wood','default:wood','default:wood'}
 	}
 })
-

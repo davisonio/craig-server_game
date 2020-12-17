@@ -1,0 +1,12 @@
+# textdomain: more_chests
+
+# Translation by An0n3m0us
+
+Secret Chest=Titkos Láda
+Wifi Chest=Wifi Láda
+Cobble Chest=Zúzottkő Láda
+Shared Chest=Közös Láda
+
+@1 (owned by @2)=@1 (@2 tulajdonában van)
+Shared with (separate names with spaces)=Megosztva (válassza el a neveket szóközökkel)
+submit=előterjeszt

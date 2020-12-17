@@ -1,0 +1,6 @@
+# textdomain: more_chests
+Secret Chest=
+Wifi Chest=
+Cobble Chest=
+Shared Chest=
+Dropbox=
