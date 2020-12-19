@@ -18,7 +18,7 @@ minetest.register_node("bitchange:donationbox", {
 		}
 	},
 	selection_box = {
-		type = "fixed", 
+		type = "fixed",
 		fixed = {
 			{-0.4,-0.5,-0.4,0.4,0.35,0.4},
 		},
@@ -65,11 +65,11 @@ minetest.register_node("bitchange:donationbox", {
 	end,
 })
 
-minetest.register_craft({
+--[[minetest.register_craft({
 	output = "bitchange:donationbox",
 	recipe = {
 		{"default:wood", "", "default:wood"},
 		{"default:wood", "bitchange:bitcoin", "default:wood"},
 		{"default:wood", "default:wood", "default:wood"}
 	}
-})
+})--]]

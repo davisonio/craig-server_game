@@ -5,7 +5,7 @@ minetest.register_craftitem("bitchange:bitcoin", {
 	stack_max = 499,
 })
 
-minetest.register_craft({
+--[[minetest.register_craft({
 	output = "bitchange:bitcoin 3",
 	recipe = {
 		{"default:gold_ingot"},
@@ -18,7 +18,7 @@ minetest.register_craft({
 		{"bitchange:bitcoin_block"},
 	}
 })
-
+--]]
 -- Bitcoin Block
 minetest.register_node("bitchange:bitcoin_block", {
 	description = "BitBlock",
@@ -26,7 +26,7 @@ minetest.register_node("bitchange:bitcoin_block", {
 	groups = {cracky=2},
 	sounds = default.node_sound_stone_defaults(),
 })
-
+--[[
 minetest.register_craft({
 	output = "bitchange:bitcoin_block",
 	recipe = {
@@ -35,3 +35,4 @@ minetest.register_craft({
 		{"bitchange:bitcoin", "bitchange:bitcoin", "bitchange:bitcoin"},
 	}
 })
+--]]

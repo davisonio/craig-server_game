@@ -102,7 +102,7 @@ minetest.register_on_player_receive_fields(function(sender, formname, fields)
 		exchange_shop[player_name] = nil
 		return
 	end
-	
+
 	if fields.set_title then
 		if fields.title and title ~= fields.title then
 			if fields.title ~= "" then
@@ -113,7 +113,7 @@ minetest.register_on_player_receive_fields(function(sender, formname, fields)
 			meta:set_string("title", fields.title)
 		end
 	end
-	
+
 	if fields.exchange then
 		local shop_inv = meta:get_inventory()
 		if shop_inv:is_empty("cust_ow") and shop_inv:is_empty("cust_og") then
@@ -278,8 +278,8 @@ minetest.register_node("bitchange:shop", {
 	can_dig = function(pos,player)
 		local meta = minetest.get_meta(pos);
 		local inv = meta:get_inventory()
-		if (inv:is_empty("stock") and inv:is_empty("custm") and 
-			inv:is_empty("custm_ej") and inv:is_empty("cust_ow") and 
+		if (inv:is_empty("stock") and inv:is_empty("custm") and
+			inv:is_empty("custm_ej") and inv:is_empty("cust_ow") and
 			inv:is_empty("cust_og") and inv:is_empty("cust_ej")) then
 			return true
 		end
@@ -318,7 +318,7 @@ minetest.register_node("bitchange:shop", {
 			return 0
 		end
 		local meta = minetest.get_meta(pos)
-		if bitchange_has_access(meta:get_string("owner"), player:get_player_name()) and 
+		if bitchange_has_access(meta:get_string("owner"), player:get_player_name()) and
 				listname ~= "cust_ej" and listname ~= "custm_ej" then
 			return stack:get_count()
 		end
@@ -336,10 +336,11 @@ minetest.register_node("bitchange:shop", {
 	end,
 })
 
-minetest.register_craft({
+--[[minetest.register_craft({
 	output = "bitchange:shop",
 	recipe = {
 		{"default:sign_wall"},
 		{"default:chest_locked"},
 	}
 })
+--]]
