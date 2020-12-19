@@ -27,7 +27,7 @@ ranks.register("owner", {
 		travelnet_attach = true,
 		basic_privs = true,
 		rank = true,
-		rollback = true
+		rollback = true,
 		-- owner
 		privs = true,
 		server = true,
