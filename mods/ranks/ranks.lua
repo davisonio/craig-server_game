@@ -9,7 +9,6 @@ ranks.register("owner", {
 	privs = {
 		-- player
 		shout = true,
-		zoom = true,
 		fast = true,
 		interact = true,
 		-- builder
@@ -34,6 +33,7 @@ ranks.register("owner", {
 		rollback = true,
 		irc_admin = true,
 		-- owner
+		privs = true,
 		server = true,
 		password = true,
 		worldedit = true,
@@ -52,14 +52,12 @@ ranks.register("admin", {
 	privs = {
 		-- player
 		shout = true,
-		zoom = true,
 		fast = true,
 		interact = true,
 		-- builder
 		fly = true,
-		noclip = true,
-		-- admin
 		settime = true,
+		-- admin
 		noclip = true,
 		teleport = true,
 		bring = true,
@@ -71,11 +69,9 @@ ranks.register("admin", {
 		areas = true,
 		travelnet_remove = true,
 		travelnet_attach = true,
-		privs = true,
 		basic_privs = true,
 		rank = true,
-		rollback = true,
-		irc_admin = true
+		rollback = true
 	}
 })
 
@@ -88,7 +84,6 @@ ranks.register("builder", {
 	privs = {
 		-- player
 		shout = true,
-		zoom = true,
 		fast = true,
 		interact = true,
 		-- builder
