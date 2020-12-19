@@ -13,9 +13,8 @@ ranks.register("owner", {
 		interact = true,
 		-- builder
 		fly = true,
-		noclip = true,
-		-- admin
 		settime = true,
+		-- admin
 		noclip = true,
 		teleport = true,
 		bring = true,
@@ -23,15 +22,12 @@ ranks.register("owner", {
 		ban = true,
 		ban_admin = true,
 		protection_bypass = true,
-		areas_high_limit = true,
 		areas = true,
 		travelnet_remove = true,
 		travelnet_attach = true,
-		privs = true,
 		basic_privs = true,
 		rank = true,
-		rollback = true,
-		irc_admin = true,
+		rollback = true
 		-- owner
 		privs = true,
 		server = true,
@@ -65,7 +61,6 @@ ranks.register("admin", {
 		ban = true,
 		ban_admin = true,
 		protection_bypass = true,
-		areas_high_limit = true,
 		areas = true,
 		travelnet_remove = true,
 		travelnet_attach = true,
