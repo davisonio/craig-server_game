@@ -12,6 +12,7 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * 3d_armor_sfinv - [GitHub](https://github.com/stujones11/minetest-3d_armor)
 * areas - [GitHub](https://github.com/ShadowNinja/areas)
 * arrow_signs - [Bitbucket](https://bitbucket.org/adrido/arrow_signs/src)
+* atm
 * basic_materials - [GitLab](https://gitlab.com/VanessaE/basic_materials)
 * bitchange - [GitHub](https://github.com/SmallJoker/bitchange)
   * Has been heavily customised, needs updating
@@ -20,10 +21,13 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * carts - [GitHub](https://github.com/minetest/minetest_game)
 * colouredstonebricks
   * One of my mods, needs updating
+* columnia
 * craftguide - [GitHub](https://github.com/minetest-mods/craftguide)
 * craig_server
   * Random custom code for this server
 * creative - [GitHub](https://github.com/minetest/minetest_game)
+* currency
+  * Modified to remove coins, stack of notes, safe, shop
 * darkage
   * One of my mods, needs updating
 * debug
@@ -34,6 +38,7 @@ Since 2013, I've been adding, tweaking and removing mods to create a great game 
 * email - [GitHub](https://github.com/rubenwardy/email)
 * fake_fire - [GitLab](https://gitlab.com/VanessaE/homedecor_modpack)
   * Modified to include Diamond & Steel
+* fancy_vend
 * farming - [GitHub](https://github.com/minetest/minetest_game)
 * flowers - [GitHub](https://github.com/minetest/minetest_game)
 * give_initial_stuff - [GitHub](https://github.com/minetest/minetest_game)
