@@ -2,6 +2,7 @@
 -- Server Misc Mod --
 ---------------------
 mod_storage = minetest.get_mod_storage()
+cgserver = {}
 
 -- Chat Commands
 dofile(minetest.get_modpath("craig_server").."/chatcommands.lua")
@@ -47,3 +48,6 @@ dofile(minetest.get_modpath("craig_server").."/cloud_height.lua")
 
 -- Zoom
 dofile(minetest.get_modpath("craig_server").."/zoom.lua")
+
+-- Moreblock Simplified Crafts
+dofile(minetest.get_modpath("craig_server").."/moreblocks_sim.lua")

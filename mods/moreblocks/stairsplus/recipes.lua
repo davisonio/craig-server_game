@@ -7,7 +7,8 @@ Licensed under the zlib license. See LICENSE.md for more information.
 
 
 stairsplus.register_recipes = function(category, alternate, modname, subname, recipeitem)
-	if category == "micro" and alternate == "" then
+	cgserver.register_simple_recipes(category, alternate, modname, subname, recipeitem)
+	--[[if category == "micro" and alternate == "" then
 		minetest.register_craft({
 			type = "shapeless",
 			output = modname .. ":micro_" .. subname .. " 7",
@@ -439,5 +440,5 @@ stairsplus.register_recipes = function(category, alternate, modname, subname, re
 				},
 			})
 		end
-	end
+	end]]
 end
