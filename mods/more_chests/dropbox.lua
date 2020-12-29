@@ -2,8 +2,10 @@
 local S = minetest.get_translator("more_chests")
 local DS = minetest.get_translator("default")
 
-local function has_locked_chest_privilege(meta, player)
-	if player:get_player_name() ~= meta:get_string("owner") then
+local function has_locked_chest_privilege(meta, player, pos)
+	if default.can_interact_with_node(player, pos) then
+		return true
+	elseif player:get_player_name() ~= meta:get_string("owner") then
 		return false
 	end
 	return true
@@ -63,7 +65,7 @@ minetest.register_node("more_chests:dropbox", {
 	end,
 	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
-		if not has_locked_chest_privilege(meta, player) then
+		if not has_locked_chest_privilege(meta, player, pos) then
 			minetest.log("action", player:get_player_name()..
 					" tried to access a dropbox belonging to "..
 					meta:get_string("owner").." at "..
@@ -74,7 +76,7 @@ minetest.register_node("more_chests:dropbox", {
 	end,
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
-		if has_locked_chest_privilege(meta, player) then
+		if has_locked_chest_privilege(meta, player, pos) then
 			return stack:get_count()
 		end
 		local target = meta:get_inventory():get_list(listname)[index]
